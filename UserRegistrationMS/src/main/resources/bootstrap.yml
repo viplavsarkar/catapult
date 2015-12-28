@@ -1,0 +1,26 @@
+server:
+  port: 0
+  
+info:
+  name: Spring boot admin
+  description: Overview of all of the application
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8002/eureka/
+            
+spring:
+  application:
+    name: UserMicroService
+  cloud:
+    config:
+      failFast: false
+      discovery:
+        enabled: true
+        service-id: CONFIG-SERVICE
+        
+        
+       

@@ -1,0 +1,16 @@
+server:
+  port: 8001
+#  address: localhost
+
+info:
+  name: "Config Server"
+  description: "This will handle all the configuration files"
+
+spring:
+  profiles:
+    active: native
+#  cloud:
+#    config:
+#      server:
+#        native:
+#          search-locations: /config

@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: EurekaServer
+  cloud:  
+    config:
+      failFast: true  # Will not start service if no config server found
+      uri: http://localhost:8001/
+
+
+        
+    

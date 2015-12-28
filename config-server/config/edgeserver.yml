@@ -1,0 +1,11 @@
+server:
+  port: 8003
+#  address: localhost
+
+#spring:
+#  oauth2:
+#    resource:
+#      userInfoUri: http://localhost:9999/uaa/user
+
+#logging:
+#  file : /var/log/wiziq/infrastucture/EdgeServer.log

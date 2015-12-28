@@ -1,0 +1,24 @@
+info:
+  name: Spring boot Turbine
+  description: Get Hystirx Stream
+
+
+server:
+  port: 8005
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8002/eureka/
+            
+spring:
+  application:
+    name: SpringTurbine
+  cloud:
+    config:
+      failFast: true
+      discovery:
+        enabled: true
+        service-id: CONFIG-SERVICE
