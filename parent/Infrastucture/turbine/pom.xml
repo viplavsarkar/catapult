@@ -4,16 +4,17 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.wiziq.infrastucture</groupId>
-	<artifactId>eurekaserver</artifactId>
+	<artifactId>wiziq-turbine</artifactId>
 	<packaging>jar</packaging>
 
-	<name>EurekaServer</name>
-	<description>Project for Spring Eureka Server</description>
+	<name>turbine</name>
+	<description>Project for Spring Hystrix Dashboard</description>
+
 	<parent>
 		<groupId>com.wiziq</groupId>
-		<artifactId>parent</artifactId>
+		<artifactId>wiziq-catapult-starter-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -22,9 +23,10 @@
 	</properties>
 
 	<dependencies>
+	
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka-server</artifactId>
+			<artifactId>spring-cloud-starter-turbine-stream</artifactId>
 		</dependency>
 	</dependencies>
 </project>

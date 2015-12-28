@@ -4,17 +4,17 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.wiziq.infrastucture</groupId>
-	<artifactId>wiziq-turbine</artifactId>
+	<artifactId>springbootadmin</artifactId>
 	<packaging>jar</packaging>
 
-	<name>turbine</name>
-	<description>Project for Spring Hystrix Dashboard</description>
+	<name>SpringBootAdmin</name>
+	<description>Project for Spring Boot Admin</description>
 
 	<parent>
 		<groupId>com.wiziq</groupId>
-		<artifactId>parent</artifactId>
+		<artifactId>wiziq-catapult-starter-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -23,10 +23,16 @@
 	</properties>
 
 	<dependencies>
-	
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-turbine-stream</artifactId>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-server</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-server-ui</artifactId>
+			<version>1.3.2</version>
 		</dependency>
 	</dependencies>
+
 </project>
