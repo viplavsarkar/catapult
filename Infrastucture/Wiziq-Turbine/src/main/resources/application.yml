@@ -17,13 +17,11 @@ spring:
         enabled: true
         service-id: CONFIG-SERVER
 
-ram
-
 eureka:
   client:
     register-with-eureka: true
     service-url:
-      defaultZone: http://localhost:8002/eureka/
+      defaultZone: http://192.168.17.175:8002/eureka/
   instance:
     leaseRenewalIntervalInSeconds: 5
     leaseExpirationDurationInSeconds: 5

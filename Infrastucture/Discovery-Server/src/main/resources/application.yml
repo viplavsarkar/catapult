@@ -10,7 +10,7 @@ spring:
     name: DISCOVERY-SERVER
   cloud:
     config:
-      uri: http://localhost:8001/
+      uri:  http://192.168.17.175:8001/
 
 
 logging:
@@ -27,4 +27,4 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
   serviceUrl:
-      defaultZone: http://localhost:8002/eureka/
+      defaultZone: http://192.168.17.175:8002/eureka/
