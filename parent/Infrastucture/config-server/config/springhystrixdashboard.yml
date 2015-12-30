@@ -1,9 +1,0 @@
-info:
-  component: Hystrix Dashboard
-server:
-  port: 8007
-
-logging:
-  level:
-    ROOT: INFO
-    org.springframework.web: DEBUG

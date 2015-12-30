@@ -1,0 +1,30 @@
+server:
+  port: 8002
+
+info:
+  name: Discovery-Server
+  discription: Discovery Server
+
+spring:
+  application:
+    name: DISCOVERY-SERVER
+  cloud:
+    config:
+      uri: http://localhost:8001/
+
+
+logging:
+  file: /var/log/wiziq/infrastucture/EurekaServer.log
+
+eureka:
+  instance:
+    hostname: localhost
+    waitTimeInMsWhenSyncEmpty: 0
+    preferIpAddress: false
+  server:
+    enable-self-preservation: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  serviceUrl:
+      defaultZone: http://localhost:8002/eureka/
