@@ -19,12 +19,12 @@ logging:
 eureka:
   instance:
     hostname: localhost
-    waitTimeInMsWhenSyncEmpty: 0
     preferIpAddress: false
   server:
+    waitTimeInMsWhenSyncEmpty: 0
     enable-self-preservation: true
   client:
     registerWithEureka: false
     fetchRegistry: false
-  serviceUrl:
+    serviceUrl:
       defaultZone: http://192.168.17.175:8002/eureka/
