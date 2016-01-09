@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by dinkarthakur on 30/12/15.
  */
 @RestController
-@RequestMapping(value = "/course")
+@RequestMapping(value = "/create")
 public class CourseController {
-    @RequestMapping(value = "/create")
+    @RequestMapping(value = "/hello")
     public String Create(){
         return "hello";
     }
