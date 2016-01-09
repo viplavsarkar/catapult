@@ -3,8 +3,6 @@ package com.wiziq.compositeservice.coursecompositeservice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
-import org.springframework.context.annotation.Bean;
 
 /**
  * Created by dinkarthakur on 30/12/15.
@@ -14,10 +12,10 @@ import org.springframework.context.annotation.Bean;
 public class CourseCompositeServiceApplication {
 
 	
-	@Bean
-	AlwaysSampler alwaysSampler(){
-		return new AlwaysSampler();
-	}
+//	@Bean
+//	AlwaysSampler alwaysSampler(){
+//		return new AlwaysSampler();
+//	}
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CourseCompositeServiceApplication.class, args);
