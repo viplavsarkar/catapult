@@ -1,0 +1,458 @@
+/*** All Global and default styles below ***/
+
+/*START - Tags Specific*/
+
+* {
+  margin: 0;
+  padding: 0;
+  background-repeat: no-repeat;
+}
+
+body {
+  background: #fff;
+  font-family: 'openSans';
+  font-weight: 300;
+}
+
+a,
+a:visited,
+a:hover {
+  color: #007ec8;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active,
+a:focus {
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: normal;
+  margin: 0;
+}
+
+table {
+  text-align: right;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Allow only vertical resizing of textareas. */
+
+p,
+h2,
+h3 {
+  orphans: 3;
+  widows: 3;
+}
+
+/* Define the minimal number of words (orphans & widows) that every line should contain. */
+
+ul,
+li,
+ol {
+  list-style: none;
+  margin: 0;
+}
+
+/*END - Tags Specific*/
+
+/*START - Prefix Specific*/
+
+.inputPlaceHolder {
+  color: #58595b;
+  font-size: 17px;
+  opacity: 1;
+}
+
+::-webkit-input-placeholder {
+  color: #58595b;
+  font-size: 17px;
+  opacity: 1;
+}
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #58595b;
+  font-size: 17px;
+  opacity: 1;
+}
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #58595b;
+  font-size: 17px;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: #58595b;
+  font-size: 17px;
+  opacity: 1;
+}
+
+/*END - Prefix Specific*/
+
+/*START - Class & ID Name Specific*/
+
+.clearfix:before,
+.clearfix:after,
+.row:before,
+.row:after {
+  content: '\0020';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+.row:after,
+.clearfix:after {
+  clear: both;
+}
+
+.row,
+.clearfix {
+  zoom: 1;
+}
+
+.fl {
+  float: right;
+}
+
+.fr {
+  float: left;
+}
+
+#mainGrid .leftPane {
+  padding: 0;
+}
+
+.arrowUp,
+.arrowDown {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 6px;
+  background: url("../image/navArrow.png") 0 -6px no-repeat;
+}
+
+.arrowDown {
+  background-position: 0 0;
+}
+
+.btnGroup .btn-default {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #f48124;
+  border-color: #f48124;
+  text-shadow: none;
+  box-shadow: none;
+  background: #fff;
+  position: relative;
+  padding: 5px 25px 5px 40px;
+}
+
+.btnGroup .btn-default::after {
+  content: '';
+  width: 30px;
+  height: 100%;
+  background: url("../image/btnArrow.png") center center no-repeat;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-right: 1px #f48124 solid;
+}
+
+.btnGroup .btn-default::before {
+  content: '+';
+  font-size: 27px;
+  color: #f48124;
+  font-weight: 100;
+  position: absolute;
+  right: 6px;
+  top: -7px;
+}
+
+/*END - Class Name Specific*/
+
+/*START - Left Nav*/
+
+#leftNav {
+  padding: 17px 0;
+  border-left: 1px solid #d7d9d8;
+}
+
+#leftNav .logo {
+  margin-bottom: 24px;
+  padding-right: 22px;
+  position: relative;
+}
+
+#leftNav .logo .switchAcademy {
+  width: 26px;
+  height: 20px;
+  background: url("../image/switch.png") 0 0 no-repeat;
+  position: absolute;
+  left: -14px;
+  top: 9px;
+}
+
+#leftNav .logo .switchAcademy a {
+  display: block;
+  text-indent: -9999px;
+}
+
+#leftNav .navItem {
+  position: relative;
+  color: #333;
+  font-size: 11px;
+  text-transform: uppercase;
+  border-right: 2px #FFF solid;
+}
+
+#leftNav .navItem a {
+  color: #333;
+  display: block;
+  line-height: 54px;
+  padding: 0 22px 0 0;
+}
+
+#leftNav .navItem.submenu a::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 6px;
+  background: url("../image/navArrow.png") 0 -6px no-repeat;
+  left: 13px;
+  top: 42%;
+}
+
+#leftNav .navItem:hover,
+#leftNav .navItem.active {
+  background: #f5f5f5;
+  border-color: #f58106;
+}
+
+#leftNav .navItem:hover a,
+#leftNav .navItem.active a {
+  text-decoration: none;
+}
+
+#leftNav .navItem:last-child {
+  margin-top: 50px;
+}
+
+/*END -   Left Nav*/
+
+/*START - Right Pane*/
+
+.rightPane {
+  padding-top: 20px;
+}
+
+.rightPane .moduleWrapper {
+  padding: 0 10%;
+}
+
+.rightPane .moduleWrapper .moduleTitle {
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.tabs .tabsHead {
+  font-size: 0;
+  border-bottom: 1px #cdcdcd solid;
+}
+
+.tabs .tabsHead .tabItem.active {
+  border-bottom: 2px #f1832e solid;
+}
+
+.tabs .tabsHead .tabItem.active a {
+  color: #000;
+}
+
+.tabs .tabsHead .tabItem {
+  font-size: 14px;
+  display: inline-block;
+  position: relative;
+  top: 2px;
+}
+
+.tabs .tabsHead .tabItem a {
+  display: block;
+  line-height: 30px;
+  padding: 0 10px;
+}
+
+.tabs .tabsHead .tabItem a:hover {
+  text-decoration: none;
+  color: #000;
+}
+
+.tabsRelatedLinks {
+  padding: 16px 0;
+  border-bottom: 1px #eaeaea solid;
+}
+
+.tabsRelatedLinks li {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 100;
+}
+
+.tabsRelatedLinks li a {
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.tabsRelatedLinks .sorting {
+  position: relative;
+}
+
+.tabsRelatedLinks .sorting a {
+  padding-left: 15px;
+}
+
+.tabsRelatedLinks .sorting a::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 6px;
+  background: url("../image/navArrow.png") 0 -6px no-repeat;
+  left: 0;
+  top: 5px;
+}
+
+.tabContent {
+  padding: 20px 0;
+}
+
+.tabContent .content {
+  background: url("../image/border2.gif") 0 bottom repeat-x;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+.tabContent .content:last-child {
+  margin-bottom: 0;
+  background: none;
+}
+
+.sessionImg {
+  width: 30%;
+  border-radius: 5px;
+  border: 1px #cccccc solid;
+}
+
+.sessionImg img {
+  width: 100%;
+  height: auto;
+  display: block;
+  padding: 5px;
+}
+
+.coursesDetail {
+  width: 67%;
+}
+
+.coursesDetail .title {
+  font-size: 22px;
+  line-height: 25px;
+  color: #007ec8;
+  margin-bottom: 10px;
+}
+
+.coursesDetail .sessionPrimaryDetails,
+.coursesDetail .sessionSecondryDetails {
+  font-size: 0;
+}
+
+.coursesDetail .sessionPrimaryDetails li,
+.coursesDetail .sessionSecondryDetails li {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 100;
+  display: inline-block;
+  vertical-align: top;
+  padding-left: 5%;
+}
+
+.coursesDetail .sessionPrimaryDetails li:last-child,
+.coursesDetail .sessionSecondryDetails li:last-child {
+  padding-left: 0;
+}
+
+.coursesDetail .sessionPrimaryDetails .live,
+.coursesDetail .sessionSecondryDetails .live {
+  color: #a1a1a1;
+  width: 20%;
+}
+
+.coursesDetail .sessionPrimaryDetails .typeOf,
+.coursesDetail .sessionSecondryDetails .typeOf {
+  color: #007ec8;
+  width: 80%;
+}
+
+.coursesDetail .sessionPrimaryDetails .typeOf span,
+.coursesDetail .sessionSecondryDetails .typeOf span {
+  display: block;
+  color: #000;
+}
+
+.coursesDetail .sessionSecondryDetails {
+  padding: 10px 0 10px;
+  margin-bottom: 10px;
+  background: url("../image/border1.gif") 0 bottom repeat-x;
+}
+
+.coursesDetail .sessionSecondryDetails li {
+  font-size: 12px;
+  line-height: 14px;
+  color: #7d7d7d;
+  font-weight: 300;
+}
+
+.coursesDetail .sessionSecondryDetails .lenth {
+  width: 20%;
+}
+
+.coursesDetail .sessionSecondryDetails .learners {
+  width: auto;
+}
+
+.coursesDetail .sessionSecondryDetails .learnerName {
+  font-size: 11px;
+  width: auto;
+}
+
+.coursesDetail .sessionNotification li {
+  font-size: 14px;
+  color: #007ec8;
+  vertical-align: top;
+}
+
+.coursesDetail .sessionNotification .item {
+  color: #FFF;
+  background: #ff7d1b;
+  display: inline-block;
+  border-radius: 8px;
+  font-size: 8px;
+  line-height: 13px;
+  width: 17px;
+  height: 13px;
+  text-align: center;
+}
+
+/*END -   Right Pane*/

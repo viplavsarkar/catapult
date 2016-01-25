@@ -1,0 +1,22 @@
+{
+  "name": "course-app",
+  "version": "1.0.0",
+  "description": "POC for Course consumption UI",
+  "start": "node ./bin/www",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www"
+  },
+  "author": "Ashutosh Dhusndhara",
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "^13.0.0",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "node-jsx": "^0.13.3",
+    "react": "0.14.3",
+    "react-dom": "0.14.3",
+    "react-intl": "1.2.0",
+    "reactify": "1.1.1"
+  }
+}

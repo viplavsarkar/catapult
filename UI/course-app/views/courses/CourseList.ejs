@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Wiziq</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="icon" type="image/png" href="">
+    <link rel="stylesheet" type="text/css" href="asset/style/fonts.css">
+    <link rel="stylesheet" type="text/css" href="asset/style/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="asset/style/bootstrap-theme.min.css">
+    <link rel="stylesheet/less" type="text/css" href="asset/style/custom.rtl.less">
+    <script src="asset/script/lib/less.js"></script> <!-- Only for dev environment-->
+</head>
+
+<body>
+    <div id="pageWrapper" class="container-fluid">
+        <div id="mainGrid" class="row">
+            <aside class="col-sm-2 leftPane">
+                <div id="leftNav">
+                    <div class="logo">
+                        <a href="#"><img src="asset/image/logo.jpg" alt="NIIT"></a>
+                        <div class="switchAcademy"><a href="#">Swith Academy</a></div>
+                    </div>
+                    <ul class="navigation">
+                        <li class="navItem">
+                            <a href="#">Notifications</a>
+                        </li>
+                        <li class="navItem">
+                            <a href="#">Activity</a>
+                        </li>
+                        <li class="navItem submenu">
+                            <a href="#">Messages</a>
+                        </li>
+                        <li class="navItem">
+                            <a href="#">People</a>
+                        </li>
+                        <li class="navItem">
+                            <a href="#">Library</a>
+                        </li>
+                        <li class="navItem active">
+                            <a href="#">Courses</a>
+                        </li>
+                        <li class="navItem">
+                            <a href="#">Live Classes</a>
+                        </li>
+                        <li class="navItem">
+                            <a href="#">Tests</a>
+                        </li>
+                        <li class="navItem">
+                            <a href="#">Reports</a>
+                        </li>
+                        <li class="navItem">
+                            <a href="#">Settings</a>
+                        </li>
+                    </ul>
+                </div><!-- END #leftNav -->
+            </aside><!-- END .leftPane -->
+            <section class="col-sm-10 rightPane">
+                <ul class="btnGroup clearfix">
+                    <li class="fr"><a class="btn btn-default" href="#" role="button">Create</a></li>
+                </ul>
+                <div id="myCourses" class="moduleWrapper">
+                    <h1 class="moduleTitle">My Courses</h1>
+                    <div class="tabs">
+                        <ul class="tabsHead">
+                            <li data-tab="active" class="tabItem active"><a href="#">Active</a></li>
+                            <li data-tab="drafts" class="tabItem"><a href="#">Drafts</a></li>
+                            <li data-tab="past" class="tabItem"><a href="#">Past</a></li>
+                        </ul>
+                        <ul class="tabsRelatedLinks clearfix">
+                            <li class="fl">Show: <a href="#">All Courses</a></li>
+                            <li class="sorting fr">Sort By: <a href="#">Date</a></li>
+                        </ul>
+                    </div>
+                    <div class="tabContentWrap" id="tabContentWrap">
+                        <%- courseList %>
+                    </div>
+                </div><!-- END #myCourses -->
+            </section><!-- END .rightPane -->
+        </div><!-- END #mainGrid -->
+    </div><!-- END #pageWrapper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var APP_PROPS = JSON.parse('<%- APP_PROPS %>');
+    </script>
+    <script src="courses/bundle.js"></script>
+</body>
+
+</html>

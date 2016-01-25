@@ -1,0 +1,139 @@
+/*** All Global and default styles below ***/
+
+// Global variables*/
+	@globalAnchorColor: #007ec8;
+	@globalPlaceHolderColor: #58595b;
+    @buttonPadding: 8px;
+    @globalImagePath: "../image";
+    @globalFontFamily: 'openSans';
+
+/*START - Tags Specific*/
+    * { margin:0; padding:0; background-repeat:no-repeat;}
+    body { background: #fff; font-family: @globalFontFamily; font-weight: 300;}
+    a, a:visited, a:hover{ color: @globalAnchorColor;}
+    a:hover { text-decoration: underline;}
+    a:active, a:focus { outline: none;}
+    h1,h2,h3,h4 { font-weight: normal; margin: 0;}
+    table { text-align: left;}
+    textarea {resize: vertical;} /* Allow only vertical resizing of textareas. */
+    p,h2,h3 {orphans: 3;widows: 3;} /* Define the minimal number of words (orphans & widows) that every line should contain. */
+    ul,li,ol { list-style: none; margin: 0;}
+/*END - Tags Specific*/
+
+/*START - Prefix Specific*/
+	.inputPlaceHolder {color: #58595b; font-size: 17px; opacity: 1;}
+    ::-webkit-input-placeholder {.inputPlaceHolder}
+    :-moz-placeholder { /* Firefox 18- */ .inputPlaceHolder}
+    ::-moz-placeholder { /* Firefox 19+ */.inputPlaceHolder}
+    :-ms-input-placeholder { .inputPlaceHolder}
+/*END - Prefix Specific*/
+
+/*START - Class & ID Name Specific*/
+    .clearfix:before, .clearfix:after, .row:before, .row:after {content: '\0020'; display: block; overflow: hidden; visibility: hidden; width: 0; height: 0;}
+    .row:after, .clearfix:after {clear: both; }
+    .row, .clearfix {zoom: 1; }
+    .fl { float: left;}
+    .fr { float: right;}
+    //.icon { width: 64px; height: 64px; background: url("@{globalImagePath}schedule.png") 0 0 no-repeat;}
+    #mainGrid {
+    	.leftPane { padding: 0;}
+    }
+    .arrowUp, .arrowDown { content: ''; position: absolute; width: 10px; height: 6px; background: url("@{globalImagePath}/navArrow.png") 0 -6px no-repeat;}
+    .arrowDown { background-position: 0 0;}
+    .btnGroup { @color: #f48124;
+        .btn-default { text-transform: uppercase; font-size: 12px; color: @color; border-color:@color; text-shadow:none; box-shadow: none; background: #fff; position: relative; padding: 5px 40px 5px 25px;
+        }
+        .btn-default::after { content: ''; width: 30px; height: 100%; background: url("@{globalImagePath}/btnArrow.png") center center no-repeat; position: absolute; right: 0; top: 0; border-left: 1px @color solid;}
+        .btn-default::before {content: '+'; font-size: 27px; color: @color; font-weight: 100; position: absolute; left: 6px; top: -7px;}
+    }
+
+/*END - Class Name Specific*/
+
+/*START - Left Nav*/
+	#leftNav { padding: 17px 0; border-right: 1px solid #d7d9d8;
+		.logo { margin-bottom: 24px; padding-left: 22px; position: relative;
+			.switchAcademy { width: 26px; height: 20px; background: url("@{globalImagePath}/switch.png") 0 0 no-repeat; position: absolute; right: -14px; top: 9px;
+				a { display: block; text-indent: -9999px;}
+			}
+		}
+		.navItem { @navItemColor: #333; position: relative; color: @navItemColor; font-size: 11px; text-transform: uppercase; border-left: 2px #FFF solid;
+			a { color: @navItemColor; display: block; line-height: 54px; padding: 0 0 0 22px;}
+		}
+		.navItem.submenu a::after {.arrowUp; right: 13px; top: 42%;}
+		.navItem:hover, .navItem.active { background: #f5f5f5; border-color: #f58106;
+			a { text-decoration: none;}
+		}
+        .navItem:last-child { margin-top: 50px;}
+	}
+/*END -   Left Nav*/
+
+/*START - Right Pane*/
+    .rightPane { padding-top: 20px;
+        .moduleWrapper { padding: 0 10%;
+            .moduleTitle { font-weight: 900; margin-bottom: 20px}
+        }
+    }
+
+    .tabs {
+        .tabsHead { font-size: 0; border-bottom: 1px #cdcdcd solid;
+            .tabItem.active { border-bottom: 2px #f1832e solid;
+                a { color: #000;}
+            }
+
+            .tabItem { font-size: 14px; display: inline-block; position: relative; top: 2px;
+                a { display: block; line-height: 30px; padding: 0 10px}
+                a:hover { text-decoration: none; color: #000;}
+            }
+        }
+    }
+
+    .tabsRelatedLinks  { padding: 16px 0; border-bottom: 1px #eaeaea solid;
+        li { font-size: 12px; text-transform: uppercase; font-weight: 100;
+            a { display: inline-block; padding-left: 5px;}
+        }
+        .sorting { position: relative;
+            a { padding-right: 15px;}
+            a::after { .arrowUp; right: 0; top: 5px;}
+        }
+    }
+
+    .tabContent { padding: 20px 0;
+        .content { background: url("@{globalImagePath}/border2.gif") 0 bottom repeat-x; padding-bottom: 30px; margin-bottom: 30px;
+
+        }
+        .content:last-child { margin-bottom: 0; background: none;}
+    }
+
+    .sessionImg { width: 30%; border-radius: 5px; border: 1px #cccccc solid;
+        img { width: 100%; height: auto; display: block; padding: 5px;}
+    }
+
+    .coursesDetail { width: 67%;
+        @blue: #007ec8;
+        @lightGray: #a1a1a1;
+        @darkGray: #7d7d7d;
+        @black: #000;
+        .title { font-size: 22px; line-height: 25px; color: @blue; margin-bottom: 10px;}
+        .sessionPrimaryDetails, .sessionSecondryDetails { font-size: 0;
+            li { font-size: 14px; line-height: 16px; font-weight: 100; display: inline-block; vertical-align: top; padding-right: 5%;}
+            li:last-child { padding-right: 0;}
+            .live { color: @lightGray; width: 20%;}
+            .typeOf { color: @blue; width: 80%;
+                span { display: block; color: @black;}
+            }
+        }
+        .sessionSecondryDetails { padding: 10px 0 10px; margin-bottom: 10px; background: url("@{globalImagePath}/border1.gif") 0 bottom repeat-x;
+            li { font-size: 12px; line-height: 14px; color: @darkGray; font-weight: 300;}
+            .lenth { width: 20%;}
+            .learners { width: auto;}
+            .learnerName { font-size: 11px; width: auto;}
+        }
+        .sessionNotification {
+            li { font-size: 14px; color: @blue; vertical-align: top;}
+            .item { color: #FFF; background: #ff7d1b; display: inline-block; border-radius: 8px; font-size: 8px; line-height: 13px; width: 17px; height: 13px; text-align: center;}
+        }
+    }
+/*END -   Right Pane*/
+
+
+
