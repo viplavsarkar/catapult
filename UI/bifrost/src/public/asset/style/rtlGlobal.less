@@ -1,0 +1,72 @@
+/*** All Global and default styles below ***/
+
+// Global variables*/
+    
+/*START - Page Header*/
+    #pageHeader { 
+        .logo { float: right;}
+        .pageHeadNav { float: left;
+            li { float: right; text-align: right;}
+        }
+    }  
+/*END -   Page Header*/
+
+/*START - Page Footer*/
+    #pageFooter { 
+        .col-1, .col-2, .col-3 { float: right; text-align: right;}
+        .col-3 { text-align: left;
+            img { float: left;}
+            figcaption { float: right; text-align: right; padding: 0 0 0 6px;}
+        }
+        .appPlatform { 
+            li { float: right;}
+        }
+    }
+/*END -   Page Footer*/
+
+/*START - Course Listing*/
+    .courseQuickLinks  { 
+        > li { float: left; text-align: right;
+            > a { float: left; padding: 0 5px 0 18px; background-position: left center;}
+            .options { right: auto; left: 0;
+                li { 
+                    a { padding: 0 33px 0 0;
+                        &:before { left: auto; right: 10px; top: -1px;}
+                    }
+                }
+            }
+            &.slide {
+                > a { background-position: 0 center;}
+            }
+        }
+    }
+    .courseList { margin-top: 15px;
+        .item { 
+            .col-1, .col-2, .col-3 { float: right;}
+            .col-2 { }
+            .col-3 { }
+            .ctaGroup {
+                li { text-align: right;}
+            }
+            .content { text-align: right;
+                .placed { 
+                    li { padding: 0 40px 0 0;
+                        span { }
+                        &:before { left: auto; right: -14px;}
+                    }
+                }
+                .type {
+                    li { float: right;}
+                }
+            }
+            .courseImg {                 
+                .captionWrap { text-align: right;
+                    .academy { float: right; margin: 0 13px 0 0;}
+                    .caption { margin: 0 72px 0 0; padding: 8px 0 0 10px;}
+                }
+            }
+            
+        }
+    } 
+/*END -   Course Listing*/
+

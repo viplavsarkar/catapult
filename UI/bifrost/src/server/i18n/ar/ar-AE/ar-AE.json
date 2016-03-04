@@ -1,0 +1,44 @@
+{
+    "common": {
+        "discover": "Discover",
+        "courses": "Courses",
+        "anytime": "Anytime",
+        "anywhere": "Anywhere",
+        "appStore": "App Store",
+        "android": "Android",
+        "sortBy": "Sort By",
+        "popularity": "Popularity",
+        "date": "Date",
+        "price": "Price",
+        "week": "week(s)",
+        "tutorials": "Tutorials",
+        "classes": "Classes",
+        "tests": "Tests",
+        "free": "Free",
+        "and": "and",
+        "others": "others",
+        "learnMore": "Learn More",
+        "viewMore": "View More"
+    },
+    "course": {
+        "liveFor": "Live for",
+        "publishedDate": "Publish date",
+        "hasEnrolled": "has enrolled in this course",
+        "haveEnrolled": "have enrolled in this course"
+    },
+    "header": {
+        "headerNavigation": {
+            "navigationItems": {
+                "mobileApp": "Mobile App",
+                "contactUs": "Contact Us",
+                "signIn": "Sign In"
+            }
+        }
+    },
+    "footer": {
+        "learnOnTheGo": "Learn on the go",
+        "availableOn": "Available on",
+        "downloadFor": "Download for",
+        "poweredBy": "Powered by"
+    }
+}

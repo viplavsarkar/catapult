@@ -1,0 +1,207 @@
+/*** All Global and default styles below ***/
+
+// Global variables*/
+	@orange: #f5892d;
+    @blue: #007fc5;
+    @gray: #333;
+    @lightGray: #666;
+    @lightestGray: #888;
+    @black: #000;
+    @largestFont: 30px;
+    @largerFont: 24px;
+    @largeFont: 18px;
+    @smallFont: 14px;
+    @smallerFont: 13px;
+    @smallestFont: 12px;
+    @globalImagePath: "../image";
+    @globalFontFamily: 'openSans';
+
+/*START - Tags Specific*/
+    * { margin:0; padding:0; background-repeat:no-repeat;}
+    body { background: #fff; font-family: @globalFontFamily; font-weight: 300; font-size: @smallFont; color: @gray}
+    a, a:visited, a:hover{ color: @orange; text-decoration: none;}
+    a:hover { text-decoration: none;}
+    a:active, a:focus { outline: none;}
+    h1,h2,h3,h4 { font-weight: normal; margin: 0;}
+    table { text-align: left;}
+    textarea {resize: vertical;} /* Allow only vertical resizing of textareas. */
+    p,h2,h3 {orphans: 3;widows: 3;} /* Define the minimal number of words (orphans & widows) that every line should contain. */
+    ul,li,ol { list-style: none; margin: 0;}
+/*END - Tags Specific*/
+
+/*START - Prefix Specific*/
+	.inputPlaceHolder {color: @lightestGray; font-size: @largeFont; opacity: 1;}
+    ::-webkit-input-placeholder {.inputPlaceHolder}
+    :-moz-placeholder { /* Firefox 18- */ .inputPlaceHolder}
+    ::-moz-placeholder { /* Firefox 19+ */.inputPlaceHolder}
+    :-ms-input-placeholder { .inputPlaceHolder}
+/*END - Prefix Specific*/
+
+/*START - Class & ID Specific*/
+    .clearfix:before, .clearfix:after, .row:before, .row:after {content: '\0020'; display: block; overflow: hidden; visibility: hidden; width: 0; height: 0;}
+    .row:after, .clearfix:after {clear: both; }
+    .row, .clearfix {zoom: 1; }
+    .fl { float: left;}
+    .fr { float: right;}
+    #pageWrapper { margin: 0; padding: 0;}
+    .moduleBody {
+        .moduleWrapper { width: 1182px; margin: 0 auto; box-sizing: border-box;}
+    }
+    html body #pageWrapper .cta { text-transform: uppercase;
+        a { line-height: normal; padding: 10px 15px; text-align: center; display: block;}
+        &.wired {border-radius: 4px; border:1px @orange solid;
+            a { color: @orange;}
+            &.wired:hover { background: #FEECD9}
+        }
+        &.noRadius { border-radius: 6px; border: 3px solid #ededed; padding: 10px 15px; color: @lightGray; font-size: @largerFont;
+            .strike { text-decoration: line-through; font-size: @smallerFont}
+            .moreInfo { font-size: @smallerFont; text-transform: none; padding-bottom: 8px;
+                span { display: block; padding-bottom: 5px;
+                    &:last-child { padding: 0;}
+                }
+            }
+        }
+    }
+    .icon { background-image: url("@{globalImagePath}/iconSprite.png"); background-repeat: no-repeat;}
+    .grayArrowSmall (@path){
+        background: url("@{globalImagePath}/@{path}") right center no-repeat;
+    }
+    .bgImg (@img, @position, @repeat) {
+        background: url("@{globalImagePath}/@{img}") @position @repeat;
+    }
+/*END - Class Name Specific*/
+
+/*START - Animation Key Frames*/
+    .enableEasing (@duration, @easing) {
+        -webkit-transition: -webkit-transform @duration @easing;
+        -moz-transition: -moz-transform @duration @easing;
+        -ms-transition: -ms-transform @duration @easing;
+        transition: transform @duration @easing;
+    }
+
+    .collaps (@deg) {
+        -webkit-transform: rotateX(@deg);
+        -moz-transform: rotateX(@deg);
+        -ms-transform: rotateX(@deg);
+        transform: rotateX(@deg);
+    }
+
+    .expend(@deg) {
+        -webkit-transform: rotateX(@deg);
+        -moz-transform: rotateX(@deg);
+        -ms-transform: rotateX(@deg);
+        transform: rotateX(@deg);
+    }
+
+/*END - Animation Key Frames*/
+    
+/*START - Page Header*/
+    #pageHeader { box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3); min-height: 70px;
+        .logo { float: left; padding-top: 12px;}
+        .pageHeadNav { float: right;
+            li { float: left; vertical-align: top; color: @lightestGray; font-size: @smallFont; margin-left: 30px; text-transform: capitalize;
+                a { text-decoration: none; color: @lightestGray; line-height: 70px; display: block;
+                    &:hover {color: @orange;}
+                }
+                &.active { 
+                    a {color: @orange;}
+                }
+                &.cta { margin-top: 14px;}
+            }
+        }
+    }  
+/*END -   Page Header*/
+
+/*START - Page Footer*/
+    #pageFooter { border-top: 2px solid #e5e5e5;
+        .col-1 { width: 35%; color: @lightGray; padding: 20px 0; float: left;
+            p { font-size: @smallestFont;}
+            h4 { font-size: @largestFont + 4;}
+        }
+        .col-2 { width: 45%; float: left;}
+        .col-3 { width: 20%; text-align: right; padding-top: 32px; float: left;
+            figure { display: inline-block;}
+            img { float: right;}
+            figcaption { float: left; line-height: 18px; padding-right: 6px;}
+        }
+        .appPlatform { 
+            li { float: left; line-height: 16px; position: relative; margin-right: 30px; border-right: 1px solid #e5e5e5;
+                a { font-size: @smallFont; font-weight: 100; height: 57px; padding: 25px 20px 0 43px; display: block; color: @lightGray; text-decoration: none; 
+                    span { display: block; padding-top: 5px; font-style: normal; font-size: 20px; color: @lightGray; font-weight: 300;}
+                }
+                &:before { content: ""; position: absolute; left: 0; top: 20px; width: 37px; height: 44px; .bgImg('oa_sprite.png', 0 0, no-repeat);}
+                &:last-child { margin-right: 0; border:0;}
+                &.android::before { background-position: right 0;}
+            }
+        }
+    }
+/*END -   Page Footer*/
+
+/*START - Course Listing*/
+    #courseListing {
+        .moduleWrapper { padding: 20px 0 30px;}
+    }
+    .courseQuickLinks  { padding-right: 18px;
+        > li { font-size: @smallestFont; text-transform: uppercase; margin-left: 10px; float: right; position: relative;
+            > a { display: inline-block; padding-left: 5px; color: @blue; text-decoration: none; .grayArrowSmall('grayArrowSmall.gif'); padding-right: 18px; text-transform: capitalize;}
+            .options { display: none; .enableEasing(.3s, ease); position: absolute; right: 0; top: 20px; z-index: 10; background: #FFF; width: 200px; border: 1px solid #cccccc; border-radius: 5px;
+                li { font-size: @smallestFont; text-transform: capitalize; margin-bottom: 10px;
+                    a { color: @blue; display: block; padding: 0 0 0 33px; position: relative;
+                        &:before { content: ''; position: absolute; left: 10px; top: -1px; width: 13px; height: 14px; .icon; background-position: -84px -83px}
+                    }
+                    &:first-child { margin-top: 10px;}
+                    &.active {
+                        a:before { background-position: -24px -83px;}
+                    }
+                }
+            }
+            &.hide {
+                .options { .collaps(90deg);}
+            }
+            &.slide {
+                > a { .grayArrowSmall('grayArrowSmallUp.gif');}
+                .options { .expend(0)}
+            }
+            
+        }
+    }
+    .courseList { margin-top: 15px;
+        .item { margin-bottom: 20px; .bgImg('dottedBorder.gif', 0 bottom, repeat-x); padding-bottom: 30px;
+            &:last-child { background: none; margin-bottom: 0;}
+            .col-1 { width: 20%; float: left;}
+            .col-2 { width: 60%; box-sizing: border-box; padding: 0 2%; float: left;}
+            .col-3 { width: 20%; float: left;}
+            .courseImg { border-radius: 5px; border: 1px #cccccc solid; padding: 5px; position: relative; 
+                img { width: 100%; height: auto; display: block;}
+                .captionWrap { position: absolute; bottom: 5px; left: 0; width: 100%; height: 48px; color: #FFF; line-height: 16px;  
+                    .gutter { height: 48px; background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0; margin: 0 5px;}
+                    .academy { float: left; margin: 0 0 0 13px; position: relative; top: 10px; background: #FFF; padding: 3px; border: 1px #cccccc solid; border-radius: 5px; display: block;}
+                    img { width: auto;}
+                    .caption { display: block; margin-left: 72px; padding: 8px 10px 0 0; font-size: @smallestFont;}
+                }
+            }
+            .ctaGroup {
+                li { margin-bottom: 20px;
+                    &:last-child { margin: 0;}
+                }
+                a { display: block;}
+            }
+            .content {
+                h2 { font-size: @largerFont; color: @blue; text-transform: capitalize; margin-bottom: 15px;
+                    a { color: @blue;}
+                }
+                .placed { margin-bottom: 15px;
+                    li { font-size: @smallestFont; padding-left: 40px; position: relative;
+                        span { display: block; padding-top: 3px; }
+                        &:before { content: ''; position: absolute; left: 0; top: 0; width: 40px; height: 40px; .icon; background-position: -18px -16px;}
+                    }
+                }
+                .type {
+                    li { float: left; font-size: @largeFont; margin-right: 20px; text-transform: uppercase;
+                        .no { display: block;}
+                    }
+                }
+            }
+        }
+    } 
+/*END -   Course Listing*/
