@@ -3,6 +3,7 @@ var path = require('path');
 var app = express();
 var config = require('./config');
 var routes = require('./config/routes');
+var i18n = require('./i18n');
 
 /**
  * Set directly accessible directories
@@ -22,5 +23,10 @@ app.set('view engine', 'hbs');
  * Initialize routes
  */
 routes(app);
+
+/**
+ * Initialize language
+ */
+i18n('en-US');
 
 module.exports = app;
