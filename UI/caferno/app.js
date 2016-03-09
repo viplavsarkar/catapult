@@ -32,7 +32,7 @@ winston.add(winston.transports.Console, console_options )
 winston.add(winston.transports.File, file_options );
 winston.add(winston_graylog, graylog_options );
 
-var routes `= require('./routes/index');
+var routes = require('./routes/index');
 var courses = require('./routes/courses');
 
 var app = express();

@@ -16,7 +16,7 @@ PCourses.prototype.getBundle = function(){
     var thisObj = this;
     thisObj.res.setHeader('Content-Type', 'text/javascript');
     console.log(__dirname);
-    var parentDir = __dirname.substring(0, __dirname.lastIndexOf('\\'));    
+    var parentDir = __dirname.substring(0, __dirname.lastIndexOf('\\'));
     thisObj.res.sendFile('../components/cCourses.jsx',{root: parentDir });
 }
 
@@ -27,19 +27,12 @@ PCourses.prototype.getCoursesScreenNew = function(){
     var hTestData = new hUnitTestData();
     var pageData = hTestData.getPageData();
     var template = 'courses.ejs';
-    var components = [ 
-                        {   
+    var components = [
+                        {
                             component_path: 'cCourses',
-                            component : 'cCourses.jsx',
+                            component : 'CourseList.jsx',
                             name : 'reactOutput',
                             rawdata :  hTestData.getTestData()
-                        },
-                        {   
-
-                            component_path: 'cCourses',
-                            component : 'cCoursesLeftNav.jsx',
-                            name : 'leftNavOutput',
-                            rawdata :  hTestData.getTestDataNavList()
                         }
                     ];
     //console.log('this is PCourses:getCoursesScreenActual footage');

@@ -1,34 +1,38 @@
-var config = require('../config');
+var config = require('../config/config');
 
 // Right now we are reading supported languages from config
 var _supportedLanguages = config.supportedLanguages;
 
-function Language(language) {
-    var _this = this;
-    this.getSupportedLanguages = _getSupportedLanguages;
 
-    var parsedLang = _parse(language);
+class Language {
+    constructor(language) {
+        var _this = this;
+        var parsedLang = _parse(language);
 
-    if (parsedLang === undefined || !_isLanguageSupported(parsedLang)) {
-        console.log('Language not supported: ' + language);
-        return Object.assign(this, _getDefaultLanguage());
+        if (parsedLang === undefined || !_isLanguageSupported(parsedLang)) {
+            console.log('Language not supported: ' + language);
+            return Object.assign(this, _getDefaultLanguage());
+        }
+
+        this.code = parsedLang.code;
+        this.locale = parsedLang.locale;
+        this.culture = parsedLang.culture;
+        _supportedLanguages.forEach(function (_language) {
+            if (parsedLang.code === _language.code && parsedLang.locale === _language.locale) {
+                _this.displayName = _language.displayName;
+                _this.isRTL = _language.isRTL;
+                return;
+            }
+        });
     }
 
-    this.code = parsedLang.code;
-    this.locale = parsedLang.locale;
-    this.culture = parsedLang.culture;
-    _supportedLanguages.forEach(function (_language) {
-        if (parsedLang.code === _language.code && parsedLang.locale === _language.locale) {
-            _this.displayName = _language.displayName;
-            _this.isRTL = _language.isRTL;
-            return;
-        }
-    });
-    this.toString = function () {
+    getSupportedLanguages() {
+        return _getSupportedLanguages();
+    }
+
+    toString() {
         return this.culture;
     }
-
-    return this;
 }
 
 /**

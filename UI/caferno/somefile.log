@@ -32,3 +32,11 @@
 {"url":"courses","page":"pCourse.js","components":["cCourses.jsx","cCoursesLeftNav.jsx"],"level":"info","message":"PCourses:getCoursesScreenNew()","timestamp":"2016-02-05T09:12:14.134Z"}
 {"url":"/courses","level":"info","message":"request at /courses","timestamp":"2016-02-05T09:12:19.740Z"}
 {"url":"courses","page":"pCourse.js","components":["cCourses.jsx","cCoursesLeftNav.jsx"],"level":"info","message":"PCourses:getCoursesScreenNew()","timestamp":"2016-02-05T09:12:19.754Z"}
+{"url":"/courses","level":"info","message":"request at /courses","timestamp":"2016-03-07T12:50:52.118Z"}
+{"url":"courses","page":"pCourse.js","components":["cCourses.jsx","cCoursesLeftNav.jsx"],"level":"info","message":"PCourses:getCoursesScreenNew()","timestamp":"2016-03-07T12:51:06.483Z"}
+{"url":"/courses","level":"info","message":"request at /courses","timestamp":"2016-03-07T12:51:11.188Z"}
+{"url":"courses","page":"pCourse.js","components":["cCourses.jsx","cCoursesLeftNav.jsx"],"level":"info","message":"PCourses:getCoursesScreenNew()","timestamp":"2016-03-07T12:51:11.190Z"}
+{"url":"/courses","level":"info","message":"request at /courses","timestamp":"2016-03-07T14:12:50.049Z"}
+{"url":"/courses","level":"info","message":"request at /courses","timestamp":"2016-03-07T14:14:07.352Z"}
+{"url":"/courses","level":"info","message":"request at /courses","timestamp":"2016-03-07T14:14:45.421Z"}
+{"url":"courses","page":"pCourse.js","components":["cCourses.jsx","cCoursesLeftNav.jsx"],"level":"info","message":"PCourses:getCoursesScreenNew()","timestamp":"2016-03-07T14:14:45.822Z"}

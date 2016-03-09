@@ -96,4 +96,61 @@ Helper.prototype.getPageData = function(){
 	}
 	return props;
 }
+
+Helper.prototype.getTestDataCourseList = function () {
+
+    var courseListData = [
+        {
+            logo: '',
+            title: '',
+            academy: {
+                logo: '',
+                name: 'LearnDesk'
+            },
+            liveFor: '',
+            publishDate: 1457342156,
+            courseComposition: {
+                tutorials: 1,
+                classes: 3,
+                tests: 2
+            },
+            enrollees: [
+                'Ashutosh'
+            ],
+            price: 10
+        }
+    ];
+
+    return courseListData;
+}
+
+Helper.prototype.getTestDataHeader = function () {
+    var header = {
+        header: {
+            academyName: "Learn Desk",
+            logo: "/asset/image/logo.jpg"
+        },
+        headerNavigation: {
+            navigationItems: [
+                { id: 0, keyName: "discover", classes: [], url: '#', isActive: true },
+                { id: 1, keyName: "courses", classes: [], url: '#', isActive: false },
+                { id: 2, keyName: "mobileApp", classes: [], url: '#', isActive: false },
+                { id: 3, keyName: "contactUs", classes: [], url: '#', isActive: false },
+                { id: 4, keyName: "signIn", classes: ['cta', 'wired'], url: '#', isActive: false }
+            ]
+        }
+    };
+
+    return header;
+}
+
+Helper.prototype.getTestDataFooter = function () {
+    var footer = {
+        academyName: "Learn Desk",
+        logo: "/asset/image/logo.jpg"
+    }
+
+    return footer;
+}
+
 module.exports = Helper;

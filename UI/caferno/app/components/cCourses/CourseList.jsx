@@ -1,39 +1,21 @@
-var React = require('react');
-var ReactIntl = require('react-intl');
-var IntlMixin = ReactIntl.IntlMixin;
-var FormattedMessage = ReactIntl.FormattedMessage;
-var FormattedDate = ReactIntl.FormattedDate;
+if (typeof window === 'undefined') {
+    var React = require('react');
+    var ReactIntl = require('react-intl');
+    var IntlMixin = ReactIntl.IntlMixin;
+    var FormattedMessage = ReactIntl.FormattedMessage;
+    var FormattedDate = ReactIntl.FormattedDate;
+} else {
+    var React = window.React;
+}
 
-var courseData = {
-    academy: {
-        name: "Learn Desk",
-        logo: "asset/image/academy/niit.jpg"
-    },
-    logo: "asset/image/courses/courses_1_221x140.jpg",
-    title: "Hadoop Introduction"
-};
-
-var intlData = {
-    locales: "en-US",
-    messages: {},
-    formats: {
-        "date": {
-            "short": {
-                "day": "long",
-                "month": "short",
-                "year": "short"
-            }
-        }
-    }
-};
-
-class CourseQuickLinks extends React.Component {
-    render() {
+var CourseQuickLinks = React.createClass({
+    mixins: [IntlMixin],
+    render: function () {
         return (
-            <ul class="courseQuickLinks clearfix">
-                <li class="sorting hide">
+            <ul className="courseQuickLinks clearfix">
+                <li className="sorting hide">
                     {this.getIntlMessage('common.sortBy')}: <a href="#" data-val="popularity">{this.getIntlMessage('common.popularity')}</a>
-                    <ul class="options">
+                    <ul className="options">
                         <li data-val="popularity">
                             <a href="#">{this.getIntlMessage('common.popularity')}</a>
                         </li>
@@ -48,49 +30,53 @@ class CourseQuickLinks extends React.Component {
             </ul>
         );
     }
-}
+});
 
-class CourseTutorials extends React.Component {
-    render() {
+var CourseTutorials = React.createClass({
+    mixins: [IntlMixin],
+    render: function () {
         var data = this.props.data;
 
         return (
             <li>
-                <span class="no">{data}</span>
+                <span className="no">{data}</span>
                 {this.getIntlMessage('common.tutorials')}
             </li>
         );
     }
-}
+});
 
-class CourseClasses extends React.Component {
-    render() {
+var CourseClasses = React.createClass({
+    mixins: [IntlMixin],
+    render: function () {
         var data = this.props.data;
 
         return (
             <li>
-                <span class="no">{data.classes}</span>
+                <span className="no">{data.classes}</span>
                 {this.getIntlMessage('common.classes')}
             </li>
         );
     }
-}
+});
 
-class CourseTests extends React.Component {
-    render() {
+var CourseTests = React.createClass({
+    mixins: [IntlMixin],
+    render: function () {
         var data = this.props.data;
 
         return (
             <li>
-                <span class="no">{data.tests}</span>
+                <span className="no">{data.tests}</span>
                 {this.getIntlMessage('common.tests')}
             </li>
         );
     }
-}
+});
 
-class CourseComposition extends React.Component {
-    render() {
+var CourseComposition = React.createClass({
+    mixins: [IntlMixin],
+    render: function () {
         var data = this.props.data;
 
         if (typeof data.tutorials != "undefined") {
@@ -112,17 +98,18 @@ class CourseComposition extends React.Component {
         }
 
         return (
-            <ul class="type clearfix">
+            <ul className="type clearfix">
                 {tutorials}
                 {classes}
                 {tests}
             </ul>
         );
     }
-}
+});
 
-class CourseEnrollees extends React.Component {
-    render() {
+var CourseEnrollees = React.createClass({
+    mixins: [IntlMixin],
+    render: function () {
         var data = this.props.data;
 
         if (data.count == 0)
@@ -132,24 +119,25 @@ class CourseEnrollees extends React.Component {
         var hasHaveEnrolled = '';
 
         if (data.count < 2) {
-            enrolleeString = data.enrollees[0];
+            enrolleeString = data[0];
             hasHaveEnrolled = this.getIntlMessage('course.hasEnrolled');
         } else {
-            enrolleeString = data.enrollees[0] + ' ' + this.getIntlMessage('common.and') + ' ' + (data.count - 1) + ' ' + this.getIntlMessage('common.others');
+            enrolleeString = data[0] + ' ' + this.getIntlMessage('common.and') + ' ' + (data.count - 1) + ' ' + this.getIntlMessage('common.others') + ' ';
             hasHaveEnrolled = this.getIntlMessage('course.haveEnrolled');
         }
 
         return (
-            <div class="moreInfo">
-                <span class="name">{enrolleeString}</span>
-                <span class="info">{hasHaveEnrolled}</span>
+            <div className="moreInfo">
+                <span className="name">{enrolleeString}</span>
+                <span className="info">{hasHaveEnrolled}</span>
             </div>
         );
     }
-}
+});
 
-class CourseListItem extends React.Component {
-    render() {
+var CourseListItem = React.createClass({
+    mixins: [IntlMixin],
+    render: function () {
         var data = this.props.data;
 
         var priceText = data.price;
@@ -158,73 +146,79 @@ class CourseListItem extends React.Component {
         }
 
         return (
-            <li class="item clearfix">
-                <div class="col-1">
-                    <figure class="courseImg">
+            <li className="item clearfix">
+                <div className="col-1">
+                    <figure className="courseImg">
                         <a href="#"><img src={data.logo} alt={data.title} /></a>
-                        <figcaption class="captionWrap">
-                            <div class="gutter clearfix">
-                                <span class="academy">
+                        <figcaption className="captionWrap">
+                            <div className="gutter clearfix">
+                                <span className="academy">
                                 <img src={data.academy.logo} />
                             </span>
-                                <span class="caption">{data.academy.name}</span>
+                                <span className="caption">{data.academy.name}</span>
                             </div>
                         </figcaption>
                     </figure>
                 </div>
-                <div class="col-2 content">
+                <div className="col-2 content">
                     <h2><a href="#">{data.title}</a></h2>
-                    <ul class="placed">
+                    <ul className="placed">
                         <li>
                             {this.getIntlMessage('course.liveFor')} {data.liveFor} {this.getIntlMessage('common.week')}
-                            <span class="date">
+                            <span className="date">
                                 {this.getIntlMessage('course.publishedDate')}: <FormattedDate value={data.publishDate} format='short' />
                             </span>
                         </li>
                     </ul>
                     <CourseComposition data={data.courseComposition} />
                 </div>
-                <div class="col-3">
-                    <ul class="ctaGroup">
-                        <li class="cta noRadius">
+                <div className="col-3">
+                    <ul className="ctaGroup">
+                        <li className="cta noRadius">
                             <CourseEnrollees data={data.enrollees}/>
                             {priceText}
                         </li>
-                        <li class="cta wired"><a href="#">{this.getIntlMessage('common.learnMore')}</a></li>
+                        <li className="cta wired"><a href="#">{this.getIntlMessage('common.learnMore')}</a></li>
                     </ul>
                 </div>
             </li>
         );
     }
-}
+});
 
-class ViewMore extends React.Component {
-    render() {
+var ViewMore = React.createClass({
+    mixins: [IntlMixin],
+    render: function () {
         return (
-            <div class="cta wired">
+            <div className="cta wired">
                 <a href="#">{this.getIntlMessage('common.viewMore')}</a>
             </div>
         );
     }
-}
+});
 
-class CourseList extends React.Component {
-    render() {
+var Section = React.createClass({
+    mixins: [IntlMixin],
+    render: function () {
         var data = this.props.data;
         var courseItems = data.map(function (courseItem) {
             return (
-                <CourseList data={courseItem} />
+                <CourseListItem data={courseItem} />
             );
         });
 
         return (
-            <div class="moduleWrapper">
-                <CourseQuickLinks />
-                <ul class="courseList">
-                    {courseItems}
-                </ul>
-                <ViewMore />
-            </div>
+            <section id="courseListing" className="moduleBody">
+                <div className="moduleWrapper">
+                    <CourseQuickLinks />
+                    <ul className="courseList">
+                        {courseItems}
+                    </ul>
+                    <ViewMore />
+                </div>
+            </section>
         );
     }
-}
+});
+
+module.exports = Section;

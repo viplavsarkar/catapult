@@ -4,6 +4,8 @@ var config = {};
 
 config.views = path.join(__dirname, '..', 'views');
 config.i18n = path.join(__dirname, '..', 'i18n');
+config.clientApp = path.join(__dirname, '..', '..', 'client');
+config.components = path.join(__dirname, '..', '..', 'client', 'components');
 
 config.supportedLanguages = [
     {

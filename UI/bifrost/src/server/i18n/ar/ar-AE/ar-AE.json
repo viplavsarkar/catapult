@@ -29,9 +29,11 @@
     "header": {
         "headerNavigation": {
             "navigationItems": {
+                "discover": "Discover",
                 "mobileApp": "Mobile App",
                 "contactUs": "Contact Us",
-                "signIn": "Sign In"
+                "signIn": "Sign In",
+                "courses": "Courses"
             }
         }
     },
