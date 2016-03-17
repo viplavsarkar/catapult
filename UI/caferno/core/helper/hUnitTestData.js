@@ -97,33 +97,6 @@ Helper.prototype.getPageData = function(){
 	return props;
 }
 
-Helper.prototype.getTestDataCourseList = function () {
-
-    var courseListData = [
-        {
-            logo: '',
-            title: '',
-            academy: {
-                logo: '',
-                name: 'LearnDesk'
-            },
-            liveFor: '',
-            publishDate: 1457342156,
-            courseComposition: {
-                tutorials: 1,
-                classes: 3,
-                tests: 2
-            },
-            enrollees: [
-                'Ashutosh'
-            ],
-            price: 10
-        }
-    ];
-
-    return courseListData;
-}
-
 Helper.prototype.getTestDataHeader = function () {
     var header = {
         header: {
@@ -153,4 +126,79 @@ Helper.prototype.getTestDataFooter = function () {
     return footer;
 }
 
+Helper.prototype.getTestDataCourseList_old = function () {
+
+    var courseListData = [
+        {
+            logo: '',
+            title: '',
+            academy: {
+                logo: '',
+                name: 'LearnDesk'
+            },
+            liveFor: '',
+            publishDate: 1457342156,
+            courseComposition: {
+                tutorials: 1,
+                classes: 3,
+                tests: 2
+            },
+            enrollees: [
+                'Ashutosh'
+            ],
+            price: 10
+        }
+    ];
+
+    return courseListData;
+}
+
+Helper.prototype.getTestDataCourseList = function () {
+    var courseListData = [
+        {
+            key: 0,
+            logo: '/asset/image/courses/courses_1_221x140.jpg',
+            title: 'Hadoop Introduction',
+            academy: {
+                logo: '/asset/image/academy/niit.jpg',
+                name: 'LearnDesk'
+            },
+            liveFor: 3,
+            publishDate: 1457342156,
+            courseComposition: {
+                tutorials: 1,
+                classes: 3,
+                tests: 2
+            },
+            enrollees: [
+                'Ashutosh'
+            ],
+            price: 10
+        },
+        {
+            key: 0,
+            logo: '/asset/image/courses/courses_1_221x140.jpg',
+            title: 'Python Introduction',
+            academy: {
+                logo: '/asset/image/academy/niit.jpg',
+                name: 'LearnDesk'
+            },
+            liveFor: 4,
+            publishDate: 1457342156,
+            courseComposition: {
+                tutorials: 2,
+                classes: 1,
+                tests: 10
+            },
+            enrollees: [
+                'Ashutosh',
+                'Biplab',
+                'Varinder'
+            ],
+            price: 10
+        }
+    ];
+
+    return courseListData;
+}
 module.exports = Helper;

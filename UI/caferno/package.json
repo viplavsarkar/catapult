@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -14,7 +14,8 @@
     "serve-favicon": "~2.3.0",    
     "react": "^0.14.3",
     "react-dom": "^0.14.3",    
-    "ejs": "^2.3.4"
+    "ejs": "^2.3.4",
+    "react-intl": "1.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
