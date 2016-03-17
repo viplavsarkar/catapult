@@ -1,92 +1,157 @@
-app.ready(function(){
-    defaultPage = 'notifications'
-    delayBetweenSameServerCalls = 60 // Seconds.
-    fileTypes = { // If content/object/type id doesn't match, it looks for objecttype, which starts at 100+.
-        0: 'unknown',
-        1: 'ppt', 2: 'pdf', 4: 'word', 6: 'xls',
-        3: 'video', 5: 'audio',
-        7: 'flash',
-        8: 'youtube', 9: 'authorstream', 11: 'scribd', 13: 'slideshare',
-        101: 'class', 103: 'test', 104: 'assignment'
-    }
+var APP = APP || {}; //Global Namespace
 
-    inaccessibles = /assignment|flash|unknown/
-    mode = {
-        bellurbis: 'http://blmobile.wiztest.authordm.com',
-        dev: 'http://mobile.wiztest.authordm.com',
-        qe: 'http://mobileapp.wizqe.authordm.com',
-        preProd: 'http://api.wiziq.authordm.com/glmobileapp',
-        prod: 'http://api.wiziq.com/glmobileapp'
-    }.prod
+// Some Global methods and properties available with APP Object.
+(function($, window, document, undefined) {
+    $.extend(APP, {
+        document: $(document),
+        eventTarget: $('body')
+    });
+})(jQuery, this, this.document);
 
-    phoneNumber = '1-800-3000-1771'
-    resultsPerPage = 25
-    toastDuration = 3000
-    version = '2.0'
+(function($, window, document, undefined) {
+    APP.subModules = (function() {
+        function _subModules() {
+            this.init = function() {
+                slideUpDown('#courseListing .sorting > a', 'slide', 'hide');
+            };
+            this.pluginInit = function() {
+                APP.eventTarget.find('#courseTabs').tabbing({
+                    defaultTab: 1,
+                    afterInit: courseAccordion
+                });
+            };
+            this.onWindowLoad = function() {};
 
-    /* If you change anything below this line, there's a 97.3% possibility that it will
-     * create a paradox in the space-time continuum and the universe will cease to exist.
-     *
-     * ~ Doc Brown
-    **/
+            var courseAccordion = function($tabsParent){
+                $tabsParent.find('.accordionWrapper').accordion({
+                    active: 0,
+                    header: '.accordionHead',
+                    heightStyle: 'content',
+                    collapsible: true
+                });
+            };
 
-    app.back = function(){
-        location.href.has('testFrame') ? $(window).trigger('message', {errorcode: '-1'}) : $('header back').trigger('click')
-    }
+            var slideUpDown = function(selector, transform, hideClass) {
+                var $selector = APP.eventTarget.find(selector),
+                    $options = $selector.parent().find('.options'),
+                    currentVal = $selector.data('val'),
+                    newVal;
 
-    app.getFileData = function(signature, callback){
-        var courseId = signature.split('/')[0]
-        if (courseId !== '0')
-            server.getCourseSchedule({courseId: courseId}).okay(function(response){
-                var found = false
-                response.course.section.some(function(section){
-                    getFilesFromSection(section).some(function(object){
-                        if (object.path){
-                            var storage = JSON.parse(window.localStorage.storage)
-                            if (storage.downloaded[signature]){
-                                object.path = storage.downloaded[signature].path
-                            }
-                        }
+                var eventHandling = function(e) {
+                    e.preventDefault();
 
-                        if ([courseId, object.typeid || 0, object.objectid].join('/') === signature){
-                            callback(object)
-                            return (found = true)
-                        }
-                    })
-                    return found
-                })
-            })
-        else server.getClassDetail({classId: signature.split('/')[2]}).okay(callback)
-    }
+                    var $this = $(this);
 
-    app.getFilesFromSection = function(section){
-        var files = [];
-        section.objects ? (files = section.objects) : // Sections based courses.
-        ((section.subsection || []).concat(section.allweek || [])).map(function(subSection){ // Weeks based courses.
-            files = files.concat(
-            (subSection.objects || []).map(function(object){
-                object.date = (subSection.date ? subSection.date : 'All week')+' - '
-                object.subSectionId = subSection.subsectionid
-                // subSection.date &&
-                // (object.date = window.parseInt(subSection.date.split(' ')[0])) &&
-                // (object.nth = object.date.nth())
-                return object
-            }))
-        })
+                    if (newVal == undefined) {
+                        newVal = currentVal;
+                    };
 
-        files.map(function(file){ file.sectionId = section.sectionid })
-        return files
-    }
+                    $options.find('li').removeClass('active').end().find('li[data-val=' + newVal + ']').addClass('active');
 
-    app.fileHref = function(o){
-        var signature = [o.courseid, o.contenttypeid || o.typeid || 0, o.contentid || o.objectid].join('/')
-        return o.type === 'class' ? 'liveClass/'+(o.classid || o.objectid) :
-        /audio|video/.test(o.type) ? 'media/'+signature :
-        /pdf|ppt|word|xls/.test(o.type) ? 'document/'+signature :
-        o.type === 'test' ? 'test/'+[o.courseid, o.sectionId || 0, o.subSectionId || 0, o.objectid || o.testid].join('/') :
-        /youtube|authorstream|scribd|slideshare/.test(o.type) ? 'embed/'+signature :
-        ''
-    }
+                    switch (transform) {
+                        case 'slide':
+                            $options.show();
 
-    app.inaccessible = function(type){ return inaccessibles.test(type) ? 'inaccessible' : '' }
-})
+                            setTimeout(function(){
+                                $this.parent().toggleClass(transform).toggleClass(hideClass);
+                                if ($this.parent().hasClass(hideClass)) {
+                                    $options.show(0).delay(301).hide(0);    
+                                };
+                            },100);
+                            break;
+                    };
+                };
+
+                var optionsEventHandling = function(e) {
+                    e.preventDefault();
+
+                    var $this = $(this);
+                    
+                    newVal = $this.data('val');
+
+                    $options.find('li').removeClass('active');
+                    $this.addClass('active');
+                    $selector.html(newVal);
+                    
+                };
+
+                var makeItHidden = function(e){
+                    if ($selector.parent().hasClass(transform) && !$selector.is(e.target)  && $selector.has(e.target).length === 0 && !$options.is(e.target) && !$options.find('li, li a').is(e.target)) {
+                        $selector.parent().removeClass(transform).addClass(hideClass);
+                        $options.show(0).delay(301).hide(0);
+                    };
+                };
+
+                $selector.on('click', eventHandling);
+                $selector.parent().on('click', '.options li', optionsEventHandling);
+                APP.document.on('mouseup', makeItHidden);
+            };
+        }
+        return new _subModules();
+    }());
+})(jQuery, this, this.document);
+
+//jQuery functions and plug-ins that will be reused across the site
+
+(function($, window, document, undefined) {
+    $.fn.extend({
+        tabbing: function(config){
+            var $tabsParent = $(this);
+
+            var settings = $.extend({
+                tab: 'tabsHead', //Tabs parent class
+                contentPanel: 'tabsContent', //Content panel parent class
+                defaultTab: 0, //Default tab
+                afterInit: function($tabsParent){}, //Callback after init
+                afterShow: function(){} //Callback after content show 
+            }, config);
+
+            var doTabbing = function(){
+                var $tabs = $('.' + settings.tab + ' li'),
+                    $tabsContent = $('.' + settings.contentPanel + ' .moduleWrapper'),
+                    defaultTab = $tabsParent.find($tabs).get(settings.defaultTab),
+                    defaultTabContent = $tabsParent.find($tabsContent).get(settings.defaultTab);
+
+                //Show default tab & conetent panel
+                $(defaultTab).addClass('active');
+                $(defaultTabContent).addClass('active');
+
+                $tabsParent.on('click', '.'+settings.tab +' li', function(event){
+                    event.preventDefault();
+
+                    var $this = $(this),
+                        getContent = $this.data('tab');
+
+                    if ($this.hasClass('active')) { 
+                        return false; //Do nothing if user click on active tab!
+                    }else{
+                        //Initially removed "active" class from "Tab" & "Content"
+                        $tabsParent.find($tabs).removeClass('active').end().find($tabsContent).removeAttr('style').removeClass('active');
+                        $(this).addClass('active'); //Add "active" class on current tab
+                        $tabsParent.find($tabsContent).filter('[data-tab='+getContent+']').fadeIn(600).addClass('active'); //Add "active" class on content panel tab
+                        settings.afterShow.call();
+                    };
+                });
+                settings.afterInit.call(this, $tabsParent);
+            };
+
+            //Create Dialog
+            return this.each(function() {
+                doTabbing();   
+            });
+        }
+    });
+})(jQuery, this, this.document);
+
+//Global code to be run on all pages
+(function($, window, document, undefined) {
+    $(function() {
+        APP.subModules.pluginInit();
+        APP.subModules.init();
+    });
+
+    // Global window load event.
+    $(window).load(function() {
+        APP.subModules.onWindowLoad();
+    });
+})(jQuery, this, this.document);

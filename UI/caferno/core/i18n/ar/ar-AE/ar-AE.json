@@ -1,0 +1,46 @@
+{
+    "common": {
+        "discover": "Discover",
+        "courses": "Courses",
+        "anytime": "Anytime",
+        "anywhere": "Anywhere",
+        "appStore": "App Store",
+        "android": "Android",
+        "sortBy": "Sort By",
+        "popularity": "Popularity",
+        "date": "Date",
+        "price": "Price",
+        "week": "week(s)",
+        "tutorials": "دَرْس خُصوصيّ",
+        "classes": "قِسْم",
+        "tests": "الاختبارات",
+        "free": "حر",
+        "and": "and",
+        "others": "others",
+        "learnMore": "أعرف أكثر",
+        "viewMore": "عرض المزيد"
+    },
+    "course": {
+        "liveFor": "أعيش من أجل",
+        "publishedDate": "تاريخ النشر",
+        "hasEnrolled": "والمسجلين في هذه الدورة",
+        "haveEnrolled": "have enrolled in this course"
+    },
+    "header": {
+        "headerNavigation": {
+            "navigationItems": {
+                "discover": "اكتشف",
+                "mobileApp": "اموبايل التطبيق",
+                "contactUs": "ااتصل بنا",
+                "signIn": "تسجيل الدخول",
+                "courses": "الدورات"
+            }
+        }
+    },
+    "footer": {
+        "learnOnTheGo": "Learn on the go",
+        "availableOn": "Available on",
+        "downloadFor": "Download for",
+        "poweredBy": "Powered by"
+    }
+}
