@@ -15,7 +15,8 @@
     "react": "^0.14.3",
     "react-dom": "^0.14.3",    
     "ejs": "^2.3.4",
-    "react-intl": "1.2.0"
+    "react-intl": "1.2.0",
+    "async": "latest"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",

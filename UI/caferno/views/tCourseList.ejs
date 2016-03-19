@@ -29,11 +29,18 @@
 
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/react-intl/1.2.2/react-intl.js"></script>
-        
-        <div id="pageWrapper">
-            <%- cCourseList %>
+
+        <div id="container_cHeader_header">
+            <%- cHeader_header %>
         </div>
-       
+
+        <div id="container_cCourses_cCourseList">
+            <%- cCourses_cCourseList %>
+        </div>
+     
+        <div id="container_cFooter_footer">
+            <%- cFooter_footer %>
+        </div>
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.6/react.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.6/react-dom.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
@@ -44,5 +51,8 @@
       
         <script src="//cdnjs.cloudflare.com/ajax/libs/react-intl/1.2.2/react-intl.js"></script>
       -->
+      <div id="localeContainer">
+            <%- localeData %>
+      </div>
     </body>
 </html>
