@@ -1,5 +1,7 @@
-var HomePageType = require('../../presenter/pGenerateHomePage.js');
-var winston = require('winston');
+var HomePageType    = require('../../presenter/pGenerateHomePage.js');
+var Comp            = require('../../../core/utility/dComponent.js');
+var async = require("async");
+//var winston = require('winston');
 
 var PCourses = function(req, res, next){
     this.req    = req;
@@ -7,74 +9,46 @@ var PCourses = function(req, res, next){
     this.next   = next;
 
     this.controller = '';
+    this.presenter  = new HomePageType(req, res ,next);
+    this.template   = '';
+    this.components = [];
+    this.pageData   = {};
 };
 
-//reserved for bundle.js
-PCourses.prototype.getBundle = function(){
-    console.log('BCourses:getBundle()');
-    console.log('bundle.js is on the way...');
-    var thisObj = this;
-    thisObj.res.setHeader('Content-Type', 'text/javascript');
-    console.log(__dirname);
-    var parentDir = __dirname.substring(0, __dirname.lastIndexOf('\\'));
-    thisObj.res.sendFile('../components/cCourses.jsx',{root: parentDir });
-}
+
 
 PCourses.prototype.getCoursesScreen = function(){
-    var thisObj = this;
-    // console.log('hello===============================z' + global.messages['en-US'].common.sortBy);
-    var template = 'tCourseList.ejs';
-    var HomePage = new HomePageType(thisObj.req, thisObj.res ,thisObj.next);
+    var _ = this;
+
     var hUnitTestData = require('../../../core/helper/hUnitTestData.js');
     var hTestData = new hUnitTestData();
-    var pageData = hTestData.getPageData();
-    var components = [
-        {
-            component_path: 'cCourses',
-            component : 'cCourseList.jsx',
-            name : 'cCourseList',
-            rawdata :  hTestData.getTestDataCourseList()
-        }
-    ]; 
+
+    //set the template to use
+    _.template = 'tCourseList.ejs';
     
-     //console.log('this is PCourses:getCoursesScreenActual footage');
-    winston.info("PCourses:getCoursesScreen()", {url:this.controller, page:'pCourse.js', components:['cCourseList.jsx']});
-    HomePage.controller = this.controller;
-    HomePage.getCoursesScreenActual(template, components, pageData);
+    //add the header
+    var componentCourseList     = new Comp('cHeader_header.jsx', hTestData.getTestDataHeader());    
+    _.components.push(componentCourseList.ToJson());
 
+    //add the react component to add in the page
+    var componentCourseList     = new Comp('cCourses_cCourseList.jsx', hTestData.getTestDataCourseList());    
+    _.components.push(componentCourseList.ToJson());
+
+    //add the footer
+    var componentCourseList     = new Comp('cFooter_footer.jsx', {});    
+    _.components.push(componentCourseList.ToJson());
+
+    _.pageData = hTestData.getPageData(); 
+
+    //calling the generate page after the components were obtained asynchronously and collected by this point.   
+    _.generatePage();
 }
 
-
-
-
-
-PCourses.prototype.getCoursesScreenNew = function(){
-    var thisObj = this;
-    var HomePage = new HomePageType(thisObj.req, thisObj.res ,thisObj.next);
-    var hUnitTestData = require('../../../core/helper/hUnitTestData.js');
-    var hTestData = new hUnitTestData();
-    var pageData = hTestData.getPageData();
-    var template = 'courses.ejs';
-    var components = [
-                        {
-                            component_path: 'cCourses',
-                            component : 'cCourses.jsx',
-                            name : 'reactOutput',
-                            rawdata :  hTestData.getTestData()
-                        },
-                        {   
-
-                            component_path: 'cCourses',
-                            component : 'cCoursesLeftNav.jsx',
-                            name : 'leftNavOutput',
-                            rawdata :  hTestData.getTestDataNavList()
-                        }
-                    ];
-    //console.log('this is PCourses:getCoursesScreenActual footage');
-    winston.info("PCourses:getCoursesScreenNew()", {url:this.controller, page:'pCourse.js', components:['cCourses.jsx', 'cCoursesLeftNav.jsx']});
-    HomePage.controller = this.controller;
-    HomePage.getCoursesScreenActual(template, components, pageData);
+PCourses.prototype.generatePage = function(){
+    var _this = this;
+    //winston.info("PCourses:getCoursesScreen()", {url:this.controller, page:'pCourse.js', components:['cCourseList.jsx']});
+    _this.presenter.controller = _this.controller;
+    _this.presenter.getCoursesScreenActual(_this.template, _this.components, _this.pageData);
 }
-
 
 module.exports = PCourses;
