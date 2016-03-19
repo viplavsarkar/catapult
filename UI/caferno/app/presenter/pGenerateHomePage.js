@@ -16,6 +16,19 @@ Helper.prototype.getCoursesScreenActual = function(template, components, pageDat
     var thisObj = this; 
    
     var params = {};
+    var localeJson = {                           
+                        messages: global.messages[global.language],
+                        locales: global.language.culture,
+                        formats: {
+                                "date": {
+                                    "short": {
+                                        "day": "numeric",
+                                        "month": "long",
+                                        "year": "numeric"
+                                    }
+                                }
+                            }
+                        };
     for(var i=0; i< components.length;i++){
         var eachKeyVal = components[i];
         var props = eachKeyVal.rawdata;
@@ -24,60 +37,29 @@ Helper.prototype.getCoursesScreenActual = function(template, components, pageDat
         var component = '../components/' + componentPath;
         var var_pagedata = 'var_' + eachKeyVal.component.split('.')[0];
         var JSXcourses = thisObj.React.createFactory(require(component));    
-        var languageJson = { 
-                            data:props,
-                            messages: global.messages[global.language],
-                            //locales: global.language.culture,
-                            formats: {
-                                    "date": {
-                                        "short": {
-                                            "day": "numeric",
-                                            "month": "long",
-                                            "year": "numeric"
-                                        }
-                                    }
-                                }
+        var dataAndLocale = { 
+                                data:props,
+                                messages:localeJson.messages,
+                                locales: localeJson.locales,
+                                formats: localeJson.formats
                             };
-        
-        params[eachKeyVal.name] = thisObj.ReactDOMServer.renderToString(
-                                                JSXcourses({
-                                                            data:props,
-                                                            locales: global.language.culture,
-                                                            messages: global.messages[global.language],
-                                                            formats: {
-                                                                    "date": {
-                                                                        "short": {
-                                                                            "day": "numeric",
-                                                                            "month": "long",
-                                                                            "year": "numeric"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            })          
-                                                                        )
+        params[eachKeyVal.name] = thisObj.ReactDOMServer.renderToString(JSXcourses(dataAndLocale))
                                                 + thisObj.setDataForBundleJs(var_pagedata, props)
-                                                + thisObj.setBundleScript(componentPath)
-                                                + thisObj.setLocales(languageJson);
+                                                + thisObj.setBundleScript(componentPath);
     }
     params.pageData = pageData;
+    
+    params.localeData = thisObj.setLocales(localeJson);
     thisObj.res.render(template, params);
     
 }
 
-Helper.prototype.setLocales1 = function(languageJson){
-    return "<script type='text/javascript'>var MESSAGES=JSON.parse('"+JSON.stringify(languageJson)+"')</script>";
-}
-
-Helper.prototype.setLocales6 = function(languageJson){
-    return "<script type='text/javascript'>var BIFROST_APP_PROPS=JSON.parse('"+JSON.stringify(languageJson)+"')</script>";
-}
 
 Helper.prototype.setLocales = function(languageJson){ 
     var str = '';
-        str += "<script type='text/javascript'>var localkk='"+JSON.stringify(languageJson.locales)+"'</script>"; 
+        str += "<script type='text/javascript'>var localkk="+JSON.stringify(languageJson.locales)+"</script>"; 
         str += "<script type='text/javascript'>var formkk=JSON.parse('"+JSON.stringify(languageJson.formats)+"')</script>"
-        str += "<script type='text/javascript'>var messkk=JSON.parse('"+JSON.stringify(languageJson.messages)+"')</script>"
-        str += "<script type='text/javascript'>var datakk=JSON.parse('"+JSON.stringify(languageJson.data)+"')</script>";
+        str += "<script type='text/javascript'>var messkk=JSON.parse('"+JSON.stringify(languageJson.messages)+"')</script>";
     return str;
 
 }
