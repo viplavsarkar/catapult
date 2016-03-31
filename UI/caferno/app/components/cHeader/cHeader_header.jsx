@@ -73,7 +73,8 @@ var Header = React.createClass({
 if (isNode) {
     module.exports = Header; 
 } else {
-
+    window.Section = Header;
+  /*
     var componentName = 'cHeader_header';
     
     var dataName = eval('var_' + componentName);
@@ -86,5 +87,5 @@ if (isNode) {
     ReactDOM.render(<Header data={dataName} messages={mekk} formats={fokk} locales={lokk} />, document.getElementById('container_'+componentName));
     //ReactDOM.render(<Section data={paramName} locales={LOCALES} {...MESSAGES} formats={FORMATS}/>, document.getElementById('pageWrapper'));
     //ReactDOM.render(<Section {...BIFROST_APP_PROPS}/>, document.getElementById('pageWrapper'));
-
+*/
 }

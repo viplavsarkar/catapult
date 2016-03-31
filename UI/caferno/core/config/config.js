@@ -1,9 +1,7 @@
-console.log('====> LOADED - config.js');
 var path = require('path');
 
 var config = config || {};
 
-console.log('__dirname = ' + __dirname);
 //config.views = path.join(__dirname, '..', 'views');
 config.i18n = path.join(__dirname, '..', 'i18n');
 //config.clientApp = path.join(__dirname, '..', '..', 'client');

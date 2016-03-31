@@ -28,5 +28,16 @@ router.get('/bundle.js', function(req, res, next){
     bCourses.getBundle();
 });
 
+router.get('/:id', function(req, res, next) {
+
+    winston.info("request at /courses", {url:'/courses'});
+
+    var fCourses        = require('../app/pages/pCourses/pCourseDetail.js');
+    var bCourses        = new fCourses(req, res, next);
+    bCourses.query      = req.query;
+    bCourses.controller = controllerName;
+    //bCourses.getCoursesScreenNew();
+    bCourses.getScreen();
+});
 
 module.exports = router;

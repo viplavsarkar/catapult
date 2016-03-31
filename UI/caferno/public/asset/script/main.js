@@ -1,5 +1,7 @@
 var APP = APP || {}; //Global Namespace
 
+var abcd = function(){
+    //alert('hurrah');
 // Some Global methods and properties available with APP Object.
 (function($, window, document, undefined) {
     $.extend(APP, {
@@ -155,3 +157,7 @@ var APP = APP || {}; //Global Namespace
         APP.subModules.onWindowLoad();
     });
 })(jQuery, this, this.document);
+
+};
+
+setTimeout(function(){abcd();},100);

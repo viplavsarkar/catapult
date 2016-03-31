@@ -105,11 +105,11 @@ Helper.prototype.getTestDataHeader = function () {
         },
         headerNavigation: {
             navigationItems: [
-                { id: 0, keyName: "discover", classes: [], url: '#', isActive: true },
-                { id: 1, keyName: "courses", classes: [], url: '#', isActive: false },
-                { id: 2, keyName: "mobileApp", classes: [], url: '#', isActive: false },
-                { id: 3, keyName: "contactUs", classes: [], url: '#', isActive: false },
-                { id: 4, keyName: "signIn", classes: ['cta', 'wired'], url: '#', isActive: false }
+                {key:11, id: 0, keyName: "discover", classes: [], url: '#', isActive: true },
+                {key:12, id: 1, keyName: "courses", classes: [], url: '#', isActive: false },
+                {key:13, id: 2, keyName: "mobileApp", classes: [], url: '#', isActive: false },
+                {key:14, id: 3, keyName: "contactUs", classes: [], url: '#', isActive: false },
+                {key:15, id: 4, keyName: "signIn", classes: ['cta', 'wired'], url: '#', isActive: false }
             ]
         }
     };
@@ -176,7 +176,7 @@ Helper.prototype.getTestDataCourseList = function () {
             price: 10
         },
         {
-            key: 0,
+            key: 1,
             logo: '/asset/image/courses/courses_1_221x140.jpg',
             title: 'Python Introduction',
             academy: {
@@ -184,7 +184,7 @@ Helper.prototype.getTestDataCourseList = function () {
                 name: 'LearnDesk'
             },
             liveFor: 4,
-            publishDate: 1457342156,
+            publishDate: 1457343156,
             courseComposition: {
                 tutorials: 2,
                 classes: 1,

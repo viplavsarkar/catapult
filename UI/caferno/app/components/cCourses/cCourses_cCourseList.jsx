@@ -55,7 +55,7 @@ var CourseClasses = React.createClass({
 
         return (
             <li>
-                <span className="no">{data.classes}</span>
+                <span className="no">{data}</span>
                 {this.getIntlMessage('common.classes')}
             </li>
         );
@@ -69,7 +69,7 @@ var CourseTests = React.createClass({
 
         return (
             <li>
-                <span className="no">{data.tests}</span>
+                <span className="no">{data}</span>
                 {this.getIntlMessage('common.tests')}
             </li>
         );
@@ -120,11 +120,11 @@ var CourseEnrollees = React.createClass({
         var enrolleeString = '';
         var hasHaveEnrolled = '';
 
-        if (data.count < 2) {
+        if (data.length < 2) {
             enrolleeString = data[0];
             hasHaveEnrolled = this.getIntlMessage('course.hasEnrolled');
         } else {
-            enrolleeString = data[0] + ' ' + this.getIntlMessage('common.and') + ' ' + (data.count - 1) + ' ' + this.getIntlMessage('common.others') + ' ';
+            enrolleeString = data[0] + ' ' + this.getIntlMessage('common.and') + ' ' + (data.length - 1) + ' ' + this.getIntlMessage('common.others') + ' ';
             hasHaveEnrolled = this.getIntlMessage('course.haveEnrolled');
         }
 
@@ -155,8 +155,8 @@ var CourseListItem = React.createClass({
                         <figcaption className="captionWrap">
                             <div className="gutter clearfix">
                                 <span className="academy">
-                                <img src={data.academy.logo} />
-                            </span>
+                                    <img src={data.academy.logo} />
+                                </span>
                                 <span className="caption">{data.academy.name}</span>
                             </div>
                         </figcaption>
@@ -214,10 +214,10 @@ var Section = React.createClass({
         });
 
         return (
-            <section id="courseListing" className="moduleBody" onClick={this.onclickhandler}>
-                <div className="moduleWrapper">
+            <section id="courseListing" className="moduleBody" >
+                <div className="moduleWrapper" >
                     <CourseQuickLinks />
-                    <ul className="courseList">
+                    <ul className="courseList" onClick={this.onclickhandler}>
                        
                         {courseItems}
                     </ul>
@@ -232,18 +232,15 @@ var Section = React.createClass({
 if (isNode) {
     module.exports = Section; 
 } else {
-
-    var componentName = 'cCourses_cCourseList';
+    window.Section = Section;
+   /* var componentName = 'cCourses_cCourseList';
     
     var dataName = eval('var_' + componentName);
-    //var dakk = eval('datakk');
     var lokk = eval('localkk')
     var mekk = eval('messkk');
     var fokk = eval('formkk');
     
-    //BIFROST_APP_PROPS
-    ReactDOM.render(<Section data={dataName} messages={mekk} formats={fokk} locales={lokk} />, document.getElementById('container_'+componentName));
-    //ReactDOM.render(<Section data={paramName} locales={LOCALES} {...MESSAGES} formats={FORMATS}/>, document.getElementById('pageWrapper'));
-    //ReactDOM.render(<Section {...BIFROST_APP_PROPS}/>, document.getElementById('pageWrapper'));
+    ReactDOM.render(<Section data={dataName} messages={mekk} formats={fokk} locales={lokk} />, 
+        document.getElementById('container_'+componentName));*/
 
 }

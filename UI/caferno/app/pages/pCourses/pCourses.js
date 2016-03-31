@@ -35,7 +35,7 @@ PCourses.prototype.getCoursesScreen = function(){
     _.components.push(componentCourseList.ToJson());
 
     //add the footer
-    var componentCourseList     = new Comp('cFooter_footer.jsx', {});    
+    var componentCourseList     = new Comp('cFooter_footer.jsx', hTestData.getTestDataFooter());
     _.components.push(componentCourseList.ToJson());
 
     _.pageData = hTestData.getPageData(); 

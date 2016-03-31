@@ -7,7 +7,7 @@ var bodyParser      = require('body-parser');
 var winston         = require('winston');
 var winston_graylog = require('winston-graylog2');
 //var config = require('./core/config/config');
-var i18n            = require('./core/i18n');
+var i18n            = require('./core/i18n'); 
 
 winston.setLevels(winston.config.syslog.levels);
 //{ emerg: 0, alert: 1, crit: 2, error: 3, warning: 4, notice: 5, info: 6, debug: 7 }

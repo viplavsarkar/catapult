@@ -59,11 +59,12 @@ var Footer = React.createClass({
 if (isNode) {
     module.exports = Footer; 
 } else {
-
+    window.Section = Footer;
+/*
     var componentName = 'cFooter_footer';
     
     var dataName = eval('var_' + componentName);
-    //var dakk = eval('datakk');
+    var dakk = eval('datakk');
     var lokk = eval('localkk')
     var mekk = eval('messkk');
     var fokk = eval('formkk');
@@ -72,5 +73,5 @@ if (isNode) {
     ReactDOM.render(<Footer data={dataName} messages={mekk} formats={fokk} locales={lokk} />, document.getElementById('container_'+componentName));
     //ReactDOM.render(<Section data={paramName} locales={LOCALES} {...MESSAGES} formats={FORMATS}/>, document.getElementById('pageWrapper'));
     //ReactDOM.render(<Section {...BIFROST_APP_PROPS}/>, document.getElementById('pageWrapper'));
-
+*/
 }
