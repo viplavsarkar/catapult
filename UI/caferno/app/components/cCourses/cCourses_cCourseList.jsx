@@ -151,13 +151,13 @@ var CourseListItem = React.createClass({
             <li className="item clearfix">
                 <div className="col-1">
                     <figure className="courseImg">
-                        <a href="#"><img src={data.logo} alt={data.title} /></a>
+                        <a href="#"><img src={data.courseLogo} alt={data.title} /></a>
                         <figcaption className="captionWrap">
                             <div className="gutter clearfix">
                                 <span className="academy">
-                                    <img src={data.academy.logo} />
+                                    <img src={data.tutor.logo} />
                                 </span>
-                                <span className="caption">{data.academy.name}</span>
+                                <span className="caption">{data.tutor.name}</span>
                             </div>
                         </figcaption>
                     </figure>

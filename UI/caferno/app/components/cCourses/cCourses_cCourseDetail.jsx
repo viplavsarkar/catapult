@@ -17,21 +17,7 @@ var CourseSummary = React.createClass({
     mixins: [IntlMixin],
     render: function(){
         var data = this.props.data;
-        var data_old = {
-                courseImg: "/asset/image/courses/courses_1_221x140.jpg",
-                authorImg: "/asset/image/academy/Learn-Desk-4690287-small.jpg",
-                authorName: "Learn Desk",
-                title:  "CPR Online Training",
-                shortDescription: "Self paced course on CPR",
-                calDate: "14 Dec",
-                duration: "9 Weeks",
-                startedFrom: "Tuesday, 2 Jun 15",
-                tutorials: 4,
-                liveClasses: 5,
-                tests: 8,
-                amount: "$149",
-                amountCrossed: "$199",
-                };
+        
         var intlData = {
                         courseStarted:"Course started:",
                         tutorials: "TUTORIALS",
@@ -133,16 +119,7 @@ var CourseOverview = React.createClass({
                         +    "<li>Stage 4: Positively focusing forward - Part II</li>"
                         +"</ul>" 
                         +"<h3 className='lang'> Language of instruction: <span>English</span> </h3>";
-        var data_temp         = {
-                        overviewText: overviewText,
-                        authorImgBig: "/asset/image/academy/Learn-Desk-4690287.jpg",
-                        authorName: "Learn Desk",
-                        authorCity: "Gurgaon",
-                        authorCountry: "India",
-                        followers: 103,
-                        testimonials: 6,
-
-                        };
+       
         return (
                 <div data-tab="overview" className="moduleWrapper">
                     <div className="primaryDetail">
@@ -178,7 +155,6 @@ var EachSectionRow = React.createClass({
     render: function(){
         var data = this.props.data;
 
-        //data =  {type:"video", title:"AED and CPR Training"};
         var className = "table-col-1 " + data.type;
         return (
                 <tr>
@@ -240,49 +216,8 @@ var CourseDetail = React.createClass({
     mixins: [IntlMixin],
     render: function() {
         var data = this.props.data;
-        var data_old = {
-            schedule:{sections: [
-                        {
-                            sectionData:[
-                                {type:"video", title:"AED and CPR Training"},
-                                {type:"video", title:"What Is a Defibrillator How Does It Work"},
-                                {type:"doc", title:"Defibrillation"},
-                                {type:"doc", title:"Defibrillation"},
-                                {type:"doc", title:"Defibrillation"},
-                                {type:"doc", title:"Defibrillation"},
-                                {type:"video", title:"AED and CPR Training"},
-                                {type:"video", title:"AED and CPR Training"},
-                                {type:"video", title:"AED and CPR Training"}
-                            ]
-                        },
-                        {
-                            sectionData:[
-                                {type:"video", title:"Not sure what is this"},
-                                {type:"video", title:"What Is a Defibrillator How Does It Work"},
-                                {type:"doc", title:"Defibrillation"},
-                                {type:"doc", title:"Defibrillation"},
-                                {type:"doc", title:"Defibrillation"},
-                                {type:"doc", title:"Defibrillation"},
-                                {type:"video", title:"AED and CPR Training"},
-                                {type:"video", title:"AED and CPR Training"},
-                                {type:"video", title:"AED and CPR Training"}
-                            ]
-                        },
-
-            ]},
-            overview:{
-                        overviewText: "<p>According to the Law of Attraction your thoughts create your reality, so everything that everyone is living and experiencing is as a result of the thoughts that they are thinking.Thought is an energy that when focused manifests into physical form.The Law of Attraction isn’t a new idea, the concepts have been talked about throughout the ages by many philosophies and traditions, including also modern day science and physics.</p>",
-                        authorImgBig: "/asset/image/academy/Learn-Desk-4690287.jpg",
-                        authorName: "Learn Desk",
-                        authorCity: "Gurgaon",
-                        authorCountry: "India",
-                        followers: 103,
-                        testimonials: 6,
-
-                        }
-        };
-
         var intlData = {overview: "Overview", schedule: "Schedule"};
+        
         return (
                 <section id="courseTabs">
                     <div className="tabsHeadWrapper moduleBody">
@@ -322,76 +257,13 @@ var Breadcrum = React.createClass({
 var CourseDetailSection = React.createClass({
     mixins: [IntlMixin],    
     render: function () {      
-        var data = this.props.data;
-        data = {
-                courseSummary: {
-                    courseImg: "/asset/image/courses/courses_1_221x140.jpg",
-                    authorImg: "/asset/image/academy/Learn-Desk-4690287-small.jpg",
-                    authorName: "Learn Desk",
-                    title:  "CPR Online Training",
-                    shortDescription: "Self paced course on CPR",
-                    calDate: "14 Dec",
-                    duration: "9 Weeks",
-                    startedFrom: "Tuesday, 2 Jun 15",
-                    tutorials: 4,
-                    liveClasses: 5,
-                    tests: 8,
-                    amount: "$149",
-                    amountCrossed: "$199",
-                },
-                courseDetail: {
- 
-                                schedule:{
-                                            sections: [
-                                                {
-                                                    sectionData:[
-                                                        {type:"video", title:"AED and CPR Training"},
-                                                        {type:"video", title:"What Is a Defibrillator How Does It Work"},
-                                                        {type:"doc", title:"Defibrillation"},
-                                                        {type:"doc", title:"Defibrillation"},
-                                                        {type:"doc", title:"Defibrillation"},
-                                                        {type:"doc", title:"Defibrillation"},
-                                                        {type:"video", title:"AED and CPR Training"},
-                                                        {type:"video", title:"AED and CPR Training"},
-                                                        {type:"video", title:"AED and CPR Training"}
-                                                    ]
-                                                },
-                                                {
-                                                    sectionData:[
-                                                        {type:"video", title:"Not sure what is this"},
-                                                        {type:"video", title:"What Is a Defibrillator How Does It Work"},
-                                                        {type:"doc", title:"Defibrillation"},
-                                                        {type:"doc", title:"Defibrillation"},
-                                                        {type:"doc", title:"Defibrillation"},
-                                                        {type:"doc", title:"Defibrillation"},
-                                                        {type:"video", title:"AED and CPR Training"},
-                                                        {type:"video", title:"AED and CPR Training"},
-                                                        {type:"video", title:"AED and CPR Training"}
-                                                    ]
-                                                },
-
-                                            ]
-                                        },
-                                overview:{
-                                            overviewText: "<p>According to the Law of Attraction your thoughts create your reality, so everything that everyone is living and experiencing is as a result of the thoughts that they are thinking.Thought is an energy that when focused manifests into physical form.The Law of Attraction isn’t a new idea, the concepts have been talked about throughout the ages by many philosophies and traditions, including also modern day science and physics.</p>",
-                                            authorImgBig: "/asset/image/academy/Learn-Desk-4690287.jpg",
-                                            authorName: "Learn Desk",
-                                            authorCity: "Gurgaon",
-                                            authorCountry: "India",
-                                            followers: 103,
-                                            testimonials: 6,
-
-                                        }
-
-
-                            }
-                }
+        var data = this.props.data;     
 
         return (
             <div>
                 <Breadcrum />
-                <CourseSummary data={data.courseSummary}/>
-                <CourseDetail data={data.courseDetail} />
+                <CourseSummary  data={data.courseSummary} />
+                <CourseDetail   data={data.courseDetail} />
             </div>
         );
     }

@@ -40,4 +40,15 @@ router.get('/:id', function(req, res, next) {
     bCourses.getScreen();
 });
 
+router.get('/home', function(req, res, next){
+    winston.info("request at /home", {url:'/home'});
+
+    var fCourses        = require('../app/pages/pDiscover/pDiscover.js');
+    var bCourses        = new fCourses(req, res, next);
+    bCourses.query      = req.query;
+    bCourses.controller = controllerName;
+    //bCourses.getCoursesScreenNew();
+    bCourses.getScreen();
+
+});
 module.exports = router;

@@ -27,7 +27,7 @@ PCourses.prototype.getCoursesScreen = function(){
     _.template = 'tCourseList.ejs';
     
     //add the header
-    var componentCourseList     = new Comp('cHeader_header.jsx', hTestData.getTestDataHeader());    
+    var componentCourseList     = new Comp('cHeader_header.jsx', hTestData.getTestDataHeader("courses"));    
     _.components.push(componentCourseList.ToJson());
 
     //add the react component to add in the page
