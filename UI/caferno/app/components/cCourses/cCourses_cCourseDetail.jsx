@@ -16,6 +16,29 @@ var FormattedDate = ReactIntl.FormattedDate;
 var CourseSummary = React.createClass({
     mixins: [IntlMixin],
     render: function(){
+        var data = this.props.data;
+        var data_old = {
+                courseImg: "/asset/image/courses/courses_1_221x140.jpg",
+                authorImg: "/asset/image/academy/Learn-Desk-4690287-small.jpg",
+                authorName: "Learn Desk",
+                title:  "CPR Online Training",
+                shortDescription: "Self paced course on CPR",
+                calDate: "14 Dec",
+                duration: "9 Weeks",
+                startedFrom: "Tuesday, 2 Jun 15",
+                tutorials: 4,
+                liveClasses: 5,
+                tests: 8,
+                amount: "$149",
+                amountCrossed: "$199",
+                };
+        var intlData = {
+                        courseStarted:"Course started:",
+                        tutorials: "TUTORIALS",
+                        liveClasses: "LIVE CLASSES",
+                        tests: "TESTS",
+                        enrollNow: "ENROLL NOW",
+                        }
         return (
                 <section id="courseDetails" className="moduleBody">
                     <div className="moduleWrapper">
@@ -23,36 +46,37 @@ var CourseSummary = React.createClass({
                             <li className="item clearfix">
                                 <div className="col-1">
                                     <figure className="courseImg">
-                                        <img src="/asset/image/courses/courses_1_221x140.jpg" alt="course" />
+                                        <img src={data.courseImg} alt="course" />
                                         <figcaption className="captionWrap">
                                             <div className="gutter clearfix">
                                                 <span className="academy">
-                                                <img src="/asset/image/academy/Learn-Desk-4690287-small.jpg" />
+                                                <img src={data.authorImg} />
                                             </span>
-                                                <span className="caption">Learn Desk</span>
+                                                <span className="caption">{data.authorName}</span>
                                             </div>
                                         </figcaption>
                                     </figure>
                                 </div>
                                 <div className="col-2 content">
-                                    <h2>CPR Online Training</h2>
-                                    <p className="shortDiscription">Self paced course on CPR</p>
+                                    <h2>{data.title}</h2>
+                                    <p className="shortDiscription">{data.shortDescription}</p>
                                     <div className="relatedOpt">
                                         <ul className="placed">
                                             <li>
-                                                <span className="calenderDate">14 Dec</span> 9 Weeks
-                                                <span className="date">Course started: Tuesday, 2 Jun 15</span>
+                                                <span className="calenderDate">{data.calDate}</span> {data.duration}
+                                                <span className="date">{intlData.courseStarted} {data.startedFrom}</span>
                                             </li>
                                         </ul>
                                         <ul className="type clearfix">
                                             <li>
-                                                <span className="no">4</span> TUTORIALS
+                                                <span className="no">{data.tutorials}</span> 
+                                                {intlData.tutorials}
                                             </li>
                                             <li>
-                                                <span className="no">4</span> live classes
+                                                <span className="no">{data.liveClasses}</span> {intlData.liveClasses}
                                             </li>
                                             <li>
-                                                <span className="no">4</span> tests
+                                                <span className="no">{data.tests}</span> {intlData.tests}
                                             </li>
                                         </ul>
                                     </div>
@@ -60,9 +84,10 @@ var CourseSummary = React.createClass({
                                 <div className="col-3">
                                     <ul className="ctaGroup">
                                         <li className="cta noRadius">
-                                            $149 <span className="strike">$199</span>
+                                            {data.amount}
+                                            <span className="strike">{data.amountCrossed}</span>
                                         </li>
-                                        <li className="cta filledOrng"><a href="#">ENROLL NOW</a></li>
+                                        <li className="cta filledOrng"><a href="#">{intlData.enrollNow}</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -73,166 +98,214 @@ var CourseSummary = React.createClass({
     }
 });
 
+var CourseOverview = React.createClass({
+    mixins: [IntlMixin],
+    render: function(){
+        var data = this.props.data;
+        var intlData = {
+                        overview: "Overview",
+                        aboutTheInstructor: "About the instructor",
+                        followers: "FOLLOWERS",
+                        testimonials: "TESTIMONIALS",
+                        };
+        var overviewText = "<p>According to the Law of Attraction your thoughts create your reality, so everything that everyone is living and experiencing is as a result of the thoughts that they are thinking.Thought is an energy that when focused manifests into physical form.The Law of Attraction isn’t a new idea, the concepts have been talked about throughout the ages by many philosophies and traditions, including also modern day science and physics.</p>"
+                        +"<h3>A household name today (thanks to The Secret), the Law of Attraction helps you to attract new experiences, relationships and situations or a greater sense of well being.</h3>"
+                        +"<h3>This online course will show you how to apply Law of Attraction in real life!</h3>"
+                        +"<p>With simple and transformative processes including written exercises and meditation, you will empower yourself with a proven practical approach to personal development. Leading Law of Attraction instructor Tracy Friend shares what she has learnt and pioneered through facilitating hundreds of events across the UK and US over the last decade, about what works when applying the Law of Attraction. Tracy’s pioneering presentation delivering The Law of Attraction Centre technology is optimistic and soothing, whilst bringing empowering results on all subjects.</p>"
+                        +"<h3>What you’ll learn:</h3>"
+                        +"<ul>"
+                        +    "<li>Learn the three step process to manifestation</li>"
+                        +    "<li>Discover how to deliberately attract more of what you want: abundance, improved relationships, health &amp; well being or any other desire</li>"
+                        +    "<li>Determine how to incorporate the Law of Attraction into your daily life</li>"
+                        +    "<li>Begin to enjoy your life more</li>"
+                        +    "<li>Let go of any negative thought habits that have been blocking your dreams and ambitions</li>"
+                        +"</ul>"
+                        +"<h3>What’s in the course:</h3>"
+                        +"<ul>"
+                        +    "<li>4 x 25 Minutes recorded classes</li>"
+                        +    "<li>8 PDFs with written exercises</li>"
+                        +"</ul>"
+                        +"<h3>Course outline:</h3>"
+                        +"<ul>"
+                        +    "<li>Stage 1: Relaxing/ letting go</li>"
+                        +    "<li>Stage 2: Making the best of your current reality</li>"
+                        +    "<li>Stage 3: Positively focusing forward - Part I</li>"
+                        +    "<li>Stage 4: Positively focusing forward - Part II</li>"
+                        +"</ul>" 
+                        +"<h3 className='lang'> Language of instruction: <span>English</span> </h3>";
+        var data_temp         = {
+                        overviewText: overviewText,
+                        authorImgBig: "/asset/image/academy/Learn-Desk-4690287.jpg",
+                        authorName: "Learn Desk",
+                        authorCity: "Gurgaon",
+                        authorCountry: "India",
+                        followers: 103,
+                        testimonials: 6,
+
+                        };
+        return (
+                <div data-tab="overview" className="moduleWrapper">
+                    <div className="primaryDetail">
+                        <h2 className="title">{intlData.overview}</h2>
+                        <span dangerouslySetInnerHTML={{__html: data.overviewText}} />
+                    </div>
+                    <div className="secondryDetail clearfix">
+                        <h2 className="title">{intlData.aboutTheInstructor}</h2>
+                        <div className="clearfix">
+                            <figure className="academyImg col-1">
+                                <img src={data.authorImgBig} alt="" />
+                                <figcaption>
+                                    {data.authorName}
+                                    <span className="location">{data.authorCity} , {data.authorCountry}</span>
+                                </figcaption>
+                            </figure>
+                            <div className="col-2">
+                                <ul className="academyMeta clearfix">
+                                    <li>{data.followers}<span>{intlData.followers}</span></li>
+                                    <li>{data.followers}<span>{intlData.followers}</span></li>                                    
+                                    <li>{data.testimonials}<span>{intlData.testimonials}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+    }
+});
+
+var EachSectionRow = React.createClass({
+    mixins:[IntlMixin],
+    render: function(){
+        var data = this.props.data;
+
+        //data =  {type:"video", title:"AED and CPR Training"};
+        var className = "table-col-1 " + data.type;
+        return (
+                <tr>
+                    <td className={className}><span>Section</span></td>
+                    <td className="table-col-2">{data.title}</td>
+                </tr>
+            )
+    }
+});
+var EachSection = React.createClass({
+    mixins:[IntlMixin],
+    render: function(){
+        var data = this.props.data;
+        
+        var sectionRows = data.sectionData.map(function (eachSectionData) {
+            return (
+                <EachSectionRow data={eachSectionData} />
+            );
+        });
+        return(
+                <li className="clearfix">
+                    <div className="accordionHead">
+                        <div className="col-1 caption-1">Section 1 :</div>
+                        <div className="col-2 caption-2">Week 1</div>
+                    </div>
+                    <div className="accordionContent">
+                        <table className="tableGrid">
+                            <tbody>
+                                {sectionRows}                               
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+            );
+    }
+});
+var CourseSchedule = React.createClass({
+    mixins:[IntlMixin],
+    render: function(){
+        var data = this.props.data;
+        var sections = data.sections.map(function(section){
+            return (
+                    <EachSection data={section} />
+                )
+        });
+        return (
+                <div data-tab="schedule" className="moduleWrapper">
+                    <div className="primaryDetail">
+                        <h2 className="title">Schedule &amp; Syllabus</h2>
+                        <ul className="accordionWrapper">
+                           {sections}                          
+                        </ul>
+                    </div>
+                </div>
+            );
+    }
+});
 var CourseDetail = React.createClass({
     mixins: [IntlMixin],
     render: function() {
+        var data = this.props.data;
+        var data_old = {
+            schedule:{sections: [
+                        {
+                            sectionData:[
+                                {type:"video", title:"AED and CPR Training"},
+                                {type:"video", title:"What Is a Defibrillator How Does It Work"},
+                                {type:"doc", title:"Defibrillation"},
+                                {type:"doc", title:"Defibrillation"},
+                                {type:"doc", title:"Defibrillation"},
+                                {type:"doc", title:"Defibrillation"},
+                                {type:"video", title:"AED and CPR Training"},
+                                {type:"video", title:"AED and CPR Training"},
+                                {type:"video", title:"AED and CPR Training"}
+                            ]
+                        },
+                        {
+                            sectionData:[
+                                {type:"video", title:"Not sure what is this"},
+                                {type:"video", title:"What Is a Defibrillator How Does It Work"},
+                                {type:"doc", title:"Defibrillation"},
+                                {type:"doc", title:"Defibrillation"},
+                                {type:"doc", title:"Defibrillation"},
+                                {type:"doc", title:"Defibrillation"},
+                                {type:"video", title:"AED and CPR Training"},
+                                {type:"video", title:"AED and CPR Training"},
+                                {type:"video", title:"AED and CPR Training"}
+                            ]
+                        },
+
+            ]},
+            overview:{
+                        overviewText: "<p>According to the Law of Attraction your thoughts create your reality, so everything that everyone is living and experiencing is as a result of the thoughts that they are thinking.Thought is an energy that when focused manifests into physical form.The Law of Attraction isn’t a new idea, the concepts have been talked about throughout the ages by many philosophies and traditions, including also modern day science and physics.</p>",
+                        authorImgBig: "/asset/image/academy/Learn-Desk-4690287.jpg",
+                        authorName: "Learn Desk",
+                        authorCity: "Gurgaon",
+                        authorCountry: "India",
+                        followers: 103,
+                        testimonials: 6,
+
+                        }
+        };
+
+        var intlData = {overview: "Overview", schedule: "Schedule"};
         return (
                 <section id="courseTabs">
                     <div className="tabsHeadWrapper moduleBody">
                         <ul className="tabsHead moduleWrapper clearfix">
-                            <li className="overview" data-tab="overview"><a href="#">Overview</a></li>
-                            <li className="schedule" data-tab="schedule"><a href="#">Schedule</a></li>
+                            <li className="overview" data-tab="overview"><a href="#">{intlData.overview}</a></li>
+                            <li className="schedule" data-tab="schedule"><a href="#">{intlData.schedule}</a></li>
                         </ul>
                     </div>
                     <div className="tabsContent moduleBody">
-                        <div data-tab="overview" className="moduleWrapper">
-                            <div className="primaryDetail">
-                                <h2 className="title">Overview</h2>
-                                <p>According to the Law of Attraction your thoughts create your reality, so everything that everyone is living and experiencing is as a result of the thoughts that they are thinking.Thought is an energy that when focused manifests into physical form.The Law of Attraction isn’t a new idea, the concepts have been talked about throughout the ages by many philosophies and traditions, including also modern day science and physics.</p>
-                                <h3>A household name today (thanks to “The Secret”), the Law of Attraction helps you to attract new experiences, relationships and situations or a greater sense of well being.</h3>
-                                <h3>This online course will show you how to apply Law of Attraction in real life!</h3>
-                                <p>With simple and transformative processes including written exercises and meditation, you will empower yourself with a proven practical approach to personal development. Leading Law of Attraction instructor Tracy Friend shares what she has learnt and pioneered through facilitating hundreds of events across the UK and US over the last decade, about what works when applying the Law of Attraction. Tracy’s pioneering presentation delivering The Law of Attraction Centre technology is optimistic and soothing, whilst bringing empowering results on all subjects.</p>
-                                <h3>What you’ll learn:</h3>
-                                <ul>
-                                    <li>Learn the three step process to manifestation</li>
-                                    <li>Discover how to deliberately attract more of what you want: abundance, improved relationships, health &amp; well being or any other desire</li>
-                                    <li>Determine how to incorporate the Law of Attraction into your daily life</li>
-                                    <li>Begin to enjoy your life more</li>
-                                    <li>Let go of any negative thought habits that have been blocking your dreams and ambitions</li>
-                                </ul>
-                                <h3>What’s in the course:</h3>
-                                <ul>
-                                    <li>4 x 25 Minutes recorded classes</li>
-                                    <li>8 PDFs with written exercises</li>
-                                </ul>
-                                <h3>Course outline:</h3>
-                                <ul>
-                                    <li>Stage 1: Relaxing/ letting go</li>
-                                    <li>Stage 2: Making the best of your current reality</li>
-                                    <li>Stage 3: Positively focusing forward - Part I</li>
-                                    <li>Stage 4: Positively focusing forward - Part II</li>
-                                </ul>
-                                <h3 className="lang"> Language of instruction: <span>English</span> </h3>
-                            </div>
-                            <div className="secondryDetail clearfix">
-                                <h2 className="title">About the instructor</h2>
-                                <div className="clearfix">
-                                    <figure className="academyImg col-1">
-                                        <img src="/asset/image/academy/Learn-Desk-4690287.jpg" alt="" />
-                                        <figcaption>
-                                            Learn Desk
-                                            <span className="location">Gurgaon , India</span>
-                                        </figcaption>
-                                    </figure>
-                                    <div className="col-2">
-                                        <ul className="academyMeta clearfix">
-                                            <li>103 <span>FOLLOWERS</span></li>
-                                            <li>6 <span>FOLLOWEES</span></li>
-                                            <li>3 <span>TESTIMONIALS</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div data-tab="schedule" className="moduleWrapper">
-                            <div className="primaryDetail">
-                                <h2 className="title">Schedule &amp; Syllabus</h2>
-                                <ul className="accordionWrapper">
-                                    <li className="clearfix">
-                                        <div className="accordionHead">
-                                            <div className="col-1 caption-1">Section 1 :</div>
-                                            <div className="col-2 caption-2">Section 2</div>
-                                        </div>
-                                        <div className="accordionContent">
-                                            <table className="tableGrid">
-                                                <tbody>
-                                                    <tr>
-                                                        <td className="table-col-1 video"><span>Section</span></td>
-                                                        <td className="table-col-2">AED and CPR Training</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="table-col-1 video"><span>Section</span></td>
-                                                        <td className="table-col-2">What Is a Defibrillator How Does It Work</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="table-col-1 doc"><span>Section</span></td>
-                                                        <td className="table-col-2">Defibrillation</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="table-col-1 doc"><span>Section</span></td>
-                                                        <td className="table-col-2">Defibrillation</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="table-col-1 doc"><span>Section</span></td>
-                                                        <td className="table-col-2">Defibrillation</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </li>
-                                    <li className="clearfix">
-                                        <div className="accordionHead">
-                                            <div className="col-1 caption-1">Section 2 :</div>
-                                            <div className="col-2 caption-2">Defibrillation</div>
-                                        </div>
-                                        <div className="accordionContent">
-                                            <table className="tableGrid">
-                                                <tbody>
-                                                    <tr>
-                                                        <td className="table-col-1 video"><span>Section</span></td>
-                                                        <td className="table-col-2">AED and CPR Training</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="table-col-1 video"><span>Section</span></td>
-                                                        <td className="table-col-2">What Is a Defibrillator How Does It Work</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="table-col-1 doc"><span>Section</span></td>
-                                                        <td className="table-col-2">Defibrillation</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </li>
-                                    <li className="clearfix">
-                                        <div className="accordionHead">
-                                            <div className="col-1 caption-1">Section 3:</div>
-                                            <div className="col-2 caption-2">Section 3</div>
-                                        </div>
-                                        <div className="accordionContent">
-                                            <table className="tableGrid">
-                                                <tbody>
-                                                    <tr>
-                                                        <td className="table-col-1 video"><span>Section</span></td>
-                                                        <td className="table-col-2">AED and CPR Training</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="table-col-1 video"><span>Section</span></td>
-                                                        <td className="table-col-2">What Is a Defibrillator How Does It Work</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="table-col-1 doc"><span>Section</span></td>
-                                                        <td className="table-col-2">Defibrillation</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        <CourseOverview data={data.overview} />
+                        <CourseSchedule data={data.schedule}/>
                     </div>
                 </section>
             );
     }
 });
 
-var CourseDetailSection = React.createClass({
-    mixins: [IntlMixin],    
-    render: function () {      
+var Breadcrum = React.createClass({
+    mixins: [IntlMixin],
+    render: function(){
+        var data = this.props.data;
 
-        return (
-            <div>
+        return(
                 <section id="breadcrumbs" className="moduleBody">
                     <div className="moduleWrapper">
                         <div className="moduleGutter">
@@ -243,8 +316,82 @@ var CourseDetailSection = React.createClass({
                         </div>
                     </div>
                 </section>
-                <CourseSummary />
-                <CourseDetail />
+            );
+    }
+});
+var CourseDetailSection = React.createClass({
+    mixins: [IntlMixin],    
+    render: function () {      
+        var data = this.props.data;
+        data = {
+                courseSummary: {
+                    courseImg: "/asset/image/courses/courses_1_221x140.jpg",
+                    authorImg: "/asset/image/academy/Learn-Desk-4690287-small.jpg",
+                    authorName: "Learn Desk",
+                    title:  "CPR Online Training",
+                    shortDescription: "Self paced course on CPR",
+                    calDate: "14 Dec",
+                    duration: "9 Weeks",
+                    startedFrom: "Tuesday, 2 Jun 15",
+                    tutorials: 4,
+                    liveClasses: 5,
+                    tests: 8,
+                    amount: "$149",
+                    amountCrossed: "$199",
+                },
+                courseDetail: {
+ 
+                                schedule:{
+                                            sections: [
+                                                {
+                                                    sectionData:[
+                                                        {type:"video", title:"AED and CPR Training"},
+                                                        {type:"video", title:"What Is a Defibrillator How Does It Work"},
+                                                        {type:"doc", title:"Defibrillation"},
+                                                        {type:"doc", title:"Defibrillation"},
+                                                        {type:"doc", title:"Defibrillation"},
+                                                        {type:"doc", title:"Defibrillation"},
+                                                        {type:"video", title:"AED and CPR Training"},
+                                                        {type:"video", title:"AED and CPR Training"},
+                                                        {type:"video", title:"AED and CPR Training"}
+                                                    ]
+                                                },
+                                                {
+                                                    sectionData:[
+                                                        {type:"video", title:"Not sure what is this"},
+                                                        {type:"video", title:"What Is a Defibrillator How Does It Work"},
+                                                        {type:"doc", title:"Defibrillation"},
+                                                        {type:"doc", title:"Defibrillation"},
+                                                        {type:"doc", title:"Defibrillation"},
+                                                        {type:"doc", title:"Defibrillation"},
+                                                        {type:"video", title:"AED and CPR Training"},
+                                                        {type:"video", title:"AED and CPR Training"},
+                                                        {type:"video", title:"AED and CPR Training"}
+                                                    ]
+                                                },
+
+                                            ]
+                                        },
+                                overview:{
+                                            overviewText: "<p>According to the Law of Attraction your thoughts create your reality, so everything that everyone is living and experiencing is as a result of the thoughts that they are thinking.Thought is an energy that when focused manifests into physical form.The Law of Attraction isn’t a new idea, the concepts have been talked about throughout the ages by many philosophies and traditions, including also modern day science and physics.</p>",
+                                            authorImgBig: "/asset/image/academy/Learn-Desk-4690287.jpg",
+                                            authorName: "Learn Desk",
+                                            authorCity: "Gurgaon",
+                                            authorCountry: "India",
+                                            followers: 103,
+                                            testimonials: 6,
+
+                                        }
+
+
+                            }
+                }
+
+        return (
+            <div>
+                <Breadcrum />
+                <CourseSummary data={data.courseSummary}/>
+                <CourseDetail data={data.courseDetail} />
             </div>
         );
     }
