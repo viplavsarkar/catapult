@@ -38,9 +38,9 @@
         }
     },
     "footer": {
-        "learnOnTheGo": "Learn on the go",
-        "availableOn": "Available on",
-        "downloadFor": "Download for",
-        "poweredBy": "Powered by"
+        "learnOnTheGo": "تعلم على الذهاب",
+        "availableOn": "متاح على",
+        "downloadFor": "تحميل ل",
+        "poweredBy": "مشغل بواسطة"
     }
 }

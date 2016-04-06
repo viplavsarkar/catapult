@@ -11,7 +11,6 @@ var i18n = function(language){
      global.messages = {};
         global.language = new Language(language);
 
-        console.log('Language set to: ' + global.language.displayName);
 
         this._initializeLocalizedStrings();
 }
@@ -34,8 +33,6 @@ i18n.prototype._initializeLocalizedStrings = function() {
         //console.log(supportedLanguages);
         if (supportedLanguages !== undefined) {
             supportedLanguages.forEach(function (_language) {
-                console.log('_language > ');
-                console.log(_language);
                 global.messages[_language.culture] = _this.getLocalizedStrings(_language);
             });
         }

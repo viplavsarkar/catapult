@@ -2,7 +2,6 @@ var config = require('../config/config');
 
 // Right now we are reading supported languages from config
 var _supportedLanguages = config.supportedLanguages;
-console.log('====> LOADED - Language.js');
 var Language = function(language){
         console.log('====> CONSTRUCTOR - Language');
         var _this = this;
@@ -72,7 +71,6 @@ function _parse(language) {
     var regEx = /^([a-z]{2})-([A-Z]{2})$/;
     console.log(language);
     var languageComponents = regEx.exec(language);
-console.log('languageComponents = ' + languageComponents);
     if (languageComponents.length !== 3)
         return;
 
