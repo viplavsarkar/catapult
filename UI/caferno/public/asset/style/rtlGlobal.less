@@ -19,7 +19,11 @@
             figcaption { float: right; text-align: right; padding: 0 0 0 6px;}
         }
         .appPlatform { 
-            li { float: right;}
+            li { float: right; border-right-width:0; border-left:1px solid #e5e5e5; margin: 0 0 0 30px; 
+                a { padding: 25px 43px 0 20px}
+                &:before { right: 0; left: auto;}
+                &:last-child { margin: 0;}
+            }
         }
     }
 /*END -   Page Footer*/
@@ -154,3 +158,14 @@
     }
     
 /*END -   Tabs*/
+
+/*START - MostPopular*/
+    .tilesList {
+        .item { float: right; 
+            figure {
+                figcaption { text-align: right;}
+            } 
+            .price { text-align: right; left: auto; right: 10px;}
+        }
+    }
+/*END - MostPopular*/

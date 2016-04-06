@@ -8,11 +8,23 @@
 	.moduleBody {
         .moduleWrapper { width: 1600px;}
     }
+
+    .tilesList {
+        .item { 
+            .innerContent { height: 400px; }
+        }
+    }
 }
 
 @media only screen and (max-width: 1600px){
 	.moduleBody {
         .moduleWrapper { width: 1240px;}
+    }
+
+    .tilesList {
+        .item { 
+            .innerContent { height: 325px; }
+        }
     }
 }
 
@@ -25,6 +37,13 @@
 @media only screen and (min-width: 1024px) and (max-width:1140px){
 	.moduleBody {
         .moduleWrapper { width: 980px;}
+    }
+
+    #appFeatures {
+
+        .contentImg.active {
+            img { max-height: 70%;}
+        }
     }
 }
 
@@ -39,11 +58,29 @@
             h4 { font-size: @largestFont - 4;}
         }
     }
+
+    #appFeatures {
+        .contentImg.active {
+            img { max-height: 65%;}
+        }
+    }
 }
 
 @media only screen and (max-width: 768px){
 	.moduleBody {
         .moduleWrapper { min-width: 768px; width: auto; padding-left: 10px; padding-right: 10px;}
+    }
+
+    #appFeatures {
+        .contentImg.active {
+            img { max-height: 65%;}
+        }
+    }
+
+    .tilesList {
+        .item { width: 33.3%; 
+            .innerContent { height: 325px; }
+        }
     }
 }
 
