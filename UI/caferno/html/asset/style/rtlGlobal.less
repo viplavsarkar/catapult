@@ -1,0 +1,171 @@
+/*** All Global and default styles below ***/
+
+// Global variables*/
+    
+/*START - Page Header*/
+    #pageHeader { 
+        .logo { float: right;}
+        .pageHeadNav { float: left;
+            li { float: right; text-align: right;}
+        }
+    }  
+/*END -   Page Header*/
+
+/*START - Page Footer*/
+    #pageFooter { 
+        .col-1, .col-2, .col-3 { float: right; text-align: right;}
+        .col-3 { text-align: left;
+            img { float: left;}
+            figcaption { float: right; text-align: right; padding: 0 0 0 6px;}
+        }
+        .appPlatform { 
+            li { float: right; border-right-width:0; border-left:1px solid #e5e5e5; margin: 0 0 0 30px; 
+                a { padding: 25px 43px 0 20px}
+                &:before { right: 0; left: auto;}
+                &:last-child { margin: 0;}
+            }
+        }
+    }
+/*END -   Page Footer*/
+
+/*START - Course Listing*/
+    .courseQuickLinks  { 
+        > li { float: left; text-align: right;
+            > a { float: left; padding: 0 5px 0 18px; background-position: left center;}
+            .options { right: auto; left: 0;
+                li { 
+                    a { padding: 0 33px 0 0;
+                        &:before { left: auto; right: 10px; top: -1px;}
+                    }
+                }
+            }
+            &.slide {
+                > a { background-position: 0 center;}
+            }
+        }
+    }
+    .courseList { margin-top: 15px;
+        .item { 
+            .col-1, .col-2, .col-3 { float: right;}
+            .col-2 { }
+            .col-3 { }
+            .ctaGroup {
+                li { text-align: right;}
+            }
+            .content { text-align: right;
+                .placed { 
+                    li { padding: 0 40px 0 0;
+                        span { }
+                        &:before { left: auto; right: -14px;}
+                    }
+                }
+                .type {
+                    li { float: right;}
+                }
+            }
+            .courseImg {                 
+                .captionWrap { text-align: right;
+                    .academy { float: right; margin: 0 13px 0 0;}
+                    .caption { margin: 0 72px 0 0; padding: 8px 0 0 10px;}
+                }
+            }
+            
+        }
+        &.details {
+            .item {
+                .courseImg { 
+                    .captionWrap { 
+                        .academy { float: right; }
+                        .caption { margin: 0 58px 0 0;}
+                    }
+                }
+                .content {
+                    .placed { 
+                        li {
+                            .calenderDate { right: -3px; left: auto;}
+                        }
+                    }
+                    .type {
+                        li { margin: 0 0 0 20px;}
+                    }
+                }
+            }
+        }
+    } 
+/*END -   Course Listing*/
+
+/*START - Breadcrumbs*/
+    #breadcrumbs { 
+        .wrapper { 
+            > li { float: right;
+                a:after { content: ""; padding: 0 0;}
+                a:before { content: "/"; padding: 0 10px;}
+            }
+        }
+    }
+/*END -   Breadcrumbs*/
+
+/*START - Tabs*/
+    .tabsHeadWrapper { 
+        .tabsHead { 
+            li { float: right; border: 1px #eee7db solid; border-left: 0;
+                a { padding: 0 40px 0 20px;
+                    &:before { left: auto; right: 5px}    
+                }
+                &:last-child { border-left: 1px #eee7db solid;}
+                
+            }
+        }
+    }
+    .primaryDetail { text-align: right;
+        
+        ul { margin: 0 15px 15px 0;
+            li { direction: rtl;}
+            &.accordionWrapper { margin: 0;
+                li { list-style: none; margin: 0;}
+            }
+        }
+    }
+
+    .secondryDetail { text-align: right;
+        .col-1 { float: right; }
+        .col-2 { margin: 0 130px 0 0;}
+        .academyMeta { 
+            li { float: right;}
+        }
+    }
+    .accordionWrapper { 
+        .accordionHead { 
+            .col-1 { float: right; padding: 0 20px 0 0;}
+            .col-2 { float: right; padding: 0 0 0 46px}
+            &:after { right: auto; left: 10px;}
+        }
+        .accordionContent { 
+            
+        }
+        .tableGrid {
+            tbody {
+                tr {
+                    &:last-child {
+                        td { border-bottom: 0;}
+                    }
+                }
+                td { text-align: right;
+                    &.table-col-1 { padding-right: 20px; padding-left: 0;}
+                }
+            }
+        }
+    }
+    
+/*END -   Tabs*/
+
+/*START - MostPopular*/
+    .tilesList {
+        .item { float: right; 
+            figure {
+                figcaption { text-align: right;}
+            } 
+            .price { text-align: right; left: auto; right: 10px;}
+        }
+    }
+/*END - MostPopular*/
