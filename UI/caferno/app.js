@@ -36,7 +36,9 @@ winston.add(winston_graylog, graylog_options );
 
 var routes = require('./routes/index');
 var courses = require('./routes/courses');
-var home    = require('./routes/rHome.js');
+var home    = require('./routes/rHome');
+var mobileApp = require('./routes/rMobileApp');
+var webinars = require('./routes/rWebinars');
 var app = express();
 
 // view engine setup
@@ -55,6 +57,9 @@ app.use(express.static(path.join(__dirname, 'app/components')));
 app.use('/', routes);
 app.use('/courses', courses);
 app.use('/home', home);
+app.use('/mobile', mobileApp);
+app.use('/webinars', webinars);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

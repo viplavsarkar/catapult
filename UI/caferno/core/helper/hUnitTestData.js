@@ -105,11 +105,12 @@ Helper.prototype.getTestDataHeader = function (currPage) {
         },
         headerNavigation: {
             navigationItems: [
-                {key:11, id: 0, keyName: "discover", classes: [], url: '#', isActive: false },
-                {key:12, id: 1, keyName: "courses", classes: [], url: '#', isActive: false },
-                {key:13, id: 2, keyName: "mobileApp", classes: [], url: '#', isActive: false },
-                {key:14, id: 3, keyName: "contactUs", classes: [], url: '#', isActive: false },
-                {key:15, id: 4, keyName: "signIn", classes: ['cta', 'wired'], url: '#', isActive: false }
+                {key:11, id: 0, keyName: "discover", classes: [], url: 'home', isActive: false },
+                {key:12, id: 1, keyName: "courses", classes: [], url: 'courses', isActive: false },
+                {key:13, id: 1, keyName: "webinars", classes: [], url: 'webinars', isActive: false },
+                {key:14, id: 2, keyName: "mobileApp", classes: [], url: 'mobile', isActive: false },
+                {key:15, id: 3, keyName: "contactUs", classes: [], url: 'contactus', isActive: false },
+                {key:16, id: 4, keyName: "signIn", classes: ['cta', 'wired'], url: '#', isActive: false }
             ]
         }
 
@@ -252,7 +253,7 @@ Helper.prototype.getTestDataCourseList = function () {
         },
         {
             key: 1,
-            courseLogo: '/asset/image/courses/courses_1_221x140.jpg',
+            courseLogo: '/asset/image/courses/145782_large.jpg',
             title: 'Python Introduction',
             tutor: {
                 logo: '/asset/image/academy/niit.jpg',
@@ -275,5 +276,166 @@ Helper.prototype.getTestDataCourseList = function () {
     ];
 
     return courseListData;
+}
+Helper.prototype.getTestDataForDiscover = function(){
+    var data = [
+            {
+                courseLogo: "/asset/image/courses/145782_large.jpg",
+                title: "Programming Basics",
+                learnerCount: 7,
+                priceData: {
+                    price: 150,
+                    priceStriked: 250,
+                    currency: '$'
+                }
+            },
+            {
+                courseLogo: "/asset/image/courses/113322_large.jpg",
+                title: "Programming Basics",
+                learnerCount: 2,
+                priceData: {
+                    price: 410,
+                    priceStriked: 750,
+                    currency: 'Rs'
+                }
+            },
+            {
+                courseLogo: "/asset/image/courses/145782_large.jpg",
+                title: "Programming Basics",
+                learnerCount: 7,
+                priceData: {
+                    price: 150,
+                    priceStriked: 250,
+                    currency: '$'
+                }
+            },
+            {
+                courseLogo: "/asset/image/courses/113322_large.jpg",
+                title: "Programming Basics",
+                learnerCount: 2,
+                priceData: {
+                    price: 410,
+                    priceStriked: 750,
+                    currency: 'Rs'
+                }
+            },
+            {
+                courseLogo: "/asset/image/courses/145782_large.jpg",
+                title: "Programming Basics",
+                learnerCount: 7,
+                priceData: {
+                    price: 150,
+                    priceStriked: 250,
+                    currency: '$'
+                }
+            },
+            {
+                courseLogo: "/asset/image/courses/113322_large.jpg",
+                title: "Programming Basics",
+                learnerCount: 2,
+                priceData: {
+                    price: 410,
+                    priceStriked: 750,
+                    currency: 'Rs'
+                }
+            },
+            {
+                courseLogo: "/asset/image/courses/145782_large.jpg",
+                title: "Programming Basics",
+                learnerCount: 7,
+                priceData: {
+                    price: 150,
+                    priceStriked: 250,
+                    currency: '$'
+                }
+            },
+            {
+                courseLogo: "/asset/image/courses/113322_large.jpg",
+                title: "Programming Basics",
+                learnerCount: 2,
+                priceData: {
+                    price: 410,
+                    priceStriked: 750,
+                    currency: 'Rs'
+                }
+            },
+            {
+                courseLogo: "/asset/image/courses/145782_large.jpg",
+                title: "Programming Basics",
+                learnerCount: 7,
+                priceData: {
+                    price: 150,
+                    priceStriked: 250,
+                    currency: '$'
+                }
+            },
+            {
+                courseLogo: "/asset/image/courses/113322_large.jpg",
+                title: "Programming Basics",
+                learnerCount: 2,
+                priceData: {
+                    price: 410,
+                    priceStriked: 750,
+                    currency: 'Rs'
+                }
+            }
+
+        ];
+        return data;
+}
+Helper.prototype.getTestDataForWebinars = function(){
+    var data = [
+                    {
+                        title: "Open class on SEO by Raj",
+                        description: "Everyone is welcome in the open class by Raj on SEO training",
+                        startAt: "Thursday, 20 Aug 15 02:47 PM (IST)",
+                        status:"the class is over",
+                        duration: 60,
+                        attendeeCount: 15,
+                        tutor:{
+                                profilePic: "http://wqimgqe.s3.amazonaws.com/ut/umt/Rajinder-69268.jpg",
+                                name: "Rajinder",
+                                country: "India",
+                                city: "Chandigar"
+                        },
+                        recordingStatus:"STOPPED/IT’S OVER",
+                        recordingRequestLink:"/action/send-message.aspx?msg=pHG%2bNSNbj6ewT%2b8JesoZ357dfPyKKOrSWOEhUwvDKXGajTGvhPVQ%2bKfp7kZd%2bqqjJA9utWGh7nFLpQwiJNTiaZE1cG3tPWkg8VhScJDcQrbTV14YVkY19h49tY23wvRrYGDMHyr9Go8%3d&amp;SetDomain=true&amp;keepThis=true&amp;TB_iframe=true&amp;height=300&amp;width=500"
+                    },
+                    {
+                        title: "Open class on jAVA BEANS by SOURABH",
+                        description: "Open class by Sourabh",
+                        startAt: "Sunday, 14 Aug 17 02:47 PM (IST)",
+                        status:"the class is over",
+                        duration: 50,
+                        attendeeCount: 51,
+                        tutor:{
+                                profilePic: "http://wqimgqe.s3.amazonaws.com/ut/umt/Rajinder-69268.jpg",
+                                name: "Sourabh Ganguly",
+                                country: "India",
+                                city: "Gurgaon"
+                        },
+                        recordingRequestLink:"YET TO START",
+                        recordingLink:""
+                    },
+                    {
+                        title: "Open class on Spring Boot by Dinkar",
+                        description: "Webinar by Dinkar",
+                        startAt: "Sunday, 03 Apr 16 03:47 PM (IST)",
+                        status:"the class is over",
+                        duration: 50,
+                        attendeeCount: 51,
+                        tutor:{
+                                profilePic: "http://wqimgqe.s3.amazonaws.com/ut/umt/Rajinder-69268.jpg",
+                                name: "Dinkar",
+                                country: "India",
+                                city: "Palampur"
+                        },
+                        recordingRequestLink:"RECORDING IN PROGRESS",
+                        recordingLink:""
+                    }
+
+
+                ];
+    return data;
 }
 module.exports = Helper;

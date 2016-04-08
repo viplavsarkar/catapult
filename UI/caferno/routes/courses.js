@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
     bCourses.query      = req.query;
     bCourses.controller = controllerName;
     //bCourses.getCoursesScreenNew();
-    bCourses.getCoursesScreen();
+    bCourses.getScreen();
 });
 
 router.get('/bundle.js', function(req, res, next){

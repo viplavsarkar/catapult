@@ -29,6 +29,9 @@
 /*END -   Page Footer*/
 
 /*START - Course Listing*/
+    #courseListing, #webinarListing {
+        .title { text-align: right;}
+    }
     .courseQuickLinks  { 
         > li { float: left; text-align: right;
             > a { float: left; padding: 0 5px 0 18px; background-position: left center;}
@@ -60,7 +63,7 @@
                     }
                 }
                 .type {
-                    li { float: right;}
+                    li { float: right; margin: 0 0 0 20px;}
                 }
             }
             .courseImg {                 
@@ -88,6 +91,15 @@
                     .type {
                         li { margin: 0 0 0 20px;}
                     }
+                }
+            }
+        }
+        &.webinar {
+            .item {
+                .col-2 { float: right; padding: 0 0 0 2%;}
+                .col-3 { float: right;}
+                .ctaGroup {
+                    text-align: center;
                 }
             }
         }
@@ -137,11 +149,12 @@
     .accordionWrapper { 
         .accordionHead { 
             .col-1 { float: right; padding: 0 20px 0 0;}
-            .col-2 { float: right; padding: 0 0 0 46px}
+            .col-2 { padding: 0 0 0 46px; margin: 0 260px 0 0;}
             &:after { right: auto; left: 10px;}
         }
         .accordionContent { 
-            
+            .col-1 { float: right; padding: 0 20px 0 0;}
+            .col-2 { padding: 0 0 0 0; margin: 0 260px 0 0;}
         }
         .tableGrid {
             tbody {
@@ -169,3 +182,51 @@
         }
     }
 /*END - MostPopular*/
+
+    .ui-datepicker {
+        .ui-datepicker-header { left: auto; right: -8px;}
+    }
+
+/*START - Hero Image Full Width*/
+    
+    .fullBgImg { 
+        .col-1, .col-2 { float: right; text-align: right;}
+        .copy { 
+            .appDownload { 
+                li { float: right; margin: 0 0 0 15px;}
+            } 
+        }
+    }
+/*END -   Hero Image Full Width*/
+
+/*START - 50% Grid*/
+    .grid50 {
+        .col-1 { float: right; padding: 0 0 20px 10%;}
+        .col-2 { float: right;}
+    }
+/*END - 50% Grid*/
+
+/*START - Highlighter*/
+    .highlighter {
+        li { text-align: right;
+            .triangle { left: auto; right: 100%; transform: rotateY(180deg);}
+            &:hover, &.active { 
+                &:after { left: auto; right: 100%; transform: rotateY(180deg); }
+                &:before { border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-top-left-radius: 0; border-bottom-left-radius: 0;
+                    @media only screen and (max-width: 1024px){
+                        border-radius: 4px;
+                    }
+                }
+
+            }
+        }
+    }
+
+    #appFeatures {
+        .contentImg { text-align: right;
+            &.active { display: block;
+                img { height: auto; max-height: 100%;}
+            }
+        }
+    }
+/*END - Highlighter*/

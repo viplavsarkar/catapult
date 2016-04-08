@@ -17,7 +17,7 @@ var PCourses = function(req, res, next){
 
 
 
-PCourses.prototype.getCoursesScreen = function(){
+PCourses.prototype.getScreen = function(){
     var _ = this;
 
     var hUnitTestData = require('../../../core/helper/hUnitTestData.js');

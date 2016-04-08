@@ -24,21 +24,21 @@ PDiscover.prototype.getScreen = function(){
     var hTestData = new hUnitTestData();
 
     //set the template to use
-    _.template = 'tDiscover.ejs';
+    _.template = 'tMobileApp.ejs';
     
     //add the header
-    var componentCourseList     = new Comp('cHeader_header.jsx', hTestData.getTestDataHeader("discover"));    
+    var componentCourseList     = new Comp('cHeader_header.jsx', hTestData.getTestDataHeader("mobileApp"));    
     _.components.push(componentCourseList.ToJson());
 
     //add the react component to add in the page
-    var componentCourseList     = new Comp('cDiscover_discover.jsx', hTestData.getTestDataForDiscover());    
-    _.components.push(componentCourseList.ToJson());
+ //   var componentCourseList     = new Comp('cDiscover_discover.jsx', hTestData.getTestDataForDiscover());    
+ //   _.components.push(componentCourseList.ToJson());
 
     //add the footer
     var componentCourseList     = new Comp('cFooter_footer.jsx', hTestData.getTestDataFooter());
     _.components.push(componentCourseList.ToJson());
 
-    _.pageData = hTestData.getPageData();
+  //  _.pageData = hTestData.getPageData();
 
     //calling the generate page after the components were obtained asynchronously and collected by this point.   
     _.generatePage();

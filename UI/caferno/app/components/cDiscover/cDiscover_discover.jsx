@@ -13,100 +13,73 @@ var FormattedDate = ReactIntl.FormattedDate;
 //  YOUR CODE STARTS HERE
 //*****************************************************************
 
+var PriceLine = React.createClass({
+    mixins:[IntlMixin],
+    render: function(){
+        var data = this.props.data;
+        var priceStr = "Free";
+        var priceStrikedStr = "";
+        if(data.price){
+            if(data.price === 0 || data.price === '0'){
+                priceStr = "Free";
+            }else{
+                priceStr = data.currency + data.price;
+
+                if(data.priceStriked){
+                    if(data.priceStriked === 0 || data.priceStriked === '0'){
+
+                    }else{
+                        priceStrikedStr = data.currency + data.priceStriked;
+                    }
+                }
+            }
+        }
+        return(
+                <div className="price"> {priceStr} <span className="strikeIt">{priceStrikedStr}</span></div>
+            )
+    }
+});
+
+var EachSection = React.createClass({
+    mixins: [IntlMixin],
+    render: function(){
+        var data = this.props.data;
+       
+        return(
+             <li className="item">
+                <div className="innerContent">
+                    <figure>
+                        <a href="#">
+                            <img src={data.courseLogo} alt="" />
+                        </a>
+                        <figcaption>
+                            <a href="#">{data.title}</a>
+                            <small>{data.learnerCount} Learners</small>
+                        </figcaption>
+                    </figure>
+                    <PriceLine data={data.priceData} />
+                </div>
+            </li>
+            )
+    }
+});
 
 var DiscoverSection = React.createClass({
     mixins: [IntlMixin],    
     render: function () {      
-
+        var data = this.props.data;
+        
+        var itemList = data.map(function(eachItem){
+            return (
+                     <EachSection data={eachItem} />
+                )
+        });
         return (
             <section id="mostPopular" className="moduleBody tiles">
                 <div className="moduleWrapper clearfix">
                     <h2 className="title">Most Popular</h2>
                     <ul className="tilesList clearfix">
-                        <li className="item">
-                            <div className="innerContent">
-                                <figure>
-                                    <a href="#">
-                                        <img src="/asset/image/courses/145782_large.jpg" alt="" />
-                                    </a>
-                                    <figcaption>
-                                        <a href="#">Programming Basics</a>
-                                        <small>7 Learners a</small>
-                                    </figcaption>
-                                </figure>
-                                <div className="price">Free</div>
-                            </div>
-                        </li>
-                        <li className="item">
-                            <div className="innerContent">
-                                <figure>
-                                    <a href="#">
-                                        <img src="/asset/image/courses/113322_large.jpg" alt="" />
-                                    </a>
-                                    <figcaption>
-                                        <a href="#">Programming Basics</a>
-                                        <small>7 Learners b</small>
-                                    </figcaption>
-                                </figure>
-                                <div className="price"> $99 <span className="strikeIt">$125</span></div>
-                            </div>
-                        </li>
-                        <li className="item">
-                            <div className="innerContent">
-                                <figure>
-                                    <a href="#">
-                                        <img src="/asset/image/courses/145782_large.jpg" alt="" />
-                                    </a>
-                                    <figcaption>
-                                        <a href="#">Programming Basics</a>
-                                        <small>7 Learners c</small>
-                                    </figcaption>
-                                </figure>
-                                <div className="price">Free</div>
-                            </div>
-                        </li>
-                        <li className="item">
-                            <div className="innerContent">
-                                <figure>
-                                    <a href="#">
-                                        <img src="/asset/image/courses/113322_large.jpg" alt="" />
-                                    </a>
-                                    <figcaption>
-                                        <a href="#">Programming Basics</a>
-                                        <small>7 Learners d</small>
-                                    </figcaption>
-                                </figure>
-                                <div className="price"> $99 <span className="strikeIt">$125</span></div>
-                            </div>
-                        </li>
-                        <li className="item">
-                            <div className="innerContent">
-                                <figure>
-                                    <a href="#">
-                                        <img src="/asset/image/courses/145782_large.jpg" alt="" />
-                                    </a>
-                                    <figcaption>
-                                        <a href="#">Programming Basics</a>
-                                        <small>7 Learners e</small>
-                                    </figcaption>
-                                </figure>
-                                <div className="price">Free</div>
-                            </div>
-                        </li>
-                        <li className="item">
-                            <div className="innerContent">
-                                <figure>
-                                    <a href="#">
-                                        <img src="/asset/image/courses/113322_large.jpg" alt="" />
-                                    </a>
-                                    <figcaption>
-                                        <a href="#">Programming Basics</a>
-                                        <small>7 Learners f</small>
-                                    </figcaption>
-                                </figure>
-                                <div className="price"> $99 <span className="strikeIt">$125</span></div>
-                            </div>
-                        </li>
+                       {itemList}
                     </ul>
                     <div className="cta wired">
                         <a href="#">View More</a>

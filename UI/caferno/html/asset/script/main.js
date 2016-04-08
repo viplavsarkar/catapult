@@ -12,20 +12,50 @@ var APP = APP || {}; //Global Namespace
     APP.subModules = (function() {
         function _subModules() {
             this.init = function() {
-                slideUpDown('#courseListing .sorting > a', 'slide', 'hide');
+                slideUpDown('.sorting > a', 'slide', 'hide');
             };
             this.pluginInit = function() {
                 APP.eventTarget.find('#courseTabs').tabbing({
-                    defaultTab: 0,
+                    defaultTab: 1,
                     afterInit: courseAccordion
                 });
 
                 APP.eventTarget.find('#appFeatures').tabbing({
                     defaultTab: 0,
-                    content: 'contentImg'
+                    content: 'contentImg',
+                    afterInit: appFeaturesCallback
                 });
             };
             this.onWindowLoad = function() {};
+
+            var appFeaturesCallback = function($tabsParent){
+
+            };
+
+            var inLineDatePicker = function($calender) {
+                var dateStart = $calender.data('date-start'),
+                    dateEnd = $calender.data('date-end');
+
+                var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    objDateStart = new Date(dateStart),
+                    objDateEnd = new Date(dateEnd);
+                    dateStartText = objDateStart.getDate() + ' ' + months[objDateStart.getMonth()],
+                    dateEndMonth = objDateEnd.getDate() + ' ' + months[objDateStart.getMonth()];
+
+                $calender.datepicker({
+                    showOtherMonths: true,
+                    nextText: dateEndMonth,
+                    prevText: dateStartText + ' - ',
+                    stepMonths: 0,
+                    beforeShowDay: function(date) {
+                        var dateFrom = $.datepicker.parseDate($.datepicker._defaults.dateFormat, dateStart);
+                            dateTo = $.datepicker.parseDate($.datepicker._defaults.dateFormat, dateEnd);
+                        return [true, dateFrom && ((date.getTime() == dateFrom.getTime()) || (dateTo && date >= dateFrom && date <= dateTo)) ? "dp-highlight" : ""];
+                    }
+                });
+
+                $calender.datepicker('setDate', dateStart);
+            };
 
             var highlighter = function() {
                 var $list = APP.eventTarget.find('.highlighter li');
@@ -45,7 +75,18 @@ var APP = APP || {}; //Global Namespace
                     active: 0,
                     header: '.accordionHead',
                     heightStyle: 'content',
-                    collapsible: true
+                    collapsible: true,
+                    create: function(event, ui) {
+                        var $calender = ui.panel.find('.inLineDatePicker');
+                        inLineDatePicker($calender);
+                    },
+                    beforeActivate: function(event, ui) {
+                        var $calender = ui.newPanel.find('.inLineDatePicker');
+
+                        if (!$calender.hasClass('hasDatepicker')) {
+                            inLineDatePicker($calender);    
+                        }
+                    }
                 });
             };
 
