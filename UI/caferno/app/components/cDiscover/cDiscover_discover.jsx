@@ -53,8 +53,8 @@ var EachSection = React.createClass({
                             <img src={data.courseLogo} alt="" />
                         </a>
                         <figcaption>
-                            <a href="#">{data.title}</a>
-                            <small>{data.learnerCount} Learners</small>
+                            <a href={data.courseDetailLink}>{data.title}</a>
+                            <small>{data.learnerCount} {this.getIntlMessage('common.learners')}</small>
                         </figcaption>
                     </figure>
                     <PriceLine data={data.priceData} />
@@ -77,7 +77,7 @@ var DiscoverSection = React.createClass({
         return (
             <section id="mostPopular" className="moduleBody tiles">
                 <div className="moduleWrapper clearfix">
-                    <h2 className="title">Most Popular</h2>
+                    <h2 className="title">{this.getIntlMessage('discover.mostPopular')}</h2>
                     <ul className="tilesList clearfix">
                        {itemList}
                     </ul>

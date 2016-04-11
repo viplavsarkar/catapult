@@ -1,6 +1,7 @@
 var APP = APP || {}; //Global Namespace
 
 // Some Global methods and properties available with APP Object.
+var allMainMethods = function(){
 (function($, window, document, undefined) {
     $.extend(APP, {
         document: $(document),
@@ -18,6 +19,10 @@ var APP = APP || {}; //Global Namespace
                 APP.eventTarget.find('#courseTabs').tabbing({
                     defaultTab: 1,
                     afterInit: courseAccordion
+                });
+
+                APP.eventTarget.find('#webinarsTabs').tabbing({
+                    defaultTab: 1
                 });
 
                 APP.eventTarget.find('#appFeatures').tabbing({
@@ -215,3 +220,6 @@ var APP = APP || {}; //Global Namespace
         APP.subModules.onWindowLoad();
     });
 })(jQuery, this, this.document);
+}
+
+setTimeout('allMainMethods()',100);

@@ -105,11 +105,11 @@ Helper.prototype.getTestDataHeader = function (currPage) {
         },
         headerNavigation: {
             navigationItems: [
-                {key:11, id: 0, keyName: "discover", classes: [], url: 'home', isActive: false },
-                {key:12, id: 1, keyName: "courses", classes: [], url: 'courses', isActive: false },
-                {key:13, id: 1, keyName: "webinars", classes: [], url: 'webinars', isActive: false },
-                {key:14, id: 2, keyName: "mobileApp", classes: [], url: 'mobile', isActive: false },
-                {key:15, id: 3, keyName: "contactUs", classes: [], url: 'contactus', isActive: false },
+                {key:11, id: 0, keyName: "discover", classes: [], url: '/home', isActive: false },
+                {key:12, id: 1, keyName: "courses", classes: [], url: '/courses', isActive: false },
+                {key:13, id: 1, keyName: "webinars", classes: [], url: '/webinars', isActive: false },
+                {key:14, id: 2, keyName: "mobileApp", classes: [], url: '/mobile', isActive: false },
+                {key:15, id: 3, keyName: "contactUs", classes: [], url: '/contactus', isActive: false },
                 {key:16, id: 4, keyName: "signIn", classes: ['cta', 'wired'], url: '#', isActive: false }
             ]
         }
@@ -249,7 +249,8 @@ Helper.prototype.getTestDataCourseList = function () {
             enrollees: [
                 'Ashutosh'
             ],
-            price: 10
+            price: 10,
+            courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
         },
         {
             key: 1,
@@ -271,7 +272,8 @@ Helper.prototype.getTestDataCourseList = function () {
                 'Biplab',
                 'Varinder'
             ],
-            price: 10
+            price: 10,
+            courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
         }
     ];
 
@@ -287,7 +289,8 @@ Helper.prototype.getTestDataForDiscover = function(){
                     price: 150,
                     priceStriked: 250,
                     currency: '$'
-                }
+                },
+                courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
                 courseLogo: "/asset/image/courses/113322_large.jpg",
@@ -297,7 +300,8 @@ Helper.prototype.getTestDataForDiscover = function(){
                     price: 410,
                     priceStriked: 750,
                     currency: 'Rs'
-                }
+                },
+                courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"                
             },
             {
                 courseLogo: "/asset/image/courses/145782_large.jpg",
@@ -307,7 +311,8 @@ Helper.prototype.getTestDataForDiscover = function(){
                     price: 150,
                     priceStriked: 250,
                     currency: '$'
-                }
+                },
+                courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
                 courseLogo: "/asset/image/courses/113322_large.jpg",
@@ -317,7 +322,8 @@ Helper.prototype.getTestDataForDiscover = function(){
                     price: 410,
                     priceStriked: 750,
                     currency: 'Rs'
-                }
+                },
+                courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
                 courseLogo: "/asset/image/courses/145782_large.jpg",
@@ -327,7 +333,8 @@ Helper.prototype.getTestDataForDiscover = function(){
                     price: 150,
                     priceStriked: 250,
                     currency: '$'
-                }
+                },
+                courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
                 courseLogo: "/asset/image/courses/113322_large.jpg",
@@ -337,7 +344,8 @@ Helper.prototype.getTestDataForDiscover = function(){
                     price: 410,
                     priceStriked: 750,
                     currency: 'Rs'
-                }
+                },
+                courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
                 courseLogo: "/asset/image/courses/145782_large.jpg",
@@ -347,7 +355,8 @@ Helper.prototype.getTestDataForDiscover = function(){
                     price: 150,
                     priceStriked: 250,
                     currency: '$'
-                }
+                },
+                courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
                 courseLogo: "/asset/image/courses/113322_large.jpg",
@@ -357,7 +366,8 @@ Helper.prototype.getTestDataForDiscover = function(){
                     price: 410,
                     priceStriked: 750,
                     currency: 'Rs'
-                }
+                },
+                courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
                 courseLogo: "/asset/image/courses/145782_large.jpg",
@@ -367,7 +377,8 @@ Helper.prototype.getTestDataForDiscover = function(){
                     price: 150,
                     priceStriked: 250,
                     currency: '$'
-                }
+                },
+                courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
                 courseLogo: "/asset/image/courses/113322_large.jpg",
@@ -377,7 +388,8 @@ Helper.prototype.getTestDataForDiscover = function(){
                     price: 410,
                     priceStriked: 750,
                     currency: 'Rs'
-                }
+                },
+                courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             }
 
         ];

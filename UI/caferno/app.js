@@ -39,6 +39,8 @@ var courses = require('./routes/courses');
 var home    = require('./routes/rHome');
 var mobileApp = require('./routes/rMobileApp');
 var webinars = require('./routes/rWebinars');
+var contactus= require('./routes/rContactUs');
+
 var app = express();
 
 // view engine setup
@@ -56,9 +58,11 @@ app.use(express.static(path.join(__dirname, 'app/components')));
 
 app.use('/', routes);
 app.use('/courses', courses);
+app.use('/course', courses);
 app.use('/home', home);
 app.use('/mobile', mobileApp);
 app.use('/webinars', webinars);
+app.use('/contactus', contactus);
 
 
 // catch 404 and forward to error handler
@@ -73,8 +77,8 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 //global.env =  'dev';
-var language = new i18n('en-US');
-//var language = new i18n('ar-AE');
+//var language = new i18n('en-US');
+var language = new i18n('ar-AE');
 
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {

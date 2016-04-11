@@ -230,3 +230,30 @@
         }
     }
 /*END - Highlighter*/
+
+/*Start - Generic*/
+    .generic { 
+        .formElement { 
+            .fieldBtn { text-align: right;} 
+            .phoneNum { direction: rtl;
+                .no { 
+                    &:first-child { padding: 0 20px 0 0;
+                        &:before { left: auto; right: 0;}
+                    }
+                }
+            }
+        }
+    }
+    .formElement {
+        .fieldList {
+            .field { 
+                label { text-align: right;}
+            }
+            
+            input {
+                &[type='text'], &[type='email'], &[type='tel'] { text-align: right;}
+            }
+            textarea { text-align: right;}
+        }
+    }
+/*END - Generic*/

@@ -18,7 +18,11 @@
         "and": "and",
         "others": "others",
         "learnMore": "Learn More",
-        "viewMore": "View More"
+        "viewMore": "View More",
+        "learners" : "Learners"
+    },
+    "discover":{
+        "mostPopular": "Most Popular"
     },
     "course": {
         "liveFor": "Live for",

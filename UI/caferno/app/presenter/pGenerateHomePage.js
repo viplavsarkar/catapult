@@ -51,7 +51,9 @@ Helper.prototype.getCoursesScreenActual = function(template, components, pageDat
     }
     params.pageData = pageData;
     
-    params.localeData = thisObj.setLocales(localeJson);
+    params.localeData = thisObj.setLocales(localeJson);    
+   
+    params.RTL_CSS = this.setRTLStyleCss();
     thisObj.res.render(template, params);
     
 }
@@ -59,9 +61,11 @@ Helper.prototype.getCoursesScreenActual = function(template, components, pageDat
 
 Helper.prototype.setLocales = function(languageJson){ 
     var str = '';
+        //str += "<link rel='stylesheet/less' type='text/css' href='asset/style/rtlCustom.less'>";
         str += "<script type='text/javascript'>var localkk="+JSON.stringify(languageJson.locales)+"</script>"; 
         str += "<script type='text/javascript'>var formkk=JSON.parse('"+JSON.stringify(languageJson.formats)+"')</script>"
         str += "<script type='text/javascript'>var messkk=JSON.parse('"+JSON.stringify(languageJson.messages)+"')</script>";
+
         //str += "<script type='text/javascript' src='/asset/script/main.js'></script>";
     return str;
 
@@ -88,7 +92,17 @@ Helper.prototype.setClientSideOfComponent = function(componentName){
     str += "ReactDOM.render(<Section data={dataName} messages={mekk} formats={fokk} locales={lokk} />, document.getElementById('container_'+componentName));";
 
     str += "</script>"; 
+
     return str;
 };
 
+Helper.prototype.setRTLStyleCss = function(){
+    var rtlCssString = '';
+    if(global.language){
+        if(global.language.isRTL){
+            rtlCssString = '<link rel="stylesheet/less" type="text/css" href="/asset/style/rtlCustom.less">';
+        }
+    }
+    return rtlCssString;
+}
 module.exports = Helper;

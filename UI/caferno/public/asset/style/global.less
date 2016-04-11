@@ -7,6 +7,8 @@
     @lightGray: #666;
     @lightestGray: #888;
     @black: #000;
+    @labelColor: #676767;
+    @inputColor:#999;
     @largestFont: 30px;
     @largerFont: 24px;
     @largeFont: 18px;
@@ -78,12 +80,10 @@
             }
         }
 
-        &.filledOrng2 { background: #f78200; border-radius: 4px; position: relative; transition: background-color 200ms linear;
-            a { color: #FFF; font-weight: 900; font-size: @largeFont - 2;}
-            &:after { content: ''; width: 32px; height: 32px; background: #f78200; transition: background-color 200ms linear; border-radius: 4px; position: absolute; right: -13px; top: 5px; transform: rotate(46deg);}
-            &:hover { background: #F99A2F;
-                &:after { background: #F99A2F;}
-            }
+        &.filledOrng2 { background: #f78200; border-radius: 4px; position: relative; 
+            a { color: #FFF; font-weight: 900; font-size: @largeFont - 2; padding-bottom: 6px;}
+            &[type='button'] { border:0; padding: 10px 15px; font-size: @smallFont; color: #FFF; cursor: pointer;}
+            &:hover { background: #F99A2F;}
         }
     }
 /*END - Class Name Specific*/
@@ -246,7 +246,7 @@
                 .content {
                     h2 { font-size: @largestFont; color: @gray;}
                     .shortDiscription { margin-bottom: 20px; line-height: 18px;}
-                    .relatedOpt { background: #F0F0F0; padding: 15px;} 
+                    .relatedOpt { background: #F0F0F0; padding: 15px 15px 23px;} 
                     .placed { 
                         li { font-size: @smallestFont + 2; 
                             .calenderDate { display: block; position: absolute; left: 1px; top: 10px; width: 29px; font-size: @smallestFont - 1; text-align: center;}
@@ -305,6 +305,12 @@
                 &.schedule{
                     a:before { .icon(-201px -82px);}
                 }
+                &.host{
+                    a:before { .icon(-321px -142px);}
+                }
+                &.discussion{
+                    a:before { .icon(-259px -142px);}
+                }
             }
         }
     }
@@ -316,6 +322,9 @@
     .primaryDetail {
         .title { font-size: @largeFont; font-weight: 900; margin-bottom: 15px;}
         p { font-size: @smallFont; line-height: 20px; margin-bottom: 15px;}
+        .hostedLang { position: relative; padding-left: 35px;
+            &:before { content: ''; width: 25px; height: 23px; .icon(-377px -137px); position: absolute; left: 0; top: 0;}
+        }
         h3 { font-size: @largeFont - 2; font-weight: 900; line-height: 20px; margin-bottom: 15px;
             &.lang {
                 span { font-weight: 300;}
@@ -522,3 +531,37 @@
         }
     }    
 /*END - Datepicker*/
+
+/*Start - Generic*/
+    .generic { padding: 30px 0 0 0;
+        .title { font-size: @largerFont; text-align: center;}
+        .formElement { padding-bottom:20px; 
+            .relatedInfo { font-size: @smallFont + 1; text-align: center; display: block; width: 100%; margin: 15px 0 20px;}
+            .fieldList { width: 50%; margin: 20px auto 0; max-width: 335px; text-align: center;}
+            .fieldBtn { text-align: left;} 
+            .separator { position: relative; font-size: @smallFont; background: #FFF; border: 1px solid #E0E0E0; display: inline-block; padding: 8px 6px; border-radius: 22px; margin: 10px 0 0 0;
+                &:before { content: ''; width: 100%; padding: 0 600%; height: 15px; border-bottom: 1px dashed #cccccc; position: absolute; left: -600%; top: 0; z-index: -1;}
+            }
+            .phoneNum { display: block; padding: 20px 0;
+                .no { display: inline-block;
+                    &:first-child { position: relative; padding-left: 20px;
+                        &:before { content: ''; width: 17px; height: 14px; position: absolute; left: 0; top: 0; .icon(-382px -83px);}
+                    }
+                }
+            }
+        }
+    }
+    .formElement {
+        .fieldList {
+            .field { margin-bottom: 20px; text-align: left;
+                label { display: block; margin-bottom: 8px; color: @labelColor;}
+            }
+            
+            input {
+                &[type='text'], &[type='email'], &[type='tel'] { width: 100%; font-weight: 100; font-size: @smallFont + 2; color: @inputColor; font-family: @globalFontFamily; padding: 6px 10px; line-height: normal; background: #fff; border-radius: 5px; border:1px solid #ccc; box-sizing: border-box;}
+            }
+            textarea { width: 100%; box-sizing: border-box; background: #fff; border-radius: 5px; border:1px solid #ccc; padding: 6px 10px; font-weight: 100; font-size: @smallFont; color: #999; font-family: @globalFontFamily;}
+        }
+    }
+/*END - Generic*/
+

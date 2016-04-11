@@ -34,8 +34,7 @@ var Section = React.createClass({
 if (isNode) {
     module.exports = Section; 
 } else {
-    window.Section = Section;
-    /*
+    window.sec
     var componentName = 'cSample_file';
     
     var dataName = eval('var_' + componentName);
@@ -44,5 +43,5 @@ if (isNode) {
     var fokk = eval('formkk');
     
     ReactDOM.render(<Section data={dataName} messages={mekk} formats={fokk} locales={lokk} />, document.getElementById('container_'+componentName));
-    */
+
 }

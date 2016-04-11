@@ -163,7 +163,7 @@ var CourseListItem = React.createClass({
                     </figure>
                 </div>
                 <div className="col-2 content">
-                    <h2><a href="#">{data.title}</a></h2>
+                    <h2><a href={data.courseDetailLink}>{data.title}</a></h2>
                     <ul className="placed">
                         <li>
                             {this.getIntlMessage('course.liveFor')} {data.liveFor} {this.getIntlMessage('common.week')}

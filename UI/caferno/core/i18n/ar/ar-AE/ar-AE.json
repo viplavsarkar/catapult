@@ -18,7 +18,11 @@
         "and": "and",
         "others": "others",
         "learnMore": "أعرف أكثر",
-        "viewMore": "عرض المزيد"
+        "viewMore": "عرض المزيد",
+        "learners" : "المتعلمين"
+    },
+    "discover":{
+        "mostPopular" :"الاكثر شهره"
     },
     "course": {
         "liveFor": "أعيش من أجل",

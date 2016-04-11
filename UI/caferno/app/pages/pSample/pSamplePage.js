@@ -17,7 +17,7 @@ var PSamplePage = function(req, res, next){
 
 
 
-PSamplePage.prototype.getCoursesScreen = function(){
+PSamplePage.prototype.getScreen = function(){
     var _ = this;
 
     var hUnitTestData = require('../../../core/helper/hUnitTestData.js');

@@ -20,6 +20,10 @@ var APP = APP || {}; //Global Namespace
                     afterInit: courseAccordion
                 });
 
+                APP.eventTarget.find('#webinarsTabs').tabbing({
+                    defaultTab: 1
+                });
+
                 APP.eventTarget.find('#appFeatures').tabbing({
                     defaultTab: 0,
                     content: 'contentImg',

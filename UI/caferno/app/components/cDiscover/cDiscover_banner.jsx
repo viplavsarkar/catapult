@@ -1,4 +1,3 @@
-
 var isNode = typeof module !== 'undefined' && module.exports
   , React = isNode ? require('react') : window.React
   , ReactDOM = isNode ? require('react-dom') : window.ReactDOM
@@ -19,8 +18,12 @@ var Section = React.createClass({
     render: function () {      
 
         return (
-            <section id="courseListing" className="moduleBody" >
-                <div className="moduleWrapper" >                   
+            <section id="heroHalfImg" class="moduleBody halfBgImg">
+                <div class="moduleWrapper clearfix">
+                    <div class="col-1 copy">
+                        <h1>LearnDesk Online Academy</h1>
+                        <p>Proving the concept of WizIQ - Online Academy Platform</p>
+                    </div>
                 </div>
             </section>
         );
@@ -35,14 +38,5 @@ if (isNode) {
     module.exports = Section; 
 } else {
     window.Section = Section;
-    /*
-    var componentName = 'cSample_file';
-    
-    var dataName = eval('var_' + componentName);
-    var lokk = eval('localkk')
-    var mekk = eval('messkk');
-    var fokk = eval('formkk');
-    
-    ReactDOM.render(<Section data={dataName} messages={mekk} formats={fokk} locales={lokk} />, document.getElementById('container_'+componentName));
-    */
+
 }
