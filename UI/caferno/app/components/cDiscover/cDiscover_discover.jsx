@@ -71,7 +71,7 @@ var DiscoverSection = React.createClass({
         
         var itemList = data.map(function(eachItem){
             return (
-                     <EachSection data={eachItem} />
+                     <EachSection key={eachItem.courseId} data={eachItem} />
                 )
         });
         return (

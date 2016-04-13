@@ -53,6 +53,7 @@
     
     html body #pageWrapper .cta { text-transform: uppercase;
         a { line-height: normal; padding: 10px 15px; text-align: center; display: block;}
+        &.inline { display: inline-block;}
         &.wired {border-radius: 4px; border:1px @orange solid;
             a { color: @orange;}
             &.wired:hover { background: #FEECD9}
@@ -81,7 +82,7 @@
         }
 
         &.filledOrng2 { background: #f78200; border-radius: 4px; position: relative; 
-            a { color: #FFF; font-weight: 900; font-size: @largeFont - 2; padding-bottom: 6px;}
+            a { color: #FFF; font-weight: 900; font-size: @largeFont - 2;}
             &[type='button'] { border:0; padding: 10px 15px; font-size: @smallFont; color: #FFF; cursor: pointer;}
             &:hover { background: #F99A2F;}
         }
@@ -196,9 +197,9 @@
     .courseList { margin-top: 15px;
         .item { margin-bottom: 20px; .bgImg('dottedBorder.gif', 0 bottom, repeat-x); padding-bottom: 30px;
             &:last-child { background: none; margin-bottom: 0;}
-            .col-1 { .column(20%, left);}
-            .col-2 { .column(60%, left); padding: 0 2%;}
-            .col-3 { .column(20%, left);}
+            > .col-1 { .column(20%, left);}
+            > .col-2 { .column(60%, left); padding: 0 2%;}
+            > .col-3 { .column(20%, left);}
             .courseImg { border-radius: 5px; border: 1px #cccccc solid; padding: 5px; position: relative; 
                 img { width: 100%; height: auto; display: block;}
                 .captionWrap { position: absolute; bottom: 5px; left: 0; width: 100%; height: 48px; color: #FFF; line-height: 16px;  
@@ -219,13 +220,13 @@
                     a { color: @blue;}
                 }
                 .shortInfo { line-height: 18px; margin-bottom: 10px;}
-                .placed { margin-bottom: 15px;
+                .placed {
                     li { font-size: @smallestFont; padding-left: 40px; position: relative;
                         .date { display: block; padding-top: 3px; }
                         &:before { content: ''; position: absolute; left: 0; top: 0; width: 40px; height: 40px; .icon(-18px -16px);}
                     }
                 }
-                .type {
+                .type { margin-top: 15px;
                     li { float: left; font-size: @largeFont; margin-right: 20px; text-transform: uppercase;
                         .no { display: block;}
                     }
@@ -242,6 +243,10 @@
                         img { width: auto;}
                         .caption { margin-left: 58px; color: @gray; padding: 0; font-size: @smallFont;}
                     }
+                    &.inline { border: 1px solid #cccccc; border-radius: 5px; padding: 10px;
+                        > img { border:0; border-radius: 0; width: 100%; max-width: 65px; display: block; margin: 0 auto;}
+                        .captionWrap { color: @gray; text-align: center; padding: 10px 0 0 0;} 
+                    }
                 }
                 .content {
                     h2 { font-size: @largestFont; color: @gray;}
@@ -257,6 +262,54 @@
                     .type {
                         li { font-size: @smallestFont; font-weight: 100;
                             .no { font-size: @largeFont; font-weight: 300;}
+                        }
+                    }
+                    .classFixtures { margin: 20px 0 0 0;
+                        .cta { margin: 10px 0 0 0;}
+                    }
+                }
+                .ctaGroup {
+                    .type { padding: 0 0 10px 0; position: relative;
+                        &:after { content: ''; position: absolute; left: -15px; bottom: 0; padding: 0 15px; width: 100%; height: 1px; background: #ededed;}
+                        li { font-size: @smallestFont; font-weight: 100; margin: 0 15px 0 0; color: @gray; display: inline-block;
+                            .no { font-size: @largeFont; font-weight: 300; display: block;}
+                        }
+                    }
+                    .msg { font-size: @smallestFont; color: #33cc33;}   
+                }
+                .innerTabsWrap { padding: 0 0 0 0; margin: 15px 0 0 0;
+                    .tabs { position: relative; z-index: 10;
+                        li { float: left; text-transform: capitalize;
+                            a { display: block; border: 1px #fff solid; border-bottom-color: #ddd; padding: 15px 15px; color: @blue; border-top-left-radius: 5px; border-top-right-radius: 5px; margin-right: 10px;}
+                            &:first-child { 
+                                
+                            }
+                            &:last-child { margin-right: 0;}
+                            &.active {
+                                a { color: @gray; border-color: #dddddd; border-bottom-color: #FFF}
+                            }
+                        }
+                    }
+                    .tabsContentWrap { border:1px #dddddd solid; border-radius: 5px; border-top-left-radius: 0; position: relative; top: -1px; padding: 10px; max-height: 300px; overflow-y: auto; 
+                        .contentOfTab { display: none;
+                            &.active { display: block;}
+                        }
+                        .scheduleList { 
+                            li { padding-bottom: 10px; margin-bottom: 10px; position: relative; clear: both;
+                                &:after { content: ''; width: 100%; padding: 0 10px; height: 1px; background: #dddddd; position: absolute; left: -10px; bottom: 0;}
+                                &:last-child:after {
+                                    display: none;
+                                }
+                                &:last-child {
+                                    padding: 0; margin: 0;
+                                }
+                            }
+                            .col-1 {.column(65%, left); padding-right: 5%; font-size: @smallestFont;}
+                            .col-2 {.column(35%, left); text-align: right}
+                            .recurringDate { font-weight: 900;}
+                            p { margin-bottom: 6px;
+                                &:last-child { margin-bottom: 0;}
+                            }
                         }
                     }
                 }
@@ -320,7 +373,9 @@
         }
     }
     .primaryDetail {
-        .title { font-size: @largeFont; font-weight: 900; margin-bottom: 15px;}
+        .title { font-size: @largeFont; font-weight: 900; margin-bottom: 15px;
+            .count { background: @inputColor; border-radius: 10px; font-weight: 100; font-size: 9px; line-height: 11px; padding: 0 10px; color: #FFF; position: relative; top: -3px;}
+        }
         p { font-size: @smallFont; line-height: 20px; margin-bottom: 15px;}
         .hostedLang { position: relative; padding-left: 35px;
             &:before { content: ''; width: 25px; height: 23px; .icon(-377px -137px); position: absolute; left: 0; top: 0;}
@@ -334,6 +389,16 @@
             li { list-style: disc outside; font-size: @smallFont; margin-bottom: 6px;}
             &.accordionWrapper { margin: 0;
                 li { list-style: none; margin: 0;}
+            }
+        }
+        .host { display: inline-block; text-align: center;
+            img { border: 1px solid #cccccc; border-radius: 5px; padding: 10px; max-width: 65px; height: auto;}
+            figcaption { padding-top: 10px;}
+        }
+        .formElement {
+            .fieldList { margin: 0;
+                li { list-style: none;}
+                textarea { width: 75%;}
             }
         }
     }
@@ -550,6 +615,7 @@
                 }
             }
         }
+        &.withBG { padding: 30px 0; background: #F5892D; color: #FFF;}
     }
     .formElement {
         .fieldList {
@@ -558,7 +624,7 @@
             }
             
             input {
-                &[type='text'], &[type='email'], &[type='tel'] { width: 100%; font-weight: 100; font-size: @smallFont + 2; color: @inputColor; font-family: @globalFontFamily; padding: 6px 10px; line-height: normal; background: #fff; border-radius: 5px; border:1px solid #ccc; box-sizing: border-box;}
+                &[type='text'], &[type='email'], &[type='tel'], &[type='password'] { width: 100%; font-weight: 100; font-size: @smallFont + 2; color: @inputColor; font-family: @globalFontFamily; padding: 6px 10px; line-height: normal; background: #fff; border-radius: 5px; border:1px solid #ccc; box-sizing: border-box;}
             }
             textarea { width: 100%; box-sizing: border-box; background: #fff; border-radius: 5px; border:1px solid #ccc; padding: 6px 10px; font-weight: 100; font-size: @smallFont; color: #999; font-family: @globalFontFamily;}
         }

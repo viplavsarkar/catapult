@@ -209,7 +209,7 @@ var Section = React.createClass({
         //var locality = this.props.messages;
         var courseItems = data.map(function (courseItem) {
             return (
-                <CourseListItem data={courseItem} />
+                <CourseListItem key={courseItem.courseId} data={courseItem} />
             );
         });
 
@@ -217,8 +217,7 @@ var Section = React.createClass({
             <section id="courseListing" className="moduleBody" >
                 <div className="moduleWrapper" >
                     <CourseQuickLinks />
-                    <ul className="courseList" onClick={this.onclickhandler}>
-                       
+                    <ul className="courseList" onClick={this.onclickhandler}>                       
                         {courseItems}
                     </ul>
                     <ViewMore />

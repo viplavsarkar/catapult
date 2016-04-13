@@ -10,7 +10,7 @@ var winston         = require('winston');
 
 router.get('/', function(req, res, next){
     winston.info("request at /home", {url:'/home'});
-
+    console.log('Home Page: ' + new Date().toISOString());
     var fCourses        = require('../app/pages/pDiscover/pDiscover.js');
     var bCourses        = new fCourses(req, res, next);
     bCourses.query      = req.query;

@@ -33,7 +33,7 @@ var EachWebinarRoww = React.createClass({
         return (
                 <li className="item clearfix">
                     <div className="col-2 content">
-                        <h2><a href="#">{data.title}</a></h2>
+                        <h2><a href={data.classUrl}>{data.title}</a></h2>
                         <p className="shortInfo">public</p>
                         <ul className="placed">
                             <li>
@@ -69,7 +69,7 @@ var Section = React.createClass({
         
         var itemList = data.map(function(eachItem){
             return (
-                     <EachWebinarRoww data={eachItem} />
+                     <EachWebinarRoww key={eachItem.classId} data={eachItem} />
                 )
         });
         return (

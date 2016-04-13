@@ -29,6 +29,7 @@ Helper.prototype.getCoursesScreenActual = function(template, components, pageDat
                                 }
                             }
                         };
+    params.localeData = thisObj.setLocales(localeJson);
     for(var i=0; i< components.length;i++){
         var eachKeyVal = components[i];
         var props = eachKeyVal.rawdata;
@@ -37,6 +38,7 @@ Helper.prototype.getCoursesScreenActual = function(template, components, pageDat
         var component = '../components/' + componentPath;
         var componentName = eachKeyVal.component.split('.')[0];
         var var_pagedata = 'var_' +componentName;
+        var dataOfComponent = "data_of_" + eachKeyVal.name;
         var JSXcourses = thisObj.React.createFactory(require(component));    
         var dataAndLocale = { 
                                 data:props,
@@ -44,15 +46,15 @@ Helper.prototype.getCoursesScreenActual = function(template, components, pageDat
                                 locales: localeJson.locales,
                                 formats: localeJson.formats
                             };
-        params[eachKeyVal.name] = thisObj.ReactDOMServer.renderToString(JSXcourses(dataAndLocale))
-                                                + thisObj.setDataForBundleJs(var_pagedata, props)
-                                                + thisObj.setBundleScript(componentPath)
-                                                + thisObj.setClientSideOfComponent(componentName);
+     
+        params[eachKeyVal.name] = thisObj.ReactDOMServer.renderToString(JSXcourses(dataAndLocale));
+        params[dataOfComponent] = thisObj.setDataForBundleJs(var_pagedata, props)
+                                            + thisObj.setBundleScript(componentPath)
+                                            + thisObj.setClientSideOfComponent(componentName);
+      
     }
     params.pageData = pageData;
     
-    params.localeData = thisObj.setLocales(localeJson);    
-   
     params.RTL_CSS = this.setRTLStyleCss();
     thisObj.res.render(template, params);
     
@@ -81,6 +83,20 @@ Helper.prototype.setBundleScript = function(component){
 
 Helper.prototype.setClientSideOfComponent = function(componentName){
     var str = '';
+    str += "<script type='text/babel'>";   
+    var dataName = 'var_' + componentName;  
+    var compoStr = 'container_' + componentName;
+    var secString = 'Section';
+   
+    str += "ReactDOM.render(<"+secString+" data={"+dataName+"}";
+    str += " messages={messkk} formats={formkk} locales={localkk}/>,"+compoStr+");";
+    str += "</script>"; 
+
+    return str;
+};
+
+Helper.prototype.setClientSideOfComponent_old = function(componentName){
+    var str = '';
     str += "<script type='text/babel'>";
     str += "var componentName = '"+componentName+"';";// 'cCourses_cCourseList';";
     //str += "var containerName"
@@ -89,7 +105,7 @@ Helper.prototype.setClientSideOfComponent = function(componentName){
     str += "var mekk = eval('messkk');";
     str += "var fokk = eval('formkk');";
     
-    str += "ReactDOM.render(<Section data={dataName} messages={mekk} formats={fokk} locales={lokk} />, document.getElementById('container_'+componentName));";
+    str += "ReactDOM.render(<Section data={dataName} messages={mekk} formats={fokk} locales={lokk}/>, document.getElementById('container_'+componentName));";
 
     str += "</script>"; 
 

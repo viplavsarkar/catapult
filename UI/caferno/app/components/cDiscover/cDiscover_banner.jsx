@@ -1,3 +1,4 @@
+
 var isNode = typeof module !== 'undefined' && module.exports
   , React = isNode ? require('react') : window.React
   , ReactDOM = isNode ? require('react-dom') : window.ReactDOM
@@ -13,15 +14,16 @@ var FormattedDate = ReactIntl.FormattedDate;
 //*****************************************************************
 
 
-var Section = React.createClass({
-    mixins: [IntlMixin],    
+var DiscoverBanner = React.createClass({
+    mixins: [IntlMixin],
+    onclickhandler: function(ev){alert('hurray');},
     render: function () {      
 
         return (
-            <section id="heroHalfImg" class="moduleBody halfBgImg">
-                <div class="moduleWrapper clearfix">
-                    <div class="col-1 copy">
-                        <h1>LearnDesk Online Academy</h1>
+            <section id="heroHalfImg" className="moduleBody halfBgImg">
+                <div className="moduleWrapper clearfix">
+                    <div className="col-1 copy">
+                        <h1 onClick={this.onclickhandler}>LearnDesk Online Academy</h1>
                         <p>Proving the concept of WizIQ - Online Academy Platform</p>
                     </div>
                 </div>
@@ -35,8 +37,8 @@ var Section = React.createClass({
 //*****************************************************************
 
 if (isNode) {
-    module.exports = Section; 
+    module.exports = DiscoverBanner; 
 } else {
-    window.Section = Section;
+    window.Section = DiscoverBanner;
 
 }

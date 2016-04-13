@@ -10,7 +10,7 @@ var winston         = require('winston');
 router.get('/', function(req, res, next) {
 
     winston.info("request at /mobile", {url:'/mobile'});
-
+	console.log('Webinar List Page: ' + new Date().toISOString());
     var fCourses        = require('../app/pages/pWebinars/pWebinars.js');
     var bCourses        = new fCourses(req, res, next);
     bCourses.query      = req.query;

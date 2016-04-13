@@ -106,7 +106,7 @@ Helper.prototype.getTestDataHeader = function (currPage) {
         headerNavigation: {
             navigationItems: [
                 {key:11, id: 0, keyName: "discover", classes: [], url: '/home', isActive: false },
-                {key:12, id: 1, keyName: "courses", classes: [], url: '/courses', isActive: false },
+                {key:12, id: 1, keyName: "courses", classes: [], url: '/publiccourse', isActive: false },
                 {key:13, id: 1, keyName: "webinars", classes: [], url: '/webinars', isActive: false },
                 {key:14, id: 2, keyName: "mobileApp", classes: [], url: '/mobile', isActive: false },
                 {key:15, id: 3, keyName: "contactUs", classes: [], url: '/contactus', isActive: false },
@@ -250,6 +250,7 @@ Helper.prototype.getTestDataCourseList = function () {
                 'Ashutosh'
             ],
             price: 10,
+            courseId: 261,
             courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
         },
         {
@@ -273,6 +274,7 @@ Helper.prototype.getTestDataCourseList = function () {
                 'Varinder'
             ],
             price: 10,
+            courseId: 262,
             courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
         }
     ];
@@ -290,6 +292,7 @@ Helper.prototype.getTestDataForDiscover = function(){
                     priceStriked: 250,
                     currency: '$'
                 },
+                courseId: 98012,
                 courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
@@ -301,6 +304,7 @@ Helper.prototype.getTestDataForDiscover = function(){
                     priceStriked: 750,
                     currency: 'Rs'
                 },
+                courseId: 98013,
                 courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"                
             },
             {
@@ -312,6 +316,7 @@ Helper.prototype.getTestDataForDiscover = function(){
                     priceStriked: 250,
                     currency: '$'
                 },
+                courseId: 98014,
                 courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
@@ -323,6 +328,7 @@ Helper.prototype.getTestDataForDiscover = function(){
                     priceStriked: 750,
                     currency: 'Rs'
                 },
+                courseId: 98015,
                 courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
@@ -334,6 +340,7 @@ Helper.prototype.getTestDataForDiscover = function(){
                     priceStriked: 250,
                     currency: '$'
                 },
+                courseId: 98016,
                 courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
@@ -345,6 +352,7 @@ Helper.prototype.getTestDataForDiscover = function(){
                     priceStriked: 750,
                     currency: 'Rs'
                 },
+                courseId: 98017,
                 courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
@@ -356,6 +364,7 @@ Helper.prototype.getTestDataForDiscover = function(){
                     priceStriked: 250,
                     currency: '$'
                 },
+                courseId: 98018,
                 courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
@@ -367,6 +376,7 @@ Helper.prototype.getTestDataForDiscover = function(){
                     priceStriked: 750,
                     currency: 'Rs'
                 },
+                courseId: 98019,
                 courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
@@ -378,6 +388,7 @@ Helper.prototype.getTestDataForDiscover = function(){
                     priceStriked: 250,
                     currency: '$'
                 },
+                courseId: 98021,
                 courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             },
             {
@@ -389,6 +400,7 @@ Helper.prototype.getTestDataForDiscover = function(){
                     priceStriked: 750,
                     currency: 'Rs'
                 },
+                courseId: 98022,
                 courseDetailLink: "/course/261-new-courses-сиыу-mathematics-science-physics-chamistery-ысшутсу-098012"
             }
 
@@ -411,6 +423,8 @@ Helper.prototype.getTestDataForWebinars = function(){
                                 city: "Chandigar"
                         },
                         recordingStatus:"STOPPED/IT’S OVER",
+                        classId: 21142,
+                        classUrl: "/online-class/21142-public-class-0001/",
                         recordingRequestLink:"/action/send-message.aspx?msg=pHG%2bNSNbj6ewT%2b8JesoZ357dfPyKKOrSWOEhUwvDKXGajTGvhPVQ%2bKfp7kZd%2bqqjJA9utWGh7nFLpQwiJNTiaZE1cG3tPWkg8VhScJDcQrbTV14YVkY19h49tY23wvRrYGDMHyr9Go8%3d&amp;SetDomain=true&amp;keepThis=true&amp;TB_iframe=true&amp;height=300&amp;width=500"
                     },
                     {
@@ -426,6 +440,8 @@ Helper.prototype.getTestDataForWebinars = function(){
                                 country: "India",
                                 city: "Gurgaon"
                         },
+                        classId: 235,
+                        classUrl: "/online-class/21142-public-class-0001/",
                         recordingRequestLink:"YET TO START",
                         recordingLink:""
                     },
@@ -442,6 +458,8 @@ Helper.prototype.getTestDataForWebinars = function(){
                                 country: "India",
                                 city: "Palampur"
                         },
+                        classId: 236,
+                        classUrl: "/online-class/21142-public-class-0001/",
                         recordingRequestLink:"RECORDING IN PROGRESS",
                         recordingLink:""
                     }
