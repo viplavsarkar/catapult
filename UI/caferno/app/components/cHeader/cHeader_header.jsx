@@ -69,13 +69,15 @@ var HeaderNavigation = React.createClass({
 
 var Header = React.createClass({
     mixins: [IntlMixin],
-    onclickhandler: function(ev){alert('this is header');},
+    onclickhandler: function(ev){
+        alert('this is header');
+    },
     render: function () {
         var data = this.props.data;
         return (
             <header id="pageHeader" className="moduleBody">
                 <div onClick={this.onclickhandler} className="moduleWrapper clearfix">
-                    <HeaderLogo data={data.header} />
+                    <HeaderLogo data={data.academy} />
                     <HeaderNavigation data={data.headerNavigation} />
                 </div>
             </header>
@@ -87,20 +89,4 @@ if (isNode) {
     module.exports = Header; 
 } else {
     window.Section = Header;
-  /*
-    var componentName = 'cHeader_header';
-    
-    var dataName = eval('var_' + componentName);
-    //var dakk = eval('datakk');
-    var lokk = eval('localkk')
-    var mekk = eval('messkk');
-    var fokk = eval('formkk');
-    
-    //BIFROST_APP_PROPS
-    ReactDOM.render(<Header data={dataName} messages={mekk} formats={fokk} locales={lokk} />, document.getElementById('container_'+componentName));
-    //ReactDOM.render(<Section data={paramName} locales={LOCALES} {...MESSAGES} formats={FORMATS}/>, document.getElementById('pageWrapper'));
-    //ReactDOM.render(<Section {...BIFROST_APP_PROPS}/>, document.getElementById('pageWrapper'));
-*/
-//ReactDOM.render(<Header data={var_cHeader_header} messages={messkk} formats={formkk} locales={localkk}/>,container_cHeader_header);
-//ReactDOM.render(function(Header){<Header data={var_cHeader_header} messages={messkk} formats={formkk} locales={localkk}/>},container_cHeader_header);
 }

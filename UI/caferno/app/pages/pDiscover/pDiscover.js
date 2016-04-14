@@ -27,20 +27,20 @@ PDiscover.prototype.getScreen = function(){
     _.template = 'tDiscover.ejs';
     
     //add the header
-    var componentCourseList     = new Comp('cHeader_header.jsx', hTestData.getTestDataHeader("discover"));    
-    _.components.push(componentCourseList.ToJson());
+    var componentCourseList     = new Comp('cHeader_header.jsx', hTestData.getTestDataHeader("discover"), false);    
+    _.components.push(componentCourseList);
 
     //add the react component to add in the page
-    var componentCourseList     = new Comp('cDiscover_banner.jsx', {});    
-    _.components.push(componentCourseList.ToJson());
+    var componentCourseList     = new Comp('cDiscover_banner.jsx', hTestData.getTestDataForDiscoverBanner(), false);    
+    _.components.push(componentCourseList);
 
     //add the react component to add in the page
-    var componentCourseList     = new Comp('cDiscover_discover.jsx', hTestData.getTestDataForDiscover());    
-    _.components.push(componentCourseList.ToJson());
+    var componentCourseList     = new Comp('cDiscover_discover.jsx', hTestData.getTestDataForDiscover(), true);
+    _.components.push(componentCourseList);
 
     //add the footer
-    var componentCourseList     = new Comp('cFooter_footer.jsx', hTestData.getTestDataFooter());
-    _.components.push(componentCourseList.ToJson());
+    var componentCourseList     = new Comp('cFooter_footer.jsx', hTestData.getTestDataFooter(), false);
+    _.components.push(componentCourseList);
 
     _.pageData = hTestData.getPageData();
 

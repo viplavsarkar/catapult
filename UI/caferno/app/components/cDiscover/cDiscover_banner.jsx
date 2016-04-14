@@ -16,15 +16,17 @@ var FormattedDate = ReactIntl.FormattedDate;
 
 var DiscoverBanner = React.createClass({
     mixins: [IntlMixin],
-    onclickhandler: function(ev){alert('hurray');},
+    onclickhandler: function(ev){
+        //alert('hurray');
+    },
     render: function () {      
-
+        var data = this.props.data;
         return (
             <section id="heroHalfImg" className="moduleBody halfBgImg">
                 <div className="moduleWrapper clearfix">
                     <div className="col-1 copy">
-                        <h1 onClick={this.onclickhandler}>LearnDesk Online Academy</h1>
-                        <p>Proving the concept of WizIQ - Online Academy Platform</p>
+                        <h1 onClick={this.onclickhandler}>{data.title}</h1>
+                        <p>{data.description}</p>
                     </div>
                 </div>
             </section>

@@ -31,14 +31,14 @@ Helper.prototype.getCoursesScreenActual = function(template, components, pageDat
                         };
     params.localeData = thisObj.setLocales(localeJson);
     for(var i=0; i< components.length;i++){
-        var eachKeyVal = components[i];
-        var props = eachKeyVal.rawdata;
-        var componentParentPath = eachKeyVal.component_path ? eachKeyVal.component_path + '/' : '';
-        var componentPath = componentParentPath + eachKeyVal.component;
+        var eachComponent = components[i];
+        var props = eachComponent.rawdata;
+        var componentParentPath = eachComponent.component_path ? eachComponent.component_path + '/' : '';
+        var componentPath = componentParentPath + eachComponent.component;
         var component = '../components/' + componentPath;
-        var componentName = eachKeyVal.component.split('.')[0];
+        var componentName = eachComponent.component.split('.')[0];
         var var_pagedata = 'var_' +componentName;
-        var dataOfComponent = "data_of_" + eachKeyVal.name;
+        var dataOfComponent = "data_of_" + eachComponent.name;
         var JSXcourses = thisObj.React.createFactory(require(component));    
         var dataAndLocale = { 
                                 data:props,
@@ -47,11 +47,17 @@ Helper.prototype.getCoursesScreenActual = function(template, components, pageDat
                                 formats: localeJson.formats
                             };
      
-        params[eachKeyVal.name] = thisObj.ReactDOMServer.renderToString(JSXcourses(dataAndLocale));
-        params[dataOfComponent] = thisObj.setDataForBundleJs(var_pagedata, props)
-                                            + thisObj.setBundleScript(componentPath)
-                                            + thisObj.setClientSideOfComponent(componentName);
-      
+        params[eachComponent.name] = thisObj.ReactDOMServer.renderToString(JSXcourses(dataAndLocale));
+        
+        if(eachComponent.loadFromClientSide) {
+            //console.log('its true')
+            params[dataOfComponent] = thisObj.setDataForJSX(var_pagedata, props)
+                                                + thisObj.setJSXScript(componentPath)
+                                                + thisObj.setClientSideOfComponent(componentName);
+        }else{
+            //console.log('its false')
+            params[dataOfComponent] = "";
+        }
     }
     params.pageData = pageData;
     
@@ -73,11 +79,11 @@ Helper.prototype.setLocales = function(languageJson){
 
 }
 
-Helper.prototype.setDataForBundleJs = function(varName, props){
+Helper.prototype.setDataForJSX = function(varName, props){
     return "<script>"+varName+"="+ JSON.stringify(props)+"</script>";
 };
 
-Helper.prototype.setBundleScript = function(component){
+Helper.prototype.setJSXScript = function(component){
         return '<script src="/'+component+'" type="text/babel"></script>';   
 };
 

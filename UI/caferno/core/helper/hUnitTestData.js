@@ -97,9 +97,21 @@ Helper.prototype.getPageData = function(){
 	return props;
 }
 
+Helper.prototype.getTestDataFooter = function () {
+    var data = {
+        academy: {
+            name: "Learn Desk",
+            logo: "/asset/image/logo.jpg"
+        },
+        urlOfAppleStore: '//itunes.apple.com/us/app/wiziq/id540018386?mt=8',
+        urlOfAndroidStore: 'https://play.google.com/store/apps/details?id=air.com.wiziq.ipadvc'
+    }
+    return data;
+}
+
 Helper.prototype.getTestDataHeader = function (currPage) {
     var header = {
-        header: {
+        academy: {
             academyName: "Learn Desk",
             logo: "/asset/image/logo.jpg"
         },
@@ -126,15 +138,6 @@ Helper.prototype.getTestDataHeader = function (currPage) {
         }
     }
     return header;
-}
-
-Helper.prototype.getTestDataFooter = function () {
-    var footer = {
-        academyName: "Learn Desk",
-        logo: "/asset/image/logo.jpg"
-    }
-
-    return footer;
 }
 
 Helper.prototype.getTestDataCourseList_old = function () {
@@ -280,6 +283,14 @@ Helper.prototype.getTestDataCourseList = function () {
     ];
 
     return courseListData;
+}
+Helper.prototype.getTestDataForDiscoverBanner = function(){
+    var data = {
+                academyBannerUrl: "http://wqimg.wizqe.authordm.com/prelogin/images/backgroundimg.jpg",
+                title: "LearnDesk Online Academy",
+                description: "Proving the concept of WizIQ - Online Academy Platform"
+                }
+    return data;
 }
 Helper.prototype.getTestDataForDiscover = function(){
     var data = [
@@ -466,6 +477,98 @@ Helper.prototype.getTestDataForWebinars = function(){
 
 
                 ];
+    return data;
+}
+
+Helper.prototype.getTestDataForWebinarDetail = function(){
+    var data = {
+                    classTitle: "Public class - 0001",
+                    classStart:{
+                        date: "20 Aug",
+                        time: "2015 04:45 AM (CST)",
+                        status: "Take place daily (all 7 days)"
+                    },
+                    classFixtures:{
+                        status: "This class ran for 17 minutes",
+                        linkViewRecording: "#",
+                        linkDownloadRecording: "#"
+                    },
+                    tutor:{
+                        profilePic: '/asset/image/user/Rajinder-69268.jpg',
+                        name: 'Rajinder Singh'
+                    },
+                    classStats:{
+                        durationInMins: 200,
+                        attendesCount: 5,
+                        status: "ThIS CLASS IS OVER"
+                    },
+                    classSessions:[
+                                     {
+                                            sessionId: 1,
+                                            startAt: "Tuesday, 18 Aug 15 08:11 AM CST",
+                                            membersAttended: 1,
+                                            status: "The class is over",
+                                            linkViewRecording: "#"
+                                        },
+                                    {
+                                            scheduleId: 2,
+                                            startAt: "Tuesday, 19 Aug 15 08:11 AM CST",
+                                            membersAttended: 1,
+                                            status: "The class is over",
+                                            linkViewRecording: "http://google.com"
+                                        },
+                                    {
+                                            scheduleId: 3,
+                                            startAt: "Tuesday, 18 Aug 15 08:11 AM CST",
+                                            membersAttended: 1,
+                                            status: "The class is over",
+                                            linkViewRecording: "#"
+                                        },
+                                    {
+                                            scheduleId: 4,
+                                            startAt: "Tuesday, 18 Aug 15 08:11 AM CST",
+                                            membersAttended: 1,
+                                            status: "The class is over",
+                                            linkViewRecording: "#"
+                                        },
+                                    {
+                                            scheduleId: 5,
+                                            startAt: "Tuesday, 18 Aug 15 08:11 AM CST",
+                                            membersAttended: 1,
+                                            status: "The class is over",
+                                            linkViewRecording: "#"
+                                        },
+                                    {
+                                            scheduleId: 6,
+                                            startAt: "Tuesday, 18 Aug 15 08:11 AM CST",
+                                            membersAttended: 1,
+                                            status: "The class is over",
+                                            linkViewRecording: "#"
+                                        }
+                                ],
+                    classSessionJoinedByYou:[],
+                };
+        return data;
+}
+
+Helper.prototype.getTestDataForWebinarDetailMeta = function(){
+    var  data = {
+                aboutClass:{
+                    title:'About the Class',
+                    hostedLang : "This webinar is hosted in English",
+                    description: "This is the description"
+                },
+                aboutHost:{
+                    title:'About the Host',
+                    profilePic: '/asset/image/user/Rajinder-69268.jpg',
+                    name: 'Ranjinder Singh',
+
+                },
+                discussion:{
+                    count: 0
+                }
+
+            };
     return data;
 }
 module.exports = Helper;

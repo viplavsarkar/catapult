@@ -27,16 +27,16 @@ PCourses.prototype.getScreen = function(){
     _.template = 'tWebinars.ejs';
     
     //add the header
-    var componentCourseList     = new Comp('cHeader_header.jsx', hTestData.getTestDataHeader("webinars"));    
-    _.components.push(componentCourseList.ToJson());
+    var componentCourseList     = new Comp('cHeader_header.jsx', hTestData.getTestDataHeader("webinars"), false);    
+    _.components.push(componentCourseList);
 
     //add the react component to add in the page
-    var componentCourseList     = new Comp('cWebinars_testList.jsx', hTestData.getTestDataForWebinars());    
-    _.components.push(componentCourseList.ToJson());
+    var componentCourseList     = new Comp('cWebinars_testList.jsx', hTestData.getTestDataForWebinars(), false);    
+    _.components.push(componentCourseList);
 
     //add the footer
-    var componentCourseList     = new Comp('cFooter_footer.jsx', hTestData.getTestDataFooter());
-    _.components.push(componentCourseList.ToJson());
+    var componentCourseList     = new Comp('cFooter_footer.jsx', hTestData.getTestDataFooter(), false);
+    _.components.push(componentCourseList);
 
     _.pageData = hTestData.getPageData(); 
 
