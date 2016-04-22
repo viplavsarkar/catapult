@@ -113,14 +113,13 @@ var CourseEnrollees = React.createClass({
     mixins: [IntlMixin],
     render: function () {
         var data = this.props.data;
-
-        if (data.count == 0)
-            return;
-
+        if(data === undefined) data = [];
+       
         var enrolleeString = '';
         var hasHaveEnrolled = '';
-
-        if (data.length < 2) {
+        if(data.length == 0){
+            enrolleeString = 'no one has enrolled';
+        }else if (data.length < 2) {
             enrolleeString = data[0];
             hasHaveEnrolled = this.getIntlMessage('course.hasEnrolled');
         } else {

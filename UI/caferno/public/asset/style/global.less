@@ -32,7 +32,7 @@
 /*END - Tags Specific*/
 
 /*START - Prefix Specific*/
-	.inputPlaceHolder {color: @lightestGray; font-size: @largeFont; opacity: 1;}
+	.inputPlaceHolder {color: @lightestGray; font-size: @smallestFont + 1; opacity: 1;}
     ::-webkit-input-placeholder {.inputPlaceHolder}
     :-moz-placeholder { /* Firefox 18- */ .inputPlaceHolder}
     ::-moz-placeholder { /* Firefox 19+ */.inputPlaceHolder}
@@ -598,6 +598,7 @@
 /*END - Datepicker*/
 
 /*Start - Generic*/
+    #signIn { min-height: 600px;}
     .generic { padding: 30px 0 0 0;
         .title { font-size: @largerFont; text-align: center;}
         .formElement { padding-bottom:20px; 
@@ -619,14 +620,30 @@
     }
     .formElement {
         .fieldList {
+            .subTitle { text-align: left; padding-bottom: 15px; font-weight: 900;}
             .field { margin-bottom: 20px; text-align: left;
                 label { display: block; margin-bottom: 8px; color: @labelColor;}
+                .selectionField {
+                    .col-1 { .column(50%, left);}
+                    .col-2 { .column(50%, left); font-size: @smallestFont; text-align: right; color: @gray; padding: 1px 0 0;
+                        a { color: @blue;}
+                    }
+                    div:first-child { text-align: left;}
+                    input {
+                        &[type='checkbox'] { float: left;}
+                    }
+                    label { float: left; margin: 0 0 0 10px;}
+                }
             }
             
             input {
-                &[type='text'], &[type='email'], &[type='tel'], &[type='password'] { width: 100%; font-weight: 100; font-size: @smallFont + 2; color: @inputColor; font-family: @globalFontFamily; padding: 6px 10px; line-height: normal; background: #fff; border-radius: 5px; border:1px solid #ccc; box-sizing: border-box;}
+                &[type='text'], &[type='email'], &[type='tel'], &[type='password'] { width: 100%; font-weight: 100; font-size: @smallestFont + 1; color: @inputColor; font-family: @globalFontFamily; padding: 10px 10px; line-height: normal; background: #fff; border-radius: 5px; border:1px solid #ccc; box-sizing: border-box;}
             }
             textarea { width: 100%; box-sizing: border-box; background: #fff; border-radius: 5px; border:1px solid #ccc; padding: 6px 10px; font-weight: 100; font-size: @smallFont; color: #999; font-family: @globalFontFamily;}
+            .fieldOpt { box-sizing: border-box; border-radius: 5px; border:1px solid #ccc; padding: 9px 10px 9px 6px;
+                select { -webkit-appearance: none; -moz-appearance: none; appearance: none; width: 100%; padding: 0; margin: 0; background: none; border:0; font-weight: 100; font-size: @smallestFont + 1; color: @inputColor; .bgImg('grayArrowSmall.gif', right 7px, no-repeat);}
+            }                
+            
         }
     }
 /*END - Generic*/

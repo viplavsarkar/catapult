@@ -40,6 +40,7 @@ var home    = require('./routes/rHome');
 var mobileApp = require('./routes/rMobileApp');
 var webinars = require('./routes/rWebinars');
 var contactus= require('./routes/rContactUs');
+var login= require('./routes/rLogin');
 var others= require('./routes/rOthers');
 
 var app = express();
@@ -63,8 +64,10 @@ app.use('/course',          courses);
 app.use('/home',            home);
 app.use('/mobile',          mobileApp);
 app.use('/webinars',        webinars);
-app.use('/online-class',    others);
 app.use('/contactus',       contactus);
+app.use('/online-class',    webinars);
+app.use('/SignIn',          login);
+app.use('/SignUp',          login);
 
 
 // catch 404 and forward to error handler

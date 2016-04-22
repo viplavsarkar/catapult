@@ -1,10 +1,11 @@
-var Component = function(component, data, clientSideJSX, component_path, name){
+var Component = function(component, data, clientSideJSX, component_path, name, reqJson){
 	var comp                = {};
     this.component          = component;
     this.component_path     = component_path ? component_path : component.split('_')[0];
     this.name               = name ? name : component.split('.')[0];
     this.rawdata            = data;
     this.loadFromClientSide = clientSideJSX == null ? true : clientSideJSX ? true : false;
+    this.reqObj             = reqJson;
 }
 
 Component.prototype.ToJson = function(){

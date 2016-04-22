@@ -8,21 +8,15 @@ var winston         = require('winston');
 
 /* GET home page. */
 router.get('/:url?', function(req, res, next) {
-
 	var pathname = req._parsedOriginalUrl.pathname;
-	/*
-	if(pathname.startsWith('/')){
-		pathname = pathname.substring(1);
-	}
-	*/
+	
 	var pathArr = pathname.split('/');
-	//console.log(pathArr);
 	switch(pathArr[1]){
-		case 'webinars':
-			getOnlineClassListScreen(req, res, next);
+		case 'SignIn':
+			getSignInScreen(req, res, next);
 			break;
-		case 'online-class':
-			getOnlineClassDetailScreen(req, res, next, pathArr[2]);
+		case 'SignUp':
+			getSignUpScreen(req, res, next, pathArr[2]);
 			break;
 		default:
 			console.log('no "webinars" controller definition found');
@@ -33,24 +27,21 @@ router.get('/:url?', function(req, res, next) {
 
 });
 
-var getOnlineClassListScreen = function(req, res, next){
+var getSignInScreen = function(req, res, next){
 	winston.info("request at /mobile", {url:'/mobile'});
 	console.log('Webinar List Page: ' + new Date().toISOString());
-    var fCourses        = require('../app/pages/pWebinars/pWebinars.js');
+    var fCourses        = require('../app/pages/pLogin/pSignIn.js');
     var bCourses        = new fCourses(req, res, next);
     bCourses.query      = req.query;
     bCourses.controller = controllerName;
     bCourses.getScreen();
 }
 
-var getOnlineClassDetailScreen = function(req, res, next, classURL){
-	if(!classURL){
-		res.send('inadequate url');
-	}
+var getSignUpScreen = function(req, res, next, classURL){
 	console.log('class url = ' + classURL);
 	winston.info("request at /mobile", {url:'/mobile'});
 	console.log('Webinar List Page: ' + new Date().toISOString());
-    var fCourses        = require('../app/pages/pWebinars/pWebinarDetail.js');
+    var fCourses        = require('../app/pages/pLogin/pSignUp.js');
     var bCourses        = new fCourses(req, res, next);
     bCourses.query      = req.query;
     bCourses.controller = controllerName;

@@ -122,7 +122,7 @@ Helper.prototype.getTestDataHeader = function (currPage) {
                 {key:13, id: 1, keyName: "webinars", classes: [], url: '/webinars', isActive: false },
                 {key:14, id: 2, keyName: "mobileApp", classes: [], url: '/mobile', isActive: false },
                 {key:15, id: 3, keyName: "contactUs", classes: [], url: '/contactus', isActive: false },
-                {key:16, id: 4, keyName: "signIn", classes: ['cta', 'wired'], url: '#', isActive: false }
+                {key:16, id: 4, keyName: "signIn", classes: ['cta', 'wired'], url: '/SignIn', isActive: false }
             ]
         }
 
@@ -230,6 +230,28 @@ Helper.prototype.getTestDataOfCourseDetail = function(){
                             }
                 };
 
+    return data;
+}
+Helper.prototype.getTestDataCourseList_temp = function(){
+    var data = [
+    {
+        courseId: 4270,
+        title: 'saasdsasa',
+        courseLogo: '4270',
+        publishDate: 1457342156,// '2015-05-08T03: 39: 00.000+0530',
+        courseDetailLink: '4270-saasdsasa',
+        courseComposition: {
+            tutorials: 0,
+            classes: 0,
+            tests: 0
+        },
+        tutor: {
+            id: 1573,
+            logo: 'nav.gif',
+            name: 'sdfssdfs'
+        }
+    }
+    ];
     return data;
 }
 Helper.prototype.getTestDataCourseList = function () {

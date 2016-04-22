@@ -21,13 +21,20 @@ var APP = APP || {}; //Global Namespace
                 });
 
                 APP.eventTarget.find('#webinarsTabs').tabbing({
-                    defaultTab: 1
+                    defaultTab: 0
                 });
 
                 APP.eventTarget.find('#appFeatures').tabbing({
                     defaultTab: 0,
                     content: 'contentImg',
                     afterInit: appFeaturesCallback
+                });
+
+                APP.eventTarget.find('#webinarsDetails').tabbing({
+                    defaultTab: 0,
+                    tab: 'tabs', 
+                    contentPanel: 'tabsContentWrap', 
+                    content: 'contentOfTab'
                 });
             };
             this.onWindowLoad = function() {};

@@ -273,14 +273,29 @@
     }
     .formElement {
         .fieldList {
+            .subTitle { text-align: right;}
             .field { 
                 label { text-align: right;}
+                .selectionField {
+                    .col-1, .col-2 { float: right; }
+                    .col-2 { text-align: left;
+                        a { text-align: right;}
+                    }
+                    div:first-child { text-align: right;}
+                    input {
+                        &[type='checkbox'] { float: right;}
+                    }
+                    label { float: right; margin: 0 10px 0 0;}
+                }
             }
             
             input {
-                &[type='text'], &[type='email'], &[type='tel'] { text-align: right;}
+                &[type='text'], &[type='email'], &[type='tel'], &[type='password'] { text-align: right;}
             }
             textarea { text-align: right;}
+            .fieldOpt { 
+                select { text-align: right; background-position: 0 9px;}
+            }
         }
     }
 /*END - Generic*/

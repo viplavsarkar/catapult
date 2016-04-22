@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Wiziq</title>
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+       
+        <link rel="stylesheet" type="text/css" href="asset/style/reset.css">
+        <link rel="stylesheet" type="text/css" href="asset/style/fonts.css">
+        <link rel="stylesheet/less" type="text/css" href="asset/style/custom.less">
+        <%- RTL_CSS %>
+        <script src="asset/script/lib/less.js"></script>
+        <!-- Only for dev environment-->
+    </head>
+
+    <body>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.6/react.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.6/react-dom.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/react-intl/1.2.2/react-intl.js"></script>
+        <div id="localeContainer"><%- localeData %></div>
+
+        <div id="pageWrapper">
+            <div id="container_cHeader_header"><%-cHeader_header %></div>
+            <div><%-data_of_cHeader_header%></div>
+
+            <div id="container_cLogin_signin"><%- cLogin_signin %></div>
+            <div><%-data_of_cLogin_signin%></div>
+            
+            <div id="container_cFooter_footer"><%- cFooter_footer %></div>        
+            <div><%-data_of_cFooter_footer%></div>
+        </div>
+        <!-- END #pageWrapper -->
+        <script src="asset/script/lib/jquery.js"></script>
+        <script src="asset/script/main.js"></script>
+    </body>
+
+</html>

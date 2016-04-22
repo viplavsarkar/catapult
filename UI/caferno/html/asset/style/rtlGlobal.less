@@ -92,6 +92,24 @@
                         li { margin: 0 0 0 20px;}
                     }
                 }
+                .ctaGroup {
+                    .type { direction: rtl;}
+                    
+                }
+                .innerTabsWrap { 
+                    .tabs {
+                        li { float: right; 
+                            a { margin: 0 0 0 10px;}
+                        }
+                    }
+                    .tabsContentWrap { border-top-right-radius: 0; border-top-left-radius: 5px;
+                        .scheduleList { 
+                            .col-1 { float: right; padding: 0 0 0 5%;}
+                            .col-2 { float: right; text-align: left;}
+                            
+                        }
+                    }
+                }
             }
         }
         &.webinar {
@@ -135,6 +153,15 @@
             li { direction: rtl;}
             &.accordionWrapper { margin: 0;
                 li { list-style: none; margin: 0;}
+            }
+        }
+        .hostedLang { padding: 0 35px 0 0;
+            &:before { left: auto; right: 0;}
+        }
+        .formElement {
+            .fieldList { 
+                li { text-align: right;}
+                
             }
         }
     }
@@ -246,14 +273,29 @@
     }
     .formElement {
         .fieldList {
+            .subTitle { text-align: right;}
             .field { 
                 label { text-align: right;}
+                .selectionField {
+                    .col-1, .col-2 { float: right; }
+                    .col-2 { text-align: left;
+                        a { text-align: right;}
+                    }
+                    div:first-child { text-align: right;}
+                    input {
+                        &[type='checkbox'] { float: right;}
+                    }
+                    label { float: right; margin: 0 10px 0 0;}
+                }
             }
             
             input {
-                &[type='text'], &[type='email'], &[type='tel'] { text-align: right;}
+                &[type='text'], &[type='email'], &[type='tel'], &[type='password'] { text-align: right;}
             }
             textarea { text-align: right;}
+            .fieldOpt { 
+                select { text-align: right; background-position: 0 9px;}
+            }
         }
     }
 /*END - Generic*/
