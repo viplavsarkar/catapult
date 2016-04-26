@@ -32,36 +32,39 @@ HttpHandler.prototype.SIMPLE_REST = function(){
     console.log(dateTimeNow + '(' + startTime + ')');
     console.log('REQUEST > ' + _.reqObj.url);
     console.log();
-    
-    request({
-        url: _.reqObj.url, 
-        qs: {from: 'caferno', time: +new Date()}, 
-        method: 'GET', 
-        headers: { 
-            'Content-Type': 'MyContentType',
-            'Custom-Header': 'Custom Value'
-        }
-    }, function(error, response, body){
-        if(error) {
-            console.log(error);
-            _.reqObj.callback(error);
-            return;
-        } else {
-            
-            console.log('RESPONSE: ' + _.reqObj.url);
-            var dateTimeNow = new Date();
-            var endTime = dateTimeNow.getTime();
-            console.log(dateTimeNow + '(' + endTime + ')');
+    if(_.reqObj.url == null){
+        _.callback(null,{});
+    }else{
+        request({
+            url: _.reqObj.url, 
+            qs: {from: 'caferno', time: +new Date()}, 
+            method: 'GET', 
+            headers: { 
+                'Content-Type': 'MyContentType',
+                'Custom-Header': 'Custom Value'
+            }
+        }, function(error, response, body){
+            if(error) {
+                console.log(error);
+                _.callback(error);
+                return;
+            } else {
+                
+                console.log('RESPONSE: ' + _.reqObj.url);
+                var dateTimeNow = new Date();
+                var endTime = dateTimeNow.getTime();
+                console.log(dateTimeNow + '(' + endTime + ')');
 
-            var timeTaken = endTime - startTime;
-            console.log('('+timeTaken+' miliseconds)');
-            console.log();
-            //console.log(response.statusCode, body);
-            var bodyObj = JSON.parse(body);
+                var timeTaken = endTime - startTime;
+                console.log('('+timeTaken+' miliseconds)');
+                console.log();
+                //console.log(response.statusCode, body);
+                var bodyObj = JSON.parse(body);
 
-            _.callback(null, bodyObj.data);          
-        }
-    });
+                _.callback(null, bodyObj.data);          
+            }
+        });
+    }
 }
 
 module.exports = HttpHandler;
