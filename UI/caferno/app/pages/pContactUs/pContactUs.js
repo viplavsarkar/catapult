@@ -1,6 +1,7 @@
 var HomePageType    = require('../../presenter/pGenerateHomePage.js');
 var Comp            = require('../../../core/utility/dComponent.js');
-var async = require("async");
+var CompObj         = require('../../../core/utility/cSCO.js');
+var CONST           = require('../../../core/constants/components.js');
 //var winston = require('winston');
 
 var PSamplePage = function(req, res, next){
@@ -27,18 +28,15 @@ PSamplePage.prototype.getScreen = function(){
     _.template = 'tContactUs.ejs';
     
     //add the header
-    var componentCourseList     = new Comp('cHeader_header.jsx', hTestData.getTestDataHeader());    
-    _.components.push(componentCourseList.ToJson());
-
+    _.components.push(new CompObj(CONST.HEADER,{}, null).getComponent());
+  
     //add the react component to add in the page
-    var componentCourseList     = new Comp('cContactUs_contactus.jsx', {});    
-    _.components.push(componentCourseList.ToJson());
-
+    _.components.push(new CompObj(CONST.CONTACT_US,{}).getComponent());
+   
     //add the footer
-    var componentCourseList     = new Comp('cFooter_footer.jsx', hTestData.getTestDataFooter());
-    _.components.push(componentCourseList.ToJson());
-
-    _.pageData = hTestData.getPageData(); 
+    _.components.push(new CompObj(CONST.FOOTER,{}).getComponent());
+   
+    _.pageData = {};
 
     //calling the generate page after the components were obtained asynchronously and collected by this point.   
     _.generatePage();

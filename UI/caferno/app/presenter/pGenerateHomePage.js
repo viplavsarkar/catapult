@@ -1,5 +1,7 @@
-
 require('babel-core/register');
+
+var async = require("async");
+var httpHandler = require('../../core/http/httpHandler.js');
 
 var Helper = function(req, res, next){
 	this.req    = req;
@@ -9,11 +11,51 @@ var Helper = function(req, res, next){
 	this.React = require('react');
 	this.ReactDOMServer = require('react-dom/server');
 	this.controller = '';
+
+    this.template   = '';
+    this.components = [];
+    this.pageData   = {};
+}
+
+Helper.prototype.getScreenData = function(reqArr){
+    var _ = this;
+  
+    async.parallel(reqArr, function(err, data){
+            if(err){
+                console.log('err = ')
+                console.log(err)
+            }
+            console.log('all the methods have been called');
+            for(var i = 0; i < _.components.length; i++){
+                _.components[i].rawdata = data[i];
+            }
+            _.getCoursesScreenActualPage();
+        }
+    );
 }
 
 Helper.prototype.getCoursesScreenActual = function(template, components, pageData){
+    var _ = this;
+    
+    _.template = template;
+    _.components =  components;
+    _.pageData = pageData;
+
+    var count = components.length;
+    var reqArr = [];
+    for(var i = 0; i < count; i++){
+        var reqObj = components[i].reqObj;
+        //console.log('reqObj > ');
+        //console.log(reqObj);
+        var req = new httpHandler({url: reqObj.url}).getMethodForAsynch("SIMPLE_REST");
+        reqArr.push(req);
+    }
+    _.getScreenData(reqArr);
+}
+
+Helper.prototype.getCoursesScreenActualPage = function(){
    
-    var thisObj = this; 
+    var _ = this; 
    
     var params = {};
     var localeJson = {                           
@@ -29,43 +71,60 @@ Helper.prototype.getCoursesScreenActual = function(template, components, pageDat
                                 }
                             }
                         };
-    params.localeData = thisObj.setLocales(localeJson);
-    for(var i=0; i< components.length;i++){
-        var eachComponent = components[i];
+    params.localeData = _.setLocales(localeJson);
+    for(var i=0; i< _.components.length;i++){
+        var eachComponent = _.components[i];
+
         var props = eachComponent.rawdata;
+        console.log(eachComponent.varName);
         var componentParentPath = eachComponent.component_path ? eachComponent.component_path + '/' : '';
         var componentPath = componentParentPath + eachComponent.component;
         var component = '../components/' + componentPath;
         var componentName = eachComponent.component.split('.')[0];
         var var_pagedata = 'var_' +componentName;
+        var compoStr = 'container_' + componentName;
         var dataOfComponent = "data_of_" + eachComponent.name;
-        var JSXcourses = thisObj.React.createFactory(require(component));    
-        var dataAndLocale = { 
+        var JSXcourses = _.React.createFactory(require(component));    
+        var dataAndLocale = {
                                 data:props,
                                 messages:localeJson.messages,
                                 locales: localeJson.locales,
                                 formats: localeJson.formats
                             };
-     
-        params[eachComponent.name] = thisObj.ReactDOMServer.renderToString(JSXcourses(dataAndLocale));
-        
-        if(eachComponent.loadFromClientSide) {
-            //console.log('its true')
-            params[dataOfComponent] = thisObj.setDataForJSX(var_pagedata, props)
-                                                + thisObj.setJSXScript(componentPath)
-                                                + thisObj.setClientSideOfComponent(componentName);
-        }else{
-            //console.log('its false')
-            params[dataOfComponent] = "";
+        //if(eachComponent.compId === 'HEADER'){
+            var data =  '<div id="'+compoStr+'">'+_.ReactDOMServer.renderToString(JSXcourses(dataAndLocale))+'</div>';
+
+            var clientSideData =  "";
+            if(eachComponent.loadFromClientSide) {
+                clientSideData =  _.setDataForJSX(var_pagedata, props)
+                                    + _.setJSXScript(componentPath)
+                                    + _.setClientSideOfComponent(componentName);
+            }
+            
+            params[eachComponent.compId] =   '<div id="'+compoStr+'">'
+                                            +   _.ReactDOMServer.renderToString(JSXcourses(dataAndLocale))
+                                            +'</div>' 
+                                            + '<div>' 
+                                            +   clientSideData 
+                                            + '</div>';
+        /*}else{
+            params[eachComponent.name] = _.ReactDOMServer.renderToString(JSXcourses(dataAndLocale));
+            
+            if(eachComponent.loadFromClientSide) {
+                params[dataOfComponent] = _.setDataForJSX(var_pagedata, props)
+                                                    + _.setJSXScript(componentPath)
+                                                    + _.setClientSideOfComponent(componentName);
+            }else{
+                params[dataOfComponent] = "";
+            }
         }
+        */
     }
-    params.pageData = pageData;
+    params.pageData = _.pageData;
     
     params.RTL_CSS = this.setRTLStyleCss();
-    thisObj.res.render(template, params);
-    
+    _.res.render(_.template, params);
 }
-
 
 Helper.prototype.setLocales = function(languageJson){ 
     var str = '';
@@ -76,7 +135,6 @@ Helper.prototype.setLocales = function(languageJson){
 
         //str += "<script type='text/javascript' src='/asset/script/main.js'></script>";
     return str;
-
 }
 
 Helper.prototype.setDataForJSX = function(varName, props){
@@ -127,4 +185,5 @@ Helper.prototype.setRTLStyleCss = function(){
     }
     return rtlCssString;
 }
+
 module.exports = Helper;

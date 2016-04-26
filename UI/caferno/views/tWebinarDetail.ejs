@@ -10,14 +10,15 @@
         <link rel="stylesheet" type="text/css" href="/asset/style/reset.css">
         <link rel="stylesheet" type="text/css" href="/asset/style/fonts.css">
         <link rel="stylesheet/less" type="text/css" href="/asset/style/custom.less">
+         <%- RTL_CSS %>
         <script src="/asset/script/lib/less.js"></script>
         <!-- Only for dev environment-->
     </head>
 
     <body>
+        <div id="localeContainer"><%- localeData %></div>
         <div id="pageWrapper">
-            <div id="container_cHeader_header"><%- cHeader_header %></div>
-            <div><%-data_of_cHeader_header%></div>
+             <%- HEADER %>
 
             <div>
                 <section id="breadcrumbs" class="moduleBody">
@@ -32,14 +33,11 @@
                 </section>
             </div>
             
-            <div id="container_cWebinars_detail"><%-cWebinars_detail%></div>
-            <div><%-data_of_cWebinars_detail%></div>
+            <%- CLASS_DETAIL %>
                         
-            <div id="container_cWebinars_detailMeta"><%-cWebinars_detailMeta%></div>
-            <div><%-data_of_cWebinars_detailMeta%></div>
+            <%- CLASS_DETAIL %>
 
-            <div id="container_cFooter_footer"><%- cFooter_footer %></div>
-            <div><%-data_of_cFooter_footer%></div>
+            <%- FOOTER %>
         </div>
         <!-- END #pageWrapper -->
         <script src="/asset/script/lib/jquery.js"></script>

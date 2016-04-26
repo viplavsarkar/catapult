@@ -1,6 +1,7 @@
 var HomePageType    = require('../../presenter/pGenerateHomePage.js');
 var Comp            = require('../../../core/utility/dComponent.js');
-var async = require("async");
+var CompObj         = require('../../../core/utility/cSCO.js');
+var CONST           = require('../../../core/constants/components.js');
 //var winston = require('winston');
 
 var PSignIn = function(req, res, next){
@@ -26,19 +27,16 @@ PSignIn.prototype.getScreen = function(){
     //set the template to use
     _.template = 'tSignIn.ejs';
     
-    //add the header
-    var componentCourseList     = new Comp('cHeader_header.jsx', hTestData.getTestDataHeader("signIn"), false);    
-    _.components.push(componentCourseList.ToJson());
-
+        //add the header
+    _.components.push(new CompObj(CONST.HEADER,{}, null).getComponent());
+  
     //add the react component to add in the page
-    var componentCourseList     = new Comp('cLogin_signin.jsx', {}, false);    
-    _.components.push(componentCourseList.ToJson());
-
+    _.components.push(new CompObj(CONST.SIGN_IN,{}).getComponent());
+   
     //add the footer
-    var componentCourseList     = new Comp('cFooter_footer.jsx', hTestData.getTestDataFooter(), false);
-    _.components.push(componentCourseList.ToJson());
+    _.components.push(new CompObj(CONST.FOOTER,{}).getComponent());
 
-    _.pageData = hTestData.getPageData(); 
+    _.pageData = {};
 
     //calling the generate page after the components were obtained asynchronously and collected by this point.   
     _.generatePage();

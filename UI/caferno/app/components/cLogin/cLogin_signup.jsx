@@ -59,7 +59,7 @@ var Section = React.createClass({
                                             <li className="field">
                                                 <div className="selectionField clearfix">
                                                     <div className="col-2">
-                                                        Already a member? <a href="/SignIn">Sign in </a>
+                                                        Already a member? <a href="">Sign in </a>
                                                     </div>
                                                 </div>
                                             </li>
