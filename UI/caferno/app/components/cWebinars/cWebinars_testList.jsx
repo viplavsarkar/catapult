@@ -65,7 +65,7 @@ var EachWebinarRoww = React.createClass({
 var Section = React.createClass({
     mixins: [IntlMixin],    
     render: function () {      
-        var data = this.props.data;
+        var data = this.props.data.result;
         
         var itemList = data.map(function(eachItem){
             return (

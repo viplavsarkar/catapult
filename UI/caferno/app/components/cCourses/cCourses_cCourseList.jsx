@@ -204,7 +204,7 @@ var Section = React.createClass({
         alert('hi');
     },
     render: function () {
-        var data = this.props.data;
+        var data = this.props.data.result;
         //var locality = this.props.messages;
         var courseItems = data.map(function (courseItem) {
             return (

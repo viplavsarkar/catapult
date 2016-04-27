@@ -64,10 +64,21 @@ var EachSection = React.createClass({
     }
 });
 
+var ViewMoreButton = React.createClass({
+    mixins: [IntlMixin],
+    render:function(){
+        return (
+            <div className="cta wired">
+                <a href="#">View More</a>
+            </div>
+            )
+    }
+});
+
 var DiscoverSection = React.createClass({
     mixins: [IntlMixin],    
     render: function () {      
-        var data = this.props.data;
+        var data = this.props.data.result;
         
         var itemList = data.map(function(eachItem){
             return (
@@ -81,9 +92,7 @@ var DiscoverSection = React.createClass({
                     <ul className="tilesList clearfix">
                        {itemList}
                     </ul>
-                    <div className="cta wired">
-                        <a href="#">View More</a>
-                    </div>
+                    
                 </div>
             </section>
         );
