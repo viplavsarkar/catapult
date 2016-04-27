@@ -20,7 +20,7 @@ var DiscoverBanner = React.createClass({
         //alert('hurray');
     },
     render: function () {      
-        var data = this.props.data;
+        var data = this.props.data.academy;
         return (
             <section id="heroHalfImg" className="moduleBody halfBgImg">
                 <div className="moduleWrapper clearfix">

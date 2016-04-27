@@ -2,6 +2,7 @@ var HomePageType    = require('../../presenter/pGenerateHomePage.js');
 var Comp            = require('../../../core/utility/dComponent.js');
 var CompObj         = require('../../../core/utility/cSCO.js');
 var CONST           = require('../../../core/constants/components.js');
+
 //var async = require("async");
 //var winston = require('winston');
 
@@ -19,20 +20,35 @@ var PCourses = function(req, res, next){
 
 
 PCourses.prototype.getScreen = function(){
+    var Helper          = require('../../../core/utility/hHelper.js');
+    var _ = this;
+    var academyUrl = "preportal.wiziq.authordm.com";
+    academyUrl = "kabza.wiziq.authordm.com";
+    academyUrl = "newjon.wiziq.authordm.com";
+    academyUrl = global.academy.url;
+    var callback =  function(da){_.getScreenComponentsAndData(da)};
+    var espId = new Helper(callback).getEspId(academyUrl);
+    console.log("espId >");
+    console.log(espId);
+}
+
+PCourses.prototype.getScreenComponentsAndData = function(academyInfo){
     var _ = this;
 
     var hUnitTestData = require('../../../core/helper/hUnitTestData.js');
     var hTestData = new hUnitTestData();
+    
+    var espId = academyInfo.id;
 
     //set the template to use
     _.template = 'tCourseList.ejs';
     
     //add the header   
-    _.components.push(new CompObj(CONST.HEADER,{}, null).getComponent());
+    _.components.push(new CompObj(CONST.HEADER,         {espId:espId}, null).getComponent());
 
-    _.components.push(new CompObj(CONST.COURSE_LIST,{}).getComponent());
+    _.components.push(new CompObj(CONST.COURSE_LIST,    {espId:espId}).getComponent());
     
-    _.components.push(new CompObj(CONST.FOOTER,{}).getComponent());
+    _.components.push(new CompObj(CONST.FOOTER,         {espId:espId}).getComponent());
 
     _.pageData = {};    // hTestData.getPageData(); 
 

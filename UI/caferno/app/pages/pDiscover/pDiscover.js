@@ -16,26 +16,39 @@ var PDiscover = function(req, res, next){
     this.pageData   = {};
 };
 
-
-
 PDiscover.prototype.getScreen = function(){
+    var Helper          = require('../../../core/utility/hHelper.js');
+    var _ = this;
+    var academyUrl = "preportal.wiziq.authordm.com";
+    academyUrl = "kabza.wiziq.authordm.com";
+    academyUrl = "newjon.wiziq.authordm.com";
+    academyUrl = global.academy.url;
+    var callback =  function(da){_.getScreenComponentsAndData(da)};
+    var espId = new Helper(callback).getEspId(academyUrl);
+    console.log("espId >");
+    console.log(espId);
+}
+
+PDiscover.prototype.getScreenComponentsAndData = function(academyInfo){
     var _ = this;
 
     var hUnitTestData = require('../../../core/helper/hUnitTestData.js');
     var hTestData = new hUnitTestData();
 
+    var espId = academyInfo.id;
+
     //set the template to use
     _.template = 'tDiscover.ejs';
     
         //add the header
-    _.components.push(new CompObj(CONST.HEADER,{}, null).getComponent());
+    _.components.push(new CompObj(CONST.HEADER,             {espId:espId}, null).getComponent());
   
     //add the react component to add in the page
-    _.components.push(new CompObj(CONST.DISCOVER_BANNER,{}).getComponent());
-    _.components.push(new CompObj(CONST.DISCOVER,{}).getComponent());
+    _.components.push(new CompObj(CONST.DISCOVER_BANNER,    {espId:espId}).getComponent());
+    _.components.push(new CompObj(CONST.DISCOVER,           {espId:espId}).getComponent());
    
     //add the footer
-    _.components.push(new CompObj(CONST.FOOTER,{}).getComponent());
+    _.components.push(new CompObj(CONST.FOOTER,             {espId:espId}).getComponent());
 
     _.pageData = {};
 

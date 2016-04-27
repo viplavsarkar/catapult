@@ -45,15 +45,18 @@ var EachSection = React.createClass({
     render: function(){
         var data = this.props.data;
 
+        var dataCourseLogo = '//' + data.courseLogo;
+        var courseDetailLink = "course/" + data.courseDetailLink;
+
         return(
              <li className="item">
                 <div className="innerContent">
                     <figure>
                         <a href="#">
-                            <img src={data.courseLogo} alt="" />
+                            <img src={dataCourseLogo} alt="" />
                         </a>
                         <figcaption>
-                            <a href={data.courseDetailLink}>{data.title}</a>
+                            <a href={courseDetailLink}>{data.title}</a>
                             <small>{data.learnerCount} {this.getIntlMessage('learners')}</small>
                         </figcaption>
                     </figure>

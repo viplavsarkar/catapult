@@ -145,16 +145,18 @@ var CourseListItem = React.createClass({
         if (data.price == 0) {
             priceText = this.getIntlMessage('free');
         }
-
+        var courseLogo = "//" + data.courseLogo;
+        var tutorLogo = "//" + data.tutor.logo;
+        var courseDetailLink = "course/" + data.courseDetailLink;
         return (
             <li className="item clearfix">
                 <div className="col-1">
                     <figure className="courseImg">
-                        <a href="#"><img src={data.courseLogo} alt={data.title} /></a>
+                        <a href={courseDetailLink}><img src={courseLogo} alt={data.title} /></a>
                         <figcaption className="captionWrap">
                             <div className="gutter clearfix">
                                 <span className="academy">
-                                    <img src={data.tutor.logo} />
+                                    <img src={tutorLogo} />
                                 </span>
                                 <span className="caption">{data.tutor.name}</span>
                             </div>
@@ -162,7 +164,7 @@ var CourseListItem = React.createClass({
                     </figure>
                 </div>
                 <div className="col-2 content">
-                    <h2><a href={data.courseDetailLink}>{data.title}</a></h2>
+                    <h2><a href={courseDetailLink}>{data.title}</a></h2>
                     <ul className="placed">
                         <li>
                             {this.getIntlMessage('liveFor')} {data.liveFor} {this.getIntlMessage('week')}
@@ -179,7 +181,9 @@ var CourseListItem = React.createClass({
                             <CourseEnrollees data={data.enrollees}/>
                             {priceText}
                         </li>
-                        <li className="cta wired"><a href="#">{this.getIntlMessage('learnMore')}</a></li>
+
+                        <li className="cta wired"><a href={courseDetailLink}>{this.getIntlMessage('learnMore')}</a></li>
+
                     </ul>
                 </div>
             </li>

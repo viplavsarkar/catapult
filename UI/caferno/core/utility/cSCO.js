@@ -33,7 +33,7 @@ cSCO.prototype.getComponent = function(){
 		case CONST.DISCOVER:
 			return new Comp('cDiscover_discover.jsx', null, false, null, null, 
 	            {
-	                url: ORCH.discover
+	                url: ORCH.discover + "espId="+_.params.espId+"&pageSize=20"
 	            },
 	            _.varName 
 	        );
@@ -49,7 +49,7 @@ cSCO.prototype.getComponent = function(){
 		case CONST.COURSE_LIST:
 			return new Comp('cCourses_cCourseList.jsx', null , false, "cCourses", null, 
 	            {
-	                 url: ORCH.courseList
+	                 url: ORCH.courseList + "espId="+_.params.espId+"&pageSize=20"
 	            },
 	            _.varName
 	        )

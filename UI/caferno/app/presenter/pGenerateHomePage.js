@@ -3,7 +3,7 @@ require('babel-core/register');
 var async = require("async");
 var httpHandler = require('../../core/http/httpHandler.js');
 
-var Helper = function(req, res, next){
+var PresenterPrelogin = function(req, res, next){
 	this.req    = req;
     this.res    = res;
     this.next   = next;
@@ -15,9 +15,11 @@ var Helper = function(req, res, next){
     this.template   = '';
     this.components = [];
     this.pageData   = {};
+
+    this.renderStart = new Date().getTime();
 }
 
-Helper.prototype.getScreenData = function(reqArr){
+PresenterPrelogin.prototype.getScreenData = function(reqArr){
     var _ = this;
   
     async.parallel(reqArr, function(err, data){
@@ -34,7 +36,7 @@ Helper.prototype.getScreenData = function(reqArr){
     );
 }
 
-Helper.prototype.getCoursesScreenActual = function(template, components, pageData){
+PresenterPrelogin.prototype.getCoursesScreenActual = function(template, components, pageData){
     var _ = this;
     
     _.template = template;
@@ -53,7 +55,7 @@ Helper.prototype.getCoursesScreenActual = function(template, components, pageDat
     _.getScreenData(reqArr);
 }
 
-Helper.prototype.getCoursesScreenActualPage = function(){
+PresenterPrelogin.prototype.getCoursesScreenActualPage = function(){
    
     var _ = this; 
    
@@ -76,7 +78,7 @@ Helper.prototype.getCoursesScreenActualPage = function(){
         var eachComponent = _.components[i];
 
         var props = eachComponent.rawdata;
-        console.log(eachComponent.varName);
+        //console.log(eachComponent.varName);
         var componentParentPath = eachComponent.component_path ? eachComponent.component_path + '/' : '';
         var componentPath = componentParentPath + eachComponent.component;
         var component = '../components/' + componentPath;
@@ -124,9 +126,20 @@ Helper.prototype.getCoursesScreenActualPage = function(){
     
     params.RTL_CSS = this.setRTLStyleCss();
     _.res.render(_.template, params);
+
+    var dateTimeNow = new Date();
+    var endTime = dateTimeNow.getTime();
+    //console.log(dateTimeNow + '(' + endTime + ')');
+
+    var timeTaken = endTime - _.renderStart;
+    //console.log('('+timeTaken+' miliseconds)');
+    console.log();
+    //console.log(_.req)
+    console.log('#############    PAGE RENDERED IN : ('+timeTaken+' miliseconds)');    
+    console.log();
 }
 
-Helper.prototype.setLocales = function(languageJson){ 
+PresenterPrelogin.prototype.setLocales = function(languageJson){ 
     var str = '';
         //str += "<link rel='stylesheet/less' type='text/css' href='asset/style/rtlCustom.less'>";
         str += "<script type='text/javascript'>var localkk="+JSON.stringify(languageJson.locales)+"</script>"; 
@@ -137,15 +150,15 @@ Helper.prototype.setLocales = function(languageJson){
     return str;
 }
 
-Helper.prototype.setDataForJSX = function(varName, props){
+PresenterPrelogin.prototype.setDataForJSX = function(varName, props){
     return "<script>"+varName+"="+ JSON.stringify(props)+"</script>";
 };
 
-Helper.prototype.setJSXScript = function(component){
+PresenterPrelogin.prototype.setJSXScript = function(component){
         return '<script src="/'+component+'" type="text/babel"></script>';   
 };
 
-Helper.prototype.setClientSideOfComponent = function(componentName){
+PresenterPrelogin.prototype.setClientSideOfComponent = function(componentName){
     var str = '';
     str += "<script type='text/babel'>";   
     var dataName = 'var_' + componentName;  
@@ -159,7 +172,7 @@ Helper.prototype.setClientSideOfComponent = function(componentName){
     return str;
 };
 
-Helper.prototype.setClientSideOfComponent_old = function(componentName){
+PresenterPrelogin.prototype.setClientSideOfComponent_old = function(componentName){
     var str = '';
     str += "<script type='text/babel'>";
     str += "var componentName = '"+componentName+"';";// 'cCourses_cCourseList';";
@@ -176,7 +189,7 @@ Helper.prototype.setClientSideOfComponent_old = function(componentName){
     return str;
 };
 
-Helper.prototype.setRTLStyleCss = function(){
+PresenterPrelogin.prototype.setRTLStyleCss = function(){
     var rtlCssString = '';
     if(global.language){
         if(global.language.isRTL){
@@ -186,4 +199,4 @@ Helper.prototype.setRTLStyleCss = function(){
     return rtlCssString;
 }
 
-module.exports = Helper;
+module.exports = PresenterPrelogin;

@@ -83,8 +83,12 @@ app.use(function(req, res, next) {
 // will print stacktrace
 //global.env =  'dev';
 
-//var language = new i18n('en-US');
-var language = new i18n('ar-AE');
+var language = new i18n('en-US');
+//var language = new i18n('ar-AE');
+
+global.academy = {url:'preportal.wiziq.authordm.com'}
+//global.academy = {url:'newjon.wiziq.authordm.com'}
+//global.academy = {url:'kabza.wiziq.authordm.com'}
 
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {

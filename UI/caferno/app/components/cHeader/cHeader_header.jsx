@@ -11,10 +11,10 @@ var FormattedDate = ReactIntl.FormattedDate;
 var HeaderLogo = React.createClass({
     render: function () {
         var data = this.props.data;
-
+        var logo = "asset/image/logo.jpg";
         return (
             <figure className="logo">
-                <img src={data.logo} alt={data.academyName} />
+                <img src={logo} alt={data.academyName} />
             </figure>
         );
     }
@@ -48,12 +48,20 @@ var NavigationLink = React.createClass({
         );
     }
 });
+var navLinks = [
+                {"key":11, "id": 0, "keyName": "discover", "classes": [], "url": "/home", "isActive": false },
+                {"key":12, "id": 1, "keyName": "courses", "classes": [], "url": "/publiccourse", "isActive": false },
+                {"key":13, "id": 1, "keyName": "webinars", "classes": [], "url": "/webinars", "isActive": false },
+                {"key":14, "id": 2, "keyName": "mobileApp", "classes": [], "url": "/mobile", "isActive": false },
+                {"key":15, "id": 3, "keyName": "contactUs", "classes": [], "url": "/contactus", "isActive": false },
+                {"key":16, "id": 4, "keyName": "signIn", "classes": ["cta", "wired"], "url": "/SignIn", "isActive": false }
+            ];
 
 var HeaderNavigation = React.createClass({
     mixins: [IntlMixin],
     render: function () {
         var data = this.props.data;
-        var navigationItems = data.navigationItems.map(function (navigationItem) {
+        var navigationItems = data.map(function (navigationItem) {
             return (
                 <NavigationLink key={navigationItem.key} data={navigationItem} />
             );
@@ -77,8 +85,8 @@ var Header = React.createClass({
         return (
             <header id="pageHeader" className="moduleBody">
                 <div onClick={this.onclickhandler} className="moduleWrapper clearfix">
-                    <HeaderLogo data={data.academy} />
-                    <HeaderNavigation data={data.headerNavigation} />
+                    <HeaderLogo data={data.academy} />                   
+                    <HeaderNavigation data={navLinks} />
                 </div>
             </header>
         );
@@ -86,7 +94,7 @@ var Header = React.createClass({
 });
 
 if (isNode) {
-    module.exports = Header;
+    module.exports = Header; 
 } else {
     window.Section = Header;
 }
