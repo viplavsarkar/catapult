@@ -4,7 +4,7 @@ var isNode = typeof module !== 'undefined' && module.exports
   , ReactDOM = isNode ? require('react-dom') : window.ReactDOM
   , ReactIntl = isNode ? require('react-intl') : window.ReactIntl;
 
-    
+
 var IntlMixin = ReactIntl.IntlMixin;
 var FormattedMessage = ReactIntl.FormattedMessage;
 var FormattedDate = ReactIntl.FormattedDate;
@@ -19,7 +19,7 @@ var ButtonViewRecording = React.createClass({
         if(data != '#'){
             return(
             <div className="col-2">
-                <div className="cta filledOrng2 inline"><a href={data}>View Recording</a></div>
+                <div className="cta filledOrng2 inline"><a href={data}>{this.getIntlMessage('viewRecording')}</a></div>
             </div>
             )
         }else{
@@ -43,7 +43,7 @@ var ClassScheduleEach = React.createClass({
                     <div className="clearfix">
                         <div className="col-1">
                             <p className="recurringDate">{data.startAt}</p>
-                            <p>Member attended: {data.membersAttended}</p>
+                            <p>{this.getIntlMessage('membersAttended')}: {data.membersAttended}</p>
                             <p>{data.status}</p>
                         </div>
                         <ButtonViewRecording data={data.linkViewRecording} />
@@ -59,7 +59,7 @@ var ClassSchedule = React.createClass({
         var data = this.props.data;
         var scheduleItems = data.map(function(eachScheduleItem){
             return (
-                    <ClassScheduleEach key={eachScheduleItem.sessionId} data={eachScheduleItem} />                    
+                    <ClassScheduleEach key={eachScheduleItem.sessionId} data={eachScheduleItem} />
                 )
         });
         return (
@@ -71,10 +71,10 @@ var ClassSchedule = React.createClass({
 });
 
 var WebinarDetailSummary = React.createClass({
-    mixins: [IntlMixin],    
-    render: function () {      
+    mixins: [IntlMixin],
+    render: function () {
         var data = this.props.data;
-        
+
         return (
                 <section id="webinarsDetails" className="moduleBody">
                     <div className="moduleWrapper">
@@ -101,23 +101,23 @@ var WebinarDetailSummary = React.createClass({
                                     <div className="classFixtures">
                                         <p>{data.classFixtures.status}</p>
                                         <div className="cta filledOrng2 inline">
-                                            <a href={data.classFixtures.linkViewRecording}>VIEW RECORDING</a>                                       
+                                            <a href={data.classFixtures.linkViewRecording}>{this.getIntlMessage('viewRecording')}</a>
                                         </div>
                                         <div className="cta filledOrng2 inline">
-                                            <a href={data.classFixtures.linkViewRecording}>DOWNLOAD RECORDING</a>
+                                            <a href={data.classFixtures.linkViewRecording}>{this.getIntlMessage('downloadRecording')}</a>
                                         </div>
                                     </div>
                                     <div className="innerTabsWrap">
                                         <ul className="tabs clearfix">
-                                            <li data-tab="schedule" className="active"><a href="#">Class Schedule</a></li>
-                                            <li data-tab="sessions"><a href="#">Sessions Joined by you</a></li>
+                                            <li data-tab="schedule" className="active"><a href="#">{this.getIntlMessage('classSchedule')}</a></li>
+                                            <li data-tab="sessions"><a href="#">{this.getIntlMessage('sessionsJoinedByYou')}</a></li>
                                         </ul>
                                         <div className="tabsContentWrap">
                                             <div data-tab="schedule" className="contentOfTab">
                                                 <ClassSchedule data={data.classSessions} />
                                             </div>
                                             <div data-tab="sessions" className="contentOfTab">
-                                                <p>You have not joined in any class of this recurring series. </p>
+                                                <p>{this.getIntlMessage('recurringClassSeriesNotJoined')}. </p>
                                             </div>
                                         </div>
                                     </div>
@@ -127,10 +127,10 @@ var WebinarDetailSummary = React.createClass({
                                         <li className="cta noRadius">
                                             <ul className="type">
                                                 <li>
-                                                    <span className="no">{data.classStats.durationInMins}</span> MINUTES
+                                                    <span className="no">{data.classStats.durationInMins}</span> {this.getIntlMessage('minutes')}
                                                 </li>
                                                 <li>
-                                                    <span className="no">{data.classStats.attendesCount}</span> Attendees
+                                                    <span className="no">{data.classStats.attendesCount}</span> {this.getIntlMessage('attendees')}
                                                 </li>
                                             </ul>
                                             <span className="msg"> {data.classStats.status}</span>
@@ -150,7 +150,7 @@ var WebinarDetailSummary = React.createClass({
 //*****************************************************************
 
 if (isNode) {
-    module.exports = WebinarDetailSummary; 
+    module.exports = WebinarDetailSummary;
 } else {
-    window.Section = WebinarDetailSummary;  
+    window.Section = WebinarDetailSummary;
 }

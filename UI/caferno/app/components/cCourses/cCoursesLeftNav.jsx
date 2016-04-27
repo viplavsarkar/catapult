@@ -4,7 +4,7 @@ var isNode = typeof module !== 'undefined' && module.exports
 
 var ListItem = React.createClass({
     onclickhandler: function(ev){
-        
+
        alert('this is Notifications');
     },
     render: function() {
@@ -17,7 +17,7 @@ var ListItem = React.createClass({
 });
 var ListItems = React.createClass({
     render: function(){
-       
+
     }
 });
 var NavigationList = React.createClass({
@@ -35,14 +35,14 @@ var NavigationList = React.createClass({
                     <div className="switchAcademy"><a href="#">Swith Academy</a></div>
                 </div>
                 <ul className="navigation">
-                    {listItems}                    
+                    {listItems}
                 </ul>
             </div>
             );
     }
 });
 
-    
+
 
 if (isNode) {
     module.exports = NavigationList;

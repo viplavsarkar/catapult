@@ -3,7 +3,7 @@ var isNode = typeof module !== 'undefined' && module.exports
   , ReactDOM = isNode ? require('react-dom') : window.ReactDOM
   , ReactIntl = isNode ? require('react-intl') : window.ReactIntl;
 
-    
+
 var IntlMixin = ReactIntl.IntlMixin;
 var FormattedMessage = ReactIntl.FormattedMessage;
 var FormattedDate = ReactIntl.FormattedDate;
@@ -36,14 +36,14 @@ var NavigationLink = React.createClass({
     render: function () {
         var data = this.props.data;
         if (data.isActive) {
-            data.classes.remove('active');      
+            data.classes.remove('active');
             data.classes.push('active');
         }
         var classNames = data.classes.join(' ');
 
         return (
             <li className={classNames}>
-                <a href={data.url}>{this.getIntlMessage('header.headerNavigation.navigationItems.' + data.keyName)}</a>
+                <a href={data.url}>{this.getIntlMessage(data.keyName)}</a>
             </li>
         );
     }
@@ -86,7 +86,7 @@ var Header = React.createClass({
 });
 
 if (isNode) {
-    module.exports = Header; 
+    module.exports = Header;
 } else {
     window.Section = Header;
 }

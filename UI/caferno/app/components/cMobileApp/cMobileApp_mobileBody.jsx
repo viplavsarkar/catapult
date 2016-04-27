@@ -4,7 +4,7 @@ var isNode = typeof module !== 'undefined' && module.exports
   , ReactDOM = isNode ? require('react-dom') : window.ReactDOM
   , ReactIntl = isNode ? require('react-intl') : window.ReactIntl;
 
-    
+
 var IntlMixin = ReactIntl.IntlMixin;
 var FormattedMessage = ReactIntl.FormattedMessage;
 var FormattedDate = ReactIntl.FormattedDate;
@@ -15,33 +15,33 @@ var FormattedDate = ReactIntl.FormattedDate;
 
 
 var Section = React.createClass({
-    mixins: [IntlMixin],    
-    render: function () {      
+    mixins: [IntlMixin],
+    render: function () {
 
         return (
             <section id="appFeatures" className="moduleBody grid50">
                 <div className="moduleWrapper clearfix">
-                    <h2 className="title">Education App Benefits &amp; Features</h2>
+                    <h2 className="title">{this.getIntlMessage('educationAppBenefits')}</h2>
                     <div className="col-1">
                         <ul className="highlighter tabsHead clearfix">
                             <li data-tab="attend">
-                                <h3>Attend live classes on-the-go </h3>
-                                <p>Access your live online classes from your Internet-enabled iOS mobile device – no matter when or where. Experience the world’s best virtual classroom - now! on your phone.</p>
+                                <h3>{this.getIntlMessage('attendClassesOnTheGo')}</h3>
+                                <p>{this.getIntlMessage('attendClassesOnIos')}</p>
                                 <div className="triangle"></div>
                             </li>
                             <li data-tab="acess">
-                                <h3>Access courseware anytime</h3>
-                                <p>Get course content including PowerPoint slides, documents, presentations, videos, and more – right on your mobile device. Access learning materials instantly, whenever you need them. </p>
+                                <h3>{this.getIntlMessage('accessCoursewareAnyWhere')}</h3>
+                                <p>{this.getIntlMessage('getContentOnMobile')}</p>
                                 <div className="triangle"></div>
                             </li>
                             <li data-tab="keep">
-                                <h3>Keep track of upcoming events</h3>
-                                <p>Receive notifications of upcoming live classes, assignments, and tests on your mobile device. Never miss a lesson or due date, and help ensure your success. </p>
+                                <h3>{this.getIntlMessage('keepTrackOfEvents')}</h3>
+                                <p>{this.getIntlMessage('receiveNotifications')}</p>
                                 <div className="triangle"></div>
                             </li>
                             <li data-tab="engage">
-                                <h3>Engage with fellow students</h3>
-                                <p>Interact with fellow students and teacher during online discussions and emails from within WizIQ’s mobile app, and get the guidance and answers you need to improve your performance.</p>
+                                <h3>{this.getIntlMessage('engagementWithFellows')}</h3>
+                                <p>{this.getIntlMessage('interactionWithFellows')}</p>
                                 <div className="triangle"></div>
                             </li>
                         </ul>
@@ -71,8 +71,8 @@ var Section = React.createClass({
 //*****************************************************************
 
 if (isNode) {
-    module.exports = Section; 
+    module.exports = Section;
 } else {
     window.Section = Section;
-    
+
 }

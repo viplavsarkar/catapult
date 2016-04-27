@@ -4,7 +4,7 @@ var isNode = typeof module !== 'undefined' && module.exports
   , ReactDOM = isNode ? require('react-dom') : window.ReactDOM
   , ReactIntl = isNode ? require('react-intl') : window.ReactIntl;
 
-    
+
 var IntlMixin = ReactIntl.IntlMixin;
 var FormattedMessage = ReactIntl.FormattedMessage;
 var FormattedDate = ReactIntl.FormattedDate;
@@ -17,7 +17,7 @@ var CourseSummary = React.createClass({
     mixins: [IntlMixin],
     render: function(){
         var data = this.props.data;
-        
+
         var intlData = {
                         courseStarted:"Course started:",
                         tutorials: "TUTORIALS",
@@ -55,7 +55,7 @@ var CourseSummary = React.createClass({
                                         </ul>
                                         <ul className="type clearfix">
                                             <li>
-                                                <span className="no">{data.tutorials}</span> 
+                                                <span className="no">{data.tutorials}</span>
                                                 {intlData.tutorials}
                                             </li>
                                             <li>
@@ -117,9 +117,9 @@ var CourseOverview = React.createClass({
                         +    "<li>Stage 2: Making the best of your current reality</li>"
                         +    "<li>Stage 3: Positively focusing forward - Part I</li>"
                         +    "<li>Stage 4: Positively focusing forward - Part II</li>"
-                        +"</ul>" 
+                        +"</ul>"
                         +"<h3 className='lang'> Language of instruction: <span>English</span> </h3>";
-       
+
         return (
                 <div data-tab="overview" className="moduleWrapper">
                     <div className="primaryDetail">
@@ -139,7 +139,7 @@ var CourseOverview = React.createClass({
                             <div className="col-2">
                                 <ul className="academyMeta clearfix">
                                     <li>{data.followers}<span>{intlData.followers}</span></li>
-                                    <li>{data.followers}<span>{intlData.followers}</span></li>                                    
+                                    <li>{data.followers}<span>{intlData.followers}</span></li>
                                     <li>{data.testimonials}<span>{intlData.testimonials}</span></li>
                                 </ul>
                             </div>
@@ -168,7 +168,7 @@ var EachSection = React.createClass({
     mixins:[IntlMixin],
     render: function(){
         var data = this.props.data;
-        
+
         var sectionRows = data.sectionData.map(function (eachSectionData) {
             return (
                 <EachSectionRow data={eachSectionData} />
@@ -183,7 +183,7 @@ var EachSection = React.createClass({
                     <div className="accordionContent">
                         <table className="tableGrid">
                             <tbody>
-                                {sectionRows}                               
+                                {sectionRows}
                             </tbody>
                         </table>
                     </div>
@@ -205,7 +205,7 @@ var CourseSchedule = React.createClass({
                     <div className="primaryDetail">
                         <h2 className="title">Schedule &amp; Syllabus</h2>
                         <ul className="accordionWrapper">
-                           {sections}                          
+                           {sections}
                         </ul>
                     </div>
                 </div>
@@ -217,7 +217,7 @@ var CourseDetail = React.createClass({
     render: function() {
         var data = this.props.data;
         var intlData = {overview: "Overview", schedule: "Schedule"};
-        
+
         return (
                 <section id="courseTabs">
                     <div className="tabsHeadWrapper moduleBody">
@@ -255,9 +255,9 @@ var Breadcrum = React.createClass({
     }
 });
 var CourseDetailSection = React.createClass({
-    mixins: [IntlMixin],    
-    render: function () {      
-        var data = this.props.data;     
+    mixins: [IntlMixin],
+    render: function () {
+        var data = this.props.data;
 
         return (
             <div>
@@ -274,17 +274,17 @@ var CourseDetailSection = React.createClass({
 //*****************************************************************
 
 if (isNode) {
-    module.exports = CourseDetailSection; 
+    module.exports = CourseDetailSection;
 } else {
     window.Section = CourseDetailSection;
  /*
     var componentName = 'cSample_file';
-    
+
     var dataName = eval('var_' + componentName);
     var lokk = eval('localkk')
     var mekk = eval('messkk');
     var fokk = eval('formkk');
-    
+
     ReactDOM.render(<CourseDetailSection data={dataName} messages={mekk} formats={fokk} locales={lokk} />, document.getElementById('container_'+componentName));
 */
 }

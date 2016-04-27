@@ -4,7 +4,7 @@ var isNode = typeof module !== 'undefined' && module.exports
   , ReactDOM = isNode ? require('react-dom') : window.ReactDOM
   , ReactIntl = isNode ? require('react-intl') : window.ReactIntl;
 
-    
+
 var IntlMixin = ReactIntl.IntlMixin;
 var FormattedMessage = ReactIntl.FormattedMessage;
 var FormattedDate = ReactIntl.FormattedDate;
@@ -15,18 +15,18 @@ var FormattedDate = ReactIntl.FormattedDate;
 
 
 var Section = React.createClass({
-    mixins: [IntlMixin],    
-    
-    render: function () {      
+    mixins: [IntlMixin],
+
+    render: function () {
         var data = this.props.data;
-       
+
         return (
              <section id="webinarsTabs">
                     <div className="tabsHeadWrapper moduleBody">
                         <ul className="tabsHead moduleWrapper clearfix">
-                            <li className="overview" data-tab="aboutClass"><a href="#">About the class</a></li>
-                            <li className="host" data-tab="aboutHost"><a href="#">About the Host</a></li>
-                            <li className="discussion" data-tab="discussion"><a href="#">Discussion</a></li>
+                            <li className="overview" data-tab="aboutClass"><a href="#">{this.getIntlMessage('aboutTheClass')}</a></li>
+                            <li className="host" data-tab="aboutHost"><a href="#">{this.getIntlMessage('aboutTheHost')}</a></li>
+                            <li className="discussion" data-tab="discussion"><a href="#">{this.getIntlMessage('discussion')}</a></li>
                         </ul>
                     </div>
                     <div className="tabsContent moduleBody">
@@ -48,7 +48,7 @@ var Section = React.createClass({
                         </div>
                         <div data-tab="discussion" className="moduleWrapper">
                             <div className="primaryDetail">
-                                <h2 className="title">Discussion thread <span className="count">{data.discussion.count}</span></h2>
+                                <h2 className="title">{this.getIntlMessage('discussionThread')} <span className="count">{data.discussion.count}</span></h2>
                                 <div className="formElement">
                                     <form>
                                         <fieldset>
@@ -76,7 +76,7 @@ var Section = React.createClass({
 //*****************************************************************
 
 if (isNode) {
-    module.exports = Section; 
+    module.exports = Section;
 } else {
-    window.Section = Section;   
+    window.Section = Section;
 }

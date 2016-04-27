@@ -4,7 +4,7 @@ var isNode = typeof module !== 'undefined' && module.exports
   , ReactDOM = isNode ? require('react-dom') : window.ReactDOM
   , ReactIntl = isNode ? require('react-intl') : window.ReactIntl;
 
-    
+
 var IntlMixin = ReactIntl.IntlMixin;
 var FormattedMessage = ReactIntl.FormattedMessage;
 var FormattedDate = ReactIntl.FormattedDate;
@@ -12,20 +12,20 @@ var FormattedDate = ReactIntl.FormattedDate;
 var CourseQuickLinks = React.createClass({
     mixins: [IntlMixin],
     render: function () {
-        
+
         return (
             <ul className="courseQuickLinks clearfix">
                 <li className="sorting hide">
-                    {this.getIntlMessage('common.sortBy')}: <a href="#" data-val="popularity">{this.getIntlMessage('common.popularity')}</a>
+                    {this.getIntlMessage('sortBy')}: <a href="#" data-val="popularity">{this.getIntlMessage('popularity')}</a>
                     <ul className="options">
                         <li data-val="popularity">
-                            <a href="#">{this.getIntlMessage('common.popularity')}</a>
+                            <a href="#">{this.getIntlMessage('popularity')}</a>
                         </li>
                         <li data-val="date">
-                            <a href="#">{this.getIntlMessage('common.date')}</a>
+                            <a href="#">{this.getIntlMessage('date')}</a>
                         </li>
                         <li data-val="price">
-                            <a href="#">{this.getIntlMessage('common.price')}</a>
+                            <a href="#">{this.getIntlMessage('price')}</a>
                         </li>
                     </ul>
                 </li>
@@ -42,7 +42,7 @@ var CourseTutorials = React.createClass({
         return (
             <li>
                 <span className="no">{data}</span>
-                {this.getIntlMessage('common.tutorials')}
+                {this.getIntlMessage('tutorials')}
             </li>
         );
     }
@@ -56,7 +56,7 @@ var CourseClasses = React.createClass({
         return (
             <li>
                 <span className="no">{data}</span>
-                {this.getIntlMessage('common.classes')}
+                {this.getIntlMessage('classes')}
             </li>
         );
     }
@@ -70,7 +70,7 @@ var CourseTests = React.createClass({
         return (
             <li>
                 <span className="no">{data}</span>
-                {this.getIntlMessage('common.tests')}
+                {this.getIntlMessage('tests')}
             </li>
         );
     }
@@ -114,17 +114,17 @@ var CourseEnrollees = React.createClass({
     render: function () {
         var data = this.props.data;
         if(data === undefined) data = [];
-       
+
         var enrolleeString = '';
         var hasHaveEnrolled = '';
         if(data.length == 0){
             enrolleeString = 'no one has enrolled';
         }else if (data.length < 2) {
             enrolleeString = data[0];
-            hasHaveEnrolled = this.getIntlMessage('course.hasEnrolled');
+            hasHaveEnrolled = this.getIntlMessage('hasEnrolled');
         } else {
-            enrolleeString = data[0] + ' ' + this.getIntlMessage('common.and') + ' ' + (data.length - 1) + ' ' + this.getIntlMessage('common.others') + ' ';
-            hasHaveEnrolled = this.getIntlMessage('course.haveEnrolled');
+            enrolleeString = data[0] + ' ' + this.getIntlMessage('and') + ' ' + (data.length - 1) + ' ' + this.getIntlMessage('others') + ' ';
+            hasHaveEnrolled = this.getIntlMessage('haveEnrolled');
         }
 
         return (
@@ -143,7 +143,7 @@ var CourseListItem = React.createClass({
 
         var priceText = data.price;
         if (data.price == 0) {
-            priceText = this.getIntlMessage('common.free');
+            priceText = this.getIntlMessage('free');
         }
 
         return (
@@ -165,9 +165,9 @@ var CourseListItem = React.createClass({
                     <h2><a href={data.courseDetailLink}>{data.title}</a></h2>
                     <ul className="placed">
                         <li>
-                            {this.getIntlMessage('course.liveFor')} {data.liveFor} {this.getIntlMessage('common.week')}
+                            {this.getIntlMessage('liveFor')} {data.liveFor} {this.getIntlMessage('week')}
                             <span className="date">
-                                {this.getIntlMessage('course.publishedDate')}: <FormattedDate value={data.publishDate} format='short' />
+                                {this.getIntlMessage('publishedDate')}: <FormattedDate value={data.publishDate} format='short' />
                             </span>
                         </li>
                     </ul>
@@ -179,7 +179,7 @@ var CourseListItem = React.createClass({
                             <CourseEnrollees data={data.enrollees}/>
                             {priceText}
                         </li>
-                        <li className="cta wired"><a href="#">{this.getIntlMessage('common.learnMore')}</a></li>
+                        <li className="cta wired"><a href="#">{this.getIntlMessage('learnMore')}</a></li>
                     </ul>
                 </div>
             </li>
@@ -192,7 +192,7 @@ var ViewMore = React.createClass({
     render: function () {
         return (
             <div className="cta wired">
-                <a href="#">{this.getIntlMessage('common.viewMore')}</a>
+                <a href="#">{this.getIntlMessage('viewMore')}</a>
             </div>
         );
     }
@@ -216,7 +216,7 @@ var Section = React.createClass({
             <section id="courseListing" className="moduleBody" >
                 <div className="moduleWrapper" >
                     <CourseQuickLinks />
-                    <ul className="courseList" onClick={this.onclickhandler}>                       
+                    <ul className="courseList" onClick={this.onclickhandler}>
                         {courseItems}
                     </ul>
                     <ViewMore />
@@ -228,17 +228,17 @@ var Section = React.createClass({
 
 
 if (isNode) {
-    module.exports = Section; 
+    module.exports = Section;
 } else {
     window.Section = Section;
    /* var componentName = 'cCourses_cCourseList';
-    
+
     var dataName = eval('var_' + componentName);
     var lokk = eval('localkk')
     var mekk = eval('messkk');
     var fokk = eval('formkk');
-    
-    ReactDOM.render(<Section data={dataName} messages={mekk} formats={fokk} locales={lokk} />, 
+
+    ReactDOM.render(<Section data={dataName} messages={mekk} formats={fokk} locales={lokk} />,
         document.getElementById('container_'+componentName));*/
 
 }

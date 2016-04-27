@@ -7,7 +7,7 @@ var bodyParser      = require('body-parser');
 var winston         = require('winston');
 var winston_graylog = require('winston-graylog2');
 //var config = require('./core/config/config');
-var i18n            = require('./core/i18n'); 
+var i18n            = require('./core/i18n');
 
 winston.setLevels(winston.config.syslog.levels);
 //{ emerg: 0, alert: 1, crit: 2, error: 3, warning: 4, notice: 5, info: 6, debug: 7 }
@@ -28,7 +28,7 @@ var graylog_options   = {
                             servers: [{ host: '192.168.17.187', port: 5555 }],
                             facility: "WizIq_Caferno"
                           }
-}; 
+};
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, console_options )
 winston.add(winston.transports.File, file_options );
@@ -83,8 +83,8 @@ app.use(function(req, res, next) {
 // will print stacktrace
 //global.env =  'dev';
 
-var language = new i18n('en-US');
-//var language = new i18n('ar-AE');
+//var language = new i18n('en-US');
+var language = new i18n('ar-AE');
 
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
