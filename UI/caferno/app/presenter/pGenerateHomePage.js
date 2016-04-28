@@ -78,7 +78,7 @@ PresenterPrelogin.prototype.generateScreenFromComponents = function(){
 
         var props = eachComponent.rawdata;
         
-        //console.log(eachComponent.varName);
+        //console.log(eachComponent.name);
         var componentParentPath = eachComponent.component_path ? eachComponent.component_path + '/' : '';
         var componentPath = componentParentPath + eachComponent.component;
         var component = '../components/' + componentPath;
@@ -94,8 +94,8 @@ PresenterPrelogin.prototype.generateScreenFromComponents = function(){
                                 formats: localeJson.formats
                             };
         //if(eachComponent.compId === 'HEADER'){
-            var data =  '<div id="'+compoStr+'">'+_.ReactDOMServer.renderToString(JSXcourses(dataAndLocale))+'</div>';
-
+            //var data =  '<div id="'+compoStr+'">'+_.ReactDOMServer.renderToString(JSXcourses(dataAndLocale))+'</div>';
+            //console.log(eachComponent.compId)
             var clientSideData =  "";
             if(eachComponent.loadFromClientSide) {
                 clientSideData =  _.setDataForJSX(var_pagedata, props)
