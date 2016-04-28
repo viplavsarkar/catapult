@@ -32,7 +32,8 @@ router.get('/:id', function(req, res, next) {
 
     winston.info("request at /courses", {url:'/courses'});
     console.log('Course Detail Page: ' + new Date().toISOString());
-    var fCourses        = require('../app/pages/pCourses/pCourseDetail.js');
+    //var fCourses        = require('../app/pages/pCourses/pCourseDetail.js');
+    var fCourses        = require('../app/pages/pCourses/pCourseDetailNew.js');
     var bCourses        = new fCourses(req, res, next);
     bCourses.query      = req.query;
     bCourses.controller = controllerName;

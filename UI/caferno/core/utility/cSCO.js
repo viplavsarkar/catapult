@@ -62,6 +62,14 @@ cSCO.prototype.getComponent = function(){
 	            _.varName
 	        )
 			break;
+		case CONST.COURSE_DETAIL_NEW:
+			return new Comp('cCourses_cCourseDetailNew.jsx', null , true, "cCourses", null, 
+	            {
+	                 url: ORCH.courseDetailNew
+	            },
+	            _.varName
+	        )
+			break;
 		case CONST.CLASS_LIST:
 			return new Comp('cWebinars_testList.jsx', null , false, "cWebinars", null, 
 	            {
