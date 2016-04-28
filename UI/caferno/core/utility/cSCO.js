@@ -17,7 +17,7 @@ cSCO.prototype.getComponent = function(){
 		case CONST.HEADER:
 			return new Comp('cHeader_header.jsx', null, false, "cHeader", null, 
 	            {
-	                url: ORCH.header
+	                url: ORCH.header + _.params.subDomainUrl + '/'
 	            },
 	            _.varName
 	        );
@@ -31,7 +31,7 @@ cSCO.prototype.getComponent = function(){
 	        );
 			break;
 		case CONST.DISCOVER:
-			return new Comp('cDiscover_discover.jsx', null, false, null, null, 
+			return new Comp('cDiscover_discover.jsx', null, true, null, null, 
 	            {
 	                url: ORCH.discover + "espId="+_.params.espId+"&pageSize=20"
 	            },
@@ -41,7 +41,7 @@ cSCO.prototype.getComponent = function(){
 		case CONST.DISCOVER_BANNER:
 			return new Comp('cDiscover_banner.jsx', null, false, null, null, 
 	            {
-	                url: ORCH.discoverBanner
+	                url: ORCH.discoverBanner + _.params.subDomainUrl + '/'
 	            },
 	            _.varName 
 	        );

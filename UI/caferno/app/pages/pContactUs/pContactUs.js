@@ -4,7 +4,7 @@ var CompObj         = require('../../../core/utility/cSCO.js');
 var CONST           = require('../../../core/constants/components.js');
 //var winston = require('winston');
 
-var PSamplePage = function(req, res, next){
+var PContactPage = function(req, res, next){
     this.req    = req;
     this.res    = res;
     this.next   = next;
@@ -16,25 +16,33 @@ var PSamplePage = function(req, res, next){
     this.pageData   = {};
 };
 
+PContactPage.prototype.getScreen = function(){
+    var Helper          = require('../../../core/utility/hHelper.js');
+    var _ = this;
+    var academyUrl = global.academy.url;
+    var callback =  function(da){_.getScreenComponentsAndData(da)};
+    var espId = new Helper(callback).getEspId(academyUrl);
+    console.log("espId >");
+    console.log(espId);
+}
 
-
-PSamplePage.prototype.getScreen = function(){
+PContactPage.prototype.getScreenComponentsAndData = function(academyInfo){
     var _ = this;
 
-    var hUnitTestData = require('../../../core/helper/hUnitTestData.js');
-    var hTestData = new hUnitTestData();
+    var espId = academyInfo.id;
+    var academyUrl = academyInfo.subDomainUrl;
 
     //set the template to use
     _.template = 'tContactUs.ejs';
     
     //add the header
-    _.components.push(new CompObj(CONST.HEADER,{}, null).getComponent());
+    _.components.push(new CompObj(CONST.HEADER,             {subDomainUrl:academyUrl}, null).getComponent());
   
     //add the react component to add in the page
-    _.components.push(new CompObj(CONST.CONTACT_US,{}).getComponent());
+    _.components.push(new CompObj(CONST.CONTACT_US,         {}).getComponent());
    
     //add the footer
-    _.components.push(new CompObj(CONST.FOOTER,{}).getComponent());
+    _.components.push(new CompObj(CONST.FOOTER,             {espId:espId}).getComponent());
    
     _.pageData = {};
 
@@ -42,11 +50,11 @@ PSamplePage.prototype.getScreen = function(){
     _.generatePage();
 }
 
-PSamplePage.prototype.generatePage = function(){
+PContactPage.prototype.generatePage = function(){
     var _this = this;
     //winston.info("PCourses:getCoursesScreen()", {url:this.controller, page:'pCourse.js', components:['cCourseList.jsx']});
     _this.presenter.controller = _this.controller;
     _this.presenter.getCoursesScreenActual(_this.template, _this.components, _this.pageData);
 }
 
-module.exports = PSamplePage;
+module.exports = PContactPage;

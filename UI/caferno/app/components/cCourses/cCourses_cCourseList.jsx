@@ -145,8 +145,8 @@ var CourseListItem = React.createClass({
         if (data.price == 0) {
             priceText = this.getIntlMessage('free');
         }
-        var courseLogo = "//" + data.courseLogo;
-        var tutorLogo = "//" + data.tutor.logo;
+        var courseLogo = data.courseLogo;
+        var tutorLogo = data.tutor.logo;
         var courseDetailLink = "course/" + data.courseDetailLink;
         return (
             <li className="item clearfix">

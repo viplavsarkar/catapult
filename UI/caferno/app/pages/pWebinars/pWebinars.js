@@ -16,25 +16,35 @@ var PCourses = function(req, res, next){
     this.pageData   = {};
 };
 
-
-
 PCourses.prototype.getScreen = function(){
+    var Helper          = require('../../../core/utility/hHelper.js');
+    var _ = this;
+    var academyUrl = "preportal.wiziq.authordm.com";
+    academyUrl = "kabza.wiziq.authordm.com";
+    academyUrl = "newjon.wiziq.authordm.com";
+    academyUrl = global.academy.url;
+    var callback =  function(da){_.getScreenComponentsAndData(da)};
+    var espId = new Helper(callback).getEspId(academyUrl);
+    console.log("espId >");
+    console.log(espId);
+}
+
+PCourses.prototype.getScreenComponentsAndData = function(academyInfo){
     var _ = this;
 
-    var hUnitTestData = require('../../../core/helper/hUnitTestData.js');
-    var hTestData = new hUnitTestData();
-
+    var espId = academyInfo.id;
+    var academyUrl = academyInfo.subDomainUrl;
     //set the template to use
     _.template = 'tWebinars.ejs';
     
             //add the header
-    _.components.push(new CompObj(CONST.HEADER,{}, null).getComponent());
+    _.components.push(new CompObj(CONST.HEADER,             {subDomainUrl:academyUrl}, null).getComponent());
   
     //add the react component to add in the page
-    _.components.push(new CompObj(CONST.CLASS_LIST,{}).getComponent());   
+    _.components.push(new CompObj(CONST.CLASS_LIST,         {espId:espId}).getComponent());   
    
     //add the footer
-    _.components.push(new CompObj(CONST.FOOTER,{}).getComponent());
+    _.components.push(new CompObj(CONST.FOOTER,             {espId:espId}).getComponent());
 
     _.pageData = {};
 

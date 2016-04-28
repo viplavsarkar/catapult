@@ -32,19 +32,16 @@ PDiscover.prototype.getScreen = function(){
 PDiscover.prototype.getScreenComponentsAndData = function(academyInfo){
     var _ = this;
 
-    var hUnitTestData = require('../../../core/helper/hUnitTestData.js');
-    var hTestData = new hUnitTestData();
-
     var espId = academyInfo.id;
-
+    var academyUrl = academyInfo.subDomainUrl;
     //set the template to use
     _.template = 'tDiscover.ejs';
     
-        //add the header
-    _.components.push(new CompObj(CONST.HEADER,             {espId:espId}, null).getComponent());
+    //add the header
+    _.components.push(new CompObj(CONST.HEADER,             {subDomainUrl:academyUrl}, null).getComponent());
   
     //add the react component to add in the page
-    _.components.push(new CompObj(CONST.DISCOVER_BANNER,    {espId:espId}).getComponent());
+    _.components.push(new CompObj(CONST.DISCOVER_BANNER,    {subDomainUrl:academyUrl}).getComponent());
     _.components.push(new CompObj(CONST.DISCOVER,           {espId:espId}).getComponent());
    
     //add the footer

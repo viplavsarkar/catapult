@@ -1,5 +1,4 @@
 require('babel-core/register');
-
 var async = require("async");
 var httpHandler = require('../../core/http/httpHandler.js');
 
@@ -31,7 +30,7 @@ PresenterPrelogin.prototype.getScreenData = function(reqArr){
             for(var i = 0; i < _.components.length; i++){
                 _.components[i].rawdata = data[i];
             }
-            _.getCoursesScreenActualPage();
+            _.generateScreenFromComponents();
         }
     );
 }
@@ -55,7 +54,7 @@ PresenterPrelogin.prototype.getCoursesScreenActual = function(template, componen
     _.getScreenData(reqArr);
 }
 
-PresenterPrelogin.prototype.getCoursesScreenActualPage = function(){
+PresenterPrelogin.prototype.generateScreenFromComponents = function(){
    
     var _ = this; 
    
@@ -78,6 +77,7 @@ PresenterPrelogin.prototype.getCoursesScreenActualPage = function(){
         var eachComponent = _.components[i];
 
         var props = eachComponent.rawdata;
+        
         //console.log(eachComponent.varName);
         var componentParentPath = eachComponent.component_path ? eachComponent.component_path + '/' : '';
         var componentPath = componentParentPath + eachComponent.component;

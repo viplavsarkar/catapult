@@ -11,7 +11,8 @@ var FormattedDate = ReactIntl.FormattedDate;
 var HeaderLogo = React.createClass({
     render: function () {
         var data = this.props.data;
-        var logo = "asset/image/logo.jpg";
+        var logo = data.logo;// "asset/image/logo.jpg";
+        console.log(logo);
         return (
             <figure className="logo">
                 <img src={logo} alt={data.academyName} />

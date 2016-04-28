@@ -44,12 +44,15 @@ var EachSection = React.createClass({
     mixins: [IntlMixin],
     render: function(){
         var data = this.props.data;
-
-        var dataCourseLogo = '//' + data.courseLogo;
+        var rowClassName = "item";
+        if(this.props.shouldHide === "hide"){
+            rowClassName = "item hide"
+        }
+        var dataCourseLogo = data.courseLogo;
         var courseDetailLink = "course/" + data.courseDetailLink;
 
         return(
-             <li className="item">
+             <li className={rowClassName}>
                 <div className="innerContent">
                     <figure>
                         <a href="#">
@@ -79,13 +82,33 @@ var ViewMoreButton = React.createClass({
 });
 
 var DiscoverSection = React.createClass({
+    getInitialState: function() {
+        return {shownow: false};
+    },
     mixins: [IntlMixin],
+    onclickhandler: function(ev){
+        this.setState({shownow: !this.state.shownow});
+        //alert('hi');
+    },
     render: function () {
+        var _ = this;
+        var viewMoreBtnClassName = _.state.shownow ? 'cta wired hide' : 'cta wired';
         var data = this.props.data.result;
-
+        var count = 0;
         var itemList = data.map(function(eachItem){
+            count++;
+            var shouldHide = 'show';
+            if(count > 16) {         
+                if(_.state.shownow){
+                    shouldHide = 'show'
+                }else{
+                    shouldHide = 'hide';
+                }
+            }
+            //var    shouldHide = eval({'s'});
+
             return (
-                     <EachSection key={eachItem.courseId} data={eachItem} />
+                     <EachSection key={eachItem.courseId} data={eachItem} shouldHide={shouldHide} />
                 )
         });
         return (
@@ -96,8 +119,8 @@ var DiscoverSection = React.createClass({
                        {itemList}
                     </ul>
 
-                    <div className="cta wired">
-                        <a href="#">{this.getIntlMessage('viewMore')}</a>
+                    <div className={viewMoreBtnClassName} onClick={this.onclickhandler}>
+                        <a href="javascript:void();">{this.getIntlMessage('viewMore')}</a>
                     </div>
                 </div>
             </section>
@@ -113,14 +136,5 @@ if (isNode) {
     module.exports = DiscoverSection;
 } else {
     window.Section = DiscoverSection;
-    /*
-    var componentName = 'cSample_file';
-
-    var dataName = eval('var_' + componentName);
-    var lokk = eval('localkk')
-    var mekk = eval('messkk');
-    var fokk = eval('formkk');
-
-    ReactDOM.render(<Section data={dataName} messages={mekk} formats={fokk} locales={lokk} />, document.getElementById('container_'+componentName));
-    */
+ 
 }

@@ -39,12 +39,13 @@ PCourses.prototype.getScreenComponentsAndData = function(academyInfo){
     var hTestData = new hUnitTestData();
     
     var espId = academyInfo.id;
+    var academyUrl = academyInfo.subDomainUrl;
 
     //set the template to use
     _.template = 'tCourseList.ejs';
     
     //add the header   
-    _.components.push(new CompObj(CONST.HEADER,         {espId:espId}, null).getComponent());
+    _.components.push(new CompObj(CONST.HEADER,         {subDomainUrl:academyUrl}, null).getComponent());
 
     _.components.push(new CompObj(CONST.COURSE_LIST,    {espId:espId}).getComponent());
     
