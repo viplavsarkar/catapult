@@ -15,7 +15,7 @@ HttpHandler.prototype.getMethodForAsynch = function(merhodName){
 			case "SIMPLE_REST":
 				_.SIMPLE_REST();
 				break;
-			default: 
+			default:
 				_.reqObj.callback(error);
 				break;
 		}
@@ -26,7 +26,7 @@ HttpHandler.prototype.getMethodForAsynch = function(merhodName){
 
 HttpHandler.prototype.SIMPLE_REST = function(){
     var _ = this;
-    
+
     var dateTimeNow = new Date();
     var startTime = new Date().getTime();
     console.log(dateTimeNow + '(' + startTime + ')');
@@ -36,10 +36,10 @@ HttpHandler.prototype.SIMPLE_REST = function(){
         _.callback(null,{});
     }else{
         request({
-            url: _.reqObj.url, 
-            qs: {from: 'caferno', time: +new Date()}, 
-            method: 'GET', 
-            headers: { 
+            url: _.reqObj.url,
+            qs: {from: 'caferno', time: +new Date()},
+            method: 'GET',
+            headers: {
                 'Content-Type': 'MyContentType',
                 'Custom-Header': 'Custom Value'
             }
@@ -49,7 +49,7 @@ HttpHandler.prototype.SIMPLE_REST = function(){
                 _.callback(error);
                 return;
             } else {
-                
+
                 console.log('RESPONSE: ' + _.reqObj.url);
                 var dateTimeNow = new Date();
                 var endTime = dateTimeNow.getTime();
@@ -61,7 +61,7 @@ HttpHandler.prototype.SIMPLE_REST = function(){
                 //console.log(response.statusCode, body);
                 var bodyObj = JSON.parse(body);
 
-                _.callback(null, bodyObj.data);          
+                _.callback(null, bodyObj.data);
             }
         });
     }

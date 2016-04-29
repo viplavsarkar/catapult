@@ -195,8 +195,8 @@ var ViewMore = React.createClass({
     mixins: [IntlMixin],
     render: function () {
         return (
-            <div className="cta wired">
-                <a href="#">{this.getIntlMessage('viewMore')}</a>
+            <div className="cta wired" onClick={this.props.clickHandler}>
+                <a href="">{this.getIntlMessage('viewMore')}</a>
             </div>
         );
     }
@@ -204,12 +204,62 @@ var ViewMore = React.createClass({
 
 var Section = React.createClass({
     mixins: [IntlMixin],
-    onclickhandler: function(ev){
-        alert('hi');
+    getInitialState: function () {
+        return {
+            meta: {},
+            data: []
+        };
+    },
+    componentWillMount: function () {
+        this.setState({
+            meta: this.props.data.meta,
+            data: this.props.data.result
+        });
+    },
+    viewMoreClickHandler: function (event) {
+        event.preventDefault();
+        var payload = {};
+        var _this = this;
+        try {
+            payload.page = (_this.state.meta.page + 1);
+            payload.pageSize = _this.state.meta.pageSize;
+        } catch (ex) {
+            console.log("Exception inside viewMoreClickHandler: " + ex);
+        }
+
+        if (payload) {
+            $.ajax({
+                url: '',
+                data: {payload: payload},
+                cache: false,
+                dataType: 'json',
+                contentType: "application/json",
+                type: 'GET',
+                success: function (response) {
+                    try {
+                        var state = {
+                            meta: _this.state.meta,
+                            data: _this.state.data
+                        };
+
+                        state.data = state.data.concat(response.result);
+                        state.meta = response.meta;
+
+                        _this.setState(state);
+                    } catch (ex) {
+                        console.log('Exception inside viewMoreClickHandler ajax success: ' + ex.message);
+                    }
+                },
+                error: function (xhr, status, err) {
+                    console.log('Exception inside viewMoreClickHandler ajax error: ' + err);
+                }
+            });
+        }
     },
     render: function () {
-        var data = this.props.data.result;
-        //var locality = this.props.messages;
+        var data = this.state.data;
+        var meta = this.state.meta;
+
         var courseItems = data.map(function (courseItem) {
             return (
                 <CourseListItem key={courseItem.courseId} data={courseItem} />
@@ -220,10 +270,10 @@ var Section = React.createClass({
             <section id="courseListing" className="moduleBody" >
                 <div className="moduleWrapper" >
                     <CourseQuickLinks />
-                    <ul className="courseList" onClick={this.onclickhandler}>
+                    <ul className="courseList">
                         {courseItems}
                     </ul>
-                    <ViewMore />
+                    <ViewMore data={meta} clickHandler={this.viewMoreClickHandler}/>
                 </div>
             </section>
         );

@@ -2,6 +2,8 @@ var path = require('path');
 
 var config = config || {};
 
+config.env = process.env.NODE_ENV || 'development';
+
 //config.views = path.join(__dirname, '..', 'views');
 config.i18n = path.join(__dirname, '..', 'i18n');
 //config.clientApp = path.join(__dirname, '..', '..', 'client');

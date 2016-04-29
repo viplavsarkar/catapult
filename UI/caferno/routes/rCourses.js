@@ -10,13 +10,23 @@ var winston         = require('winston');
 router.get('/', function(req, res, next) {
 
     winston.info("request at /courses", {url:'/courses'});
-
     var fCourses        = require('../app/pages/pCourses/pCourses.js');
     var bCourses        = new fCourses(req, res, next);
-    bCourses.query      = req.query;
-    bCourses.controller = controllerName;
-    //bCourses.getCoursesScreenNew();
-    bCourses.getScreen();
+
+    if (req.get('Content-Type') === 'application/json') {
+        try {
+            var payload = req.query.payload;
+            payload.espId = global.academy.espId;
+            bCourses.getPageJson(payload);
+        } catch (ex) {
+            console.log(ex);
+        }
+    } else {
+        bCourses.query      = req.query;
+        bCourses.controller = controllerName;
+        //bCourses.getCoursesScreenNew();
+        bCourses.getScreen();
+    }
 });
 
 router.get('/bundle.js', function(req, res, next){
