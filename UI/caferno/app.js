@@ -1,8 +1,10 @@
 var express         = require('express');
 var path            = require('path');
+var config          = require('./core/config/config');
 var favicon         = require('serve-favicon');
 //var logger          = require('morgan');
 var cookieParser    = require('cookie-parser');
+var cookies          = require('./core/middlewares/cookie');
 var bodyParser      = require('body-parser');
 var winston         = require('winston');
 var winston_graylog = require('winston-graylog2');
@@ -57,6 +59,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app/components')));
+app.use(express.static(path.join(__dirname, 'html')));
+
+global.academy = {
+  url: 'preportal.wiziq.authordm.com'
+};
+
+cookies(app);
 
 //app.use('/',                routes);
 app.use('/publiccourse',    courses);
@@ -85,12 +94,11 @@ app.use(function(req, res, next) {
 
 var language = new i18n('en-US');
 //var language = new i18n('ar-AE');
-global.academy = {url:'taru.wiziq.authordm.com'}
-//global.academy = {url:'preportal.wiziq.authordm.com'}
+
 //global.academy = {url:'newjon.wiziq.authordm.com'}
 //global.academy = {url:'kabza.wiziq.authordm.com'}
 
-if (app.get('env') === 'development') {
+if (config.env === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {

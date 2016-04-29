@@ -69,8 +69,61 @@ var EachWebinarRoww = React.createClass({
 });
 var Section = React.createClass({
     mixins: [IntlMixin],
+    getInitialState: function () {
+        return {
+            meta: {},
+            data: []
+        };
+    },
+    componentWillMount: function () {
+        this.setState({
+            meta: this.props.data.meta,
+            data: this.props.data.result
+        });
+    },
+    viewMoreClickHandler: function (event) {
+        event.preventDefault();
+
+        var payload = {};
+        var _this = this;
+        try {
+            payload.page = (_this.state.meta.page + 1);
+            payload.pageSize = _this.state.meta.pageSize;
+        } catch (ex) {
+            console.log("Exception inside viewMoreClickHandler: " + ex);
+        }
+
+        if (payload) {
+            $.ajax({
+                url: '',
+                data: { payload: payload },
+                cache: false,
+                dataType: 'json',
+                contentType: "application/json",
+                type: 'GET',
+                success: function (response) {
+                    try {
+                        var state = {
+                            meta: _this.state.meta,
+                            data: _this.state.data
+                        };
+
+                        state.data = state.data.concat(response.result);
+                        state.meta = response.meta;
+
+                        _this.setState(state);
+                    } catch (ex) {
+                        console.log('Exception inside viewMoreClickHandler ajax success: ' + ex.message);
+                    }
+                },
+                error: function (xhr, status, err) {
+                    console.log('Exception inside viewMoreClickHandler ajax error: ' + err);
+                }
+            });
+        }
+    },
     render: function () {
-        var data = this.props.data.result;
+        var data = this.state.data;
 
         var itemList = data.map(function(eachItem){
             return (
@@ -100,7 +153,7 @@ var Section = React.createClass({
                     <ul className="courseList webinar">
                        {itemList}
                     </ul>
-                    <div className="cta wired">
+                    <div className="cta wired" onClick={this.viewMoreClickHandler}>
                         <a href="#">{this.getIntlMessage('viewMore')}</a>
                     </div>
                 </div>

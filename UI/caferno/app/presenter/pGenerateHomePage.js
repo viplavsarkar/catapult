@@ -20,7 +20,7 @@ var PresenterPrelogin = function(req, res, next){
 
 PresenterPrelogin.prototype.getScreenData = function(reqArr){
     var _ = this;
-  
+
     async.parallel(reqArr, function(err, data){
             if(err){
                 console.log('err = ')
@@ -37,7 +37,7 @@ PresenterPrelogin.prototype.getScreenData = function(reqArr){
 
 PresenterPrelogin.prototype.getCoursesScreenActual = function(template, components, pageData){
     var _ = this;
-    
+
     _.template = template;
     _.components =  components;
     _.pageData = pageData;
@@ -55,11 +55,11 @@ PresenterPrelogin.prototype.getCoursesScreenActual = function(template, componen
 }
 
 PresenterPrelogin.prototype.generateScreenFromComponents = function(){
-   
-    var _ = this; 
-   
+
+    var _ = this;
+
     var params = {};
-    var localeJson = {                           
+    var localeJson = {
                         messages: global.messages[global.language],
                         locales: global.language.culture,
                         formats: {
@@ -77,7 +77,9 @@ PresenterPrelogin.prototype.generateScreenFromComponents = function(){
         var eachComponent = _.components[i];
 
         var props = eachComponent.rawdata;
-        
+        if (props)
+            props.srcUrl = eachComponent.reqObj.url;
+
         //console.log(eachComponent.name);
         var componentParentPath = eachComponent.component_path ? eachComponent.component_path + '/' : '';
         var componentPath = componentParentPath + eachComponent.component;
@@ -86,7 +88,7 @@ PresenterPrelogin.prototype.generateScreenFromComponents = function(){
         var var_pagedata = 'var_' +componentName;
         var compoStr = 'container_' + componentName;
         var dataOfComponent = "data_of_" + eachComponent.name;
-        var JSXcourses = _.React.createFactory(require(component));    
+        var JSXcourses = _.React.createFactory(require(component));
         var dataAndLocale = {
                                 data:props,
                                 messages:localeJson.messages,
@@ -102,16 +104,16 @@ PresenterPrelogin.prototype.generateScreenFromComponents = function(){
                                     + _.setJSXScript(componentPath)
                                     + _.setClientSideOfComponent(componentName);
             }
-            
+
             params[eachComponent.compId] =   '<div id="'+compoStr+'">'
                                             +   _.ReactDOMServer.renderToString(JSXcourses(dataAndLocale))
-                                            +'</div>' 
-                                            + '<div>' 
-                                            +   clientSideData 
+                                            +'</div>'
+                                            + '<div>'
+                                            +   clientSideData
                                             + '</div>';
         /*}else{
             params[eachComponent.name] = _.ReactDOMServer.renderToString(JSXcourses(dataAndLocale));
-            
+
             if(eachComponent.loadFromClientSide) {
                 params[dataOfComponent] = _.setDataForJSX(var_pagedata, props)
                                                     + _.setJSXScript(componentPath)
@@ -123,7 +125,7 @@ PresenterPrelogin.prototype.generateScreenFromComponents = function(){
         */
     }
     params.pageData = _.pageData;
-    
+
     params.RTL_CSS = this.setRTLStyleCss();
     _.res.render(_.template, params);
 
@@ -135,14 +137,14 @@ PresenterPrelogin.prototype.generateScreenFromComponents = function(){
     //console.log('('+timeTaken+' miliseconds)');
     console.log();
     //console.log(_.req)
-    console.log('#############    PAGE RENDERED IN : ('+timeTaken+' miliseconds)');    
+    console.log('#############    PAGE RENDERED IN : ('+timeTaken+' miliseconds)');
     console.log();
 }
 
-PresenterPrelogin.prototype.setLocales = function(languageJson){ 
+PresenterPrelogin.prototype.setLocales = function(languageJson){
     var str = '';
         //str += "<link rel='stylesheet/less' type='text/css' href='asset/style/rtlCustom.less'>";
-        str += "<script type='text/javascript'>var localkk="+JSON.stringify(languageJson.locales)+"</script>"; 
+        str += "<script type='text/javascript'>var localkk="+JSON.stringify(languageJson.locales)+"</script>";
         str += "<script type='text/javascript'>var formkk=JSON.parse('"+JSON.stringify(languageJson.formats)+"')</script>"
         str += "<script type='text/javascript'>var messkk=JSON.parse('"+JSON.stringify(languageJson.messages)+"')</script>";
 
@@ -155,19 +157,19 @@ PresenterPrelogin.prototype.setDataForJSX = function(varName, props){
 };
 
 PresenterPrelogin.prototype.setJSXScript = function(component){
-        return '<script src="/'+component+'" type="text/babel"></script>';   
+        return '<script src="/'+component+'" type="text/babel"></script>';
 };
 
 PresenterPrelogin.prototype.setClientSideOfComponent = function(componentName){
     var str = '';
-    str += "<script type='text/babel'>";   
-    var dataName = 'var_' + componentName;  
+    str += "<script type='text/babel'>";
+    var dataName = 'var_' + componentName;
     var compoStr = 'container_' + componentName;
     var secString = 'Section';
-   
+
     str += "ReactDOM.render(<"+secString+" data={"+dataName+"}";
     str += " messages={messkk} formats={formkk} locales={localkk}/>,"+compoStr+");";
-    str += "</script>"; 
+    str += "</script>";
 
     return str;
 };
@@ -181,10 +183,10 @@ PresenterPrelogin.prototype.setClientSideOfComponent_old = function(componentNam
     str += "var lokk = eval('localkk');";
     str += "var mekk = eval('messkk');";
     str += "var fokk = eval('formkk');";
-    
+
     str += "ReactDOM.render(<Section data={dataName} messages={mekk} formats={fokk} locales={lokk}/>, document.getElementById('container_'+componentName));";
 
-    str += "</script>"; 
+    str += "</script>";
 
     return str;
 };

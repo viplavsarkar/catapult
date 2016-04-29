@@ -1,0 +1,25 @@
+{
+  "name": "anewbegining",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Ashutosh Dhundhara <ashutoshd@wiziq.com>",
+    "Biplab Sarkar <biplab@wiziq.com>"
+  ],
+  "license": "",
+  "homepage": "https://github.com/viplavsarkar/catapult",
+  "moduleType": [
+    "globals"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.2.3"
+  }
+}

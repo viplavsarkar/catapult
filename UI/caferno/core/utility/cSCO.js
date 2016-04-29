@@ -15,7 +15,7 @@ cSCO.prototype.getComponent = function(){
 	//console.log(_.component);
 	switch(_.component){
 		case CONST.HEADER:
-			return new Comp('cHeader_header.jsx', null, false, "cHeader", null, 
+			return new Comp('cHeader_header.jsx', null, false, "cHeader", null,
 	            {
 	                url: ORCH.header + _.params.subDomainUrl + '/'
 	            },
@@ -23,39 +23,39 @@ cSCO.prototype.getComponent = function(){
 	        );
 			break;
 		case CONST.FOOTER:
-			return new Comp('cFooter_footer.jsx', null, false, null, null, 
+			return new Comp('cFooter_footer.jsx', null, false, null, null,
 	            {
 	                url: ORCH.footer
 	            },
-	            _.varName 
+	            _.varName
 	        );
 			break;
 		case CONST.DISCOVER:
-			return new Comp('cDiscover_discover.jsx', null, true, null, null, 
+			return new Comp('cDiscover_discover.jsx', null, true, null, null,
 	            {
 	                url: ORCH.discover + "espId="+_.params.espId+"&pageSize=20"
 	            },
-	            _.varName 
+	            _.varName
 	        );
 			break;
 		case CONST.DISCOVER_BANNER:
-			return new Comp('cDiscover_banner.jsx', null, false, null, null, 
+			return new Comp('cDiscover_banner.jsx', null, false, null, null,
 	            {
 	                url: ORCH.discoverBanner + _.params.subDomainUrl + '/'
 	            },
-	            _.varName 
+	            _.varName
 	        );
 			break;
 		case CONST.COURSE_LIST:
-			return new Comp('cCourses_cCourseList.jsx', null , false, "cCourses", null, 
+			return new Comp('cCourses_cCourseList.jsx', null , true, "cCourses", null,
 	            {
-	                 url: ORCH.courseList + "espId="+_.params.espId+"&pageSize=20"
+	                 url: ORCH.courseList + "espId="+_.params.espId+"&page=0&pageSize=20"
 	            },
 	            _.varName
 	        )
 			break;
 		case CONST.COURSE_DETAIL:
-			return new Comp('cCourses_cCourseDetail.jsx', null , false, "cCourses", null, 
+			return new Comp('cCourses_cCourseDetail.jsx', null , false, "cCourses", null,
 	            {
 	                 url: ORCH.courseDetail + _.params.courseId
 	            },
@@ -63,23 +63,23 @@ cSCO.prototype.getComponent = function(){
 	        )
 			break;
 		case CONST.COURSE_DETAIL_NEW:
-			return new Comp('cCourses_cCourseDetailNew.jsx', null , true, "cCourses", null, 
+			return new Comp('cCourses_cCourseDetailNew.jsx', null , true, "cCourses", null,
 	            {
 	                 url: ORCH.courseDetailNew
 	            },
 	            _.varName
 	        )
 			break;
-		case CONST.CLASS_LIST:		
-			return new Comp('cWebinars_testList.jsx', null , false, "cWebinars", null, 
+		case CONST.CLASS_LIST:
+			return new Comp('cWebinars_testList.jsx', null , true, "cWebinars", null,
 	            {
-	                 url: ORCH.classList + _.params.espId + "?pageSize=2&page=0"
+	                 url: ORCH.classList + _.params.espId + "?pageSize=10&page=0"
 	            },
 	            _.varName
 	        )
 			break;
 		case CONST.CLASS_DETAIL:
-			return new Comp('cWebinars_detail.jsx', null , false, "cWebinars", null, 
+			return new Comp('cWebinars_detail.jsx', null , false, "cWebinars", null,
 	            {
 	                 url: ORCH.classDetail+"webinar/detail/"+_.params.idClassMaster
 	            },
@@ -87,14 +87,14 @@ cSCO.prototype.getComponent = function(){
 	        )
 			break;
 		case CONST.CLASS_DETAIL_META:
-			return new Comp('cWebinars_detailMeta.jsx', null , false, "cWebinars", null, 
+			return new Comp('cWebinars_detailMeta.jsx', null , false, "cWebinars", null,
 	            {
 	                 url: ORCH.classDetailMeta
 	            },
 	            _.varName
 	        )
 	     case CONST.MOBILE_HEAD:
-			return new Comp('cMobileApp_mobileHead.jsx', null , false, "cMobileApp", null, 
+			return new Comp('cMobileApp_mobileHead.jsx', null , false, "cMobileApp", null,
 	            {
 	                 url: null
 	            },
@@ -102,7 +102,7 @@ cSCO.prototype.getComponent = function(){
 	        )
 			break;
 		case CONST.MOBILE_BODY:
-			return new Comp('cMobileApp_mobileBody.jsx', null , false, "cMobileApp", null, 
+			return new Comp('cMobileApp_mobileBody.jsx', null , false, "cMobileApp", null,
 	            {
 	                 url: null
 	            },
@@ -110,7 +110,7 @@ cSCO.prototype.getComponent = function(){
 	        )
 			break;
 		case CONST.CONTACT_US:
-			return new Comp('cContactUs_contactus.jsx', null , false, "cContactUs", null, 
+			return new Comp('cContactUs_contactus.jsx', null , false, "cContactUs", null,
 	            {
 	                 url: null
 	            },
@@ -118,7 +118,7 @@ cSCO.prototype.getComponent = function(){
 	        )
 			break;
 		case CONST.SIGN_IN:
-			return new Comp('cLogin_signin.jsx', null , false, "cLogin", null, 
+			return new Comp('cLogin_signin.jsx', null , false, "cLogin", null,
 	            {
 	                 url: null
 	            },
@@ -126,7 +126,7 @@ cSCO.prototype.getComponent = function(){
 	        )
 			break;
 		case CONST.SIGN_UP:
-			return new Comp('cLogin_signup.jsx', null , false, "cLogin", null, 
+			return new Comp('cLogin_signup.jsx', null , false, "cLogin", null,
 	            {
 	                 url: null
 	            },
