@@ -152,11 +152,11 @@ var WebinarDetailSummary = React.createClass({
                                         <ul className="placed">
                                             <li>
                                                 <span className="calenderDate">
-                                                	<FormattedDate value={data.classStart.date} day="numeric" />&#160;
+                                                	<FormattedDate value={data.classStart.date} day="2-digit" /><br/>
                                                 	<FormattedDate value={data.classStart.date} month="short" />
                                                 </span>
                                                 <FormattedDate value={data.classStart.date} year="numeric"/>&#160;
-                                                <FormattedTime value={data.classStart.date} />
+                                                <FormattedTime value={data.classStart.date} hour="2-digit" minute="2-digit" />
                                                 <span className="date">{data.classStart.status}</span>
                                                 
                                             </li>
