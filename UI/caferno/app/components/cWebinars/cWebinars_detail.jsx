@@ -8,6 +8,7 @@ var isNode = typeof module !== 'undefined' && module.exports
 var IntlMixin = ReactIntl.IntlMixin;
 var FormattedMessage = ReactIntl.FormattedMessage;
 var FormattedDate = ReactIntl.FormattedDate;
+var FormattedTime = ReactIntl.FormattedTime;
 
 //*****************************************************************
 //  YOUR CODE STARTS HERE
@@ -70,6 +71,63 @@ var ClassSchedule = React.createClass({
     }
 });
 
+var MetaDetail = React.createClass({
+    mixins: [IntlMixin],
+
+    render: function () {
+        var data = this.props.data;
+
+        return (
+             <section id="webinarsTabs">
+                    <div className="tabsHeadWrapper moduleBody">
+                        <ul className="tabsHead moduleWrapper clearfix">
+                            <li className="overview" data-tab="aboutClass"><a href="#">{this.getIntlMessage('aboutTheClass')}</a></li>
+                            <li className="host" data-tab="aboutHost"><a href="#">{this.getIntlMessage('aboutTheHost')}</a></li>
+                            <li className="discussion" data-tab="discussion"><a href="#">{this.getIntlMessage('discussion')}</a></li>
+                        </ul>
+                    </div>
+                    <div className="tabsContent moduleBody">
+                        <div data-tab="aboutClass" className="moduleWrapper">
+                            <div className="primaryDetail">
+                                <h2 className="title">{data.classTitle}</h2>
+                                <p className="hostedLang">{data.language}</p>
+                                <p>{data.description}</p>
+                            </div>
+                        </div>
+                        <div data-tab="aboutHost" className="moduleWrapper">
+                            <div className="primaryDetail">
+                                <h2 className="title">{data.tutor.name}</h2>
+                                <figure className="host">
+                                    <img src={data.tutor.profilePic} alt="" />
+                                    <figcaption>{data.tutor.name}</figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                        <div data-tab="discussion" className="moduleWrapper">
+                            <div className="primaryDetail">
+                                <h2 className="title">{this.getIntlMessage('discussionThread')} <span className="count">{/*data.discussion.count*/}0</span></h2>
+                                <div className="formElement">
+                                    <form>
+                                        <fieldset>
+                                            <ul className="fieldList">
+                                                <li className="field">
+                                                    <textarea placeholder="Have a question or want to say something? Post it here." name="thread" id="discussion" cols="30" rows="5"></textarea>
+                                                </li>
+                                                <li className="fieldBtn">
+                                                    <input className="cta filledOrng2" type="button" value="Post" />
+                                                </li>
+                                            </ul>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+        );
+    }
+});
+
 var WebinarDetailSummary = React.createClass({
     mixins: [IntlMixin],
     render: function () {
@@ -93,8 +151,14 @@ var WebinarDetailSummary = React.createClass({
                                     <div className="relatedOpt">
                                         <ul className="placed">
                                             <li>
-                                                <span className="calenderDate">{data.classStart.date}</span> {data.classStart.time}
+                                                <span className="calenderDate">
+                                                	<FormattedDate value={data.classStart.date} day="numeric" />&#160;
+                                                	<FormattedDate value={data.classStart.date} month="short" />
+                                                </span>
+                                                <FormattedDate value={data.classStart.date} year="numeric"/>&#160;
+                                                <FormattedTime value={data.classStart.date} />
                                                 <span className="date">{data.classStart.status}</span>
+                                                
                                             </li>
                                         </ul>
                                     </div>
@@ -102,7 +166,7 @@ var WebinarDetailSummary = React.createClass({
                                         <p>{data.classFixtures.status}</p>
                                         <div className="cta filledOrng2 inline">
                                             <a href={data.classFixtures.linkViewRecording}>{this.getIntlMessage('viewRecording')}</a>
-                                        </div>
+                                        </div>&#160;&#160;
                                         <div className="cta filledOrng2 inline">
                                             <a href={data.classFixtures.linkViewRecording}>{this.getIntlMessage('downloadRecording')}</a>
                                         </div>
@@ -140,6 +204,7 @@ var WebinarDetailSummary = React.createClass({
                             </li>
                         </ul>
                     </div>
+                    <MetaDetail data={data}/>
                 </section>
         );
     }
