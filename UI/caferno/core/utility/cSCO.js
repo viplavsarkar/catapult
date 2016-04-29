@@ -81,7 +81,7 @@ cSCO.prototype.getComponent = function(){
 		case CONST.CLASS_DETAIL:
 			return new Comp('cWebinars_detail.jsx', null , false, "cWebinars", null, 
 	            {
-	                 url: ORCH.classDetail
+	                 url: ORCH.classDetail+"webinar/detail/"+_.params.idClassMaster
 	            },
 	            _.varName
 	        )

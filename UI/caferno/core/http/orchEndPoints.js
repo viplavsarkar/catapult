@@ -17,7 +17,9 @@ o.courseDetailNew 	= o.root + "/catapultui/data/getTestDataOfCourseDetailNew.txt
 
 //classes
 o.classList  		= o.root + "/catapultui/data/getTestDataForWebinars.txt";
-o.classDetail 		= o.root + "/catapultui/data/getTestDataForWebinarDetail.txt";
+
+o.classDetail		= "http://192.168.17.186:8050/v1/class/";
+//o.classDetail 		= o.root + "/catapultui/data/getTestDataForWebinarDetail.txt";
 o.classDetailMeta	= o.root + "/catapultui/data/getTestDataForWebinarDetailMeta.txt";
 
 //discover

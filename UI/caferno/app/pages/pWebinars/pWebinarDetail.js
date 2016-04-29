@@ -14,6 +14,7 @@ var PCourses = function(req, res, next){
     this.template   = '';
     this.components = [];
     this.pageData   = {};
+    this.seoUrl = "";
 };
 
 PCourses.prototype.getScreen = function(){
@@ -31,9 +32,10 @@ PCourses.prototype.getScreen = function(){
 
 PCourses.prototype.getScreenComponentsAndData = function(academyInfo){
     var _ = this;
-
+	
     var espId = academyInfo.id;
-    var academyUrl = academyInfo.subDomainUrl;   
+    var academyUrl = academyInfo.subDomainUrl; 
+    var idClassMaster = _.seoUrl.split('-')[0];
     //set the template to use
     _.template = 'tWebinarDetail.ejs';
     
@@ -41,7 +43,7 @@ PCourses.prototype.getScreenComponentsAndData = function(academyInfo){
     _.components.push(new CompObj(CONST.HEADER,             {subDomainUrl:academyUrl}, null).getComponent());
   
     //add the react component to add in the page
-    _.components.push(new CompObj(CONST.CLASS_DETAIL,       {}).getComponent());
+    _.components.push(new CompObj(CONST.CLASS_DETAIL,       {idClassMaster:idClassMaster}).getComponent());
     _.components.push(new CompObj(CONST.CLASS_DETAIL_META,  {}).getComponent());
    
     //add the footer
