@@ -2,6 +2,8 @@ var HomePageType    = require('../../presenter/pGenerateHomePage.js');
 var Comp            = require('../../../core/utility/dComponent.js');
 var CompObj         = require('../../../core/utility/cSCO.js');
 var CONST           = require('../../../core/constants/components.js');
+var httpHandler     = require('../../../core/http/httpHandler.js');
+var ORCH            = require('../../../core/http/orchEndPoints.js');
 //var winston = require('winston');
 
 var PCourses = function(req, res, next){
@@ -36,19 +38,19 @@ PCourses.prototype.getScreenComponentsAndData = function(academyInfo){
     var academyUrl = academyInfo.subDomainUrl;
     //set the template to use
     _.template = 'tWebinars.ejs';
-    
+
             //add the header
     _.components.push(new CompObj(CONST.HEADER,             {subDomainUrl:academyUrl}, null).getComponent());
-  
+
     //add the react component to add in the page
-    _.components.push(new CompObj(CONST.CLASS_LIST,         {espId:espId}).getComponent());   
-   
+    _.components.push(new CompObj(CONST.CLASS_LIST,         {espId:espId}).getComponent());
+
     //add the footer
     _.components.push(new CompObj(CONST.FOOTER,             {espId:espId}).getComponent());
 
     _.pageData = {};
 
-    //calling the generate page after the components were obtained asynchronously and collected by this point.   
+    //calling the generate page after the components were obtained asynchronously and collected by this point.
     _.generatePage();
 }
 
@@ -57,6 +59,25 @@ PCourses.prototype.generatePage = function(){
     //winston.info("PCourses:getCoursesScreen()", {url:this.controller, page:'pCourse.js', components:['cCourseList.jsx']});
     _this.presenter.controller = _this.controller;
     _this.presenter.getCoursesScreenActual(_this.template, _this.components, _this.pageData);
+}
+
+PCourses.prototype.getPageJson = function (payload) {
+    var _this = this;
+    var request = new httpHandler({
+            url: ORCH.classList + payload.espId + '?page=' + payload.page + '&pageSize=' + payload.pageSize
+        });
+    request.getMethodForAsynch("SIMPLE_REST")(function (err, data) {
+        if (err) {
+            console.log(err);
+            _this.res.statusCode = 500;
+            _this.res.send({
+                error: err.toString()
+            });
+        }
+        else {
+            _this.res.send(data);
+        }
+    });
 }
 
 module.exports = PCourses;

@@ -36,11 +36,23 @@ router.get('/:url?', function(req, res, next) {
 var getOnlineClassListScreen = function(req, res, next){
 	winston.info("request at /mobile", {url:'/mobile'});
 	console.log('Webinar List Page: ' + new Date().toISOString());
+
     var fCourses        = require('../app/pages/pWebinars/pWebinars.js');
     var bCourses        = new fCourses(req, res, next);
-    bCourses.query      = req.query;
-    bCourses.controller = controllerName;
-    bCourses.getScreen();
+
+    if (req.get('Content-Type') === 'application/json') {
+        try {
+            var payload = req.query.payload;
+            payload.espId = global.academy.espId;
+            bCourses.getPageJson(payload);
+        } catch (ex) {
+            console.log(ex);
+        }
+    } else {
+        bCourses.query      = req.query;
+        bCourses.controller = controllerName;
+        bCourses.getScreen();
+    }
 }
 
 var getOnlineClassDetailScreen = function(req, res, next, classURL){
