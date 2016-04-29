@@ -12,7 +12,7 @@
 .factorypath
 .recommenders
 build
-lib/
+liberty/
 target
 .factorypath
 .springBeans
