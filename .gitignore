@@ -12,7 +12,7 @@
 .factorypath
 .recommenders
 build
-lib/
+liberty/
 target
 .factorypath
 .springBeans
@@ -34,3 +34,4 @@ overridedb.*
 .DS_Store
 .factorypath
 node_modules
+**/*.log

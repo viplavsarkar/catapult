@@ -7,6 +7,7 @@ if (typeof window === 'undefined') {
     var Footer = require('./footer/Footer.jsx');
 } else {
     var React = window.React;
+    var ReactDOM = window.ReactDOM;
     var ReactIntl = window.ReactIntl;
     var IntlMixin = ReactIntl.IntlMixin;
     var Header = window.Header;
@@ -32,5 +33,10 @@ var App = React.createClass({
 if (typeof window === 'undefined') {
     module.exports = App;
 } else {
-    window.App = App;
+    //window.App = App;
+    var bf = eval('BIFROST_APP_PROPS');
+    ReactDOM.render(
+                        <App {...BIFROST_APP_PROPS}/>,
+                        pageWrapper
+                    );
 }

@@ -4,7 +4,7 @@
   "description": "the rainbow bridge to catapult midgard",
   "main": "src/server/app.js",
   "scripts": {
-    "start": "nodemon src/bin/www",
+    "start": "node src/bin/www",
     "test": "npm test"
   },
   "author": "WizIQ",

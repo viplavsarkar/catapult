@@ -12,12 +12,20 @@ o.footer			= o.root + '/catapultui/data/getTestDataFooter.txt';
 //courses
 //o.courseList		= o.root + '/catapultui/data/getTestDataCourseList.txt';
 o.courseList		= "http://192.168.17.186:8070/v1/courses?";
-o.courseDetail 		= o.root + "/catapultui/data/getTestDataOfCourseDetail.txt";
+o.courseDetail 		= "http://192.168.17.186:8070/v1/courses/";
+//o.courseDetail 		= o.root + "/catapultui/data/getTestDataOfCourseDetail.txt";
 o.courseDetailNew 	= o.root + "/catapultui/data/getTestDataOfCourseDetailNew.txt";
 
 //classes
-o.classList  		= o.root + "/catapultui/data/getTestDataForWebinars.txt";
-o.classDetail 		= o.root + "/catapultui/data/getTestDataForWebinarDetail.txt";
+
+//o.classList  		= o.root + "/catapultui/data/getTestDataForWebinars.txt";
+o.classDetail		= "http://192.168.17.186:8050/v1/class/";
+//o.classDetail 		= o.root + "/catapultui/data/getTestDataForWebinarDetail.txt";
+
+//o.classList  		= o.root + "/catapultui/data/getTestDataForWebinars.txt";
+o.classList 		= "http://192.168.17.186:8050/v1/class/esp/webinars/";
+//o.classDetail 		= o.root + "/catapultui/data/getTestDataForWebinarDetail.txt";
+
 o.classDetailMeta	= o.root + "/catapultui/data/getTestDataForWebinarDetailMeta.txt";
 
 //discover

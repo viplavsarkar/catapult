@@ -29,11 +29,16 @@ var EachWebinarRoww = React.createClass({
     render: function(){
         var data = this.props.data;
         var tutor = data.tutorq;
-
+        var duration = data.duration ? data.duration : 0;
+        var attendeeCount= data.attendeeCount ? data.attendeeCount : 0;
+        var title = data.title ? data.title : 'No Title';
+        var classUrl = data.classUrl ? data.classUrl : '/online-class/' + data.idClassMaster + '-' + title + "/"
+        //http://myschool.wizqe.authordm.com/SignIn?returnUrl=/online-class/21142-public-class-0001
+        var viewRecording = '/SignIn?returnUrl=' + classUrl;
         return (
                 <li className="item clearfix">
                     <div className="col-2 content">
-                        <h2><a href={data.classUrl}>{data.title}</a></h2>
+                        <h2><a href={classUrl}>{title}</a></h2>
                         <p className="shortInfo">{this.getIntlMessage('public')}</p>
                         <ul className="placed">
                             <li>
@@ -43,19 +48,19 @@ var EachWebinarRoww = React.createClass({
                         </ul>
                         <ul className="type clearfix">
                             <li>
-                                <span className="no">{this.duration}</span> {this.getIntlMessage('minutes')}
+                                <span className="no">{duration}</span> {this.getIntlMessage('minutes')}
                             </li>
                             <li>
-                                <span className="no">{this.attendeeCount}</span> {this.getIntlMessage('attendees')}
+                                <span className="no">{attendeeCount}</span> {this.getIntlMessage('attendees')}
                             </li>
                         </ul>
                     </div>
                     <div className="col-3">
                         <ul className="ctaGroup">
                             <li className="cta noRadius inlineBlc">
-                                <TutorInfo data={data.tutor} />
+                                <TutorInfo data={data.creator} />
                             </li>
-                            <li className="cta filledOrng"><a href="#">{this.getIntlMessage('viewRecording')}</a></li>
+                            <li className="cta filledOrng"><a href={viewRecording}>{this.getIntlMessage('viewRecording')}</a></li>
                         </ul>
                     </div>
                 </li>

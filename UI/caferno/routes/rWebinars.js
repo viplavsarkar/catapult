@@ -54,6 +54,7 @@ var getOnlineClassDetailScreen = function(req, res, next, classURL){
     var bCourses        = new fCourses(req, res, next);
     bCourses.query      = req.query;
     bCourses.controller = controllerName;
+    bCourses.seoUrl = classURL;
     bCourses.getScreen();
 }
 

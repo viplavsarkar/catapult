@@ -140,6 +140,9 @@ var CourseEnrollees = React.createClass({
 
 var CourseListItem = React.createClass({
     mixins: [IntlMixin],
+    onclickhandler: function(ev){
+        alert('hello');
+    },
     render: function () {
         var data = this.props.data;
 
@@ -149,7 +152,7 @@ var CourseListItem = React.createClass({
         }
 
         return (
-            <li className="item clearfix">
+            <li className="item clearfix" onClick={this.onclickhandler} >
                 <div className="col-1">
                     <figure className="courseImg">
                         <a href="#"><img src={data.logo} alt={data.title} /></a>
@@ -164,7 +167,7 @@ var CourseListItem = React.createClass({
                     </figure>
                 </div>
                 <div className="col-2 content">
-                    <h2><a href="#">{data.title}</a></h2>
+                    <h2><a href="#" >{data.title}</a></h2>
                     <ul className="placed">
                         <li>
                             {this.getIntlMessage('course.liveFor') + ' ' + data.liveFor + ' ' + this.getIntlMessage('common.week')}
@@ -201,7 +204,7 @@ var ViewMore = React.createClass({
 });
 
 var Section = React.createClass({
-    mixins: [IntlMixin],
+    mixins: [IntlMixin],    
     render: function () {
         var data = this.props.data;
 
@@ -212,7 +215,7 @@ var Section = React.createClass({
         });
 
         return (
-            <section id="courseListing" className="moduleBody">
+            <section id="courseListing" className="moduleBody" >
                 <div className="moduleWrapper">
                     <CourseQuickLinks />
                     <ul className="courseList">

@@ -43,9 +43,9 @@ class Language {
  */
 function _parse(language) {
     var regEx = /^([a-z]{2})-([A-Z]{2})$/;
-
+    console.log(language);
     var languageComponents = regEx.exec(language);
-
+console.log('languageComponents = ' + languageComponents);
     if (languageComponents.length !== 3)
         return;
 

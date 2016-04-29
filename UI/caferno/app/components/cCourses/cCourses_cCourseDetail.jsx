@@ -12,6 +12,27 @@ var FormattedDate = ReactIntl.FormattedDate;
 //*****************************************************************
 //  YOUR CODE STARTS HERE
 //*****************************************************************
+var Breadcrum = React.createClass({
+    mixins: [IntlMixin],
+    render: function(){
+        var data = this.props.data;
+
+        return(
+                <div>
+                    <section id="breadcrumbs" className="moduleBody">
+                        <div className="moduleWrapper">
+                            <div className="moduleGutter">
+                                <ul className="wrapper clearfix">
+                                    <li><a href="#">Courses</a></li>
+                                    <li>CPR Online Training</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            );
+    }
+});
 
 var CourseSummary = React.createClass({
     mixins: [IntlMixin],
@@ -26,60 +47,62 @@ var CourseSummary = React.createClass({
                         enrollNow: "ENROLL NOW",
                         }
         return (
-                <section id="courseDetails" className="moduleBody">
-                    <div className="moduleWrapper">
-                        <ul className="courseList details">
-                            <li className="item clearfix">
-                                <div className="col-1">
-                                    <figure className="courseImg">
-                                        <img src={data.courseImg} alt="course" />
-                                        <figcaption className="captionWrap">
-                                            <div className="gutter clearfix">
-                                                <span className="academy">
-                                                <img src={data.authorImg} />
-                                            </span>
-                                                <span className="caption">{data.authorName}</span>
-                                            </div>
-                                        </figcaption>
-                                    </figure>
-                                </div>
-                                <div className="col-2 content">
-                                    <h2>{data.title}</h2>
-                                    <p className="shortDiscription">{data.shortDescription}</p>
-                                    <div className="relatedOpt">
-                                        <ul className="placed">
-                                            <li>
-                                                <span className="calenderDate">{data.calDate}</span> {data.duration}
-                                                <span className="date">{intlData.courseStarted} {data.startedFrom}</span>
+                <div>
+                    <section id="courseDetails" className="moduleBody">
+                        <div className="moduleWrapper">
+                            <ul className="courseList details">
+                                <li className="item clearfix">
+                                    <div className="col-1">
+                                        <figure className="courseImg">
+                                            <img src={data.courseImg} alt="course" />
+                                            <figcaption className="captionWrap">
+                                                <div className="gutter clearfix">
+                                                    <span className="academy">
+                                                    <img src={data.authorImg} />
+                                                </span>
+                                                    <span className="caption">{data.authorName}</span>
+                                                </div>
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                    <div className="col-2 content">
+                                        <h2>{data.title}</h2>
+                                        <p className="shortDiscription">{data.shortDescription}</p>
+                                        <div className="relatedOpt">
+                                            <ul className="placed">
+                                                <li>
+                                                    <span className="calenderDate">{data.calDate}</span> {data.duration}
+                                                    <span className="date">{intlData.courseStarted} {data.startedFrom}</span>
+                                                </li>
+                                            </ul>
+                                            <ul className="type clearfix">
+                                                <li>
+                                                    <span className="no">{data.tutorials}</span>
+                                                    {intlData.tutorials}
+                                                </li>
+                                                <li>
+                                                    <span className="no">{data.liveClasses}</span> {intlData.liveClasses}
+                                                </li>
+                                                <li>
+                                                    <span className="no">{data.tests}</span> {intlData.tests}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div className="col-3">
+                                        <ul className="ctaGroup">
+                                            <li className="cta noRadius">
+                                                {data.amount}
+                                                <span className="strike">{data.amountCrossed}</span>
                                             </li>
-                                        </ul>
-                                        <ul className="type clearfix">
-                                            <li>
-                                                <span className="no">{data.tutorials}</span>
-                                                {intlData.tutorials}
-                                            </li>
-                                            <li>
-                                                <span className="no">{data.liveClasses}</span> {intlData.liveClasses}
-                                            </li>
-                                            <li>
-                                                <span className="no">{data.tests}</span> {intlData.tests}
-                                            </li>
+                                            <li className="cta filledOrng"><a href="#">{intlData.enrollNow}</a></li>
                                         </ul>
                                     </div>
-                                </div>
-                                <div className="col-3">
-                                    <ul className="ctaGroup">
-                                        <li className="cta noRadius">
-                                            {data.amount}
-                                            <span className="strike">{data.amountCrossed}</span>
-                                        </li>
-                                        <li className="cta filledOrng"><a href="#">{intlData.enrollNow}</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </section>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
             );
     }
 });
@@ -128,19 +151,19 @@ var CourseOverview = React.createClass({
                     </div>
                     <div className="secondryDetail clearfix">
                         <h2 className="title">{intlData.aboutTheInstructor}</h2>
+                        {data.about}
                         <div className="clearfix">
                             <figure className="academyImg col-1">
-                                <img src={data.authorImgBig} alt="" />
+                                <img src={data.authorImg} alt="" />
                                 <figcaption>
                                     {data.authorName}
-                                    <span className="location">{data.authorCity} , {data.authorCountry}</span>
+                                    <span className="location">{data.city} , {data.country}</span>
                                 </figcaption>
                             </figure>
                             <div className="col-2">
                                 <ul className="academyMeta clearfix">
-                                    <li>{data.followers}<span>{intlData.followers}</span></li>
-                                    <li>{data.followers}<span>{intlData.followers}</span></li>
-                                    <li>{data.testimonials}<span>{intlData.testimonials}</span></li>
+                                    <li>{data.followersCount}<span>{intlData.followers}</span></li>
+                                    <li>{data.testimonialsCount}<span>{intlData.testimonials}</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -155,11 +178,12 @@ var EachSectionRow = React.createClass({
     render: function(){
         var data = this.props.data;
 
-        var className = "table-col-1 " + data.type;
+        var className = "table-col-2 " + data.type;
         return (
                 <tr>
+                    <td className="table-col-1">11 Mar</td>
                     <td className={className}><span>Section</span></td>
-                    <td className="table-col-2">{data.title}</td>
+                    <td className="table-col-3">{data.title}</td>
                 </tr>
             )
     }
@@ -180,12 +204,15 @@ var EachSection = React.createClass({
                         <div className="col-1 caption-1">Section 1 :</div>
                         <div className="col-2 caption-2">Week 1</div>
                     </div>
-                    <div className="accordionContent">
-                        <table className="tableGrid">
-                            <tbody>
-                                {sectionRows}
-                            </tbody>
-                        </table>
+                    <div className="accordionContent clearfix">
+                        <div className="col-1 inLineDatePicker" data-date-start="01/24/2016" data-date-end="02/01/2016"></div>
+                        <div className="col-2">
+                            <table className="tableGrid">
+                                <tbody>
+                                    {sectionRows}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </li>
             );
@@ -219,46 +246,34 @@ var CourseDetail = React.createClass({
         var intlData = {overview: "Overview", schedule: "Schedule"};
 
         return (
-                <section id="courseTabs">
-                    <div className="tabsHeadWrapper moduleBody">
-                        <ul className="tabsHead moduleWrapper clearfix">
-                            <li className="overview" data-tab="overview"><a href="#">{intlData.overview}</a></li>
-                            <li className="schedule" data-tab="schedule"><a href="#">{intlData.schedule}</a></li>
-                        </ul>
-                    </div>
-                    <div className="tabsContent moduleBody">
-                        <CourseOverview data={data.overview} />
-                        <CourseSchedule data={data.schedule}/>
-                    </div>
-                </section>
-            );
-    }
-});
-
-var Breadcrum = React.createClass({
-    mixins: [IntlMixin],
-    render: function(){
-        var data = this.props.data;
-
-        return(
-                <section id="breadcrumbs" className="moduleBody">
-                    <div className="moduleWrapper">
-                        <div className="moduleGutter">
-                            <ul className="wrapper clearfix">
-                                <li><a href="#">Courses</a></li>
-                                <li>CPR Online Training</li>
+                <div>
+                    <section id="courseTabs">
+                        <div className="tabsHeadWrapper moduleBody">
+                            <ul className="tabsHead moduleWrapper clearfix">
+                                <li className="overview" data-tab="overview"><a href="#">{intlData.overview}</a></li>
+                                <li className="schedule" data-tab="schedule"><a href="#">{intlData.schedule}</a></li>
                             </ul>
                         </div>
-                    </div>
-                </section>
+                        <div className="tabsContent moduleBody">
+                            <CourseOverview data={data.overview} />
+                            <CourseSchedule data={data.schedule}/>
+                        </div>
+                    </section>
+                </div>
             );
     }
 });
+
+
 var CourseDetailSection = React.createClass({
     mixins: [IntlMixin],
     render: function () {
         var data = this.props.data;
-
+        data.courseSummary.authorImg            = data.authorInfo.authorImg;
+        data.courseSummary.authorName           = data.authorInfo.authorName;
+        data.courseDetail.schedule.sections     = data.sections;
+        data.courseDetail.overview              = data.authorInfo;
+        data.courseDetail.overview.overviewText = data.courseSummary.about;
         return (
             <div>
                 <Breadcrum />

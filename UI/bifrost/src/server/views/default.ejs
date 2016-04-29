@@ -10,6 +10,8 @@
         <link rel="stylesheet" type="text/css" href="/asset/style/reset.css">
         <link rel="stylesheet" type="text/css" href="/asset/style/fonts.css">
         <link rel="stylesheet/less" type="text/css" href="/asset/style/custom.less">
+        <!-- <link rel="stylesheet/less" type="text/css" href="asset/style/rtlCustom.less"> -->
+
         <script src="/asset/script/lib/less.js"></script>
         <!-- Only for dev environment-->
     </head>
@@ -20,17 +22,23 @@
         <!-- END #pageWrapper -->
         <script src="/asset/script/lib/jquery.js"></script>
         <script src="/asset/script/main.js"></script>
-        <script src="/react/react.js"></script>
+        
+        <!--<script src="/react/react.js"></script>
         <script src="/react/react-dom.js"></script>
-        <script src="/babel/browser.js"></script>
+        <script src="/babel/browser.js"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.6/react.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.6/react-dom.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+
         <script src="//cdnjs.cloudflare.com/ajax/libs/react-intl/1.2.2/react-intl.js"></script>
         <script type="text/javascript">
             var BIFROST_APP_PROPS = JSON.parse('<%- APP_PROPS %>');
         </script>
         <script type="text/babel" src="/components/header/Header.jsx"></script>
         <script type="text/babel" src="/components/footer/Footer.jsx"></script>
-        <script type="text/babel" src="/components/courses/CourseList.jsx"></script>
+        <script type="text/babel" src="/components/courses/PublicCourses.jsx"></script>
         <script type="text/babel" src="/components/App.jsx"></script>
-        <script type="text/babel" src="/app.js"></script>
+        <!--<script type="text/babel" src="/app.js"></script>-->
     </body>
 </html>

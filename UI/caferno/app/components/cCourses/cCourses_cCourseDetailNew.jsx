@@ -13,7 +13,6 @@ var FormattedDate = ReactIntl.FormattedDate;
 //  YOUR CODE STARTS HERE
 //*****************************************************************
 
-
 var CourseDetail = React.createClass({
     mixins: [IntlMixin],    
     render: function () {      

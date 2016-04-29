@@ -11,29 +11,29 @@
         "date": "Date",
         "price": "Price",
         "week": "week(s)",
-        "tutorials": "Tutorials",
-        "classes": "Classes",
-        "tests": "Tests",
-        "free": "Free",
+        "tutorials": "دَرْس خُصوصيّ",
+        "classes": "قِسْم",
+        "tests": "الاختبارات",
+        "free": "حر",
         "and": "and",
         "others": "others",
-        "learnMore": "Learn More",
-        "viewMore": "View More"
+        "learnMore": "أعرف أكثر",
+        "viewMore": "عرض المزيد"
     },
     "course": {
-        "liveFor": "Live for",
-        "publishedDate": "Publish date",
-        "hasEnrolled": "has enrolled in this course",
+        "liveFor": "أعيش من أجل",
+        "publishedDate": "تاريخ النشر",
+        "hasEnrolled": "والمسجلين في هذه الدورة",
         "haveEnrolled": "have enrolled in this course"
     },
     "header": {
         "headerNavigation": {
             "navigationItems": {
-                "discover": "Discover",
-                "mobileApp": "Mobile App",
-                "contactUs": "Contact Us",
-                "signIn": "Sign In",
-                "courses": "Courses"
+                "discover": "اكتشف",
+                "mobileApp": "اموبايل التطبيق",
+                "contactUs": "ااتصل بنا",
+                "signIn": "تسجيل الدخول",
+                "courses": "الدورات"
             }
         }
     },

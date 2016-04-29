@@ -85,7 +85,7 @@ Page.prototype.prepareAndSendResponse = function (res, section, sectionData, tem
 
     var APP_PROPS = this.prepareAppProps(sectionData);
     var pageHtml = this.preparePageHtml(section, APP_PROPS);
-
+    //pageHtml = '';
     res.setHeader('Content-Type', 'text/html');
     res.render(path.join(config.views, template),
         {pageHtml: pageHtml, APP_PROPS: JSON.stringify(APP_PROPS)});

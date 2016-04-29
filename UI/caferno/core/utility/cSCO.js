@@ -57,7 +57,7 @@ cSCO.prototype.getComponent = function(){
 		case CONST.COURSE_DETAIL:
 			return new Comp('cCourses_cCourseDetail.jsx', null , false, "cCourses", null, 
 	            {
-	                 url: ORCH.courseDetail
+	                 url: ORCH.courseDetail + _.params.courseId
 	            },
 	            _.varName
 	        )
@@ -70,10 +70,10 @@ cSCO.prototype.getComponent = function(){
 	            _.varName
 	        )
 			break;
-		case CONST.CLASS_LIST:
+		case CONST.CLASS_LIST:		
 			return new Comp('cWebinars_testList.jsx', null , false, "cWebinars", null, 
 	            {
-	                 url: ORCH.classList
+	                 url: ORCH.classList + _.params.espId + "?pageSize=2&page=0"
 	            },
 	            _.varName
 	        )
@@ -81,7 +81,7 @@ cSCO.prototype.getComponent = function(){
 		case CONST.CLASS_DETAIL:
 			return new Comp('cWebinars_detail.jsx', null , false, "cWebinars", null, 
 	            {
-	                 url: ORCH.classDetail
+	                 url: ORCH.classDetail+"webinar/detail/"+_.params.idClassMaster
 	            },
 	            _.varName
 	        )

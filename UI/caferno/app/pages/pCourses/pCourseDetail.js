@@ -32,9 +32,11 @@ PCourseDetail.prototype.getScreen = function(){
 PCourseDetail.prototype.getScreenComponentsAndData = function(academyInfo){
     var _ = this;
     
+    var seoUrl = _.req.params.id;
     var espId = academyInfo.id;
     var academyUrl = academyInfo.subDomainUrl;
 
+    var courseId = seoUrl.split('-')[0];
     //set the template to use
     _.template = 'tCourseDetail.ejs';
     
@@ -42,7 +44,7 @@ PCourseDetail.prototype.getScreenComponentsAndData = function(academyInfo){
     _.components.push(new CompObj(CONST.HEADER,             {subDomainUrl:academyUrl}, null).getComponent());
   
     //add the react component to add in the page
-    _.components.push(new CompObj(CONST.COURSE_DETAIL,      {}).getComponent());
+    _.components.push(new CompObj(CONST.COURSE_DETAIL,      {courseId: courseId}).getComponent());
    
     //add the footer
     _.components.push(new CompObj(CONST.FOOTER,             {espId:espId}).getComponent());

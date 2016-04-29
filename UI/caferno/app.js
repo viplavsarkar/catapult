@@ -85,8 +85,8 @@ app.use(function(req, res, next) {
 
 var language = new i18n('en-US');
 //var language = new i18n('ar-AE');
-
-global.academy = {url:'preportal.wiziq.authordm.com'}
+global.academy = {url:'taru.wiziq.authordm.com'}
+//global.academy = {url:'preportal.wiziq.authordm.com'}
 //global.academy = {url:'newjon.wiziq.authordm.com'}
 //global.academy = {url:'kabza.wiziq.authordm.com'}
 
