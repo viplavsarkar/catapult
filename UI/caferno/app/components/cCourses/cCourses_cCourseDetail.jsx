@@ -38,7 +38,9 @@ var CourseSummary = React.createClass({
     mixins: [IntlMixin],
     render: function(){
         var data = this.props.data;
-
+        var tutorials = data.tutorials ? data.tutorials : 0;
+        var liveClasses = data.liveClasses ? data.liveClasses : 0;
+        var tests = data.tests ? data.tests : 0;
         var intlData = {
                         courseStarted:"Course started:",
                         tutorials: "TUTORIALS",
@@ -77,14 +79,14 @@ var CourseSummary = React.createClass({
                                             </ul>
                                             <ul className="type clearfix">
                                                 <li>
-                                                    <span className="no">{data.tutorials}</span>
+                                                    <span className="no">{tutorials}</span>
                                                     {intlData.tutorials}
                                                 </li>
                                                 <li>
-                                                    <span className="no">{data.liveClasses}</span> {intlData.liveClasses}
+                                                    <span className="no">{liveClasses}</span> {intlData.liveClasses}
                                                 </li>
                                                 <li>
-                                                    <span className="no">{data.tests}</span> {intlData.tests}
+                                                    <span className="no">{tests}</span> {intlData.tests}
                                                 </li>
                                             </ul>
                                         </div>
@@ -192,7 +194,11 @@ var EachSection = React.createClass({
     mixins:[IntlMixin],
     render: function(){
         var data = this.props.data;
-
+        if(!data.sectionData){
+            return(
+                <div></div>
+                )
+        }
         var sectionRows = data.sectionData.map(function (eachSectionData) {
             return (
                 <EachSectionRow data={eachSectionData} />
@@ -269,6 +275,10 @@ var CourseDetailSection = React.createClass({
     mixins: [IntlMixin],
     render: function () {
         var data = this.props.data;
+        data.courseDetail = {};
+        data.courseDetail.schedule = {};
+        data.courseDetail.overview = {};
+
         data.courseSummary.authorImg            = data.authorInfo.authorImg;
         data.courseSummary.authorName           = data.authorInfo.authorName;
         data.courseDetail.schedule.sections     = data.sections;
