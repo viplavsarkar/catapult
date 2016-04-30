@@ -68,6 +68,15 @@ PresenterPrelogin.prototype.generateScreenFromComponents = function(){
                                         "day": "numeric",
                                         "month": "long",
                                         "year": "numeric"
+                                    },
+                                    "webinars": {
+                                        'weekday': 'long',
+                                        'day': '2-digit',
+                                        'month': 'short',
+                                        'year': '2-digit',
+                                        'hour': 'numeric',
+                                        'minute': 'numeric',
+                                        'timeZoneName': 'long'
                                     }
                                 }
                             }

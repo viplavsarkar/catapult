@@ -42,7 +42,7 @@ var EachWebinarRoww = React.createClass({
                         <p className="shortInfo">{this.getIntlMessage('public')}</p>
                         <ul className="placed">
                             <li>
-                                {data.startAt}
+                                <FormattedDate value={new Date(data.startAt)} format='webinars' />
                                 <span className="date">{data.recordingStatus}</span>
                             </li>
                         </ul>
