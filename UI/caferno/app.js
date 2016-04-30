@@ -62,7 +62,8 @@ app.use(express.static(path.join(__dirname, 'app/components')));
 app.use(express.static(path.join(__dirname, 'html')));
 
 global.academy = {
-  url: 'preportal.wiziq.authordm.com'
+  //url: 'preportal.wiziq.authordm.com'
+  url: 'taru.wiziq.authordm.com'
 };
 
 cookies(app);

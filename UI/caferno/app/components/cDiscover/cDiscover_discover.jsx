@@ -19,6 +19,20 @@ var PriceLine = React.createClass({
         var data = this.props.data;
         var priceStr = this.getIntlMessage('free');
         var priceStrikedStr = "";
+        var curr = 'US';
+
+        if(data.isPaid){
+            if(data.priceList){
+                if(data.priceList[curr]){
+                    if(data.priceList[curr].priceStriked) priceStrikedStr = data.priceList[curr].priceStriked;
+                    if(data.priceList[curr].price) priceStr = data.priceList[curr].price;
+                }
+            }
+        }else{
+            priceStr = this.getIntlMessage('free');
+        }
+        ////
+        /*
         if(data.price){
             if(data.price === 0 || data.price === '0'){
                 priceStr = this.getIntlMessage('free');
@@ -34,6 +48,7 @@ var PriceLine = React.createClass({
                 }
             }
         }
+        */
         return(
                 <div className="price"> {priceStr} <span className="strikeIt">{priceStrikedStr}</span></div>
             )
@@ -44,11 +59,15 @@ var EachSection = React.createClass({
     mixins: [IntlMixin],
     render: function(){
         var data = this.props.data;
+        data.priceData = {};
+        if(data.isPaid) data.priceData.isPaid = data.isPaid;
+        if(data.priceList) data.priceData.priceList = data.priceList;
         var rowClassName = "item";
         if(this.props.shouldHide === "hide"){
             rowClassName = "item hide"
         }
         var dataCourseLogo = data.courseLogo;
+        dataCourseLogo = dataCourseLogo.replace('wqimgqe.s3.amazonaws.com','wqimg.authordm.com');
         var courseDetailLink = "course/" + data.courseDetailLink;
 
         return(

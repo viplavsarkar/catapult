@@ -113,17 +113,20 @@ var CourseEnrollees = React.createClass({
     mixins: [IntlMixin],
     render: function () {
         var data = this.props.data;
-        if(data === undefined) data = [];
+        var enrollees = data.enrollees;
+        var count = data.count;
+        console.log('GRRRR'  + count)
+        if(enrollees === undefined) enrollees = [];
 
         var enrolleeString = '';
         var hasHaveEnrolled = '';
-        if(data.length == 0){
+        if(enrollees.length == 0){
             enrolleeString = 'no one has enrolled';
-        }else if (data.length < 2) {
-            enrolleeString = data[0];
+        }else if (count < 2) {
+            enrolleeString = enrollees[0];
             hasHaveEnrolled = this.getIntlMessage('hasEnrolled');
         } else {
-            enrolleeString = data[0] + ' ' + this.getIntlMessage('and') + ' ' + (data.length - 1) + ' ' + this.getIntlMessage('others') + ' ';
+            enrolleeString = enrollees[0] + ' ' + this.getIntlMessage('and') + ' ' + (count - 1) + ' ' + this.getIntlMessage('others') + ' ';
             hasHaveEnrolled = this.getIntlMessage('haveEnrolled');
         }
 
@@ -148,6 +151,9 @@ var CourseListItem = React.createClass({
         var courseLogo = data.courseLogo;
         var tutorLogo = data.tutor.logo;
         var courseDetailLink = "course/" + data.courseDetailLink;
+        data.enrolleesData = {};
+        data.enrolleesData.enrollees = data.enrollees;
+        data.enrolleesData.count = data.learnerCount;
         return (
             <li className="item clearfix">
                 <div className="col-1">
@@ -178,7 +184,7 @@ var CourseListItem = React.createClass({
                 <div className="col-3">
                     <ul className="ctaGroup">
                         <li className="cta noRadius">
-                            <CourseEnrollees data={data.enrollees}/>
+                            <CourseEnrollees data={data.enrolleesData}/>
                             {priceText}
                         </li>
 

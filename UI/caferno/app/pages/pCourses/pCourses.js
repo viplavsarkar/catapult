@@ -40,7 +40,7 @@ PCourses.prototype.getScreenComponentsAndData = function(academyInfo){
     var hUnitTestData = require('../../../core/helper/hUnitTestData.js');
     var hTestData = new hUnitTestData();
 
-    var espId = academyInfo.id;
+    var espId =  academyInfo.id;
     var academyUrl = academyInfo.subDomainUrl;
 
     //set the template to use

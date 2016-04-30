@@ -32,7 +32,7 @@ PDiscover.prototype.getScreen = function(){
 PDiscover.prototype.getScreenComponentsAndData = function(academyInfo){
     var _ = this;
 
-    var espId = academyInfo.id;
+    var espId =  academyInfo.id;
     var academyUrl = academyInfo.subDomainUrl;
     //set the template to use
     _.template = 'tDiscover.ejs';
