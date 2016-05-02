@@ -307,19 +307,23 @@ var Section = React.createClass({
     getInitialState: function () {
         return {
             meta: {},
-            data: []
+            data: [],
+            allRecordsFetched: false
         };
     },
     componentWillMount: function () {
+        var allRecordsFetched = (this.props.data.result.length < this.props.data.meta.pageSize);
+
         this.setState({
             meta: this.props.data.meta,
-            data: this.props.data.result
+            data: this.props.data.result,
+            allRecordsFetched: allRecordsFetched
         });
     },
     loadCoursesFromServer: function (payload, isAppend) {
         var _this = this;
 
-        if (payload) {
+        if (payload && !this.state.allRecordsFetched) {
             $.ajax({
                 url: '',
                 data: {payload: payload},
@@ -331,7 +335,8 @@ var Section = React.createClass({
                     try {
                         var state = {
                             meta: _this.state.meta,
-                            data: _this.state.data
+                            data: _this.state.data,
+                            allRecordsFetched: _this.state.allRecordsFetched
                         };
 
                         if (isAppend) {
@@ -341,6 +346,9 @@ var Section = React.createClass({
                         }
 
                         state.meta = response.meta;
+
+                        var allRecordsFetched = (response.result.length < state.meta.pageSize);
+                        state.allRecordsFetched = allRecordsFetched;
 
                         _this.setState(state);
                     } catch (ex) {
@@ -403,7 +411,7 @@ var Section = React.createClass({
                     <ul className="courseList">
                         {courseItems}
                     </ul>
-                    <ViewMore data={meta} clickHandler={this.viewMoreClickHandler}/>
+                    { !this.state.allRecordsFetched ? <ViewMore data={meta} clickHandler={this.viewMoreClickHandler}/> : null }
                 </div>
             </section>
         );
