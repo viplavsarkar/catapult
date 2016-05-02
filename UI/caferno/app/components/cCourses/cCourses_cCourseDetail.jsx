@@ -41,6 +41,7 @@ var CourseSummary = React.createClass({
         var tutorials = data.tutorials ? data.tutorials : 0;
         var liveClasses = data.liveClasses ? data.liveClasses : 0;
         var tests = data.tests ? data.tests : 0;
+
         var intlData = {
                         courseStarted:"Course started:",
                         tutorials: "TUTORIALS",
@@ -194,12 +195,14 @@ var EachSection = React.createClass({
     mixins:[IntlMixin],
     render: function(){
         var data = this.props.data;
-        if(!data.sectionData){
-            return(
+        console.log(data);
+        if(!data.subSections){
+            /*return(
                 <div></div>
-                )
+                )*/
+            data.subSections =  [];
         }
-        var sectionRows = data.sectionData.map(function (eachSectionData) {
+        var sectionRows = data.subSections.map(function (eachSectionData) {
             return (
                 <EachSectionRow data={eachSectionData} />
             );
@@ -208,10 +211,10 @@ var EachSection = React.createClass({
                 <li className="clearfix">
                     <div className="accordionHead">
                         <div className="col-1 caption-1">Section 1 :</div>
-                        <div className="col-2 caption-2">Week 1</div>
+                        <div className="col-2 caption-2">{data.label}</div>
                     </div>
                     <div className="accordionContent clearfix">
-                        <div className="col-1 inLineDatePicker" data-date-start="01/24/2016" data-date-end="02/01/2016"></div>
+                        <div className="col-1 inLineDatePicker" data-date-start={data.startDate} data-date-end={data.endDate}></div>
                         <div className="col-2">
                             <table className="tableGrid">
                                 <tbody>
@@ -250,7 +253,7 @@ var CourseDetail = React.createClass({
     render: function() {
         var data = this.props.data;
         var intlData = {overview: "Overview", schedule: "Schedule"};
-
+        //console.log(data.schedule)
         return (
                 <div>
                     <section id="courseTabs">

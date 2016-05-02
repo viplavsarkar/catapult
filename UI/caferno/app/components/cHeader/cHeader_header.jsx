@@ -12,7 +12,10 @@ var HeaderLogo = React.createClass({
     render: function () {
         var data = this.props.data;
         var logo = data.logo;// "asset/image/logo.jpg";
-        console.log(logo);
+        if(logo){
+ //           logo = logo.replace('wqimgqe.s3.amazonaws.com','wqimg.authordm.com');
+        }
+        //console.log(logo);
         return (
             <figure className="logo">
                 <img src={logo} alt={data.academyName} />

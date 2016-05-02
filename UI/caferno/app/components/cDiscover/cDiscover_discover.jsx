@@ -19,8 +19,9 @@ var PriceLine = React.createClass({
         var data = this.props.data;
         var priceStr = this.getIntlMessage('free');
         var priceStrikedStr = "";
-        var curr = 'US';
-
+        var curr =  global.academy.curr;
+        //console.log(data)
+        
         if(data.isPaid){
             if(data.priceList){
                 if(data.priceList[curr]){
@@ -31,24 +32,7 @@ var PriceLine = React.createClass({
         }else{
             priceStr = this.getIntlMessage('free');
         }
-        ////
-        /*
-        if(data.price){
-            if(data.price === 0 || data.price === '0'){
-                priceStr = this.getIntlMessage('free');
-            }else{
-                priceStr = data.currency + data.price;
-
-                if(data.priceStriked){
-                    if(data.priceStriked === 0 || data.priceStriked === '0'){
-
-                    }else{
-                        priceStrikedStr = data.currency + data.priceStriked;
-                    }
-                }
-            }
-        }
-        */
+    
         return(
                 <div className="price"> {priceStr} <span className="strikeIt">{priceStrikedStr}</span></div>
             )
@@ -59,9 +43,11 @@ var EachSection = React.createClass({
     mixins: [IntlMixin],
     render: function(){
         var data = this.props.data;
+        
         data.priceData = {};
         if(data.isPaid) data.priceData.isPaid = data.isPaid;
         if(data.priceList) data.priceData.priceList = data.priceList;
+
         var rowClassName = "item";
         if(this.props.shouldHide === "hide"){
             rowClassName = "item hide"

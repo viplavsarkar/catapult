@@ -109,13 +109,39 @@ var CourseComposition = React.createClass({
     }
 });
 
+var PriceLine = React.createClass({
+    mixins:[IntlMixin],
+    render: function(){
+        var data = this.props.data;
+        var priceStr = this.getIntlMessage('free');
+        var priceStrikedStr = "";
+        var curr = global.academy.curr;
+        //console.log(data)
+        if(data.isPaid){
+            if(data.priceList){
+                if(data.priceList[curr]){
+                    if(data.priceList[curr].priceStriked) priceStrikedStr = data.priceList[curr].priceStriked;
+                    if(data.priceList[curr].price) priceStr = data.priceList[curr].price;
+                }
+            }
+        }else{
+            priceStr = this.getIntlMessage('free');
+        }
+      
+        return(
+                <div className="price"> {priceStr} <span className="strikeIt">{priceStrikedStr}</span></div>
+
+            )
+    }
+});
+//<p><span class="h3">$12</span> </p>
 var CourseEnrollees = React.createClass({
     mixins: [IntlMixin],
     render: function () {
         var data = this.props.data;
         var enrollees = data.enrollees;
         var count = data.count;
-        console.log('GRRRR'  + count)
+        //console.log('GRRRR'  + count)
         if(enrollees === undefined) enrollees = [];
 
         var enrolleeString = '';
@@ -143,12 +169,17 @@ var CourseListItem = React.createClass({
     mixins: [IntlMixin],
     render: function () {
         var data = this.props.data;
-
+        /*
         var priceText = data.price;
         if (data.price == 0) {
             priceText = this.getIntlMessage('free');
         }
-        var courseLogo = data.courseLogo;
+        */
+         data.priceData = {};
+        if(data.isPaid) data.priceData.isPaid = data.isPaid;
+        if(data.priceList) data.priceData.priceList = data.priceList;
+        var courseLogo = data.courseLogo;                
+        //courseLogo = courseLogo.replace('wqimgqe.s3.amazonaws.com','wqimg.authordm.com');
         var tutorLogo = data.tutor.logo;
         var courseDetailLink = "course/" + data.courseDetailLink;
         data.enrolleesData = {};
@@ -185,7 +216,8 @@ var CourseListItem = React.createClass({
                     <ul className="ctaGroup">
                         <li className="cta noRadius">
                             <CourseEnrollees data={data.enrolleesData}/>
-                            {priceText}
+                            
+                            <PriceLine data={data.priceData} />
                         </li>
 
                         <li className="cta wired"><a href={courseDetailLink}>{this.getIntlMessage('learnMore')}</a></li>
