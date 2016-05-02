@@ -32,8 +32,8 @@ var APP = APP || {}; //Global Namespace
 
                 APP.eventTarget.find('#webinarsDetails').tabbing({
                     defaultTab: 0,
-                    tab: 'tabs', 
-                    contentPanel: 'tabsContentWrap', 
+                    tab: 'tabs',
+                    contentPanel: 'tabsContentWrap',
                     content: 'contentOfTab'
                 });
             };
@@ -95,7 +95,7 @@ var APP = APP || {}; //Global Namespace
                         var $calender = ui.newPanel.find('.inLineDatePicker');
 
                         if (!$calender.hasClass('hasDatepicker')) {
-                            inLineDatePicker($calender);    
+                            inLineDatePicker($calender);
                         }
                     }
                 });
@@ -116,7 +116,7 @@ var APP = APP || {}; //Global Namespace
                         newVal = currentVal;
                     };
 
-                    $options.find('li').removeClass('active').end().find('li[data-val=' + newVal + ']').addClass('active');
+                    //$options.find('li').removeClass('active').end().find('li[data-val=' + newVal + ']').addClass('active');
 
                     switch (transform) {
                         case 'slide':
@@ -153,7 +153,7 @@ var APP = APP || {}; //Global Namespace
                 };
 
                 $selector.on('click', eventHandling);
-                $selector.parent().on('click', '.options li', optionsEventHandling);
+                //$selector.parent().on('click', '.options li', optionsEventHandling);
                 APP.document.on('mouseup', makeItHidden);
             };
         }
@@ -175,7 +175,7 @@ var APP = APP || {}; //Global Namespace
                 defaultTab: 0, //Default tab
                 animationSpeed: 600,
                 afterInit: function($tabsParent) {}, //Callback after init
-                afterShow: function() {} //Callback after content show 
+                afterShow: function() {} //Callback after content show
             }, config);
 
             var doTabbing = function() {

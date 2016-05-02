@@ -9,24 +9,80 @@ var IntlMixin = ReactIntl.IntlMixin;
 var FormattedMessage = ReactIntl.FormattedMessage;
 var FormattedDate = ReactIntl.FormattedDate;
 
+var SortField = React.createClass({
+    mixins: [IntlMixin],
+    clickHandler: function (event) {
+        try {
+            var currentSortField = this.props.getCurrentSortField();
+            if (currentSortField.selectedField !== this.props.data.dataVal) {
+                this.props.sortClickHandler(event);
+            }
+            this.props.setCurrentSortField(this.props.data.dataVal);
+        } catch (ex) {
+            console.log('Exception inside SortField clickHandler: ' + ex);
+        }
+    },
+    render: function () {
+        var data = this.props.data;
+
+        return (
+            <li data-val={data.dataVal} className={this.props.className}>
+                <a href="#" data-sort-field={data.fieldName} onClick={this.clickHandler}>{this.getIntlMessage(data.dataVal)}</a>
+            </li>
+        );
+    }
+});
+
 var CourseQuickLinks = React.createClass({
     mixins: [IntlMixin],
+    getInitialState: function () {
+        return {
+            selectedField: ''
+        };
+    },
+    componentWillMount: function () {
+        this.setState({
+            selectedField: 'popularity'
+        });
+    },
+    setCurrentSortField: function (sortField) {
+        this.setState({
+            selectedField: sortField
+        });
+    },
+    getCurrentSortField: function () {
+        return this.state;
+    },
     render: function () {
+        var _this = this;
+        var defaultSortFields = [
+            {
+                dataVal: 'popularity',
+                fieldName: 'ENROLLEDCOUNT'
+            },
+            {
+                dataVal: 'date',
+                fieldName: 'PUBLISHEDON'
+            },
+            {
+                dataVal: 'price',
+                fieldName: 'PRICE'
+            }
+        ];
+
+        var sortFields = defaultSortFields.map(function (field) {
+            var className = (_this.state.selectedField === field.dataVal) ? 'active' : '';
+            return (
+                <SortField className={className} data={field} sortClickHandler={_this.props.sortClickHandler} setCurrentSortField={_this.setCurrentSortField} getCurrentSortField={_this.getCurrentSortField}/>
+            );
+        });
 
         return (
             <ul className="courseQuickLinks clearfix">
                 <li className="sorting hide">
-                    {this.getIntlMessage('sortBy')}: <a href="#" data-val="popularity">{this.getIntlMessage('popularity')}</a>
+                    {this.getIntlMessage('sortBy')}: <a href="#" data-val={this.state}>{this.getIntlMessage(this.state.selectedField)}</a>
                     <ul className="options">
-                        <li data-val="popularity">
-                            <a href="#">{this.getIntlMessage('popularity')}</a>
-                        </li>
-                        <li data-val="date">
-                            <a href="#">{this.getIntlMessage('date')}</a>
-                        </li>
-                        <li data-val="price">
-                            <a href="#">{this.getIntlMessage('price')}</a>
-                        </li>
+                        {sortFields}
                     </ul>
                 </li>
             </ul>
@@ -127,7 +183,7 @@ var PriceLine = React.createClass({
         }else{
             priceStr = this.getIntlMessage('free');
         }
-      
+
         return(
                 <div className="price"> {priceStr} <span className="strikeIt">{priceStrikedStr}</span></div>
 
@@ -141,7 +197,7 @@ var CourseEnrollees = React.createClass({
         var data = this.props.data;
         var enrollees = data.enrollees;
         var count = data.count;
-        //console.log('GRRRR'  + count)
+
         if(enrollees === undefined) enrollees = [];
 
         var enrolleeString = '';
@@ -178,7 +234,7 @@ var CourseListItem = React.createClass({
          data.priceData = {};
         if(data.isPaid) data.priceData.isPaid = data.isPaid;
         if(data.priceList) data.priceData.priceList = data.priceList;
-        var courseLogo = data.courseLogo;                
+        var courseLogo = data.courseLogo;
         //courseLogo = courseLogo.replace('wqimgqe.s3.amazonaws.com','wqimg.authordm.com');
         var tutorLogo = data.tutor.logo;
         var courseDetailLink = "course/" + data.courseDetailLink;
@@ -206,7 +262,7 @@ var CourseListItem = React.createClass({
                         <li>
                             {this.getIntlMessage('liveFor')} {data.liveFor} {this.getIntlMessage('week')}
                             <span className="date">
-                                {this.getIntlMessage('publishedDate')}: <FormattedDate value={data.publishDate} format='short' />
+                                {this.getIntlMessage('publishedDate')}: <FormattedDate value={data.publishDate || 0} format='short' />
                             </span>
                         </li>
                     </ul>
@@ -216,7 +272,7 @@ var CourseListItem = React.createClass({
                     <ul className="ctaGroup">
                         <li className="cta noRadius">
                             <CourseEnrollees data={data.enrolleesData}/>
-                            
+
                             <PriceLine data={data.priceData} />
                         </li>
 
@@ -254,16 +310,8 @@ var Section = React.createClass({
             data: this.props.data.result
         });
     },
-    viewMoreClickHandler: function (event) {
-        event.preventDefault();
-        var payload = {};
+    loadCoursesFromServer: function (payload, isAppend) {
         var _this = this;
-        try {
-            payload.page = (_this.state.meta.page + 1);
-            payload.pageSize = _this.state.meta.pageSize;
-        } catch (ex) {
-            console.log("Exception inside viewMoreClickHandler: " + ex);
-        }
 
         if (payload) {
             $.ajax({
@@ -280,19 +328,57 @@ var Section = React.createClass({
                             data: _this.state.data
                         };
 
-                        state.data = state.data.concat(response.result);
+                        if (isAppend) {
+                            state.data = state.data.concat(response.result);
+                        } else {
+                            state.data = response.result;
+                        }
+
                         state.meta = response.meta;
 
                         _this.setState(state);
                     } catch (ex) {
-                        console.log('Exception inside viewMoreClickHandler ajax success: ' + ex.message);
+                        console.log('Exception inside loadCoursesFromServer ajax success: ' + ex.message);
                     }
                 },
                 error: function (xhr, status, err) {
-                    console.log('Exception inside viewMoreClickHandler ajax error: ' + err);
+                    console.log('Exception inside loadCoursesFromServer ajax error: ' + err);
                 }
             });
         }
+    },
+    viewMoreClickHandler: function (event) {
+        event.preventDefault();
+        var payload = {};
+        var _this = this;
+        try {
+            payload.page = (_this.state.meta.page + 1);
+            payload.pageSize = _this.state.meta.pageSize;
+            payload.sortField = _this.state.meta.sortField;
+            payload.order = _this.state.meta.order;
+        } catch (ex) {
+            console.log("Exception inside viewMoreClickHandler: " + ex);
+            return;
+        }
+
+        this.loadCoursesFromServer(payload, true);
+    },
+    sortClickHandler: function (event) {
+        event.preventDefault();
+
+        var payload = {};
+        var _this = this;
+        try {
+            payload.page = 0;
+            payload.pageSize = _this.state.meta.pageSize;
+            payload.sortField = event.target.getAttribute('data-sort-field');
+            payload.order = _this.state.meta.order;
+        } catch (ex) {
+            console.log("Exception inside sortClickHandler: " + ex);
+            return;
+        }
+
+        this.loadCoursesFromServer(payload, false);
     },
     render: function () {
         var data = this.state.data;
@@ -307,7 +393,7 @@ var Section = React.createClass({
         return (
             <section id="courseListing" className="moduleBody" >
                 <div className="moduleWrapper" >
-                    <CourseQuickLinks />
+                    <CourseQuickLinks sortClickHandler={this.sortClickHandler} />
                     <ul className="courseList">
                         {courseItems}
                     </ul>
