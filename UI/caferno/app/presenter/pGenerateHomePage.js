@@ -79,7 +79,8 @@ PresenterPrelogin.prototype.generateScreenFromComponents = function(){
                                         'timeZoneName': 'long'
                                     }
                                 }
-                            }
+                            },
+                        currency: global.academy.curr
                         };
     params.localeData = _.setLocales(localeJson);
     for(var i=0; i< _.components.length;i++){
@@ -156,6 +157,7 @@ PresenterPrelogin.prototype.setLocales = function(languageJson){
         str += "<script type='text/javascript'>var localkk="+JSON.stringify(languageJson.locales)+"</script>";
         str += "<script type='text/javascript'>var formkk=JSON.parse('"+JSON.stringify(languageJson.formats)+"')</script>"
         str += "<script type='text/javascript'>var messkk=JSON.parse('"+JSON.stringify(languageJson.messages)+"')</script>";
+        str += "<script type='text/javascript'>var currency=JSON.parse('"+JSON.stringify(languageJson.currency)+"')</script>";
 
         //str += "<script type='text/javascript' src='/asset/script/main.js'></script>";
     return str;
