@@ -115,7 +115,13 @@ var PriceLine = React.createClass({
         var data = this.props.data;
         var priceStr = this.getIntlMessage('free');
         var priceStrikedStr = "";
-        var curr = global.academy.curr;
+        var curr = 'INR';
+        if (isNode) {
+            curr = global.academy.curr;
+        } else {
+            curr = window.currency;
+        }
+        //var curr = window.currency;
         //console.log(data)
         if(data.isPaid){
             if(data.priceList){
