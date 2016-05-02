@@ -19,7 +19,12 @@ var PriceLine = React.createClass({
         var data = this.props.data;
         var priceStr = this.getIntlMessage('free');
         var priceStrikedStr = "";
-        var curr =  global.academy.curr;
+         var curr = 'USD';
+        if (isNode) {
+            curr = global.academy.curr;
+        } else {
+            curr = window.currency;
+        }
         //console.log(data)
         
         if(data.isPaid){
@@ -53,9 +58,9 @@ var EachSection = React.createClass({
             rowClassName = "item hide"
         }
         var dataCourseLogo = data.courseLogo;
-        dataCourseLogo = dataCourseLogo.replace('wqimgqe.s3.amazonaws.com','wqimg.authordm.com');
+        //dataCourseLogo = dataCourseLogo.replace('wqimgqe.s3.amazonaws.com','wqimg.authordm.com');
         var courseDetailLink = "course/" + data.courseDetailLink;
-
+        var title = data.title;
         return(
              <li className={rowClassName}>
                 <div className="innerContent">
@@ -64,7 +69,7 @@ var EachSection = React.createClass({
                             <img src={dataCourseLogo} alt="" />
                         </a>
                         <figcaption>
-                            <a href={courseDetailLink}>{data.title}</a>
+                            <a href={courseDetailLink}>{title}</a>
                             <small>{data.learnerCount} {this.getIntlMessage('learners')}</small>
                         </figcaption>
                     </figure>
@@ -103,12 +108,14 @@ var DiscoverSection = React.createClass({
         var itemList = data.map(function(eachItem){
             count++;
             var shouldHide = 'show';
-            if(count > 16) {         
+            if(count > 16) {
                 if(_.state.shownow){
                     shouldHide = 'show'
                 }else{
                     shouldHide = 'hide';
                 }
+            }else{
+                viewMoreBtnClassName = 'hide';
             }
             //var    shouldHide = eval({'s'});
 

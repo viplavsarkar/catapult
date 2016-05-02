@@ -21,11 +21,14 @@ var DiscoverBanner = React.createClass({
     },
     render: function () {      
         var data = this.props.data.academy;
+
+        var title = data.title;
+        if(!title) title = 'Your Academy Where People Come to Learn From Your Courses';
         return (
             <section id="heroHalfImg" className="moduleBody halfBgImg">
                 <div className="moduleWrapper clearfix">
                     <div className="col-1 copy">
-                        <h1 onClick={this.onclickhandler}>{data.title}</h1>
+                        <h1 onClick={this.onclickhandler}>{title}</h1>
                         <p>{data.description}</p>
                     </div>
                 </div>

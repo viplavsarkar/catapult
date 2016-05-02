@@ -34,13 +34,45 @@ var Breadcrum = React.createClass({
     }
 });
 
+var PriceLine = React.createClass({
+    mixins:[IntlMixin],
+    render: function(){
+        var data = this.props.data;
+        var priceStr = this.getIntlMessage('free');
+        var priceStrikedStr = "";
+        var curr =  global.academy.curr;
+        //console.log(data)
+        
+        if(data.isPaid){
+            if(data.priceList){
+                if(data.priceList[curr]){
+                    if(data.priceList[curr].priceStriked) priceStrikedStr = data.priceList[curr].priceStriked;
+                    if(data.priceList[curr].price) priceStr = data.priceList[curr].price;
+                }
+            }
+        }else{
+            priceStr = this.getIntlMessage('free');
+        }
+    
+        return(
+                <div className="price"> {priceStr} <span className="strikeIt">{priceStrikedStr}</span></div>
+
+               
+            )
+    }
+});
+
 var CourseSummary = React.createClass({
     mixins: [IntlMixin],
     render: function(){
         var data = this.props.data;
-        var tutorials = data.tutorials ? data.tutorials : 0;
-        var liveClasses = data.liveClasses ? data.liveClasses : 0;
-        var tests = data.tests ? data.tests : 0;
+        var tutorials = data.tutorialsCount ? data.tutorialsCount : 0;
+        var liveClasses = data.classesCount ? data.classesCount : 0;
+        var tests = data.testsCount ? data.testsCount : 0;
+        var assignments = data.assignmentsCount ? data.assignmentsCount : 0;
+        data.priceData = {};
+        if(data.isPaid) data.priceData.isPaid = data.isPaid;
+        if(data.priceList) data.priceData.priceList = data.priceList;
 
         var intlData = {
                         courseStarted:"Course started:",
@@ -48,6 +80,7 @@ var CourseSummary = React.createClass({
                         liveClasses: "LIVE CLASSES",
                         tests: "TESTS",
                         enrollNow: "ENROLL NOW",
+                        assignments: "ASSIGNMENT"
                         }
         return (
                 <div>
@@ -89,12 +122,15 @@ var CourseSummary = React.createClass({
                                                 <li>
                                                     <span className="no">{tests}</span> {intlData.tests}
                                                 </li>
+                                                 <li>
+                                                    <span className="no">{assignments}</span> {intlData.assignments}
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div className="col-3">
                                         <ul className="ctaGroup">
-                                            <li className="cta noRadius">
+                                             <li className="cta noRadius">
                                                 {data.amount}
                                                 <span className="strike">{data.amountCrossed}</span>
                                             </li>

@@ -63,7 +63,9 @@ app.use(express.static(path.join(__dirname, 'html')));
 
 global.academy = {
   //url: 'preportal.wiziq.authordm.com'
-  url: 'taru.wiziq.authordm.com'
+  url: 'taru.wiziq.authordm.com',
+  //url: 'imdb.wiziq.authordm.com',
+  curr: 'USD'
 };
 
 cookies(app);
@@ -98,8 +100,8 @@ var language = new i18n('en-US');
 
 //global.academy = {url:'newjon.wiziq.authordm.com'}
 //global.academy = {url:'kabza.wiziq.authordm.com'}
-
-if (config.env === 'development') {
+if (app.get('env') === 'development') {
+//if (config.env === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {

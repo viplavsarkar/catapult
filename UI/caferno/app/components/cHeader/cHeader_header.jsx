@@ -12,13 +12,15 @@ var HeaderLogo = React.createClass({
     render: function () {
         var data = this.props.data;
         var logo = data.logo;// "asset/image/logo.jpg";
-        if(logo){
- //           logo = logo.replace('wqimgqe.s3.amazonaws.com','wqimg.authordm.com');
+        var academyName = data.academyName;
+        if(!logo){
+            //logo = logo.replace('wqimgqe.s3.amazonaws.com','wqimg.authordm.com');
+            logo = "//wqimg.authordm.com/data/esp/default-logo.png?635977750540207098";
         }
         //console.log(logo);
         return (
             <figure className="logo">
-                <img src={logo} alt={data.academyName} />
+                <img src={logo} alt={academyName} />
             </figure>
         );
     }
