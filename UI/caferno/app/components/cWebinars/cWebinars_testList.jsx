@@ -24,6 +24,22 @@ var TutorInfo = React.createClass({
             )
     }
 });
+var ViewRecordingBtn = React.createClass({
+    mixins: [IntlMixin],
+    render: function(){
+        var data = this.props.data;
+        if(data.recordingStatus === "Deleted"){
+            return (
+                    <li>RECORDING IN PROGRESS</li>
+                )
+        }else {
+            return(
+                    <li className="cta filledOrng"><a href={data.recordingLink}>{this.getIntlMessage('viewRecording')}</a></li>
+                )
+        }
+    }
+});
+
 var EachWebinarRoww = React.createClass({
     mixins: [IntlMixin],
     render: function(){
@@ -35,6 +51,11 @@ var EachWebinarRoww = React.createClass({
         var classUrl = data.classUrl ? data.classUrl : '/online-class/' + data.idClassMaster + '-' + title + "/"
         //http://myschool.wizqe.authordm.com/SignIn?returnUrl=/online-class/21142-public-class-0001
         var viewRecording = '/SignIn?returnUrl=' + classUrl;
+
+        var recordingData = {};
+        recordingData.recordingStatus = data.recordingStatus;
+        recordingData.recordingLink = viewRecording;
+       
         return (
                 <li className="item clearfix">
                     <div className="col-2 content">
@@ -58,9 +79,12 @@ var EachWebinarRoww = React.createClass({
                     <div className="col-3">
                         <ul className="ctaGroup">
                             <li className="cta noRadius inlineBlc">
-                                <TutorInfo data={data.creator} />
+                                <TutorInfo data={data.creator} />                                
+                            </li>                           
+                            <li>
+                                <p>{data.creator.city}, {data.creator.country}</p>
                             </li>
-                            <li className="cta filledOrng"><a href={viewRecording}>{this.getIntlMessage('viewRecording')}</a></li>
+                            <ViewRecordingBtn data={recordingData} />
                         </ul>
                     </div>
                 </li>
