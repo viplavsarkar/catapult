@@ -132,7 +132,12 @@ var WebinarDetailSummary = React.createClass({
     mixins: [IntlMixin],
     render: function () {
         var data = this.props.data;
-
+        var genderCity = data.tutor.gender;
+        if(data.tutor.city)     genderCity += ' | ' + data.tutor.city;
+        if(data.tutor.country)  genderCity += ', ' + data.tutor.country;
+        var status = data.classStart.status;
+        var msg = '';
+        if(status==='DONE') msg = 'THIS CLASS IS OVER';
         return (
                 <section id="webinarsDetails" className="moduleBody">
                     <div className="moduleWrapper">
@@ -144,6 +149,7 @@ var WebinarDetailSummary = React.createClass({
                                         <figcaption className="captionWrap">
                                             {data.tutor.name}
                                         </figcaption>
+                                        <p className="captionWrap"> {genderCity}</p>
                                     </figure>
                                 </div>
                                 <div className="col-2 content">
@@ -157,12 +163,12 @@ var WebinarDetailSummary = React.createClass({
                                                 </span>
                                                 <FormattedDate value={data.classStart.date} year="numeric"/>&#160;
                                                 <FormattedTime value={data.classStart.date} hour="2-digit" minute="2-digit" />
-                                                <span className="date">{data.classStart.status}</span>
+                                                <span className="date">{data.classStats.status}</span>
                                                 
                                             </li>
                                         </ul>
                                     </div>
-                                    <div className="classFixtures">
+                                    <div className="classFixtures hide">
                                         <p>{data.classFixtures.status}</p>
                                         <div className="cta filledOrng2 inline">
                                             <a href={data.classFixtures.linkViewRecording}>{this.getIntlMessage('viewRecording')}</a>
@@ -197,7 +203,7 @@ var WebinarDetailSummary = React.createClass({
                                                     <span className="no">{data.classStats.attendesCount}</span> {this.getIntlMessage('attendees')}
                                                 </li>
                                             </ul>
-                                            <span className="msg"> {data.classStats.status}</span>
+                                            <span className="msg"> {msg}</span>
                                         </li>
                                     </ul>
                                 </div>

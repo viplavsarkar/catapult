@@ -254,8 +254,8 @@ var CourseListItem = React.createClass({
                         <a href={courseDetailLink}><img src={courseLogo} alt={data.title} /></a>
                         <figcaption className="captionWrap">
                             <div className="gutter clearfix">
-                                <span className="academy">
-                                    <img src={tutorLogo} />
+                                <span className="academy vMiddleWrap">
+                                    <span className="vMiddle"><img src={tutorLogo} /></span>
                                 </span>
                                 <span className="caption">{data.tutor.name}</span>
                             </div>
