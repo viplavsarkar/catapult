@@ -13,18 +13,19 @@ var FormattedTime = ReactIntl.FormattedTime;
 //*****************************************************************
 //  YOUR CODE STARTS HERE
 //*****************************************************************
-var GetStatusMessage = function(status){
+
+var GetStatusMessage = function(ref, status){
      var msg = '';
-       
+     var obj = ref;  
      switch(status){
         case 'DONE':
-            msg = 'This class is over';
+            msg = obj.getIntlMessage('Thisclassisover');// 'This class is over';
             break;
         case 'CANCELLEDBYTEACHER':
-            msg = 'This class has been Cancelled';
+            msg = obj.getIntlMessage('ThisSessioncancelled');//'This class has been Cancelled';
             break;
         case 'EXPIRED':
-            msg = 'This class was not held';
+            msg = obj.getIntlMessage('Thissessionnotheld');//'This class was not held';
             break;
         
         default:
@@ -49,6 +50,7 @@ var ButtonViewRecording = React.createClass({
         }
     }
 });
+
 var ClassScheduleEach = React.createClass({
     mixins: [IntlMixin],
     render: function(){
@@ -60,7 +62,7 @@ var ClassScheduleEach = React.createClass({
                 return (<ButtonViewRecording data={data.linkViewRecording} />)
             }
         }*/
-        var msg = GetStatusMessage(data.status);
+        var msg = GetStatusMessage(this, data.status);
         return(
                 <li>
                     <div className="clearfix">
@@ -162,7 +164,7 @@ var WebinarDetailSummary = React.createClass({
         if(data.tutor.city)     genderCity += ' | ' + data.tutor.city;
         if(data.tutor.country)  genderCity += ', ' + data.tutor.country;
         var status = data.classStart.status;
-        var msg = GetStatusMessage(status);
+        var msg = GetStatusMessage(this, status);
 
         return (
                 <section id="webinarsDetails" className="moduleBody">

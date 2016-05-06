@@ -68,5 +68,13 @@
     "webinars": "Webinars",
     "week": "week(s)",
     "wiziq": "WizIQ",
-    "yourCommentHere": "Your comment here..."
+    "yourCommentHere": "Your comment here...",
+
+    "CLASSPAGE DETAIL": "=============================",
+    "Thisclassisover": "THIS CLASS IS OVER",
+    "Thissessionnotheld": "This class was not held",
+    "ThisSessioncancelled": "This class has been Cancelled",
+    "WebinarLanguage": "This webinar is hosted in ",
+    "RecordingInProgress": "Recording is in Progress"
+
 }

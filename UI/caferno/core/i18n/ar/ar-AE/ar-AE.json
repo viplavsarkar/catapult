@@ -68,5 +68,12 @@
     "webinars": "قِسْم",
     "week": "أسبوع",
     "wiziq": "WizIQ",
-    "yourCommentHere": "تعليقك هنا..."
+    "yourCommentHere": "تعليقك هنا...",
+
+    "CLASSPAGE DETAIL": "=============================",
+    "Thisclassisover": "لقد انتهى هذا الدرس",
+    "Thissessionnotheld": "هذا الفصل لم ينعقد",
+    "ThisSessioncancelled": "تم إلغاء هذا الفصل",
+    "WebinarLanguage": "تُعقد ندوة الإنترنت هذه في",
+    "RecordingInProgress": "جاري التسجيل"
 }
