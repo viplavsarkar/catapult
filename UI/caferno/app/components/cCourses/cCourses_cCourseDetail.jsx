@@ -199,7 +199,7 @@ var CourseOverview = React.createClass({
                                 </figcaption>
                             </figure>
                             <div className="col-2">
-                                <p>{data.about}</p>
+                                <p dangerouslySetInnerHTML={{__html: data.about}} />
                                 <ul className="academyMeta clearfix">
                                     <li>{data.followersCount}<span className="name">{intlData.followers}</span></li>
                                     <li>{data.testimonialsCount}<span className="name">{intlData.testimonials}</span></li>
