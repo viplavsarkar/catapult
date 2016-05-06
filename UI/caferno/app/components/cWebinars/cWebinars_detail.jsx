@@ -13,6 +13,27 @@ var FormattedTime = ReactIntl.FormattedTime;
 //*****************************************************************
 //  YOUR CODE STARTS HERE
 //*****************************************************************
+var GetStatusMessage = function(status){
+     var msg = '';
+       
+     switch(status){
+        case 'DONE':
+            msg = 'This class is over';
+            break;
+        case 'CANCELLEDBYTEACHER':
+            msg = 'This class has been Cancelled';
+            break;
+        case 'EXPIRED':
+            msg = 'This class was not held';
+            break;
+        
+        default:
+            break;
+     }
+
+     return msg;
+};
+
 var ButtonViewRecording = React.createClass({
     mixins: [IntlMixin],
     render: function(){
@@ -39,13 +60,16 @@ var ClassScheduleEach = React.createClass({
                 return (<ButtonViewRecording data={data.linkViewRecording} />)
             }
         }*/
+        var msg = GetStatusMessage(data.status);
         return(
                 <li>
                     <div className="clearfix">
                         <div className="col-1">
-                            <p className="recurringDate">{data.startAt}</p>
+                            <p className="recurringDate">{data.startAt}
+                                <FormattedDate value={data.startAt} format='webinars' />
+                            </p>
                             <p>{this.getIntlMessage('membersAttended')}: {data.membersAttended}</p>
-                            <p>{data.status}</p>
+                            <p>{msg}</p>
                         </div>
                         <ButtonViewRecording data={data.linkViewRecording} />
                     </div>
@@ -101,6 +125,7 @@ var MetaDetail = React.createClass({
                                     <img src={data.tutor.profilePic} alt="" />
                                     <figcaption>{data.tutor.name}</figcaption>
                                 </figure>
+                                <p dangerouslySetInnerHTML={{__html: data.tutor.presenterInfo}} />
                             </div>
                         </div>
                         <div data-tab="discussion" className="moduleWrapper">
@@ -128,10 +153,16 @@ var MetaDetail = React.createClass({
     }
 });
 
+
 var WebinarDetailSummary = React.createClass({
     mixins: [IntlMixin],
     render: function () {
         var data = this.props.data;
+        var genderCity = data.tutor.gender;
+        if(data.tutor.city)     genderCity += ' | ' + data.tutor.city;
+        if(data.tutor.country)  genderCity += ', ' + data.tutor.country;
+        var status = data.classStart.status;
+        var msg = GetStatusMessage(status);
 
         return (
                 <section id="webinarsDetails" className="moduleBody">
@@ -144,6 +175,7 @@ var WebinarDetailSummary = React.createClass({
                                         <figcaption className="captionWrap">
                                             {data.tutor.name}
                                         </figcaption>
+                                        <p className="captionWrap"> {genderCity}</p>
                                     </figure>
                                 </div>
                                 <div className="col-2 content">
@@ -157,12 +189,12 @@ var WebinarDetailSummary = React.createClass({
                                                 </span>
                                                 <FormattedDate value={data.classStart.date} year="numeric"/>&#160;
                                                 <FormattedTime value={data.classStart.date} hour="2-digit" minute="2-digit" />
-                                                <span className="date">{data.classStart.status}</span>
+                                                <span className="date">{data.classStats.status}</span>
                                                 
                                             </li>
                                         </ul>
                                     </div>
-                                    <div className="classFixtures">
+                                    <div className="classFixtures hide">
                                         <p>{data.classFixtures.status}</p>
                                         <div className="cta filledOrng2 inline">
                                             <a href={data.classFixtures.linkViewRecording}>{this.getIntlMessage('viewRecording')}</a>
@@ -197,7 +229,7 @@ var WebinarDetailSummary = React.createClass({
                                                     <span className="no">{data.classStats.attendesCount}</span> {this.getIntlMessage('attendees')}
                                                 </li>
                                             </ul>
-                                            <span className="msg"> {data.classStats.status}</span>
+                                            <span className="msg"> {msg}</span>
                                         </li>
                                     </ul>
                                 </div>

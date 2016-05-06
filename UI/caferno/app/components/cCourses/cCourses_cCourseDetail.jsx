@@ -94,8 +94,8 @@ var CourseSummary = React.createClass({
                                             <figcaption className="captionWrap">
                                                 <div className="gutter clearfix">
                                                     <span className="academy">
-                                                    <img src={data.authorImg} />
-                                                </span>
+                                                        <img src={data.authorImg} />
+                                                    </span>
                                                     <span className="caption">{data.authorName}</span>
                                                 </div>
                                             </figcaption>
@@ -186,11 +186,10 @@ var CourseOverview = React.createClass({
                 <div data-tab="overview" className="moduleWrapper">
                     <div className="primaryDetail">
                         <h2 className="title">{intlData.overview}</h2>
-                        <span dangerouslySetInnerHTML={{__html: data.overviewText}} />
+                        <p dangerouslySetInnerHTML={{__html: data.overviewText}} />
                     </div>
                     <div className="secondryDetail clearfix">
                         <h2 className="title">{intlData.aboutTheInstructor}</h2>
-                        {data.about}
                         <div className="clearfix">
                             <figure className="academyImg col-1">
                                 <img src={data.authorImg} alt="" />
@@ -200,9 +199,10 @@ var CourseOverview = React.createClass({
                                 </figcaption>
                             </figure>
                             <div className="col-2">
+                                <p dangerouslySetInnerHTML={{__html: data.about}} />
                                 <ul className="academyMeta clearfix">
-                                    <li>{data.followersCount}<span>{intlData.followers}</span></li>
-                                    <li>{data.testimonialsCount}<span>{intlData.testimonials}</span></li>
+                                    <li>{data.followersCount}<span className="name">{intlData.followers}</span></li>
+                                    <li>{data.testimonialsCount}<span className="name">{intlData.testimonials}</span></li>
                                 </ul>
                             </div>
                         </div>

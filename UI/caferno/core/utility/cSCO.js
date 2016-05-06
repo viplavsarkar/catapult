@@ -73,7 +73,7 @@ cSCO.prototype.getComponent = function(){
 		case CONST.CLASS_LIST:
 			return new Comp('cWebinars_testList.jsx', null , true, "cWebinars", null,
 	            {
-	                 url: ORCH.classList + _.params.espId + "?pageSize=10&page=0"
+	                 url: ORCH.classList + _.params.espId + "?pageSize=1000&page=0"
 	            },
 	            _.varName
 	        )

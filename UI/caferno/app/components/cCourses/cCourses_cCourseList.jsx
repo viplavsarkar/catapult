@@ -140,22 +140,17 @@ var CourseComposition = React.createClass({
     render: function () {
         var data = this.props.data;
 
-        if (typeof data.tutorials != "undefined") {
-            var tutorials = <CourseTutorials data={data.tutorials} />
-        } else {
-            var tutorials = '';
-        }
+        var tutorials = '', classes = '', tests = '';
+        if(data.tutorials && data.tutorials > 0){
+            tutorials = <CourseTutorials data={data.tutorials} />
+        } 
 
-        if (typeof data.classes != "undefined") {
-            var classes = <CourseClasses data={data.classes} />
-        } else {
-            var classes = '';
-        }
+        if(data.classes && data.classes > 0){
+            classes = <CourseClasses data={data.classes} />
+        } 
 
-        if (typeof data.tests != "undefined") {
-            var tests = <CourseTests data={data.tests} />
-        } else {
-            var tests = '';
+        if(data.tests && data.tutorials > 0){
+            tests = <CourseTests data={data.tests} />
         }
 
         return (
@@ -182,11 +177,30 @@ var PriceLine = React.createClass({
         }
         //var curr = window.currency;
         //console.log(data)
+        var currSym = {
+                        USD:'$',
+                        INR:'Rs.'
+                    };
         if(data.isPaid){
             if(data.priceList){
                 if(data.priceList[curr]){
-                    if(data.priceList[curr].priceStriked) priceStrikedStr = data.priceList[curr].priceStriked;
-                    if(data.priceList[curr].price) priceStr = data.priceList[curr].price;
+
+                    if(data.priceList[curr].priceStriked) {
+                        priceStrikedStr = data.priceList[curr].priceStriked;
+                        if(priceStrikedStr.length > 0){
+                            if(priceStrikedStr[0] != currSym[curr]){
+                                priceStrikedStr = currSym[curr] + priceStrikedStr;
+                            }
+                        }
+                    }
+                    if(data.priceList[curr].price) {
+                        priceStr = data.priceList[curr].price;
+                        if(priceStr.length > 0){
+                            if(priceStr[0] != currSym[curr]){
+                                priceStr = currSym[curr] + priceStr;
+                            }
+                        }
+                    }
                 }
             }
         }else{
@@ -230,6 +244,42 @@ var CourseEnrollees = React.createClass({
     }
 });
 
+var SelfPacedDate = React.createClass({
+    mixins:[IntlMixin],
+    render: function(){
+        var data = this.props.data;
+
+        return (
+                <ul className="placed">
+                    <li>
+                        {this.getIntlMessage('selfPaced')} 
+                        <span className="date">
+                            {this.getIntlMessage('publishedDate')}: <FormattedDate value={data.publishedDate || 0} format='short' />
+                        </span>
+                    </li>
+                </ul>
+            )
+    }
+});
+
+var LiveForDate = React.createClass({
+    mixins:[IntlMixin],
+    render: function(){
+        var data = this.props.data;
+        return (
+                <ul className="placed">
+                    <li>
+                        {this.getIntlMessage('liveFor')} {data.liveFor} {this.getIntlMessage('week')}
+                        <span className="date">
+                            {this.getIntlMessage('startDate')}: <FormattedDate value={data.startDate || 0} format='short' />
+                        </span>
+                    </li>
+                </ul>
+            )
+    }
+});
+
+
 var CourseListItem = React.createClass({
     mixins: [IntlMixin],
     render: function () {
@@ -250,6 +300,17 @@ var CourseListItem = React.createClass({
         data.enrolleesData = {};
         data.enrolleesData.enrollees = data.enrollees;
         data.enrolleesData.count = data.learnerCount;
+        var selfOrLive;
+        if(data.courseScheduleType.type === 'SELF_PACED'){
+            var selfData = {};
+            selfData.publishedDate = data.courseScheduleType.publishedDate;
+            selfOrLive = <SelfPacedDate data={selfData} />;
+        }else if(data.courseScheduleType.type === "INSTRUCTOR_LED"){
+            var liveData = {};
+            liveData.liveFor = data.courseScheduleType.weekCount;
+            liveData.startDate = data.courseScheduleType.startDate;
+            selfOrLive = <LiveForDate data={liveData} />;
+        }
         return (
             <li className="item clearfix">
                 <div className="col-1">
@@ -257,8 +318,8 @@ var CourseListItem = React.createClass({
                         <a href={courseDetailLink}><img src={courseLogo} alt={data.title} /></a>
                         <figcaption className="captionWrap">
                             <div className="gutter clearfix">
-                                <span className="academy">
-                                    <img src={tutorLogo} />
+                                <span className="academy vMiddleWrap">
+                                    <span className="vMiddle"><img src={tutorLogo} /></span>
                                 </span>
                                 <span className="caption">{data.tutor.name}</span>
                             </div>
@@ -267,14 +328,7 @@ var CourseListItem = React.createClass({
                 </div>
                 <div className="col-2 content">
                     <h2><a href={courseDetailLink}>{data.title}</a></h2>
-                    <ul className="placed">
-                        <li>
-                            {this.getIntlMessage('liveFor')} {data.liveFor} {this.getIntlMessage('week')}
-                            <span className="date">
-                                {this.getIntlMessage('publishedDate')}: <FormattedDate value={data.publishDate || 0} format='short' />
-                            </span>
-                        </li>
-                    </ul>
+                    {selfOrLive}
                     <CourseComposition data={data.courseComposition} />
                 </div>
                 <div className="col-3">

@@ -21,7 +21,9 @@ var DiscoverBanner = React.createClass({
     },
     render: function () {      
         var data = this.props.data.academy;
-
+        var date = new Date();
+        console.log(date.toLocaleDateString('en-GB'));
+        console.log(date.toLocaleDateString('en-US'));
         var title = data.title;
         if(!title) title = 'Your Academy Where People Come to Learn From Your Courses';
         return (
