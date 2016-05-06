@@ -57,14 +57,17 @@ var CourseQuickLinks = React.createClass({
         var _this = this;
         var defaultSortFields = [
             {
+                key: 0,
                 dataVal: 'popularity',
                 fieldName: 'ENROLLEDCOUNT'
             },
             {
+                key: 1,
                 dataVal: 'date',
                 fieldName: 'PUBLISHEDON'
             },
             {
+                key: 2,
                 dataVal: 'price',
                 fieldName: 'PRICE'
             }
@@ -73,14 +76,14 @@ var CourseQuickLinks = React.createClass({
         var sortFields = defaultSortFields.map(function (field) {
             var className = (_this.state.selectedField === field.dataVal) ? 'active' : '';
             return (
-                <SortField className={className} data={field} sortClickHandler={_this.props.sortClickHandler} setCurrentSortField={_this.setCurrentSortField} getCurrentSortField={_this.getCurrentSortField}/>
+                <SortField key={field.key} className={className} data={field} sortClickHandler={_this.props.sortClickHandler} setCurrentSortField={_this.setCurrentSortField} getCurrentSortField={_this.getCurrentSortField}/>
             );
         });
 
         return (
             <ul className="courseQuickLinks clearfix">
                 <li className="sorting hide">
-                    {this.getIntlMessage('sortBy')}: <a href="#" data-val={this.state}>{this.getIntlMessage(this.state.selectedField)}</a>
+                    {this.getIntlMessage('sortBy')}: <a href="#" data-val={this.state.selectedField}>{this.getIntlMessage(this.state.selectedField)}</a>
                     <ul className="options">
                         {sortFields}
                     </ul>
@@ -323,7 +326,7 @@ var Section = React.createClass({
     loadCoursesFromServer: function (payload, isAppend) {
         var _this = this;
 
-        if (payload && !this.state.allRecordsFetched) {
+        if (payload && (!this.state.allRecordsFetched || !isAppend)) {
             $.ajax({
                 url: '',
                 data: {payload: payload},

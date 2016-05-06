@@ -64,7 +64,7 @@ PCourses.prototype.generatePage = function(){
 PCourses.prototype.getPageJson = function (payload) {
     var _this = this;
     var request = new httpHandler({
-            url: ORCH.classList + payload.espId + '?page=' + payload.page + '&pageSize=' + payload.pageSize
+            url: ORCH.classList + payload.espId + '?page=' + payload.page + '&pageSize=' + payload.pageSize + '&sortField=' + payload.sortField
         });
     request.getMethodForAsynch("SIMPLE_REST")(function (err, data) {
         if (err) {

@@ -12,6 +12,90 @@ var FormattedDate = ReactIntl.FormattedDate;
 //*****************************************************************
 //  YOUR CODE STARTS HERE
 //*****************************************************************
+var SortMenuItem = React.createClass({
+    mixins: [IntlMixin],
+    clickHandler: function (event) {
+        try {
+            var currentSortField = this.props.getCurrentSortField();
+            if (currentSortField.selectedField !== this.props.data.dataVal) {
+                this.props.sortClickHandler(event);
+            }
+            this.props.setCurrentSortField(this.props.data.dataVal);
+        } catch (ex) {
+            console.log('Exception inside SortMenuItem clickHandler: ' + ex);
+        }
+    },
+    render: function () {
+        var data = this.props.data;
+
+        return (
+            <li data-val={data.dataVal} className={this.props.className}>
+                <a href="#" data-sort-field={data.fieldName} onClick={this.clickHandler}>{this.getIntlMessage(data.dataVal)}</a>
+            </li>
+        );
+    }
+});
+
+var SortMenu = React.createClass({
+    mixins: [IntlMixin],
+    getInitialState: function () {
+        return {
+            selectedField: ''
+        };
+    },
+    componentWillMount: function () {
+        this.setState({
+            selectedField: 'popularity'
+        });
+    },
+    setCurrentSortField: function (sortField) {
+        this.setState({
+            selectedField: sortField
+        });
+    },
+    getCurrentSortField: function () {
+        return this.state;
+    },
+    render: function () {
+        var _this = this;
+        var defaultSortFields = [
+            {
+                key: 0,
+                dataVal: 'popularity',
+                fieldName: 'POPULARITY'
+            },
+            {
+                key: 1,
+                dataVal: 'time',
+                fieldName: 'TIME'
+            },
+            {
+                key: 2,
+                dataVal: 'rating',
+                fieldName: 'RATING'
+            }
+        ];
+
+        var sortFields = defaultSortFields.map(function (field) {
+            var className = (_this.state.selectedField === field.dataVal) ? 'active' : '';
+            return (
+                <SortMenuItem key={field.key} className={className} data={field} sortClickHandler={_this.props.sortClickHandler} setCurrentSortField={_this.setCurrentSortField} getCurrentSortField={_this.getCurrentSortField}/>
+            );
+        });
+
+        return (
+            <ul className="courseQuickLinks clearfix">
+                <li className="sorting hide">
+                    {this.getIntlMessage('sortBy')}: <a href="#" data-val={this.state.selectedField}>{this.getIntlMessage(this.state.selectedField)}</a>
+                    <ul className="options">
+                        {sortFields}
+                    </ul>
+                </li>
+            </ul>
+        );
+    }
+});
+
 var TutorInfo = React.createClass({
     mixins: [IntlMixin],
     render: function(){
@@ -55,7 +139,7 @@ var EachWebinarRoww = React.createClass({
         var recordingData = {};
         recordingData.recordingStatus = data.recordingStatus;
         recordingData.recordingLink = viewRecording;
-       
+
         return (
                 <li className="item clearfix">
                     <div className="col-2 content">
@@ -79,8 +163,8 @@ var EachWebinarRoww = React.createClass({
                     <div className="col-3">
                         <ul className="ctaGroup">
                             <li className="cta noRadius inlineBlc">
-                                <TutorInfo data={data.creator} />                                
-                            </li>                           
+                                <TutorInfo data={data.creator} />
+                            </li>
                             <li>
                                 <p>{data.creator.city}, {data.creator.country}</p>
                             </li>
@@ -105,22 +189,14 @@ var Section = React.createClass({
             data: this.props.data.result
         });
     },
-    viewMoreClickHandler: function (event) {
-        event.preventDefault();
-
-        var payload = {};
+    loadWebinarsFromServer: function (payload, isAppend) {
         var _this = this;
-        try {
-            payload.page = (_this.state.meta.page + 1);
-            payload.pageSize = _this.state.meta.pageSize;
-        } catch (ex) {
-            console.log("Exception inside viewMoreClickHandler: " + ex);
-        }
+        var allRecordsFetched = _this.state.meta.page == _this.state.meta.totalPages;
 
-        if (payload) {
+        if (payload && !allRecordsFetched) {
             $.ajax({
                 url: '',
-                data: { payload: payload },
+                data: {payload: payload},
                 cache: false,
                 dataType: 'json',
                 contentType: "application/json",
@@ -132,19 +208,57 @@ var Section = React.createClass({
                             data: _this.state.data
                         };
 
-                        state.data = state.data.concat(response.result);
+                        if (isAppend) {
+                            state.data = state.data.concat(response.result);
+                        } else {
+                            state.data = response.result;
+                        }
+
                         state.meta = response.meta;
 
                         _this.setState(state);
                     } catch (ex) {
-                        console.log('Exception inside viewMoreClickHandler ajax success: ' + ex.message);
+                        console.log('Exception inside loadWebinarsFromServer ajax success: ' + ex.message);
                     }
                 },
                 error: function (xhr, status, err) {
-                    console.log('Exception inside viewMoreClickHandler ajax error: ' + err);
+                    console.log('Exception inside loadWebinarsFromServer ajax error: ' + err);
                 }
             });
         }
+    },
+    viewMoreClickHandler: function (event) {
+        event.preventDefault();
+        var payload = {};
+        var _this = this;
+        try {
+            payload.page = (_this.state.meta.page + 1);
+            payload.pageSize = _this.state.meta.pageSize;
+            payload.sortField = _this.state.meta.sortField;
+            payload.order = _this.state.meta.order;
+        } catch (ex) {
+            console.log("Exception inside viewMoreClickHandler: " + ex);
+            return;
+        }
+
+        this.loadWebinarsFromServer(payload, true);
+    },
+    sortClickHandler: function (event) {
+        event.preventDefault();
+
+        var payload = {};
+        var _this = this;
+        try {
+            payload.page = 0;
+            payload.pageSize = _this.state.meta.pageSize;
+            payload.sortField = event.target.getAttribute('data-sort-field');
+            payload.order = _this.state.meta.order;
+        } catch (ex) {
+            console.log("Exception inside sortClickHandler: " + ex);
+            return;
+        }
+
+        this.loadWebinarsFromServer(payload, false);
     },
     render: function () {
         var data = this.state.data;
@@ -158,28 +272,17 @@ var Section = React.createClass({
             <section id="webinarListing" className="moduleBody">
                 <div className="moduleWrapper">
                     <h1 className="title">{this.getIntlMessage('webinars')}</h1>
-                    <ul className="courseQuickLinks clearfix">
-                        <li className="sorting hide">
-                            {this.getIntlMessage('sortBy')}: <a href="#" data-val="popularity">{this.getIntlMessage('time')}</a>
-                            <ul className="options">
-                                <li data-val="popularity">
-                                    <a href="#">{this.getIntlMessage('time')}</a>
-                                </li>
-                                <li data-val="date">
-                                    <a href="#">{this.getIntlMessage('popularity')}</a>
-                                </li>
-                                <li data-val="price">
-                                    <a href="#">{this.getIntlMessage('rating')}</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <SortMenu sortClickHandler={this.sortClickHandler} />
                     <ul className="courseList webinar">
                        {itemList}
                     </ul>
-                    <div className="cta wired" onClick={this.viewMoreClickHandler}>
-                        <a href="#">{this.getIntlMessage('viewMore')}</a>
-                    </div>
+                    {
+                        (this.state.meta.page === this.state.meta.totalPages - 1) ?
+                        null :
+                        <div className="cta wired" onClick={this.viewMoreClickHandler}>
+                            <a href="#">{this.getIntlMessage('viewMore')}</a>
+                        </div>
+                    }
                 </div>
             </section>
         );
