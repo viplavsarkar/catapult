@@ -1,12 +1,15 @@
 /*** All Global and default styles below ***/
 
 // Global variables*/
-	@orange: #f5892d;
+    @orange: #f5892d;
     @blue: #007fc5;
     @gray: #333;
     @lightGray: #666;
     @lightestGray: #888;
     @black: #000;
+    @white: #FFF;
+    @green: #33cc33;
+    @disable: #ededed;
     @labelColor: #676767;
     @inputColor:#999;
     @largestFont: 30px;
@@ -32,7 +35,7 @@
 /*END - Tags Specific*/
 
 /*START - Prefix Specific*/
-	.inputPlaceHolder {color: @lightestGray; font-size: @smallestFont + 1; opacity: 1;}
+    .inputPlaceHolder {color: @lightestGray; font-size: @smallestFont + 1; opacity: 1;}
     ::-webkit-input-placeholder {.inputPlaceHolder}
     :-moz-placeholder { /* Firefox 18- */ .inputPlaceHolder}
     ::-moz-placeholder { /* Firefox 19+ */.inputPlaceHolder}
@@ -74,7 +77,7 @@
             &.inlineBlc { display: inline-block; min-width: 50%; max-width: 50%;}
         }
         &.filledOrng { background: #f78200; border-radius: 4px; position: relative; border-bottom: 6px #C05F0B solid;
-            a { color: #FFF; font-weight: 900; font-size: @largeFont - 2; padding-bottom: 6px;}
+            a { color: @white; font-weight: 900; font-size: @largeFont - 2; padding-bottom: 6px;}
             &:after { content: ''; background: #f78200; position: absolute; left: 0; bottom: -2px; width: 100%; height: 4px; border-radius: 0 0 4px 4px;}
             &:hover { background: #F99A2F;
                 &:after { background: #F99A2F;}
@@ -82,8 +85,8 @@
         }
 
         &.filledOrng2 { background: #f78200; border-radius: 4px; position: relative; 
-            a { color: #FFF; font-weight: 900; font-size: @largeFont - 2;}
-            &[type='button'] { border:0; padding: 10px 15px; font-size: @smallFont; color: #FFF; cursor: pointer;}
+            a { color: @white; font-weight: 900; font-size: @largeFont - 2;}
+            &[type='button'] { border:0; padding: 10px 15px; font-size: @smallFont; color: @white; cursor: pointer;}
             &:hover { background: #F99A2F;}
         }
     }
@@ -126,7 +129,8 @@
 /*START - Page Header*/
     #pageHeader { box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3); min-height: 70px;
         .logo { float: left; padding-top: 12px;}
-        .pageHeadNav { float: right;
+        .pageHeadNavWrap { float: right;}
+        .pageHeadNav { 
             li { float: left; vertical-align: top; color: @lightestGray; font-size: @smallFont; margin-left: 30px; text-transform: capitalize;
                 a { text-decoration: none; color: @lightestGray; line-height: 70px; display: block;
                     &:hover {color: @orange;}
@@ -137,7 +141,8 @@
                 &.cta { margin-top: 14px;}
             }
         }
-    }  
+    } 
+    #hamBurgerMenu { display: none;}
 /*END -   Page Header*/
 
 /*START - Page Footer*/
@@ -147,15 +152,15 @@
             h4 { font-size: @largestFont + 4;}
         }
         .col-2 { .column(45%, left);}
-        .col-3 { .column(20%, left); text-align: right; padding-top: 32px;
-            figure { display: inline-block;}
+        .col-3 { .column(20%, left); text-align: right; padding-top: 1.5%; direction: rtl; 
+            figure { display: table; direction: rtl;}
             img { float: right;}
-            figcaption { float: left; line-height: 18px; padding-right: 6px;}
+            figcaption { float: none; display: table-cell; vertical-align: middle; line-height: 18px; padding-right: 6px;}
         }
         .appPlatform { 
             li { float: left; line-height: 16px; position: relative; margin-right: 30px; border-right: 1px solid #e5e5e5;
                 a { font-size: @smallFont; font-weight: 100; height: 57px; padding: 25px 20px 0 43px; display: block; color: @lightGray; text-decoration: none; 
-                    span { display: block; padding-top: 5px; font-style: normal; font-size: 20px; color: @lightGray; font-weight: 300;}
+                    span.os { display: block; padding-top: 5px; font-style: normal; font-size: @largeFont + 2; color: @lightGray; font-weight: 300;}
                 }
                 &:before { content: ""; position: absolute; left: 0; top: 20px; width: 37px; height: 44px; .bgImg('oa_sprite.png', 0 0, no-repeat);}
                 &:last-child { margin-right: 0; border:0;}
@@ -203,7 +208,7 @@
             .courseImg { border-radius: 5px; border: 1px #cccccc solid; padding: 5px; position: relative;
                 a { display: block; height: 152px; overflow: hidden;}  
                 img { width: 100%; height: auto; display: block;}
-                .captionWrap { position: absolute; bottom: 5px; left: 0; width: 100%; height: 48px; color: #FFF; line-height: 16px;  
+                .captionWrap { position: absolute; bottom: 5px; left: 0; width: 100%; height: 48px; color: @white; line-height: 16px;  
                     .gutter { height: 48px; background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0; margin: 0 5px;}
                     .academy { width: 44px; height: 48px; float: left; margin: 0 0 0 13px; position: relative; top: 10px; background: #FFF; padding: 3px; border: 1px #cccccc solid; border-radius: 5px; display: block;}
                     img { width: 100%; max-height: 48px;}
@@ -241,7 +246,7 @@
             .item {
                 .courseImg { border-radius: 0; border: 0; padding: 0; position: relative; 
                     > img { width: 100%; height: auto; max-height: 152px; display: block; border-radius: 5px; border: 1px #cccccc solid;}
-                    .captionWrap { position: static; width: auto; height: auto; color: #FFF; line-height: 16px;  
+                    .captionWrap { position: static; width: auto; height: auto; color: @white; line-height: 16px;  
                         .gutter { height: auto; background: none; margin: 0; padding-top: 15px;}
                         .academy { float: left; margin: 0; position: static; border: 0; padding: 0;}
                         img { width: auto;}
@@ -280,7 +285,7 @@
                             .no { font-size: @largeFont; font-weight: 300; display: block;}
                         }
                     }
-                    .msg { font-size: @smallestFont; color: #33cc33;}   
+                    .msg { font-size: @smallestFont; color: @green;}   
                 }
                 .innerTabsWrap { padding: 0 0 0 0; margin: 15px 0 0 0;
                     .tabs { position: relative; z-index: 10;
@@ -379,7 +384,7 @@
     }
     .primaryDetail {
         .title { font-size: @largeFont; font-weight: 900; margin-bottom: 15px;
-            .count { background: @inputColor; border-radius: 10px; font-weight: 100; font-size: 9px; line-height: 11px; padding: 0 10px; color: #FFF; position: relative; top: -3px;}
+            .count { background: @inputColor; border-radius: 10px; font-weight: 100; font-size: @smallestFont - 3; line-height: 11px; padding: 0 10px; color: @white; position: relative; top: -3px;}
         }
         p { font-size: @smallFont; line-height: 20px; margin-bottom: 15px;}
         .hostedLang { position: relative; padding-left: 35px;
@@ -479,7 +484,7 @@
     .fullBgImg { border-bottom: 1px solid #1e201d;
         .col-1 { .column(50%, left);}
         .col-2 { .column(50%, left);}
-        .copy { padding: 16% 10% 0 0; color: #FFF;
+        .copy { padding: 16% 10% 0 0; color: @white;
             h1 { font-size: @largestFont; margin-bottom: 10px;}
             p { font-size: @largeFont - 2; line-height: 22px;}
             .appDownload { margin-top: 15px;
@@ -505,7 +510,7 @@
     #heroHalfImg { .bgImg('/heroImg/backgroundimg.jpg', center 0, no-repeat); background-size: 100% auto;}
     .halfBgImg {
         .moduleWrapper { height: 208px; display: table;} 
-        .copy { color: #FFF; text-align: center; display: table-cell; vertical-align: middle;
+        .copy { color: @white; text-align: center; display: table-cell; vertical-align: middle;
             h1 { font-size: @largestFont + 18; font-weight: 900; margin-bottom: 15px;}
             p { font-size: @largeFont; line-height: 22px; font-style: italic;}
         }
@@ -529,7 +534,7 @@
             .triangle { width: 56px; height: 100%; position: absolute; left: 100%; top: 0; .bgImg('triangular.png', 0 0, no-repeat);}
             &:after, &:before { content: ''; opacity: 0; transition: opacity 300ms linear; position: absolute; top: 0;}  
 
-            &:hover, &.active { color: #FFF;
+            &:hover, &.active { color: @white;
                 &:after { width: 56px; height: 100%; left: 100%; z-index: 3; opacity: 1; .bgImg('triangular.png', 0 -109px, no-repeat);}
                 &:before { width: 100%; height: 100%; left: 0; opacity: 1; .bgImg('triangular.png', 0 -328px, repeat-x); border-radius: 4px; border-top-right-radius: 0; border-bottom-right-radius: 0;}    
             }
@@ -591,7 +596,7 @@
                     &:last-child { padding-right: 5px;}    
                     &.dp-highlight { background: #EDEDED}
                     &.dp-highlight.ui-state-disabled { color: @gray;}
-                    &.ui-state-disabled  { color: #ededed;}
+                    &.ui-state-disabled  { color: @disable;}
                     a { color: @black;}
                 }
                 tr:last-child {
@@ -622,7 +627,7 @@
                 }
             }
         }
-        &.withBG { padding: 30px 0; background: #F5892D; color: #FFF;}
+        &.withBG { padding: 30px 0; background: #F5892D; color: @white;}
     }
     .formElement {
         .fieldList {
@@ -645,7 +650,7 @@
             input {
                 &[type='text'], &[type='email'], &[type='tel'], &[type='password'] { width: 100%; font-weight: 100; font-size: @smallestFont + 1; color: @inputColor; font-family: @globalFontFamily; padding: 10px 10px; line-height: normal; background: #fff; border-radius: 5px; border:1px solid #ccc; box-sizing: border-box;}
             }
-            textarea { width: 100%; box-sizing: border-box; background: #fff; border-radius: 5px; border:1px solid #ccc; padding: 6px 10px; font-weight: 100; font-size: @smallFont; color: #999; font-family: @globalFontFamily;}
+            textarea { width: 100%; box-sizing: border-box; background: #fff; border-radius: 5px; border:1px solid #ccc; padding: 6px 10px; font-weight: 100; font-size: @smallFont; color: @inputColor; font-family: @globalFontFamily;}
             .fieldOpt { box-sizing: border-box; border-radius: 5px; border:1px solid #ccc; padding: 9px 10px 9px 6px;
                 select { -webkit-appearance: none; -moz-appearance: none; appearance: none; width: 100%; padding: 0; margin: 0; background: none; border:0; font-weight: 100; font-size: @smallestFont + 1; color: @inputColor; .bgImg('grayArrowSmall.gif', right 7px, no-repeat);}
             }                
@@ -653,4 +658,3 @@
         }
     }
 /*END - Generic*/
-

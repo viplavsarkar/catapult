@@ -13,6 +13,7 @@ var APP = APP || {}; //Global Namespace
         function _subModules() {
             this.init = function() {
                 slideUpDown('.sorting > a', 'slide', 'hide');
+                hamBurgerMenu();
             };
             this.pluginInit = function() {
                 APP.eventTarget.find('#courseTabs').tabbing({
@@ -26,8 +27,7 @@ var APP = APP || {}; //Global Namespace
 
                 APP.eventTarget.find('#appFeatures').tabbing({
                     defaultTab: 0,
-                    content: 'contentImg',
-                    afterInit: appFeaturesCallback
+                    content: 'contentImg'
                 });
 
                 APP.eventTarget.find('#webinarsDetails').tabbing({
@@ -39,18 +39,60 @@ var APP = APP || {}; //Global Namespace
             };
             this.onWindowLoad = function() {};
 
-            var appFeaturesCallback = function($tabsParent){
+            var hamBurgerMenu = function() {
+                var $pageHeadNavWrap = APP.eventTarget.find('.pageHeadNavWrap'),
+                    $pageWrapper = APP.eventTarget.find('#pageWrapper'),
+                    $menu = $('<div id="hamBurgerMenu" />'),
+                    domOfMenu = $pageHeadNavWrap[0].innerHTML;
 
-            };
+                $pageHeadNavWrap.on('click', function(e) {
+                    var $this = $(this),
+                        docHeight = APP.eventTarget.find('#pageWrapper').height();
+
+                    if ($(window).width() < 768) {
+                        var getMenu = APP.eventTarget.find('#hamBurgerMenu');
+
+                        if ($this.hasClass('show')) {
+                            APP.eventTarget.find('#pageWrapper').removeClass('enableAnimation');
+                            $this.removeClass('show');
+                            return false;
+                        };
+
+                        if (getMenu.length !== 1) {
+                            APP.eventTarget.prepend($menu).find('#hamBurgerMenu').height(docHeight).html(domOfMenu).end().find('#pageWrapper').addClass('enableAnimation');
+                            $this.addClass('show');
+                        } else {
+                            APP.eventTarget.find('#hamBurgerMenu').height(docHeight).end().find('#pageWrapper').addClass('enableAnimation');
+                            $this.addClass('show');
+                        };
+
+                    } else {
+                        var getMenu = APP.eventTarget.find('#hamBurgerMenu');
+                        if (getMenu.length == 1) {
+                            $(getMenu).remove();
+                        }
+                    };
+                });
+
+                var makeItHidden = function(e) {
+                    if ($pageWrapper.hasClass('enableAnimation') && !$pageHeadNavWrap.is(e.target) && $pageHeadNavWrap.has(e.target).length === 0 && !$menu.is(e.target) && !$menu.find('.pageHeadNav, li, li a').is(e.target)) {
+                        $pageWrapper.removeClass('enableAnimation');
+                        $pageHeadNavWrap.removeClass('show');
+                    };
+                };
+
+                APP.document.on('mouseup', makeItHidden);
+
+            }
 
             var inLineDatePicker = function($calender) {
                 var dateStart = $calender.data('date-start'),
                     dateEnd = $calender.data('date-end');
 
-                var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     objDateStart = new Date(dateStart),
                     objDateEnd = new Date(dateEnd);
-                    dateStartText = objDateStart.getDate() + ' ' + months[objDateStart.getMonth()],
+                dateStartText = objDateStart.getDate() + ' ' + months[objDateStart.getMonth()],
                     dateEndMonth = objDateEnd.getDate() + ' ' + months[objDateStart.getMonth()];
 
                 $calender.datepicker({
@@ -60,7 +102,7 @@ var APP = APP || {}; //Global Namespace
                     stepMonths: 0,
                     beforeShowDay: function(date) {
                         var dateFrom = $.datepicker.parseDate($.datepicker._defaults.dateFormat, dateStart);
-                            dateTo = $.datepicker.parseDate($.datepicker._defaults.dateFormat, dateEnd);
+                        dateTo = $.datepicker.parseDate($.datepicker._defaults.dateFormat, dateEnd);
                         return [true, dateFrom && ((date.getTime() == dateFrom.getTime()) || (dateTo && date >= dateFrom && date <= dateTo)) ? "dp-highlight" : ""];
                     }
                 });
@@ -72,10 +114,10 @@ var APP = APP || {}; //Global Namespace
                 var $list = APP.eventTarget.find('.highlighter li');
 
                 $list.hover(
-                    function(){
+                    function() {
                         console.log('hover');
                     },
-                    function(){
+                    function() {
                         console.log('leave');
                     }
                 );
@@ -116,7 +158,7 @@ var APP = APP || {}; //Global Namespace
                         newVal = currentVal;
                     };
 
-                    //$options.find('li').removeClass('active').end().find('li[data-val=' + newVal + ']').addClass('active');
+                    $options.find('li').removeClass('active').end().find('li[data-val=' + newVal + ']').addClass('active');
 
                     switch (transform) {
                         case 'slide':
@@ -153,7 +195,7 @@ var APP = APP || {}; //Global Namespace
                 };
 
                 $selector.on('click', eventHandling);
-                //$selector.parent().on('click', '.options li', optionsEventHandling);
+                $selector.parent().on('click', '.options li', optionsEventHandling);
                 APP.document.on('mouseup', makeItHidden);
             };
         }
@@ -175,7 +217,7 @@ var APP = APP || {}; //Global Namespace
                 defaultTab: 0, //Default tab
                 animationSpeed: 600,
                 afterInit: function($tabsParent) {}, //Callback after init
-                afterShow: function() {} //Callback after content show
+                afterShow: function() {} //Callback after content show 
             }, config);
 
             var doTabbing = function() {
