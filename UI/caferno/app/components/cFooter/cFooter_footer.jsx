@@ -34,13 +34,13 @@ var Footer = React.createClass({
                         <li className="ios">
                             <a href={data.urlOfAppleStore} target="_blank">
                                 {this.getIntlMessage('availableOn')}
-                                <span>{this.getIntlMessage('appStore')}</span>
+                                <span className="os">{this.getIntlMessage('appStore')}</span>
                             </a>
                         </li>
                         <li className="android">
                             <a href={data.urlOfAndroidStore} target="_blank">
                                 {this.getIntlMessage('downloadFor')}
-                                <span>{this.getIntlMessage('android')}</span>
+                                <span className="os">{this.getIntlMessage('android')}</span>
                             </a>
                         </li>
                     </ul>

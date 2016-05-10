@@ -74,9 +74,11 @@ var HeaderNavigation = React.createClass({
         });
 
         return (
-            <ul className="pageHeadNav clearfix">
-                {navigationItems}
-            </ul>
+            <nav className="pageHeadNavWrap">
+                <ul className="pageHeadNav clearfix">
+                    {navigationItems}
+                </ul>
+            </nav>
         );
     }
 });

@@ -4,8 +4,13 @@
     
 /*START - Page Header*/
     #pageHeader { 
-        .logo { float: right;}
-        .pageHeadNav { float: left;
+        .logo { float: right;
+            @media only screen and (max-width: 767px){
+                float: none;
+            }
+        }
+        .pageHeadNavWrap { float: left;}
+        .pageHeadNav { 
             li { float: right; text-align: right;}
         }
     }  
@@ -13,13 +18,24 @@
 
 /*START - Page Footer*/
     #pageFooter { 
-        .col-1, .col-2, .col-3 { float: right; text-align: right;}
-        .col-3 { text-align: left;
-            img { float: left;}
-            figcaption { float: right; text-align: right; padding: 0 0 0 6px;}
+        .col-1, .col-2, .col-3 { float: right; text-align: right;
+            @media only screen and (max-width: 767px){
+                text-align: center;
+            }
         }
-        .appPlatform { 
+        .col-3 { text-align: left; direction: ltr;
+            figure { direction: ltr;}
+            img { float: left;}
+            figcaption { text-align: right; padding: 0 0 0 6px;}
+        }
+        .appPlatform {
+            @media only screen and (max-width: 767px){
+                direction: rtl; font-size: 0; 
+            } 
             li { float: right; border-right-width:0; border-left:1px solid #e5e5e5; margin: 0 0 0 30px; 
+                @media only screen and (max-width: 767px){
+                    float: none; display: inline-block; margin-left: 10px;
+                }
                 a { padding: 25px 43px 0 20px}
                 &:before { right: 0; left: auto;}
                 &:last-child { margin: 0;}
@@ -34,8 +50,14 @@
     }
     .courseQuickLinks  { 
         > li { float: left; text-align: right;
+            @media only screen and (max-width: 767px){
+                float: right;
+            }
             > a { float: left; padding: 0 5px 0 18px; background-position: left center;}
             .options { right: auto; left: 0;
+                @media only screen and (max-width: 767px){
+                    left: auto; right: 0;
+                }
                 li { 
                     a { padding: 0 33px 0 0;
                         &:before { left: auto; right: 10px; top: -1px;}
@@ -50,10 +72,12 @@
     .courseList { margin-top: 15px;
         .item { 
             .col-1, .col-2, .col-3 { float: right;}
-            .col-2 { }
-            .col-3 { }
             .ctaGroup {
-                li { text-align: right;}
+                li { text-align: right;
+                    @media only screen and (max-width: 767px){
+                        &.wired { float: right;}
+                    }
+                }
             }
             .content { text-align: right;
                 .placed { 
@@ -63,7 +87,7 @@
                     }
                 }
                 .type {
-                    li { float: right; margin: 0 0 0 20px;}
+                    li { float: right; margin: 10px 0 0 20px;}
                 }
             }
             .courseImg {                 
