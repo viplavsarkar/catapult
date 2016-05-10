@@ -5,7 +5,7 @@ var APP = APP || {}; //Global Namespace
     $.extend(APP, {
         document: $(document),
         eventTarget: $('body')
-    });
+    }) ;
 })(jQuery, this, this.document);
 
 (function($, window, document, undefined) {
