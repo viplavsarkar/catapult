@@ -103,7 +103,7 @@ var TutorInfo = React.createClass({
         return(
                 <figure className="userInfo clearfix">
                     <img src={data.profilePic} alt={this.getIntlMessage('tutor')} />
-                    <figcaption><a href="#">{data.name}</a></figcaption>
+                    <figcaption> <a href="#">{data.name}</a></figcaption>
                 </figure>
             )
     }
