@@ -23,8 +23,8 @@ var Breadcrum = React.createClass({
                         <div className="moduleWrapper">
                             <div className="moduleGutter">
                                 <ul className="wrapper clearfix">
-                                    <li><a href="#">Courses</a></li>
-                                    <li>CPR Online Training</li>
+                                    <li><a href="/publiccourse/">Courses</a></li>
+                                    <li>{data}</li>
                                 </ul>
                             </div>
                         </div>
@@ -365,7 +365,7 @@ var CourseDetailSection = React.createClass({
         data.courseDetail.overview.overviewText = data.courseSummary.about;
         return (
             <div>
-                <Breadcrum />
+                <Breadcrum data={data.courseSummary.title} />
                 <CourseSummary  data={data.courseSummary} />
                 <CourseDetail   data={data.courseDetail} />
             </div>

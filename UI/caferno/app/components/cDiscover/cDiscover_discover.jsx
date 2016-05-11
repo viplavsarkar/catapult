@@ -19,25 +19,43 @@ var PriceLine = React.createClass({
         var data = this.props.data;
         var priceStr = this.getIntlMessage('free');
         var priceStrikedStr = "";
-         var curr = 'USD';
+        var curr = 'INR';
         if (isNode) {
             curr = global.academy.curr;
         } else {
             curr = window.currency;
         }
-        //console.log(data)
         
+        var currSym = {
+                        USD:'$',
+                        INR:'Rs.'
+                    };
         if(data.isPaid){
             if(data.priceList){
                 if(data.priceList[curr]){
-                    if(data.priceList[curr].priceStriked) priceStrikedStr = data.priceList[curr].priceStriked;
-                    if(data.priceList[curr].price) priceStr = data.priceList[curr].price;
+
+                    if(data.priceList[curr].priceStriked) {
+                        priceStrikedStr = data.priceList[curr].priceStriked;
+                        if(priceStrikedStr.length > 0){
+                            if(priceStrikedStr[0] != currSym[curr]){
+                                priceStrikedStr = currSym[curr] + parseInt(priceStrikedStr);
+                            }
+                        }
+                    }
+                    if(data.priceList[curr].price) {
+                        priceStr = data.priceList[curr].price;
+                        if(priceStr.length > 0){
+                            if(priceStr[0] != currSym[curr]){
+                                priceStr = currSym[curr] + parseInt(priceStr);
+                            }
+                        }
+                    }
                 }
             }
         }else{
             priceStr = this.getIntlMessage('free');
         }
-    
+
         return(
                 <div className="price"> {priceStr} <span className="strikeIt">{priceStrikedStr}</span></div>
             )

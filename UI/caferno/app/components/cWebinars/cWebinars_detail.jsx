@@ -14,6 +14,29 @@ var FormattedTime = ReactIntl.FormattedTime;
 //  YOUR CODE STARTS HERE
 //*****************************************************************
 
+var Breadcrum = React.createClass({
+    mixins: [IntlMixin],
+    render: function(){
+        var data = this.props.data;
+
+        return(
+                <div>
+                    <section id="breadcrumbs" className="moduleBody">
+                        <div className="moduleWrapper">
+                            <div className="moduleGutter">
+                                <ul className="wrapper clearfix">
+                                    <li><a href="/webinars/">Webinars</a></li>
+                                    <li>{data}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                
+            );
+    }
+});
+
 var GetStatusMessage = function(ref, status){
      var msg = '';
      var obj = ref;  
@@ -167,6 +190,8 @@ var WebinarDetailSummary = React.createClass({
         var msg = GetStatusMessage(this, status);
 
         return (
+            <div>
+                <Breadcrum data={data.classTitle} />
                 <section id="webinarsDetails" className="moduleBody">
                     <div className="moduleWrapper">
                         <ul className="courseList details">
@@ -240,6 +265,7 @@ var WebinarDetailSummary = React.createClass({
                     </div>
                     <MetaDetail data={data}/>
                 </section>
+            </div>
         );
     }
 });
