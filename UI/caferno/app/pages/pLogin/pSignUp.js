@@ -2,6 +2,7 @@ var HomePageType    = require('../../presenter/pGenerateHomePage.js');
 var Comp            = require('../../../core/utility/dComponent.js');
 var CompObj         = require('../../../core/utility/cSCO.js');
 var CONST           = require('../../../core/constants/components.js');
+var DATA_ACCESS_TYPE  = require('../../../core/constants/componentParams.js');
 //var winston = require('winston');
 
 var PSamplePage = function(req, res, next){

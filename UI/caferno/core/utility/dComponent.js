@@ -1,4 +1,5 @@
-var Component = function(component, data, clientSideJSX, component_path, name, reqJson, compId){
+var DATA_ACCESS_TYPE  = require('../constants/componentParams.js');
+var Component = function(component, data, clientSideJSX, component_path, name, reqJson, compId, dataAccessType){
 	var comp                = {};
     this.component          = component;
     this.component_path     = component_path ? component_path : component.split('_')[0];
@@ -7,6 +8,7 @@ var Component = function(component, data, clientSideJSX, component_path, name, r
     this.loadFromClientSide = clientSideJSX == null ? true : clientSideJSX ? true : false;
     this.reqObj             = reqJson;
     this.compId             = compId;
+    this.dataAccessType     = dataAccessType ? dataAccessType : DATA_ACCESS_TYPE.REQUEST_ONLY;
 }
 
 Component.prototype.ToJson = function(){

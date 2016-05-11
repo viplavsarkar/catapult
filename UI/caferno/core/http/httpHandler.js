@@ -30,7 +30,7 @@ HttpHandler.prototype.SIMPLE_REST = function(){
     var dateTimeNow = new Date();
     var startTime = new Date().getTime();
     console.log(dateTimeNow + '(' + startTime + ')');
-    console.log('REQUEST > ' + _.reqObj.url);
+    console.log('REQUEST >>>>>>>> ' + _.reqObj.url);
     console.log();
     if(_.reqObj.url == null){
         _.callback(null,{});
@@ -50,7 +50,7 @@ HttpHandler.prototype.SIMPLE_REST = function(){
                 return;
             } else {
 
-                console.log('RESPONSE: ' + _.reqObj.url);
+                console.log('RESPONSE <<<<<<<<< ' + _.reqObj.url);
                 var dateTimeNow = new Date();
                 var endTime = dateTimeNow.getTime();
                 console.log(dateTimeNow + '(' + endTime + ')');

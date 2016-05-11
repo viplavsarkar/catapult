@@ -1,0 +1,7 @@
+module.exports = Object.freeze({
+
+	REQUEST_AND_RAW_DATA: 'REQUEST_AND_RAW_DATA',
+	REQUEST_ONLY: 'REQUEST_ONLY',
+	RAW_DATA_ONLY: 'RAW_DATA_ONLY'
+
+});
