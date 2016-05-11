@@ -37,28 +37,40 @@ var Breadcrum = React.createClass({
 var PriceLine = React.createClass({
     mixins:[IntlMixin],
     render: function(){
+        var currencySymbol = {
+            'USD': '$'
+        };
+
         var data = this.props.data;
         var priceStr = this.getIntlMessage('free');
         var priceStrikedStr = "";
-        var curr =  global.academy.curr;
-        //console.log(data)
-        
+        var curr;
+        if (isNode) {
+            curr = global.academy.curr;
+        } else {
+            curr = window.currency;
+        }
+
         if(data.isPaid){
-            if(data.priceList){
-                if(data.priceList[curr]){
-                    if(data.priceList[curr].priceStriked) priceStrikedStr = data.priceList[curr].priceStriked;
-                    if(data.priceList[curr].price) priceStr = data.priceList[curr].price;
+            if(data.price){
+                if(data.price[curr]){
+                    if(data.price[curr].priceStriked) priceStrikedStr = data.price[curr].priceStriked;
+                    if(data.price[curr].price) priceStr = data.price[curr].price;
                 }
             }
         }else{
             priceStr = this.getIntlMessage('free');
         }
-    
-        return(
-                <div className="price"> {priceStr} <span className="strikeIt">{priceStrikedStr}</span></div>
 
-               
-            )
+        if (this.getIntlMessage('free') !== priceStr || priceStrikedStr) {
+            return(
+                <li className="cta noRadius">
+                    {currencySymbol[curr] + priceStr}
+                    <span className="strike">{priceStrikedStr}</span>
+                </li>
+            );
+        } else
+            return null;
     }
 });
 
@@ -73,6 +85,7 @@ var CourseSummary = React.createClass({
         data.priceData = {};
         if(data.isPaid) data.priceData.isPaid = data.isPaid;
         if(data.priceList) data.priceData.priceList = data.priceList;
+        data.calDate = new Date(data.startDate).getDate();
 
         var intlData = {
                         courseStarted:"Course started:",
@@ -107,34 +120,61 @@ var CourseSummary = React.createClass({
                                         <div className="relatedOpt">
                                             <ul className="placed">
                                                 <li>
-                                                    <span className="calenderDate">{data.calDate}</span> {data.duration}
-                                                    <span className="date">{intlData.courseStarted} {data.startedFrom}</span>
+                                                    <span className="calenderDate">{data.calDate}</span>
+                                                    {
+                                                        (data.consumptionType !== 'SELF_PACED') ?
+                                                            <span className="date">{intlData.courseStarted} {data.startDate}</span>
+                                                        :
+                                                            <span className="date">{this.getIntlMessage('selfPaced')}</span>
+                                                    }
                                                 </li>
                                             </ul>
                                             <ul className="type clearfix">
-                                                <li>
-                                                    <span className="no">{tutorials}</span>
-                                                    {intlData.tutorials}
-                                                </li>
-                                                <li>
-                                                    <span className="no">{liveClasses}</span> {intlData.liveClasses}
-                                                </li>
-                                                <li>
-                                                    <span className="no">{tests}</span> {intlData.tests}
-                                                </li>
-                                                 <li>
-                                                    <span className="no">{assignments}</span> {intlData.assignments}
-                                                </li>
+                                                {
+                                                    (tutorials > 0) ?
+                                                        <li>
+                                                            <span className="no">{tutorials}</span>
+                                                            {intlData.tutorials}
+                                                        </li>
+                                                    :
+                                                        null
+                                                }
+                                                {
+                                                    (liveClasses > 0) ?
+                                                        <li>
+                                                            <span className="no">{liveClasses}</span> {intlData.liveClasses}
+                                                        </li>
+                                                    :
+                                                        null
+                                                }
+                                                {
+                                                    (tests > 0) ?
+                                                        <li>
+                                                            <span className="no">{tests}</span> {intlData.tests}
+                                                        </li>
+                                                    :
+                                                        null
+                                                }
+                                                {
+                                                    (assignments > 0) ?
+                                                         <li>
+                                                            <span className="no">{assignments}</span> {intlData.assignments}
+                                                        </li>
+                                                    :
+                                                        null
+                                                }
                                             </ul>
                                         </div>
                                     </div>
                                     <div className="col-3">
                                         <ul className="ctaGroup">
-                                             <li className="cta noRadius">
-                                                {data.amount}
-                                                <span className="strike">{data.amountCrossed}</span>
-                                            </li>
-                                            <li className="cta filledOrng"><a href="#">{intlData.enrollNow}</a></li>
+                                            <PriceLine data={data} />
+                                        {
+                                            (data.canEnroll) ?
+                                                <li className="cta filledOrng"><a href="#">{intlData.enrollNow}</a></li>
+                                            :
+                                                null
+                                        }
                                         </ul>
                                     </div>
                                 </li>
