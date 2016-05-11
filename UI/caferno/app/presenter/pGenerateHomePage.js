@@ -1,6 +1,7 @@
 require('babel-core/register');
 var async = require("async");
 var httpHandler = require('../../core/http/httpHandler.js');
+var DATA_ACCESS_TYPE  = require('../../core/constants/componentParams.js');
 
 var PresenterPrelogin = function(req, res, next){
 	this.req    = req;
@@ -14,8 +15,36 @@ var PresenterPrelogin = function(req, res, next){
     this.template   = '';
     this.components = [];
     this.pageData   = {};
+    this.rawdataIndex = [];
 
     this.renderStart = new Date().getTime();
+}
+
+PresenterPrelogin.prototype.getCoursesScreenActual = function(template, components, pageData){
+    var _ = this;
+
+    _.template = template;
+    _.components =  components;
+    _.pageData = pageData;
+
+    var count = _.components.length;
+    var reqArr = [];
+
+    for(var i = 0; i < count; i++){
+        var dtoForRawDataIndex = {index:i, dataAccessType: _.components[i].dataAccessType};
+        //console.log(components[i].rawdata);
+        if(_.components[i].dataAccessType === DATA_ACCESS_TYPE.RAW_DATA_ONLY){
+            //do nothing
+            console.log(components[i].rawdata);
+        }else{
+            //_.rawdataIndex.push(i);
+            _.rawdataIndex.push(dtoForRawDataIndex);
+            var reqObj = _.components[i].reqObj;          
+            var req = new httpHandler({url: reqObj.url}).getMethodForAsynch("SIMPLE_REST");
+            reqArr.push(req);
+        }
+    }
+    _.getScreenData(reqArr);
 }
 
 PresenterPrelogin.prototype.getScreenData = function(reqArr){
@@ -27,31 +56,32 @@ PresenterPrelogin.prototype.getScreenData = function(reqArr){
                 console.log(err)
             }
             console.log('all the methods have been called');
-            for(var i = 0; i < _.components.length; i++){
-                _.components[i].rawdata = data[i];
+            for(var i = 0; i < _.rawdataIndex.length; i++){
+                var index = _.rawdataIndex[i].index;
+                //console.log(_.rawdataIndex[i]);
+                var dataAccessType = _.rawdataIndex[i].dataAccessType;
+                if(dataAccessType === DATA_ACCESS_TYPE.REQUEST_ONLY){
+                    _.components[index].rawdata = data[i];
+                }else if(dataAccessType === DATA_ACCESS_TYPE.REQUEST_AND_RAW_DATA){
+                    //console.log(_.components[index].rawdata);
+
+                    var tempData = _.components[index].rawdata;
+                    for(var key in tempData){
+                        var val = tempData[key];
+                        if(data[i]){
+                            data[i][key] = val;
+                        }
+                        //console.log(key)   
+                    }
+                    console.log(data[i]);
+                    _.components[index].rawdata = data[i];
+                }else if(dataAccessType === DATA_ACCESS_TYPE.RAW_DATA_ONLY){
+                    //log error
+                }
             }
             _.generateScreenFromComponents();
         }
     );
-}
-
-PresenterPrelogin.prototype.getCoursesScreenActual = function(template, components, pageData){
-    var _ = this;
-
-    _.template = template;
-    _.components =  components;
-    _.pageData = pageData;
-
-    var count = components.length;
-    var reqArr = [];
-    for(var i = 0; i < count; i++){
-        var reqObj = components[i].reqObj;
-        //console.log('reqObj > ');
-        //console.log(reqObj);
-        var req = new httpHandler({url: reqObj.url}).getMethodForAsynch("SIMPLE_REST");
-        reqArr.push(req);
-    }
-    _.getScreenData(reqArr);
 }
 
 PresenterPrelogin.prototype.generateScreenFromComponents = function(){

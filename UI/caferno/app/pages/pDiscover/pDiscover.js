@@ -2,6 +2,7 @@ var HomePageType    = require('../../presenter/pGenerateHomePage.js');
 var Comp            = require('../../../core/utility/dComponent.js');
 var CompObj         = require('../../../core/utility/cSCO.js');
 var CONST           = require('../../../core/constants/components.js');
+var DATA_ACCESS_TYPE  = require('../../../core/constants/componentParams.js');
 //var winston = require('winston');
 
 var PDiscover = function(req, res, next){
@@ -25,8 +26,8 @@ PDiscover.prototype.getScreen = function(){
     academyUrl = global.academy.url;
     var callback =  function(da){_.getScreenComponentsAndData(da)};
     var espId = new Helper(callback).getEspId(academyUrl);
-    console.log("espId >");
-    console.log(espId);
+    //console.log("espId >");
+    //console.log(espId);
 }
 
 PDiscover.prototype.getScreenComponentsAndData = function(academyInfo){
@@ -38,11 +39,19 @@ PDiscover.prototype.getScreenComponentsAndData = function(academyInfo){
     _.template = 'tDiscover.ejs';
     
     //add the header
-    _.components.push(new CompObj(CONST.HEADER,             {subDomainUrl:academyUrl}, null).getComponent());
+    //_.components.push(new CompObj(CONST.HEADER,           {subDomainUrl:academyUrl}, null, {currPage:'discover'}).getComponent());
+    _.components.push( new CompObj(
+                                        CONST.HEADER,   
+                                        {subDomainUrl:academyUrl}, 
+                                        null, 
+                                        {currPage:'discover'}, 
+                                        DATA_ACCESS_TYPE.REQUEST_AND_RAW_DATA                                        
+                                    ).getComponent()
+                        );
   
     //add the react component to add in the page
-    _.components.push(new CompObj(CONST.DISCOVER_BANNER,    {subDomainUrl:academyUrl}).getComponent());
-    _.components.push(new CompObj(CONST.DISCOVER,           {espId:espId}).getComponent());
+    _.components.push(new CompObj(CONST.DISCOVER_BANNER,    {subDomainUrl:academyUrl}, null, null, null).getComponent());
+    _.components.push(new CompObj(CONST.DISCOVER,           {espId:espId}, null, null, null).getComponent());
    
     //add the footer
     _.components.push(new CompObj(CONST.FOOTER,             {espId:espId}).getComponent());

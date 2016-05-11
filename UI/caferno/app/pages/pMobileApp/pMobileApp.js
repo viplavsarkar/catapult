@@ -2,6 +2,7 @@ var HomePageType    = require('../../presenter/pGenerateHomePage.js');
 var Comp            = require('../../../core/utility/dComponent.js');
 var CompObj         = require('../../../core/utility/cSCO.js');
 var CONST           = require('../../../core/constants/components.js');
+var DATA_ACCESS_TYPE  = require('../../../core/constants/componentParams.js');
 //var winston = require('winston');
 
 var PDiscover = function(req, res, next){
@@ -36,7 +37,14 @@ PDiscover.prototype.getScreenComponentsAndData = function(academyInfo){
     _.template = 'tMobileApp.ejs';
     
                 //add the header
-    _.components.push(new CompObj(CONST.HEADER,             {subDomainUrl:academyUrl}, null).getComponent());
+   _.components.push( new CompObj(
+                                    CONST.HEADER,   
+                                    {subDomainUrl:academyUrl}, 
+                                    null, 
+                                    {currPage:'mobileApp'}, 
+                                    DATA_ACCESS_TYPE.REQUEST_AND_RAW_DATA                                        
+                                ).getComponent()
+                        );
   
     //add the react component to add in the page
     _.components.push(new CompObj(CONST.MOBILE_HEAD,        {}).getComponent());   

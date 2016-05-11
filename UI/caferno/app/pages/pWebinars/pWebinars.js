@@ -4,6 +4,7 @@ var CompObj         = require('../../../core/utility/cSCO.js');
 var CONST           = require('../../../core/constants/components.js');
 var httpHandler     = require('../../../core/http/httpHandler.js');
 var ORCH            = require('../../../core/http/orchEndPoints.js');
+var DATA_ACCESS_TYPE  = require('../../../core/constants/componentParams.js');
 //var winston = require('winston');
 
 var PCourses = function(req, res, next){
@@ -40,7 +41,14 @@ PCourses.prototype.getScreenComponentsAndData = function(academyInfo){
     _.template = 'tWebinars.ejs';
 
             //add the header
-    _.components.push(new CompObj(CONST.HEADER,             {subDomainUrl:academyUrl}, null).getComponent());
+   _.components.push( new CompObj(
+                                        CONST.HEADER,   
+                                        {subDomainUrl:academyUrl}, 
+                                        null, 
+                                        {currPage:'webinars'}, 
+                                        DATA_ACCESS_TYPE.REQUEST_AND_RAW_DATA                                        
+                                    ).getComponent()
+                        );
 
     //add the react component to add in the page
     _.components.push(new CompObj(CONST.CLASS_LIST,         {espId:espId}).getComponent());

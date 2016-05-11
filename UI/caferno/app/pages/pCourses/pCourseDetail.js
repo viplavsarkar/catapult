@@ -2,6 +2,7 @@ var HomePageType    = require('../../presenter/pGenerateHomePage.js');
 var Comp            = require('../../../core/utility/dComponent.js');
 var CompObj         = require('../../../core/utility/cSCO.js');
 var CONST           = require('../../../core/constants/components.js');
+var DATA_ACCESS_TYPE= require('../../../core/constants/componentParams.js');
 //var winston = require('winston');
 
 var PCourseDetail = function(req, res, next){
@@ -41,7 +42,14 @@ PCourseDetail.prototype.getScreenComponentsAndData = function(academyInfo){
     _.template = 'tCourseDetail.ejs';
     
     //add the header
-    _.components.push(new CompObj(CONST.HEADER,             {subDomainUrl:academyUrl}, null).getComponent());
+    _.components.push( new CompObj(
+                                        CONST.HEADER,   
+                                        {subDomainUrl:academyUrl}, 
+                                        null, 
+                                        {currPage:'courses'}, 
+                                        DATA_ACCESS_TYPE.REQUEST_AND_RAW_DATA                                        
+                                    ).getComponent()
+                        );
   
     //add the react component to add in the page
     _.components.push(new CompObj(CONST.COURSE_DETAIL,      {courseId: courseId}).getComponent());

@@ -6,6 +6,7 @@ var ORCH            = require('../../../core/http/orchEndPoints.js');
 var CompObj         = require('../../../core/utility/cSCO.js');
 var CONST           = require('../../../core/constants/components.js');
 var httpHandler     = require('../../../core/http/httpHandler.js');
+var DATA_ACCESS_TYPE= require('../../../core/constants/componentParams.js');
 //var async = require("async");
 //var winston = require('winston');
 
@@ -47,8 +48,15 @@ PCourses.prototype.getScreenComponentsAndData = function(academyInfo){
     //set the template to use
     _this.template = 'tCourseList.ejs';
 
-    //add the header
-    _this.components.push(new CompObj(CONST.HEADER,         {subDomainUrl:academyUrl}, null).getComponent());
+    //add the header    
+    _this.components.push( new CompObj(
+                                        CONST.HEADER,   
+                                        {subDomainUrl:academyUrl}, 
+                                        null, 
+                                        {currPage:'courses'}, 
+                                        DATA_ACCESS_TYPE.REQUEST_AND_RAW_DATA                                        
+                                    ).getComponent()
+                        );
 
     _this.components.push(new CompObj(CONST.COURSE_LIST,    {espId:espId}).getComponent());
 

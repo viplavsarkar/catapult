@@ -41,8 +41,8 @@ var NavigationLink = React.createClass({
     mixins: [IntlMixin],
     render: function () {
         var data = this.props.data;
+        data.classes.remove('active');
         if (data.isActive) {
-            data.classes.remove('active');
             data.classes.push('active');
         }
         var classNames = data.classes.join(' ');
@@ -67,7 +67,13 @@ var HeaderNavigation = React.createClass({
     mixins: [IntlMixin],
     render: function () {
         var data = this.props.data;
-        var navigationItems = data.map(function (navigationItem) {
+      
+        var navigationItems = navLinks.map(function (navigationItem) {
+            navigationItem.isActive = false;
+            if(navigationItem.keyName === data.currPage){
+                navigationItem.isActive = true;
+            }
+            
             return (
                 <NavigationLink key={navigationItem.key} data={navigationItem} />
             );
@@ -90,11 +96,15 @@ var Header = React.createClass({
     },
     render: function () {
         var data = this.props.data;
+        var headerNavData = {                               
+                                currPage: data.currPage,
+                                webinarsExists: data.webinar
+                            };
         return (
             <header id="pageHeader" className="moduleBody">
                 <div onClick={this.onclickhandler} className="moduleWrapper clearfix">
                     <HeaderLogo data={data.academy} />                   
-                    <HeaderNavigation data={navLinks} />
+                    <HeaderNavigation data={headerNavData} />
                 </div>
             </header>
         );

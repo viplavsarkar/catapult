@@ -62,9 +62,10 @@ app.use(express.static(path.join(__dirname, 'app/components')));
 app.use(express.static(path.join(__dirname, 'html')));
 
 global.academy = {
-  //url: 'preportal.wiziq.authordm.com'
+  // url: 'preportal.wiziq.authordm.com',
   url: 'taru.wiziq.authordm.com',
   //url: 'imdb.wiziq.authordm.com',
+  //url: 'ppttest.wiziq.com',
   curr: 'USD'
 };
 
@@ -93,8 +94,8 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-//global.env =  'dev';
-
+global.env =  'dev';
+//
 var language = new i18n('en-US');
 //var language = new i18n('ar-AE');
 

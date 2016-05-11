@@ -36,7 +36,14 @@ PSamplePage.prototype.getScreenComponentsAndData = function(academyInfo){
     _.template = 'tSignUp.ejs';
     
         //add the header
-    _.components.push(new CompObj(CONST.HEADER,             {subDomainUrl:academyUrl}, null).getComponent());
+    _.components.push( new CompObj(
+                                    CONST.HEADER,   
+                                    {subDomainUrl:academyUrl}, 
+                                    null, 
+                                    {currPage:'signIn'}, 
+                                    DATA_ACCESS_TYPE.REQUEST_AND_RAW_DATA                                        
+                                ).getComponent()
+                        );
   
     //add the react component to add in the page
     _.components.push(new CompObj(CONST.SIGN_UP,            {}).getComponent());
