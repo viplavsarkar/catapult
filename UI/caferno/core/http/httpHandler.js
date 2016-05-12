@@ -45,9 +45,9 @@ HttpHandler.prototype.SIMPLE_REST = function(){
             }
         }, function(error, response, body){
             if(error) {
-                console.log(error);
-                _.callback(error);
-                return;
+                console.log(error.message);
+                return _.callback(error);
+                //return;
             } else {
 
                 console.log('RESPONSE <<<<<<<<< ' + _.reqObj.url);

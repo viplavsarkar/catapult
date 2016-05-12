@@ -32,12 +32,12 @@ PresenterPrelogin.prototype.getCoursesScreenActual = function(template, componen
 
     for(var i = 0; i < count; i++){
         var dtoForRawDataIndex = {index:i, dataAccessType: _.components[i].dataAccessType};
-        //console.log(components[i].rawdata);
         if(_.components[i].dataAccessType === DATA_ACCESS_TYPE.RAW_DATA_ONLY){
             //do nothing
-            console.log(components[i].rawdata);
+            
+            //for debugging
+            //console.log(components[i].rawdata);
         }else{
-            //_.rawdataIndex.push(i);
             _.rawdataIndex.push(dtoForRawDataIndex);
             var reqObj = _.components[i].reqObj;          
             var req = new httpHandler({url: reqObj.url}).getMethodForAsynch("SIMPLE_REST");
@@ -51,9 +51,8 @@ PresenterPrelogin.prototype.getScreenData = function(reqArr){
     var _ = this;
 
     async.parallel(reqArr, function(err, data){
-            if(err){
-                console.log('err = ')
-                console.log(err)
+            if(err){                
+                return _.next(err);
             }
             console.log('all the methods have been called');
             for(var i = 0; i < _.rawdataIndex.length; i++){
@@ -72,6 +71,9 @@ PresenterPrelogin.prototype.getScreenData = function(reqArr){
                     _.components[index].rawdata = data[i];
                 }else if(dataAccessType === DATA_ACCESS_TYPE.RAW_DATA_ONLY){
                     //log error
+                    var inValidCompositionException = new Error('Invalid composition. Please contact your vendor.');
+                    inValidCompositionException.status = 505;
+                    return _.next(inValidCompositionException);
                 }
             }
             _.generateScreenFromComponents();
