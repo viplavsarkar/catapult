@@ -143,10 +143,11 @@
     #hamBurgerMenu { width: 60%; height: 100%; background: #F2F2F2; position: absolute; left: 0; top: 0; display: block; z-index: 19;
         .pageHeadNav { border-right: 1px solid #FFF; 
             li { background: #323a46; border-bottom: 1px #3e4753 solid; 
-                a { color: @white; display: block; padding: 14px 10px; font-size: @largeFont - 2;}
+                a { color: @white; display: block; padding: 14px 10px; font-size: @largeFont - 2; text-align: left; line-height: 16px;}
                 &:hover { background: #BDBEBE;
                     a { color: @gray; }
                 }
+                &.cta { border-radius: 0; border-color: #3e4753; border-width: 0 0 1px 0; text-transform: none;}
             }
         }        
         
@@ -193,7 +194,7 @@
 
 /*START - Course Listing*/
     #courseListing, #webinarListing {
-        .title { font-size: @largerFont;}
+        .title { font-size: @largerFont; margin-bottom: 15px;}
         .moduleWrapper { padding: 20px 10px 30px;}
     }
     .courseQuickLinks  { padding-right: 0;
@@ -213,6 +214,7 @@
                 }
             }
             .content {
+                h2 { line-height: 26px;}
                 .type { margin-top: 5px;
                     li { float: left; font-size: @smallerFont; margin-right: 20px; margin-top: 10px;}
                 }
@@ -224,6 +226,15 @@
                     li {
                         &.filledOrng { display: inline-block;}
                     } 
+                }
+            }
+        }
+        &.webinar {
+            .item {
+                .col-2, .col-3 { float: none; width: 100%; padding: 0;}
+                .col-3 { margin-top: 15px;}
+                .ctaGroup {text-align: left;
+                    .cta { display: inline-block;}
                 }
             }
         }
@@ -246,7 +257,7 @@
     }
 
     .accordionWrapper { 
-        .accordionHead { height: 44px ;
+        .accordionHead { height: 44px ;     
             .col-1 { display: none;}
             .col-2 { float: none; margin-left: 0; padding: 0 46px 0 10px}
             .caption-1, .caption-2 { font-size: @smallFont; line-height: 44px;}

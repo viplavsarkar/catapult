@@ -103,7 +103,10 @@ var TutorInfo = React.createClass({
         return(
                 <figure className="userInfo clearfix">
                     <img src={data.profilePic} alt={this.getIntlMessage('tutor')} />
-                    <figcaption> <a href="#">{data.name}</a></figcaption>
+                    <figcaption>
+                        <a href="#">{data.name}</a>
+                        <p>{data.city}, {data.country}</p>
+                    </figcaption>
                 </figure>
             )
     }
@@ -162,11 +165,8 @@ var EachWebinarRoww = React.createClass({
                     </div>
                     <div className="col-3">
                         <ul className="ctaGroup">
-                            <li className="cta noRadius inlineBlc">
-                                <TutorInfo data={data.creator} />
-                            </li>
                             <li>
-                                <p>{data.creator.city}, {data.creator.country}</p>
+                                <TutorInfo data={data.creator} />
                             </li>
                             <ViewRecordingBtn data={recordingData} />
                         </ul>

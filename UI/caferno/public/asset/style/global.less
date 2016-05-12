@@ -56,7 +56,7 @@
     .vMiddleWrap { display: table;}
     .vMiddle { display: table-cell; vertical-align: middle;}
     
-    html body #pageWrapper .cta { text-transform: uppercase;
+    .cta { text-transform: uppercase;
         a { line-height: normal; padding: 10px 15px; text-align: center; display: block;}
         &.inline { display: inline-block;}
         &.wired {border-radius: 4px; border:1px @orange solid;
@@ -68,12 +68,6 @@
             .moreInfo { font-size: @smallerFont; text-transform: none; padding-bottom: 8px;
                 span { display: block; padding-bottom: 5px;
                     &:last-child { padding: 0;}
-                }
-            }
-            .userInfo { position: relative;
-                img { display: block; margin: 0 auto;}
-                figcaption { display: block; box-sizing: border-box; padding: 10px 0 0;
-                    a { padding:0; line-height: 18px; color: @blue; text-transform: capitalize; font-size: @smallFont + 1;}
                 }
             }
             &.inlineBlc { display: inline-block; min-width: 50%; max-width: 50%;}
@@ -140,7 +134,9 @@
                 &.active { 
                     a {color: @orange;}
                 }
-                &.cta { margin-top: 14px;}
+                &.cta { margin-top: 14px; text-transform: uppercase;
+                    a { line-height: normal; color: #f5892d;}
+                }
             }
         }
     } 
@@ -331,8 +327,14 @@
             .item {
                 .col-2 { .column(80%, left); padding: 0 2% 0 0;}
                 .col-3 { .column(20%, left);}
-                .ctaGroup {
-                    text-align: center ;
+                .ctaGroup { text-align: left;
+                    .userInfo { 
+                        img { float: left; max-width: 70px;}
+                        figcaption { display: block; box-sizing: border-box; margin-left: 80px; padding: 0 0 0 0; font-size: @smallestFont;
+                            a { padding:0; line-height: 14px; color: @blue; text-transform: capitalize; }
+                            p { margin-top: 2px; line-height: 14px;}
+                        }
+                    }
                 }
             }
         }
