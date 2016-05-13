@@ -5,7 +5,7 @@ var DATA_ACCESS_TYPE  = require('../constants/componentParams.js');
 
 var cSCO = function(componentId, params, templateVariableName, presetData, dataAccessType){
 	this.component 	= componentId;
-	this.params		= params;
+	this.params		= params ? params : {};
 	this.varName 	= templateVariableName ? templateVariableName : componentId;
 	this.presetData = presetData ? presetData : null;
 	this.dataAccessType = dataAccessType ? dataAccessType : DATA_ACCESS_TYPE.REQUEST_ONLY;
@@ -27,7 +27,7 @@ cSCO.prototype.getComponent = function(){
 		case CONST.FOOTER:
 			return new Comp('cFooter_footer.jsx', _.presetData, false, null, null,
 	            {
-	                url: ORCH.footer
+	                 url: ORCH.header + _.params.subDomainUrl + '/'
 	            },
 	            _.varName, _.dataAccessType
 	        );

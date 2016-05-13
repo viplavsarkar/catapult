@@ -22,7 +22,13 @@ var Footer = React.createClass({
     mixins: [IntlMixin],
     render: function () {
         var data = this.props.data;
-
+        data.urlOfAppleStore = "//itunes.apple.com/us/app/wiziq/id540018386?mt=8";
+        data.urlOfAndroidStore = "https://play.google.com/store/apps/details?id=air.com.wiziq.ipadvc";
+        var logo = data.academy.logo;// "asset/image/logo.jpg";
+        if(!logo){
+            //logo = logo.replace('wqimgqe.s3.amazonaws.com','wqimg.authordm.com');
+            logo = "//wqimg.authordm.com/data/esp/default-logo.png?635977750540207098";
+        }
         return (
             <footer id="pageFooter" className="moduleBody">
                 <div className="moduleWrapper clearfix">
@@ -46,7 +52,7 @@ var Footer = React.createClass({
                     </ul>
                     <div className="col-3">
                         <figure className="clearfix">
-                            <img src={data.academy.logo} alt={data.academy.name} />
+                            <img src={logo} alt={data.academy.name} />
                             <figcaption>{this.getIntlMessage('poweredBy')}</figcaption>
                         </figure>
                     </div>

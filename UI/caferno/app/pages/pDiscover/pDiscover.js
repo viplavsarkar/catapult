@@ -18,23 +18,16 @@ var PDiscover = function(req, res, next){
 };
 
 PDiscover.prototype.getScreen = function(){
-    var Helper          = require('../../../core/utility/hHelper.js');
     var _ = this;
-    var academyUrl = "preportal.wiziq.authordm.com";
-    academyUrl = "kabza.wiziq.authordm.com";
-    academyUrl = "newjon.wiziq.authordm.com";
-    academyUrl = global.academy.url;
-    var callback =  function(da){_.getScreenComponentsAndData(da)};
-    var espId = new Helper(callback).getEspId(academyUrl);
-    //console.log("espId >");
-    //console.log(espId);
+    _.getScreenComponentsAndData(null);
 }
 
-PDiscover.prototype.getScreenComponentsAndData = function(academyInfo){
+PDiscover.prototype.getScreenComponentsAndData = function(someData){
     var _ = this;
-
-    var espId =  academyInfo.id;
-    var academyUrl = academyInfo.subDomainUrl;
+    var espId =  global.academy.espId;
+    var academyUrl = global.academy.url;
+    var dataForHeader = {academy:global.academy, currPage: 'discover'};
+  
     //set the template to use
     _.template = 'tDiscover.ejs';
     
@@ -43,18 +36,18 @@ PDiscover.prototype.getScreenComponentsAndData = function(academyInfo){
     _.components.push( new CompObj(
                                         CONST.HEADER,   
                                         {subDomainUrl:academyUrl}, 
-                                        null, 
-                                        {currPage:'discover'}, 
-                                        DATA_ACCESS_TYPE.REQUEST_AND_RAW_DATA                                        
+                                        'HEADER', 
+                                        dataForHeader, 
+                                        DATA_ACCESS_TYPE.RAW_DATA_ONLY
                                     ).getComponent()
                         );
-  
+    //REQUEST_AND_RAW_DATA                                        
     //add the react component to add in the page
-    _.components.push(new CompObj(CONST.DISCOVER_BANNER,    {subDomainUrl:academyUrl}, null, null, null).getComponent());
+    _.components.push(new CompObj(CONST.DISCOVER_BANNER,    null, null, dataForHeader, DATA_ACCESS_TYPE.RAW_DATA_ONLY).getComponent());
     _.components.push(new CompObj(CONST.DISCOVER,           {espId:espId}, null, null, null).getComponent());
    
     //add the footer
-    _.components.push(new CompObj(CONST.FOOTER,             {espId:espId}).getComponent());
+    _.components.push(new CompObj(CONST.FOOTER,             null, null, dataForHeader, DATA_ACCESS_TYPE.RAW_DATA_ONLY).getComponent());
 
     _.pageData = {};
 

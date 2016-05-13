@@ -1,5 +1,4 @@
 var request         = require('request');
-var async 			= require("async");
 
 var HttpHandler = function(reqObj, callback){
 	this.reqObj = reqObj;
@@ -24,7 +23,12 @@ HttpHandler.prototype.getMethodForAsynch = function(merhodName){
 	}
 }
 
-HttpHandler.prototype.SIMPLE_REST = function(){
+HttpHandler.prototype.SIMPLE_REST_FULL_RESPONSE = function(){
+    var _ = this;
+    _.SIMPLE_REST(true);
+}
+
+HttpHandler.prototype.SIMPLE_REST = function(completeResponse){
     var _ = this;
 
     var dateTimeNow = new Date();
@@ -60,8 +64,11 @@ HttpHandler.prototype.SIMPLE_REST = function(){
                 console.log();
                 //console.log(response.statusCode, body);
                 var bodyObj = JSON.parse(body);
-
-                _.callback(null, bodyObj.data);
+                if(completeResponse){
+                    _.callback(null, bodyObj);
+                }else{
+                    _.callback(null, bodyObj.data);
+                }
             }
         });
     }

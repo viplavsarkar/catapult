@@ -11,7 +11,7 @@ var FormattedDate = ReactIntl.FormattedDate;
 var HeaderLogo = React.createClass({
     render: function () {
         var data = this.props.data;
-        var logo = data.logo;// "asset/image/logo.jpg";
+        var logo = data.logo;
         var academyName = data.academyName;
         if(!logo){
             //logo = logo.replace('wqimgqe.s3.amazonaws.com','wqimg.authordm.com');
@@ -67,9 +67,15 @@ var HeaderNavigation = React.createClass({
     mixins: [IntlMixin],
     render: function () {
         var data = this.props.data;
-      
+        
         var navigationItems = navLinks.map(function (navigationItem) {
             navigationItem.isActive = false;
+            if(navigationItem.keyName === 'webinars'){
+                if(data.webinarsExists){}
+                else{
+                    return null;
+                }
+            }
             if(navigationItem.keyName === data.currPage){
                 navigationItem.isActive = true;
             }
@@ -98,7 +104,7 @@ var Header = React.createClass({
         var data = this.props.data;
         var headerNavData = {                               
                                 currPage: data.currPage,
-                                webinarsExists: data.webinar
+                                webinarsExists: data.academy.webinar
                             };
         return (
             <header id="pageHeader" className="moduleBody">

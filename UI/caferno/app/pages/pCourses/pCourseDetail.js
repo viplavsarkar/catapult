@@ -15,29 +15,22 @@ var PCourseDetail = function(req, res, next){
     this.template   = '';
     this.components = [];
     this.pageData   = {};
+    this.seoUrl = "";
 };
 
 PCourseDetail.prototype.getScreen = function(){
-    var Helper          = require('../../../core/utility/hHelper.js');
     var _ = this;
-    var academyUrl = "preportal.wiziq.authordm.com";
-    academyUrl = "kabza.wiziq.authordm.com";
-    academyUrl = "newjon.wiziq.authordm.com";
-    academyUrl = global.academy.url;
-    var callback =  function(da){_.getScreenComponentsAndData(da)};
-    var espId = new Helper(callback).getEspId(academyUrl);
-    console.log("espId >");
-    console.log(espId);
+    _.getScreenComponentsAndData(null);
 }
 
-PCourseDetail.prototype.getScreenComponentsAndData = function(academyInfo){
-    var _ = this;
+PCourseDetail.prototype.getScreenComponentsAndData = function(someData){
+    var _ = this;    
     
-    var seoUrl = _.req.params.id;
-    var espId = academyInfo.id;
-    var academyUrl = academyInfo.subDomainUrl;
+    var espId =  global.academy.espId;
+    var academyUrl = global.academy.url;
+    var dataForHeader = {academy:global.academy, currPage: 'discover'};
 
-    var courseId = seoUrl.split('-')[0];
+    var courseId = _.seoUrl.split('-')[0];
     //set the template to use
     _.template = 'tCourseDetail.ejs';
     
@@ -45,9 +38,9 @@ PCourseDetail.prototype.getScreenComponentsAndData = function(academyInfo){
     _.components.push( new CompObj(
                                         CONST.HEADER,   
                                         {subDomainUrl:academyUrl}, 
-                                        null, 
-                                        {currPage:'courses'}, 
-                                        DATA_ACCESS_TYPE.REQUEST_AND_RAW_DATA                                        
+                                        'HEADER', 
+                                        dataForHeader, 
+                                        DATA_ACCESS_TYPE.RAW_DATA_ONLY
                                     ).getComponent()
                         );
   
@@ -55,7 +48,7 @@ PCourseDetail.prototype.getScreenComponentsAndData = function(academyInfo){
     _.components.push(new CompObj(CONST.COURSE_DETAIL,      {courseId: courseId}).getComponent());
    
     //add the footer
-    _.components.push(new CompObj(CONST.FOOTER,             {espId:espId}).getComponent());
+    _.components.push(new CompObj(CONST.FOOTER,             null, null, dataForHeader, DATA_ACCESS_TYPE.RAW_DATA_ONLY).getComponent());
    
     _.pageData = {};
 

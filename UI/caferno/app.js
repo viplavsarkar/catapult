@@ -61,12 +61,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app/components')));
 app.use(express.static(path.join(__dirname, 'html')));
 
+
 global.academy = {
   // url: 'preportal.wiziq.authordm.com',
-  url: 'taru.wiziq.authordm.com',
+  //url: 'taru.wiziq.authordm.com',
   //url: 'imdb.wiziq.authordm.com',
   //url: 'ppttest.wiziq.com',
-  curr: 'USD'
+//  curr: 'USD'
 };
 
 cookies(app);
@@ -105,7 +106,7 @@ app.use(function(err, req, res, next) {
 // will print stacktrace
 global.env =  'dev';
 //
-var language = new i18n('en-US');
+//var language = new i18n('en-US');
 //var language = new i18n('ar-AE');
 
 //global.academy = {url:'newjon.wiziq.authordm.com'}

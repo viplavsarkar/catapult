@@ -8,6 +8,9 @@ o.prod.root 			= "http://192.168.17.186";
 o.dev.root 				= "http://192.168.17.145";
 //o.dev.root 				= "http://localhost";
 
+o.prod.academy 			= o.prod.root + ":8055/v1/academy/subdomain/";
+o.dev.academy 	 		= o.dev.root + "/catapultui/data/getTestDataForAcademy.txt?";
+
 o.dev.header 			= o.dev.root + '/catapultui/data/getTestDataHeader.txt?';
 o.prod.header			= o.prod.root + ":8055/v1/academy/subdomain/";
 o.dev.footer			= o.dev.root + '/catapultui/data/getTestDataFooter.txt';

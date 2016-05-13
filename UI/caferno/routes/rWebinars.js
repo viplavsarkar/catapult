@@ -61,7 +61,7 @@ var getOnlineClassDetailScreen = function(req, res, next, classURL){
 	}
 	console.log('class url = ' + classURL);
 	winston.info("request at /mobile", {url:'/mobile'});
-	console.log('Webinar List Page: ' + new Date().toISOString());
+	console.log('Webinar Detail Page: ' + new Date().toISOString());
     var fCourses        = require('../app/pages/pWebinars/pWebinarDetail.js');
     var bCourses        = new fCourses(req, res, next);
     bCourses.query      = req.query;

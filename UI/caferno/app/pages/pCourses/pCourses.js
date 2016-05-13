@@ -24,26 +24,16 @@ var PCourses = function(req, res, next){
 
 
 PCourses.prototype.getScreen = function(){
-    var Helper          = require('../../../core/utility/hHelper.js');
-    var _this = this;
-    var academyUrl = "preportal.wiziq.authordm.com";
-    academyUrl = "kabza.wiziq.authordm.com";
-    academyUrl = "newjon.wiziq.authordm.com";
-    academyUrl = global.academy.url;
-    var callback =  function (da) { _this.getScreenComponentsAndData(da); };
-    var espId = new Helper(callback).getEspId(academyUrl);
-    console.log("espId >");
-    console.log(espId);
+    var _ = this;
+    _.getScreenComponentsAndData(null);
 }
 
-PCourses.prototype.getScreenComponentsAndData = function(academyInfo){
+PCourses.prototype.getScreenComponentsAndData = function(someData){
     var _this = this;
 
-    var hUnitTestData = require('../../../core/helper/hUnitTestData.js');
-    var hTestData = new hUnitTestData();
-
-    var espId =  academyInfo.id;
-    var academyUrl = academyInfo.subDomainUrl;
+    var espId =  global.academy.espId;
+    var academyUrl = global.academy.url;
+    var dataForHeader = {academy:global.academy, currPage: 'discover'};
 
     //set the template to use
     _this.template = 'tCourseList.ejs';
@@ -52,15 +42,15 @@ PCourses.prototype.getScreenComponentsAndData = function(academyInfo){
     _this.components.push( new CompObj(
                                         CONST.HEADER,   
                                         {subDomainUrl:academyUrl}, 
-                                        null, 
-                                        {currPage:'courses'}, 
-                                        DATA_ACCESS_TYPE.REQUEST_AND_RAW_DATA                                        
+                                        'HEADER', 
+                                        dataForHeader, 
+                                        DATA_ACCESS_TYPE.RAW_DATA_ONLY
                                     ).getComponent()
                         );
 
     _this.components.push(new CompObj(CONST.COURSE_LIST,    {espId:espId}).getComponent());
 
-    _this.components.push(new CompObj(CONST.FOOTER,         {espId:espId}).getComponent());
+    _this.components.push(new CompObj(CONST.FOOTER,             null, null, dataForHeader, DATA_ACCESS_TYPE.RAW_DATA_ONLY).getComponent());
 
     _this.pageData = {};    // hTestData.getPageData();
 

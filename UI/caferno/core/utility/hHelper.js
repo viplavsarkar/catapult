@@ -1,5 +1,5 @@
 var httpHandler = require('../http/httpHandler.js');
-
+var ORCH        = require('../http/orchEndPoints.js');
 var HelperClass = function(callback){
 	this.callback = callback;
 }
@@ -16,17 +16,26 @@ HelperClass.prototype.getEspId = function(academyUrl){
       "idCreator": 77524
     });*/
 
-	var url = "http://192.168.17.186:8055/v1/academy/subdomain/"+academyUrl+"/";
+	var url = ORCH.academy + academyUrl + "/";
 	//url = "http://192.168.17.145/catapultui/data/getTestDataHeader.txt";
 	//url = "http://localhost/catapultui/data/getTestDataHeader.txt";
 	var req = new httpHandler({url:url},function(err, data){
 			if(err){
 				console.log('error has occured');
+				_.callback(err);
 			}else{
 				//console.log(" hhhhhhhhhhhhh> ");
 				console.log(data);
 				//return data;
-				_.callback(data.academy);
+				if(data && data.academy){
+					_.callback(null,data);
+				}else{
+					var invalidDomain = new Error('Invalid academy.');
+                    invalidDomain.status = 404;
+                    //return _.next(invalidDomain);
+
+					_.callback(invalidDomain);
+				}
 			}
 	}).SIMPLE_REST();
 	//return 495;

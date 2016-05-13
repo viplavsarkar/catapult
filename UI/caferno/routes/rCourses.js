@@ -50,6 +50,7 @@ router.get('/:id', function(req, res, next) {
     var bCourses        = new fCourses(req, res, next);
     bCourses.query      = req.query;
     bCourses.controller = controllerName;
+    bCourses.seoUrl     = req.params.id;
     bCourses.getScreen();
 });
 
