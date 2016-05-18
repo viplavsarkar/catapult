@@ -39,7 +39,7 @@ var Breadcrum = React.createClass({
 
 var GetStatusMessage = function(ref, status){
      var msg = '';
-     var obj = ref;  
+     var obj = ref;
      switch(status){
         case 'DONE':
             msg = obj.getIntlMessage('Thisclassisover');// 'This class is over';
@@ -50,7 +50,7 @@ var GetStatusMessage = function(ref, status){
         case 'EXPIRED':
             msg = obj.getIntlMessage('Thissessionnotheld');//'This class was not held';
             break;
-        
+
         default:
             break;
      }
@@ -74,6 +74,19 @@ var ButtonViewRecording = React.createClass({
     }
 });
 
+var EnrollButton = React.createClass({
+    mixins: [IntlMixin],
+    render: function () {
+        var data = this.props.data;
+
+        return (
+            <div className="col-2">
+                <div className="cta filledOrng2 inline"><a href={data}>{this.getIntlMessage('enroll')}</a></div>
+            </div>
+        );
+    }
+});
+
 var ClassScheduleEach = React.createClass({
     mixins: [IntlMixin],
     render: function(){
@@ -85,21 +98,43 @@ var ClassScheduleEach = React.createClass({
                 return (<ButtonViewRecording data={data.linkViewRecording} />)
             }
         }*/
-        var msg = GetStatusMessage(this, data.status);
+        var timeRemaining = new Date(Math.abs(new Date(data.startAt) - new Date()));
+        var startsInStr = <p>
+            { 'Starts in ' + timeRemaining.getDate() + ' day(s) ' + timeRemaining.getHours() + ' hours ' + timeRemaining.getMinutes() + ' mins' }
+            <EnrollButton data='enroll_url' />
+        </p>
+        var membersAttendedStr = <div>
+            <p>
+                {this.getIntlMessage('membersAttended') + ': ' + data.membersAttended}
+            </p>
+            <p>
+                {GetStatusMessage(this, data.status)}
+            </p>
+        </div>
+
         return(
-                <li>
-                    <div className="clearfix">
-                        <div className="col-1">
-                            <p className="recurringDate">{data.startAt}
-                                <FormattedDate value={data.startAt} format='webinars' />
-                            </p>
-                            <p>{this.getIntlMessage('membersAttended')}: {data.membersAttended}</p>
-                            <p>{msg}</p>
-                        </div>
-                        <ButtonViewRecording data={data.linkViewRecording} />
+            <li>
+                <div className="clearfix">
+                    <div className="col-1">
+                        <p className="recurringDate">
+                            <FormattedDate value={new Date(data.startAt)} weekday='long' day='numeric' month='long' year='2-digit' hour12='true' hour='numeric' minute='numeric' timeZoneName='long' />
+                        </p>
+                        {
+                            data.status === 'DONE' ?
+                                membersAttendedStr
+                            :
+                                startsInStr
+                        }
                     </div>
-                </li>
-            )
+                    {
+                        (data.status === 'DONE' && data.recordingStatus === 'Done') ?
+                            <ButtonViewRecording data={data.linkViewRecording} />
+                        :
+                            null
+                    }
+                </div>
+            </li>
+        );
     }
 });
 
@@ -107,7 +142,7 @@ var ClassSchedule = React.createClass({
     mixins: [IntlMixin],
     render: function(){
         var data = this.props.data;
-        var scheduleItems = data.map(function(eachScheduleItem){
+        var scheduleItems = data.map(function (eachScheduleItem){
             return (
                     <ClassScheduleEach key={eachScheduleItem.sessionId} data={eachScheduleItem} />
                 )
@@ -178,6 +213,84 @@ var MetaDetail = React.createClass({
     }
 });
 
+var ClassSessionsAndRecordings = React.createClass({
+    mixins: [IntlMixin],
+    render: function () {
+        var data = this.props.data;
+
+        var scheduleTab = null;
+        var scheduleTabContents = null;
+        var sessionsTab = null;
+        var sessionsTabContents = null;
+        var noTabs = null;
+
+        switch (data.recurring) {
+            case 'Not_Recurring':
+                if (data.classStart.status === 'UPCOMING') {
+                    noTabs = <div>
+                        <p>
+                            {'This class runs for ' + data.classStats.durationInMins + ' minutes'}
+                        </p>
+                        <EnrollButton data={'enroll_url'} />
+                    </div>
+                } else if (data.classStart.status === 'DONE') {
+                    if (data.classSessions.recordingStatus === 'Done')
+                        noTabs = <ButtonViewRecording data={data.linkViewRecording} />
+                    else if (data.classSessions.recordingStatus === 'Default') {
+                        noTabs = null;
+                    } else
+                        noTabs = <p>
+                            Recording in progresss
+                        </p>
+                }
+                break;
+            case 'Permanent':
+            case 'Recurring':
+                // 'Class Schedule' tab and its contents
+                scheduleTab = <li data-tab="schedule" className="active">
+                    <a href="#">{this.getIntlMessage('classSchedule')}</a>
+                </li>
+                scheduleTabContents = <ClassSchedule data={data.classSessions} />
+
+                // 'Sessions' tabs and its contents
+                sessionsTab = <li data-tab="sessions">
+                    <a href="#">{this.getIntlMessage('sessionsJoinedByYou')}</a>
+                </li>
+
+                if (data.sessionsJoinedByYou) {
+
+                } else {
+                    sessionsTabContents = this.getIntlMessage('recurringClassSeriesNotJoined');
+                }
+                break;
+            default:
+                break;
+        }
+
+        // Incase of `Recurring` or `Permanent` class, show Session and Recordings tabs
+        if (scheduleTab || sessionsTab)
+            return (
+                <div className="innerTabsWrap">
+                    <ul className="tabs clearfix">
+                        {scheduleTab}
+                        {sessionsTab}
+                    </ul>
+                    <div className="tabsContentWrap">
+                        <div data-tab="schedule" className="contentOfTab">
+                            {scheduleTabContents}
+                        </div>
+                        <div data-tab="sessions" className="contentOfTab">
+                            <p>{sessionsTabContents}</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        else
+            // Incase class is `Non-Recurring`
+            return(noTabs);
+    }
+});
+
 
 var WebinarDetailSummary = React.createClass({
     mixins: [IntlMixin],
@@ -211,13 +324,13 @@ var WebinarDetailSummary = React.createClass({
                                         <ul className="placed">
                                             <li>
                                                 <span className="calenderDate">
-                                                	<FormattedDate value={data.classStart.date} day="2-digit" /><br/>
-                                                	<FormattedDate value={data.classStart.date} month="short" />
+                                                	<FormattedDate value={new Date(data.classStart.date)} day="2-digit" /><br/>
+                                                	<FormattedDate value={new Date(data.classStart.date)} month="short" />
                                                 </span>
-                                                <FormattedDate value={data.classStart.date} year="numeric"/>&#160;
-                                                <FormattedTime value={data.classStart.date} hour="2-digit" minute="2-digit" />
+                                                <FormattedDate value={new Date(data.classStart.date)} year="numeric"/>&#160;
+                                                <FormattedTime value={new Date(data.classStart.date)} hour="2-digit" minute="2-digit" />
                                                 <span className="date">{data.classStats.status}</span>
-                                                
+
                                             </li>
                                         </ul>
                                     </div>
@@ -230,20 +343,7 @@ var WebinarDetailSummary = React.createClass({
                                             <a href={data.classFixtures.linkViewRecording}>{this.getIntlMessage('downloadRecording')}</a>
                                         </div>
                                     </div>
-                                    <div className="innerTabsWrap">
-                                        <ul className="tabs clearfix">
-                                            <li data-tab="schedule" className="active"><a href="#">{this.getIntlMessage('classSchedule')}</a></li>
-                                            <li data-tab="sessions"><a href="#">{this.getIntlMessage('sessionsJoinedByYou')}</a></li>
-                                        </ul>
-                                        <div className="tabsContentWrap">
-                                            <div data-tab="schedule" className="contentOfTab">
-                                                <ClassSchedule data={data.classSessions} />
-                                            </div>
-                                            <div data-tab="sessions" className="contentOfTab">
-                                                <p>{this.getIntlMessage('recurringClassSeriesNotJoined')}. </p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <ClassSessionsAndRecordings data={data} />
                                 </div>
                                 <div className="col-3">
                                     <ul className="ctaGroup">
